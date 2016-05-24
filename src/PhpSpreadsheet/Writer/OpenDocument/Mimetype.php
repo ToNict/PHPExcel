@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\OpenDocument;
 
 /**
- * PhpOffice\PhpExcel\Writer\OpenDocument\Mimetype
+ * PhpOffice\PhpExcel\Writer\OpenDocument\Mimetype.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Writer\OpenDocument;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\OpenDocument
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Mimetype extends WriterPart
 {
     /**
-     * Write mimetype to plain text format
+     * Write mimetype to plain text format.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
-     * @return     string         XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function write(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {

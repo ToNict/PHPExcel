@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader\Excel5;
 
 /**
- * PhpOffice\PhpExcel\Reader\Excel5\Escher
+ * PhpOffice\PhpExcel\Reader\Excel5\Escher.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,48 +22,49 @@ namespace PhpOffice\PhpExcel\Reader\Excel5;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader\Excel5
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Escher
 {
-    const DGGCONTAINER      = 0xF000;
-    const BSTORECONTAINER   = 0xF001;
-    const DGCONTAINER       = 0xF002;
-    const SPGRCONTAINER     = 0xF003;
-    const SPCONTAINER       = 0xF004;
-    const DGG               = 0xF006;
-    const BSE               = 0xF007;
-    const DG                = 0xF008;
-    const SPGR              = 0xF009;
-    const SP                = 0xF00A;
-    const OPT               = 0xF00B;
-    const CLIENTTEXTBOX     = 0xF00D;
-    const CLIENTANCHOR      = 0xF010;
-    const CLIENTDATA        = 0xF011;
-    const BLIPJPEG          = 0xF01D;
-    const BLIPPNG           = 0xF01E;
-    const SPLITMENUCOLORS   = 0xF11E;
-    const TERTIARYOPT       = 0xF122;
+    const DGGCONTAINER = 0xF000;
+    const BSTORECONTAINER = 0xF001;
+    const DGCONTAINER = 0xF002;
+    const SPGRCONTAINER = 0xF003;
+    const SPCONTAINER = 0xF004;
+    const DGG = 0xF006;
+    const BSE = 0xF007;
+    const DG = 0xF008;
+    const SPGR = 0xF009;
+    const SP = 0xF00A;
+    const OPT = 0xF00B;
+    const CLIENTTEXTBOX = 0xF00D;
+    const CLIENTANCHOR = 0xF010;
+    const CLIENTDATA = 0xF011;
+    const BLIPJPEG = 0xF01D;
+    const BLIPPNG = 0xF01E;
+    const SPLITMENUCOLORS = 0xF11E;
+    const TERTIARYOPT = 0xF122;
 
     /**
-     * Escher stream data (binary)
+     * Escher stream data (binary).
      *
      * @var string
      */
     private $data;
 
     /**
-     * Size in bytes of the Escher stream data
+     * Size in bytes of the Escher stream data.
      *
      * @var int
      */
     private $dataSize;
 
     /**
-     * Current position of stream pointer in Escher stream data
+     * Current position of stream pointer in Escher stream data.
      *
      * @var int
      */
@@ -77,7 +78,7 @@ class Escher
     private $object;
 
     /**
-     * Create a new Escher instance
+     * Create a new Escher instance.
      *
      * @param mixed $object
      */
@@ -170,7 +171,7 @@ class Escher
     }
 
     /**
-     * Read a generic record
+     * Read a generic record.
      */
     private function readDefault()
     {
@@ -191,7 +192,7 @@ class Escher
     }
 
     /**
-     * Read DggContainer record (Drawing Group Container)
+     * Read DggContainer record (Drawing Group Container).
      */
     private function readDggContainer()
     {
@@ -204,12 +205,12 @@ class Escher
         // record is a container, read contents
         $dggContainer = new \PhpOffice\PhpExcel\Shared\Escher\DggContainer();
         $this->object->setDggContainer($dggContainer);
-        $reader = new Escher($dggContainer);
+        $reader = new self($dggContainer);
         $reader->load($recordData);
     }
 
     /**
-     * Read Dgg record (Drawing Group)
+     * Read Dgg record (Drawing Group).
      */
     private function readDgg()
     {
@@ -221,7 +222,7 @@ class Escher
     }
 
     /**
-     * Read BstoreContainer record (Blip Store Container)
+     * Read BstoreContainer record (Blip Store Container).
      */
     private function readBstoreContainer()
     {
@@ -234,12 +235,12 @@ class Escher
         // record is a container, read contents
         $bstoreContainer = new \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer();
         $this->object->setBstoreContainer($bstoreContainer);
-        $reader = new Escher($bstoreContainer);
+        $reader = new self($bstoreContainer);
         $reader->load($recordData);
     }
 
     /**
-     * Read BSE record
+     * Read BSE record.
      */
     private function readBSE()
     {
@@ -305,7 +306,7 @@ class Escher
     }
 
     /**
-     * Read BlipJPEG record. Holds raw JPEG image data
+     * Read BlipJPEG record. Holds raw JPEG image data.
      */
     private function readBlipJPEG()
     {
@@ -346,7 +347,7 @@ class Escher
     }
 
     /**
-     * Read BlipPNG record. Holds raw PNG image data
+     * Read BlipPNG record. Holds raw PNG image data.
      */
     private function readBlipPNG()
     {
@@ -387,7 +388,7 @@ class Escher
     }
 
     /**
-     * Read OPT record. This record may occur within DggContainer record or SpContainer
+     * Read OPT record. This record may occur within DggContainer record or SpContainer.
      */
     private function readOPT()
     {
@@ -406,7 +407,7 @@ class Escher
     }
 
     /**
-     * Read TertiaryOPT record
+     * Read TertiaryOPT record.
      */
     private function readTertiaryOPT()
     {
@@ -423,7 +424,7 @@ class Escher
     }
 
     /**
-     * Read SplitMenuColors record
+     * Read SplitMenuColors record.
      */
     private function readSplitMenuColors()
     {
@@ -435,7 +436,7 @@ class Escher
     }
 
     /**
-     * Read DgContainer record (Drawing Container)
+     * Read DgContainer record (Drawing Container).
      */
     private function readDgContainer()
     {
@@ -453,7 +454,7 @@ class Escher
     }
 
     /**
-     * Read Dg record (Drawing)
+     * Read Dg record (Drawing).
      */
     private function readDg()
     {
@@ -465,7 +466,7 @@ class Escher
     }
 
     /**
-     * Read SpgrContainer record (Shape Group Container)
+     * Read SpgrContainer record (Shape Group Container).
      */
     private function readSpgrContainer()
     {
@@ -488,12 +489,12 @@ class Escher
             $this->object->addChild($spgrContainer);
         }
 
-        $reader = new Escher($spgrContainer);
+        $reader = new self($spgrContainer);
         $escher = $reader->load($recordData);
     }
 
     /**
-     * Read SpContainer record (Shape Container)
+     * Read SpContainer record (Shape Container).
      */
     private function readSpContainer()
     {
@@ -508,12 +509,12 @@ class Escher
         $this->pos += 8 + $length;
 
         // record is a container, read contents
-        $reader = new Escher($spContainer);
+        $reader = new self($spContainer);
         $escher = $reader->load($recordData);
     }
 
     /**
-     * Read Spgr record (Shape Group)
+     * Read Spgr record (Shape Group).
      */
     private function readSpgr()
     {
@@ -525,7 +526,7 @@ class Escher
     }
 
     /**
-     * Read Sp record (Shape)
+     * Read Sp record (Shape).
      */
     private function readSp()
     {
@@ -542,7 +543,7 @@ class Escher
     }
 
     /**
-     * Read ClientTextbox record
+     * Read ClientTextbox record.
      */
     private function readClientTextbox()
     {
@@ -559,7 +560,7 @@ class Escher
     }
 
     /**
-     * Read ClientAnchor record. This record holds information about where the shape is anchored in worksheet
+     * Read ClientAnchor record. This record holds information about where the shape is anchored in worksheet.
      */
     private function readClientAnchor()
     {
@@ -594,7 +595,7 @@ class Escher
         $endOffsetY = \PhpOffice\PhpExcel\Reader\Excel5::getInt2d($recordData, 16);
 
         // set the start coordinates
-        $this->object->setStartCoordinates(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c1) . ($r1 + 1));
+        $this->object->setStartCoordinates(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c1).($r1 + 1));
 
         // set the start offsetX
         $this->object->setStartOffsetX($startOffsetX);
@@ -603,7 +604,7 @@ class Escher
         $this->object->setStartOffsetY($startOffsetY);
 
         // set the end coordinates
-        $this->object->setEndCoordinates(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c2) . ($r2 + 1));
+        $this->object->setEndCoordinates(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c2).($r2 + 1));
 
         // set the end offsetX
         $this->object->setEndOffsetX($endOffsetX);
@@ -613,7 +614,7 @@ class Escher
     }
 
     /**
-     * Read ClientData record
+     * Read ClientData record.
      */
     private function readClientData()
     {
@@ -625,10 +626,10 @@ class Escher
     }
 
     /**
-     * Read OfficeArtRGFOPTE table of property-value pairs
+     * Read OfficeArtRGFOPTE table of property-value pairs.
      *
      * @param string $data Binary data
-     * @param int $n Number of properties
+     * @param int    $n    Number of properties
      */
     private function readOfficeArtRGFOPTE($data, $n)
     {

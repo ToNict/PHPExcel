@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\TimeZone
+ * PhpOffice\PhpExcel\Shared\TimeZone.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class TimeZone
@@ -35,54 +36,58 @@ class TimeZone
      * @private
      * @var    string
      */
-    protected static $timezone    = 'UTC';
+    protected static $timezone = 'UTC';
 
     /**
-     * Validate a Timezone name
+     * Validate a Timezone name.
      *
-     * @param     string        $timezone            Time zone (e.g. 'Europe/London')
-     * @return     boolean                        Success or failure
+     * @param string $timezone Time zone (e.g. 'Europe/London')
+     *
+     * @return bool Success or failure
      */
     private static function validateTimeZone($timezone)
     {
         if (in_array($timezone, \DateTimeZone::listIdentifiers())) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Set the Default Timezone used for date/time conversions
+     * Set the Default Timezone used for date/time conversions.
      *
-     * @param     string        $timezone            Time zone (e.g. 'Europe/London')
-     * @return     boolean                        Success or failure
+     * @param string $timezone Time zone (e.g. 'Europe/London')
+     *
+     * @return bool Success or failure
      */
     public static function setTimeZone($timezone)
     {
         if (self::validateTimezone($timezone)) {
             self::$timezone = $timezone;
+
             return true;
         }
+
         return false;
     }
 
-
     /**
-     * Return the Default Timezone used for date/time conversions
+     * Return the Default Timezone used for date/time conversions.
      *
-     * @return     string        Timezone (e.g. 'Europe/London')
+     * @return string Timezone (e.g. 'Europe/London')
      */
     public static function getTimeZone()
     {
         return self::$timezone;
     }
 
-
     /**
-     *    Return the Timezone transition for the specified timezone and timestamp
+     *    Return the Timezone transition for the specified timezone and timestamp.
      *
      *    @param        DateTimeZone         $objTimezone    The timezone for finding the transitions
-     *    @param        integer                 $timestamp        PHP date/time value for finding the current transition
+     *    @param        int                 $timestamp        PHP date/time value for finding the current transition
+     *
      *    @return         array                The current transition details
      */
     private static function getTimezoneTransitions($objTimezone, $timestamp)
@@ -104,18 +109,20 @@ class TimeZone
 
     /**
      *    Return the Timezone offset used for date/time conversions to/from UST
-     *    This requires both the timezone and the calculated date/time to allow for local DST
+     *    This requires both the timezone and the calculated date/time to allow for local DST.
      *
      *    @param    string             $timezone         The timezone for finding the adjustment to UST
-     *    @param    integer            $timestamp        PHP date/time value
-     *    @return   integer            Number of seconds for timezone adjustment
+     *    @param    int            $timestamp        PHP date/time value
+     *
+     *    @return   int            Number of seconds for timezone adjustment
+     *
      *    @throws   \PhpOffice\PhpExcel\Exception
      */
     public static function getTimeZoneAdjustment($timezone, $timestamp)
     {
         if ($timezone !== null) {
             if (!self::validateTimezone($timezone)) {
-                throw new \PhpOffice\PhpExcel\Exception("Invalid timezone " . $timezone);
+                throw new \PhpOffice\PhpExcel\Exception('Invalid timezone '.$timezone);
             }
         } else {
             $timezone = self::$timezone;

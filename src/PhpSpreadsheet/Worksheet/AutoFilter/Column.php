@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet\AutoFilter;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\AutoFilter\Column
+ * PhpOffice\PhpExcel\Worksheet\AutoFilter\Column.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,24 +22,25 @@ namespace PhpOffice\PhpExcel\Worksheet\AutoFilter;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category    PHPExcel
- * @package     PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class Column
 {
-    const AUTOFILTER_FILTERTYPE_FILTER         = 'filters';
-    const AUTOFILTER_FILTERTYPE_CUSTOMFILTER   = 'customFilters';
+    const AUTOFILTER_FILTERTYPE_FILTER = 'filters';
+    const AUTOFILTER_FILTERTYPE_CUSTOMFILTER = 'customFilters';
     //    Supports no more than 2 rules, with an And/Or join criteria
     //        if more than 1 rule is defined
-    const AUTOFILTER_FILTERTYPE_DYNAMICFILTER  = 'dynamicFilter';
+    const AUTOFILTER_FILTERTYPE_DYNAMICFILTER = 'dynamicFilter';
     //    Even though the filter rule is constant, the filtered data can vary
     //        e.g. filtered by date = TODAY
-    const AUTOFILTER_FILTERTYPE_TOPTENFILTER   = 'top10';
+    const AUTOFILTER_FILTERTYPE_TOPTENFILTER = 'top10';
 
     /**
-     * Types of autofilter rules
+     * Types of autofilter rules.
      *
      * @var string[]
      */
@@ -56,10 +57,10 @@ class Column
 
     /* Multiple Rule Connections */
     const AUTOFILTER_COLUMN_JOIN_AND = 'and';
-    const AUTOFILTER_COLUMN_JOIN_OR  = 'or';
+    const AUTOFILTER_COLUMN_JOIN_OR = 'or';
 
     /**
-     * Join options for autofilter rules
+     * Join options for autofilter rules.
      *
      * @var string[]
      */
@@ -69,55 +70,49 @@ class Column
     );
 
     /**
-     * Autofilter
+     * Autofilter.
      *
      * @var \PhpOffice\PhpExcel\Worksheet\AutoFilter
      */
     private $parent;
 
-
     /**
-     * Autofilter Column Index
+     * Autofilter Column Index.
      *
      * @var string
      */
     private $columnIndex = '';
 
-
     /**
-     * Autofilter Column Filter Type
+     * Autofilter Column Filter Type.
      *
      * @var string
      */
     private $filterType = self::AUTOFILTER_FILTERTYPE_FILTER;
 
-
     /**
-     * Autofilter Multiple Rules And/Or
+     * Autofilter Multiple Rules And/Or.
      *
      * @var string
      */
     private $join = self::AUTOFILTER_COLUMN_JOIN_OR;
 
-
     /**
-     * Autofilter Column Rules
+     * Autofilter Column Rules.
      *
      * @var array of Column\Rule
      */
     private $ruleset = array();
 
-
     /**
-     * Autofilter Column Dynamic Attributes
+     * Autofilter Column Dynamic Attributes.
      *
      * @var array of mixed
      */
     private $attributes = array();
 
-
     /**
-     * Create a new Column
+     * Create a new Column.
      *
      *    @param    string                           $pColumn        Column (e.g. A)
      *    @param    \PhpOffice\PhpExcel\Worksheet\AutoFilter  $pParent        Autofilter for this column
@@ -129,7 +124,7 @@ class Column
     }
 
     /**
-     * Get AutoFilter Column Index
+     * Get AutoFilter Column Index.
      *
      * @return string
      */
@@ -139,10 +134,12 @@ class Column
     }
 
     /**
-     *    Set AutoFilter Column Index
+     *    Set AutoFilter Column Index.
      *
      *    @param    string        $pColumn        Column (e.g. A)
+     *
      *    @throws    \PhpOffice\PhpExcel\Exception
+     *
      *    @return Column
      */
     public function setColumnIndex($pColumn)
@@ -159,7 +156,7 @@ class Column
     }
 
     /**
-     * Get this Column's AutoFilter Parent
+     * Get this Column's AutoFilter Parent.
      *
      * @return \PhpOffice\PhpExcel\Worksheet\AutoFilter
      */
@@ -169,9 +166,10 @@ class Column
     }
 
     /**
-     * Set this Column's AutoFilter Parent
+     * Set this Column's AutoFilter Parent.
      *
      * @param \PhpOffice\PhpExcel\Worksheet\AutoFilter
+     *
      * @return Column
      */
     public function setParent(\PhpOffice\PhpExcel\Worksheet\AutoFilter $pParent = null)
@@ -182,7 +180,7 @@ class Column
     }
 
     /**
-     * Get AutoFilter Type
+     * Get AutoFilter Type.
      *
      * @return string
      */
@@ -192,10 +190,12 @@ class Column
     }
 
     /**
-     *    Set AutoFilter Type
+     *    Set AutoFilter Type.
      *
      *    @param    string        $pFilterType
+     *
      *    @throws    \PhpOffice\PhpExcel\Exception
+     *
      *    @return Column
      */
     public function setFilterType($pFilterType = self::AUTOFILTER_FILTERTYPE_FILTER)
@@ -210,7 +210,7 @@ class Column
     }
 
     /**
-     * Get AutoFilter Multiple Rules And/Or Join
+     * Get AutoFilter Multiple Rules And/Or Join.
      *
      * @return string
      */
@@ -220,10 +220,12 @@ class Column
     }
 
     /**
-     *    Set AutoFilter Multiple Rules And/Or
+     *    Set AutoFilter Multiple Rules And/Or.
      *
      *    @param   string        $pJoin        And/Or
+     *
      *    @throws  \PhpOffice\PhpExcel\Exception
+     *
      *    @return  Column
      */
     public function setJoin($pJoin = self::AUTOFILTER_COLUMN_JOIN_OR)
@@ -240,10 +242,12 @@ class Column
     }
 
     /**
-     *    Set AutoFilter Attributes
+     *    Set AutoFilter Attributes.
      *
      *    @param    string[]        $pAttributes
+     *
      *    @throws   \PhpOffice\PhpExcel\Exception
+     *
      *    @return   Column
      */
     public function setAttributes($pAttributes = array())
@@ -254,11 +258,13 @@ class Column
     }
 
     /**
-     *    Set An AutoFilter Attribute
+     *    Set An AutoFilter Attribute.
      *
      *    @param    string        $pName        Attribute Name
      *    @param    string        $pValue        Attribute Value
+     *
      *    @throws   \PhpOffice\PhpExcel\Exception
+     *
      *    @return   Column
      */
     public function setAttribute($pName, $pValue)
@@ -269,7 +275,7 @@ class Column
     }
 
     /**
-     * Get AutoFilter Column Attributes
+     * Get AutoFilter Column Attributes.
      *
      * @return string
      */
@@ -279,9 +285,10 @@ class Column
     }
 
     /**
-     * Get specific AutoFilter Column Attribute
+     * Get specific AutoFilter Column Attribute.
      *
      *    @param    string        $pName        Attribute Name
+     *
      * @return string
      */
     public function getAttribute($pName)
@@ -289,14 +296,16 @@ class Column
         if (isset($this->attributes[$pName])) {
             return $this->attributes[$pName];
         }
-        return null;
+
+        return;
     }
 
     /**
-     * Get all AutoFilter Column Rules
+     * Get all AutoFilter Column Rules.
      *
-     * @throws   \PhpOffice\PhpExcel\Exception
-     * @return   Column\Rule[]
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return Column\Rule[]
      */
     public function getRules()
     {
@@ -304,23 +313,25 @@ class Column
     }
 
     /**
-     * Get a specified AutoFilter Column Rule
+     * Get a specified AutoFilter Column Rule.
      *
-     * @param    integer    $pIndex        Rule index in the ruleset array
-     * @return    Column\Rule
+     * @param int $pIndex Rule index in the ruleset array
+     *
+     * @return Column\Rule
      */
     public function getRule($pIndex)
     {
         if (!isset($this->ruleset[$pIndex])) {
             $this->ruleset[$pIndex] = new Column\Rule($this);
         }
+
         return $this->ruleset[$pIndex];
     }
 
     /**
-     * Create a new AutoFilter Column Rule in the ruleset
+     * Create a new AutoFilter Column Rule in the ruleset.
      *
-     * @return    Column\Rule
+     * @return Column\Rule
      */
     public function createRule()
     {
@@ -330,11 +341,12 @@ class Column
     }
 
     /**
-     * Add a new AutoFilter Column Rule to the ruleset
+     * Add a new AutoFilter Column Rule to the ruleset.
      *
-     * @param    Column\Rule    $pRule
-     * @param    boolean    $returnRule     Flag indicating whether the rule object or the column object should be returned
-     * @return   Column|Column\Rule
+     * @param Column\Rule $pRule
+     * @param bool        $returnRule Flag indicating whether the rule object or the column object should be returned
+     *
+     * @return Column|Column\Rule
      */
     public function addRule(Column\Rule $pRule, $returnRule = true)
     {
@@ -346,10 +358,11 @@ class Column
 
     /**
      * Delete a specified AutoFilter Column Rule
-     *    If the number of rules is reduced to 1, then we reset And/Or logic to Or
+     *    If the number of rules is reduced to 1, then we reset And/Or logic to Or.
      *
-     * @param    integer    $pIndex        Rule index in the ruleset array
-     * @return    Column
+     * @param int $pIndex Rule index in the ruleset array
+     *
+     * @return Column
      */
     public function deleteRule($pIndex)
     {
@@ -365,9 +378,9 @@ class Column
     }
 
     /**
-     * Delete all AutoFilter Column Rules
+     * Delete all AutoFilter Column Rules.
      *
-     * @return    Column
+     * @return Column
      */
     public function clearRules()
     {

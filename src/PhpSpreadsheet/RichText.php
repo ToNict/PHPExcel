@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\RichText
+ * PhpOffice\PhpExcel\RichText.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,24 +22,26 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class RichText implements IComparable
 {
     /**
-     * Rich text elements
+     * Rich text elements.
      *
      * @var RichText\ITextElement[]
      */
     private $richTextElements;
 
     /**
-     * Create a new RichText instance
+     * Create a new RichText instance.
      *
      * @param Cell $pCell
+     *
      * @throws Exception
      */
     public function __construct(Cell $pCell = null)
@@ -50,7 +52,7 @@ class RichText implements IComparable
         // Rich-Text string attached to cell?
         if ($pCell !== null) {
             // Add cell text and style
-            if ($pCell->getValue() != "") {
+            if ($pCell->getValue() != '') {
                 $objRun = new RichText\Run($pCell->getValue());
                 $objRun->setFont(clone $pCell->getParent()->getStyle($pCell->getCoordinate())->getFont());
                 $this->addText($objRun);
@@ -62,48 +64,57 @@ class RichText implements IComparable
     }
 
     /**
-     * Add text
+     * Add text.
      *
      * @param RichText\ITextElement $pText Rich text element
+     *
      * @throws Exception
+     *
      * @return RichText
      */
     public function addText(RichText\ITextElement $pText = null)
     {
         $this->richTextElements[] = $pText;
+
         return $this;
     }
 
     /**
-     * Create text
+     * Create text.
      *
      * @param string $pText Text
+     *
      * @return RichText\TextElement
+     *
      * @throws Exception
      */
     public function createText($pText = '')
     {
         $objText = new RichText\TextElement($pText);
         $this->addText($objText);
+
         return $objText;
     }
 
     /**
-     * Create text run
+     * Create text run.
      *
      * @param string $pText Text
+     *
      * @return RichText\Run
+     *
      * @throws Exception
      */
     public function createTextRun($pText = '')
     {
         $objText = new RichText\Run($pText);
         $this->addText($objText);
+
         return $objText;
     }
 
     /**
-     * Get plain text
+     * Get plain text.
      *
      * @return string
      */
@@ -121,7 +132,7 @@ class RichText implements IComparable
     }
 
     /**
-     * Convert to string
+     * Convert to string.
      *
      * @return string
      */
@@ -131,7 +142,7 @@ class RichText implements IComparable
     }
 
     /**
-     * Get Rich Text elements
+     * Get Rich Text elements.
      *
      * @return RichText\ITextElement[]
      */
@@ -141,10 +152,12 @@ class RichText implements IComparable
     }
 
     /**
-     * Set Rich Text elements
+     * Set Rich Text elements.
      *
      * @param RichText\ITextElement[] $pElements Array of elements
+     *
      * @throws Exception
+     *
      * @return RichText
      */
     public function setRichTextElements($pElements = null)
@@ -154,13 +167,14 @@ class RichText implements IComparable
         } else {
             throw new Exception("Invalid \PhpOffice\PhpExcel\RichText\ITextElement[] array passed.");
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
@@ -170,7 +184,7 @@ class RichText implements IComparable
         }
 
         return md5(
-            $hashElements .
+            $hashElements.
             __CLASS__
         );
     }

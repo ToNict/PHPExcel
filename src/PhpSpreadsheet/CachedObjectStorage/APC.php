@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\CachedObjectStorage;
 
 /**
- * PhpOffice\PhpExcel\CachedObjectStorage\APC
+ * PhpOffice\PhpExcel\CachedObjectStorage\APC.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,35 +22,33 @@ namespace PhpOffice\PhpExcel\CachedObjectStorage;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\CachedObjectStorage
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class APC extends CacheBase implements ICache
 {
     /**
-     * Prefix used to uniquely identify cache data for this worksheet
+     * Prefix used to uniquely identify cache data for this worksheet.
      *
-     * @access    private
      * @var string
      */
     private $cachePrefix = null;
 
     /**
-     * Cache timeout
+     * Cache timeout.
      *
-     * @access    private
-     * @var integer
+     * @var int
      */
     private $cacheTime = 600;
 
     /**
      * Store cell data in cache for the current cell object if it's "dirty",
-     *     and the 'nullify' the current cell object
+     *     and the 'nullify' the current cell object.
      *
-     * @access  private
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     protected function storeData()
     {
@@ -58,12 +56,12 @@ class APC extends CacheBase implements ICache
             $this->currentObject->detach();
 
             if (!apc_store(
-                $this->cachePrefix . $this->currentObjectID . '.cache',
+                $this->cachePrefix.$this->currentObjectID.'.cache',
                 serialize($this->currentObject),
                 $this->cacheTime
             )) {
                 $this->__destruct();
-                throw new \PhpOffice\PhpExcel\Exception('Failed to store cell ' . $this->currentObjectID . ' in APC');
+                throw new \PhpOffice\PhpExcel\Exception('Failed to store cell '.$this->currentObjectID.' in APC');
             }
             $this->currentCellIsDirty = false;
         }
@@ -71,13 +69,14 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Add or Update a cell in cache identified by coordinate address
+     * Add or Update a cell in cache identified by coordinate address.
      *
-     * @access  public
-     * @param   string         $pCoord  Coordinate address of the cell to update
-     * @param   \PhpOffice\PhpExcel\Cell  $cell    Cell to update
-     * @return  \PhpOffice\PhpExcel\Cell
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param string                   $pCoord Coordinate address of the cell to update
+     * @param \PhpOffice\PhpExcel\Cell $cell   Cell to update
+     *
+     * @return \PhpOffice\PhpExcel\Cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function addCacheData($pCoord, \PhpOffice\PhpExcel\Cell $cell)
     {
@@ -96,10 +95,11 @@ class APC extends CacheBase implements ICache
     /**
      * Is a value set in the current \PhpOffice\PhpExcel\CachedObjectStorage\ICache for an indexed cell?
      *
-     * @access  public
-     * @param   string  $pCoord  Coordinate address of the cell to check
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  boolean
+     * @param string $pCoord Coordinate address of the cell to check
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return bool
      */
     public function isDataSet($pCoord)
     {
@@ -115,18 +115,21 @@ class APC extends CacheBase implements ICache
                 parent::deleteCacheData($pCoord);
                 throw new \PhpOffice\PhpExcel\Exception('Cell entry '.$pCoord.' no longer exists in APC cache');
             }
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * Get cell at a specific coordinate
+     * Get cell at a specific coordinate.
      *
-     * @access  public
-     * @param   string         $pCoord  Coordinate of the cell
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  \PhpOffice\PhpExcel\Cell  Cell that was found, or null if not found
+     * @param string $pCoord Coordinate of the cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return \PhpOffice\PhpExcel\Cell Cell that was found, or null if not found
      */
     public function getCacheData($pCoord)
     {
@@ -137,7 +140,7 @@ class APC extends CacheBase implements ICache
 
         //    Check if the entry that has been requested actually exists
         if (parent::isDataSet($pCoord)) {
-            $obj = apc_fetch($this->cachePrefix . $pCoord . '.cache');
+            $obj = apc_fetch($this->cachePrefix.$pCoord.'.cache');
             if ($obj === false) {
                 //    Entry no longer exists in APC, so clear it from the cache array
                 parent::deleteCacheData($pCoord);
@@ -145,7 +148,7 @@ class APC extends CacheBase implements ICache
             }
         } else {
             //    Return null if requested entry doesn't exist in cache
-            return null;
+            return;
         }
 
         //    Set current entry to the requested entry
@@ -159,9 +162,9 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Get a list of all cell addresses currently held in cache
+     * Get a list of all cell addresses currently held in cache.
      *
-     * @return  string[]
+     * @return string[]
      */
     public function getCellList()
     {
@@ -173,11 +176,11 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Delete a cell in cache identified by coordinate address
+     * Delete a cell in cache identified by coordinate address.
      *
-     * @access  public
-     * @param   string  $pCoord  Coordinate address of the cell to delete
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param string $pCoord Coordinate address of the cell to delete
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function deleteCacheData($pCoord)
     {
@@ -189,30 +192,30 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Clone the cell collection
+     * Clone the cell collection.
      *
-     * @access  public
-     * @param   \PhpOffice\PhpExcel\Worksheet  $parent  The new worksheet that we're copying to
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param \PhpOffice\PhpExcel\Worksheet $parent The new worksheet that we're copying to
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function copyCellCollection(\PhpOffice\PhpExcel\Worksheet $parent)
     {
         parent::copyCellCollection($parent);
         //    Get a new id for the new file name
         $baseUnique = $this->getUniqueID();
-        $newCachePrefix = substr(md5($baseUnique), 0, 8) . '.';
+        $newCachePrefix = substr(md5($baseUnique), 0, 8).'.';
         $cacheList = $this->getCellList();
         foreach ($cacheList as $cellID) {
             if ($cellID != $this->currentObjectID) {
-                $obj = apc_fetch($this->cachePrefix . $cellID . '.cache');
+                $obj = apc_fetch($this->cachePrefix.$cellID.'.cache');
                 if ($obj === false) {
                     //    Entry no longer exists in APC, so clear it from the cache array
                     parent::deleteCacheData($cellID);
-                    throw new \PhpOffice\PhpExcel\Exception('Cell entry ' . $cellID . ' no longer exists in APC');
+                    throw new \PhpOffice\PhpExcel\Exception('Cell entry '.$cellID.' no longer exists in APC');
                 }
-                if (!apc_store($newCachePrefix . $cellID . '.cache', $obj, $this->cacheTime)) {
+                if (!apc_store($newCachePrefix.$cellID.'.cache', $obj, $this->cacheTime)) {
                     $this->__destruct();
-                    throw new \PhpOffice\PhpExcel\Exception('Failed to store cell ' . $cellID . ' in APC');
+                    throw new \PhpOffice\PhpExcel\Exception('Failed to store cell '.$cellID.' in APC');
                 }
             }
         }
@@ -220,9 +223,7 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Clear the cell collection and disconnect from our parent
-     *
-     * @return  void
+     * Clear the cell collection and disconnect from our parent.
      */
     public function unsetWorksheetCells()
     {
@@ -241,10 +242,10 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Initialise this new cell collection
+     * Initialise this new cell collection.
      *
-     * @param  \PhpOffice\PhpExcel\Worksheet  $parent     The worksheet for this cell collection
-     * @param  array of mixed      $arguments  Additional initialisation arguments
+     * @param \PhpOffice\PhpExcel\Worksheet $parent    The worksheet for this cell collection
+     * @param array of mixed                $arguments Additional initialisation arguments
      */
     public function __construct(\PhpOffice\PhpExcel\Worksheet $parent, $arguments)
     {
@@ -252,7 +253,7 @@ class APC extends CacheBase implements ICache
 
         if ($this->cachePrefix === null) {
             $baseUnique = $this->getUniqueID();
-            $this->cachePrefix = substr(md5($baseUnique), 0, 8) . '.';
+            $this->cachePrefix = substr(md5($baseUnique), 0, 8).'.';
             $this->cacheTime = $cacheTime;
 
             parent::__construct($parent);
@@ -260,21 +261,21 @@ class APC extends CacheBase implements ICache
     }
 
     /**
-     * Destroy this cell collection
+     * Destroy this cell collection.
      */
     public function __destruct()
     {
         $cacheList = $this->getCellList();
         foreach ($cacheList as $cellID) {
-            apc_delete($this->cachePrefix . $cellID . '.cache');
+            apc_delete($this->cachePrefix.$cellID.'.cache');
         }
     }
 
     /**
      * Identify whether the caching method is currently available
-     * Some methods are dependent on the availability of certain extensions being enabled in the PHP build
+     * Some methods are dependent on the availability of certain extensions being enabled in the PHP build.
      *
-     * @return  boolean
+     * @return bool
      */
     public static function cacheMethodIsAvailable()
     {

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE
+ * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,47 +22,48 @@ namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class BSE
 {
-    const BLIPTYPE_ERROR    = 0x00;
-    const BLIPTYPE_UNKNOWN  = 0x01;
-    const BLIPTYPE_EMF      = 0x02;
-    const BLIPTYPE_WMF      = 0x03;
-    const BLIPTYPE_PICT     = 0x04;
-    const BLIPTYPE_JPEG     = 0x05;
-    const BLIPTYPE_PNG      = 0x06;
-    const BLIPTYPE_DIB      = 0x07;
-    const BLIPTYPE_TIFF     = 0x11;
+    const BLIPTYPE_ERROR = 0x00;
+    const BLIPTYPE_UNKNOWN = 0x01;
+    const BLIPTYPE_EMF = 0x02;
+    const BLIPTYPE_WMF = 0x03;
+    const BLIPTYPE_PICT = 0x04;
+    const BLIPTYPE_JPEG = 0x05;
+    const BLIPTYPE_PNG = 0x06;
+    const BLIPTYPE_DIB = 0x07;
+    const BLIPTYPE_TIFF = 0x11;
     const BLIPTYPE_CMYKJPEG = 0x12;
 
     /**
-     * The parent BLIP Store Entry Container
+     * The parent BLIP Store Entry Container.
      *
      * @var \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer
      */
     private $parent;
 
     /**
-     * The BLIP (Big Large Image or Picture)
+     * The BLIP (Big Large Image or Picture).
      *
      * @var BSE\Blip
      */
     private $blip;
 
     /**
-     * The BLIP type
+     * The BLIP type.
      *
      * @var int
      */
     private $blipType;
 
     /**
-     * Set parent BLIP Store Entry Container
+     * Set parent BLIP Store Entry Container.
      *
      * @param \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer $parent
      */
@@ -72,7 +73,7 @@ class BSE
     }
 
     /**
-     * Get the BLIP
+     * Get the BLIP.
      *
      * @return BSE\Blip
      */
@@ -82,7 +83,7 @@ class BSE
     }
 
     /**
-     * Set the BLIP
+     * Set the BLIP.
      *
      * @param BSE\Blip $blip
      */
@@ -93,7 +94,7 @@ class BSE
     }
 
     /**
-     * Get the BLIP type
+     * Get the BLIP type.
      *
      * @return int
      */
@@ -103,7 +104,7 @@ class BSE
     }
 
     /**
-     * Set the BLIP type
+     * Set the BLIP type.
      *
      * @param int
      */

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher
+ * PhpOffice\PhpExcel\Shared\Escher.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,29 +22,30 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Escher
 {
     /**
-     * Drawing Group Container
+     * Drawing Group Container.
      *
      * @var Escher\DggContainer
      */
     private $dggContainer;
 
     /**
-     * Drawing Container
+     * Drawing Container.
      *
      * @var Escher\DgContainer
      */
     private $dgContainer;
 
     /**
-     * Get Drawing Group Container
+     * Get Drawing Group Container.
      *
      * @return Escher\DgContainer
      */
@@ -54,7 +55,7 @@ class Escher
     }
 
     /**
-     * Set Drawing Group Container
+     * Set Drawing Group Container.
      *
      * @param Escher\DggContainer $dggContainer
      */
@@ -64,7 +65,7 @@ class Escher
     }
 
     /**
-     * Get Drawing Container
+     * Get Drawing Container.
      *
      * @return Escher\DgContainer
      */
@@ -74,7 +75,7 @@ class Escher
     }
 
     /**
-     * Set Drawing Container
+     * Set Drawing Container.
      *
      * @param Escher\DgContainer $dgContainer
      */

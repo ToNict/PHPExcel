@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Document;
 
 /**
- * PhpOffice\PhpExcel\Document\Security
+ * PhpOffice\PhpExcel\Document\Security.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,50 +22,51 @@ namespace PhpOffice\PhpExcel\Document;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Document
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Security
 {
     /**
-     * LockRevision
+     * LockRevision.
      *
-     * @var boolean
+     * @var bool
      */
     private $lockRevision = false;
 
     /**
-     * LockStructure
+     * LockStructure.
      *
-     * @var boolean
+     * @var bool
      */
     private $lockStructure = false;
 
     /**
-     * LockWindows
+     * LockWindows.
      *
-     * @var boolean
+     * @var bool
      */
     private $lockWindows = false;
 
     /**
-     * RevisionsPassword
+     * RevisionsPassword.
      *
      * @var string
      */
     private $revisionsPassword = '';
 
     /**
-     * WorkbookPassword
+     * WorkbookPassword.
      *
      * @var string
      */
     private $workbookPassword = '';
 
     /**
-     * Create a new Document Security instance
+     * Create a new Document Security instance.
      */
     public function __construct()
     {
@@ -74,7 +75,7 @@ class Security
     /**
      * Is some sort of document security enabled?
      *
-     * @return boolean
+     * @return bool
      */
     public function isSecurityEnabled()
     {
@@ -84,9 +85,9 @@ class Security
     }
 
     /**
-     * Get LockRevision
+     * Get LockRevision.
      *
-     * @return boolean
+     * @return bool
      */
     public function getLockRevision()
     {
@@ -94,21 +95,23 @@ class Security
     }
 
     /**
-     * Set LockRevision
+     * Set LockRevision.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Security
      */
     public function setLockRevision($pValue = false)
     {
         $this->lockRevision = $pValue;
+
         return $this;
     }
 
     /**
-     * Get LockStructure
+     * Get LockStructure.
      *
-     * @return boolean
+     * @return bool
      */
     public function getLockStructure()
     {
@@ -116,21 +119,23 @@ class Security
     }
 
     /**
-     * Set LockStructure
+     * Set LockStructure.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Security
      */
     public function setLockStructure($pValue = false)
     {
         $this->lockStructure = $pValue;
+
         return $this;
     }
 
     /**
-     * Get LockWindows
+     * Get LockWindows.
      *
-     * @return boolean
+     * @return bool
      */
     public function getLockWindows()
     {
@@ -138,19 +143,21 @@ class Security
     }
 
     /**
-     * Set LockWindows
+     * Set LockWindows.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Security
      */
     public function setLockWindows($pValue = false)
     {
         $this->lockWindows = $pValue;
+
         return $this;
     }
 
     /**
-     * Get RevisionsPassword (hashed)
+     * Get RevisionsPassword (hashed).
      *
      * @return string
      */
@@ -160,10 +167,11 @@ class Security
     }
 
     /**
-     * Set RevisionsPassword
+     * Set RevisionsPassword.
      *
-     * @param string     $pValue
-     * @param boolean     $pAlreadyHashed If the password has already been hashed, set this to true
+     * @param string $pValue
+     * @param bool   $pAlreadyHashed If the password has already been hashed, set this to true
+     *
      * @return Security
      */
     public function setRevisionsPassword($pValue = '', $pAlreadyHashed = false)
@@ -172,11 +180,12 @@ class Security
             $pValue = \PhpOffice\PhpExcel\Shared\PasswordHasher::hashPassword($pValue);
         }
         $this->revisionsPassword = $pValue;
+
         return $this;
     }
 
     /**
-     * Get WorkbookPassword (hashed)
+     * Get WorkbookPassword (hashed).
      *
      * @return string
      */
@@ -186,10 +195,11 @@ class Security
     }
 
     /**
-     * Set WorkbookPassword
+     * Set WorkbookPassword.
      *
-     * @param string     $pValue
-     * @param boolean     $pAlreadyHashed If the password has already been hashed, set this to true
+     * @param string $pValue
+     * @param bool   $pAlreadyHashed If the password has already been hashed, set this to true
+     *
      * @return Security
      */
     public function setWorkbookPassword($pValue = '', $pAlreadyHashed = false)
@@ -198,6 +208,7 @@ class Security
             $pValue = \PhpOffice\PhpExcel\Shared\PasswordHasher::hashPassword($pValue);
         }
         $this->workbookPassword = $pValue;
+
         return $this;
     }
 

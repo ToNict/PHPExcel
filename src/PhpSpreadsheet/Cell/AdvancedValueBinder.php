@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Cell;
 
 /**
- * PhpOffice\PhpExcel\Cell\AdvancedValueBinder
+ * PhpOffice\PhpExcel\Cell\AdvancedValueBinder.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,21 @@ namespace PhpOffice\PhpExcel\Cell;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Cell
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
 {
     /**
-     * Bind value to a cell
+     * Bind value to a cell.
      *
-     * @param  \PhpOffice\PhpExcel\Cell  $cell  Cell to bind value to
-     * @param  mixed $value           Value to bind in cell
-     * @return boolean
+     * @param \PhpOffice\PhpExcel\Cell $cell  Cell to bind value to
+     * @param mixed                    $value Value to bind in cell
+     *
+     * @return bool
      */
     public function bindValue(\PhpOffice\PhpExcel\Cell $cell, $value = null)
     {
@@ -51,15 +53,18 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
             //    Test for booleans using locale-setting
             if ($value == \PhpOffice\PhpExcel\Calculation::getTRUE()) {
                 $cell->setValueExplicit(true, DataType::TYPE_BOOL);
+
                 return true;
             } elseif ($value == \PhpOffice\PhpExcel\Calculation::getFALSE()) {
                 $cell->setValueExplicit(false, DataType::TYPE_BOOL);
+
                 return true;
             }
 
             // Check for number in scientific format
             if (preg_match('/^'.\PhpOffice\PhpExcel\Calculation::CALCULATION_REGEXP_NUMBER.'$/', $value)) {
                 $cell->setValueExplicit((float) $value, DataType::TYPE_NUMERIC);
+
                 return true;
             }
 
@@ -74,6 +79,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode('??/??');
+
                 return true;
             } elseif (preg_match('/^([+-]?)([0-9]*) +([0-9]*)\s?\/\s*([0-9]*)$/', $value, $matches)) {
                 // Convert value to number
@@ -85,6 +91,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode('# ??/??');
+
                 return true;
             }
 
@@ -96,6 +103,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode(\PhpOffice\PhpExcel\Style\NumberFormat::FORMAT_PERCENTAGE_00);
+
                 return true;
             }
 
@@ -112,14 +120,16 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                     ->getNumberFormat()->setFormatCode(
                         str_replace('$', $currencyCode, \PhpOffice\PhpExcel\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE)
                     );
+
                 return true;
             } elseif (preg_match('/^\$ *(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$/', $value)) {
                 // Convert value to number
-                $value = (float) trim(str_replace(array('$',','), '', $value));
+                $value = (float) trim(str_replace(array('$', ','), '', $value));
                 $cell->setValueExplicit($value, DataType::TYPE_NUMERIC);
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode(\PhpOffice\PhpExcel\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+
                 return true;
             }
 
@@ -132,6 +142,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode(\PhpOffice\PhpExcel\Style\NumberFormat::FORMAT_DATE_TIME3);
+
                 return true;
             }
 
@@ -145,6 +156,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode(\PhpOffice\PhpExcel\Style\NumberFormat::FORMAT_DATE_TIME4);
+
                 return true;
             }
 
@@ -160,6 +172,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 }
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getNumberFormat()->setFormatCode($formatCode);
+
                 return true;
             }
 
@@ -170,6 +183,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())
                     ->getAlignment()->setWrapText(true);
+
                 return true;
             }
         }

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\WriterPart
+ * PhpOffice\PhpExcel\Writer\Excel2007\WriterPart.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,24 +22,26 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 abstract class WriterPart
 {
     /**
-     * Parent IWriter object
+     * Parent IWriter object.
      *
      * @var \PhpOffice\PhpExcel\Writer\IWriter
      */
     private $parentWriter;
 
     /**
-     * Set parent IWriter object
+     * Set parent IWriter object.
      *
-     * @param \PhpOffice\PhpExcel\Writer\IWriter    $pWriter
+     * @param \PhpOffice\PhpExcel\Writer\IWriter $pWriter
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function setParentWriter(\PhpOffice\PhpExcel\Writer\IWriter $pWriter = null)
@@ -48,9 +50,10 @@ abstract class WriterPart
     }
 
     /**
-     * Get parent IWriter object
+     * Get parent IWriter object.
      *
      * @return \PhpOffice\PhpExcel\Writer\IWriter
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function getParentWriter()
@@ -58,14 +61,15 @@ abstract class WriterPart
         if (!is_null($this->parentWriter)) {
             return $this->parentWriter;
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("No parent \\PhpOffice\\PhpExcel\\Writer\\IWriter assigned.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('No parent \\PhpOffice\\PhpExcel\\Writer\\IWriter assigned.');
         }
     }
 
     /**
-     * Set parent IWriter object
+     * Set parent IWriter object.
      *
-     * @param \PhpOffice\PhpExcel\Writer\IWriter    $pWriter
+     * @param \PhpOffice\PhpExcel\Writer\IWriter $pWriter
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function __construct(\PhpOffice\PhpExcel\Writer\IWriter $pWriter = null)

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE\Blip
+ * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE\Blip.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,29 +22,30 @@ namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Blip
 {
     /**
-     * The parent BSE
+     * The parent BSE.
      *
      * @var \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE
      */
     private $parent;
 
     /**
-     * Raw image data
+     * Raw image data.
      *
      * @var string
      */
     private $data;
 
     /**
-     * Get the raw image data
+     * Get the raw image data.
      *
      * @return string
      */
@@ -54,7 +55,7 @@ class Blip
     }
 
     /**
-     * Set the raw image data
+     * Set the raw image data.
      *
      * @param string
      */
@@ -64,7 +65,7 @@ class Blip
     }
 
     /**
-     * Set parent BSE
+     * Set parent BSE.
      *
      * @param \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE $parent
      */
@@ -74,7 +75,7 @@ class Blip
     }
 
     /**
-     * Get parent BSE
+     * Get parent BSE.
      *
      * @return \PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer\BSE $parent
      */

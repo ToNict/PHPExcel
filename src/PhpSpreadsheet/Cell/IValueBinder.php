@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Cell;
 
 /**
- * PhpOffice\PhpExcel\Cell\IValueBinder
+ * PhpOffice\PhpExcel\Cell\IValueBinder.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,21 @@ namespace PhpOffice\PhpExcel\Cell;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Cell
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 interface IValueBinder
 {
     /**
-     * Bind value to a cell
+     * Bind value to a cell.
      *
-     * @param  \PhpOffice\PhpExcel\Cell $cell    Cell to bind value to
-     * @param  mixed $value           Value to bind in cell
-     * @return boolean
+     * @param \PhpOffice\PhpExcel\Cell $cell  Cell to bind value to
+     * @param mixed                    $value Value to bind in cell
+     *
+     * @return bool
      */
     public function bindValue(\PhpOffice\PhpExcel\Cell $cell, $value = null);
 }

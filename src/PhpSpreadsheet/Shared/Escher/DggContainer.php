@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Escher;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher\DggContainer
+ * PhpOffice\PhpExcel\Shared\Escher\DggContainer.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,57 +22,58 @@ namespace PhpOffice\PhpExcel\Shared\Escher;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class DggContainer
 {
     /**
-     * Maximum shape index of all shapes in all drawings increased by one
+     * Maximum shape index of all shapes in all drawings increased by one.
      *
      * @var int
      */
     private $spIdMax;
 
     /**
-     * Total number of drawings saved
+     * Total number of drawings saved.
      *
      * @var int
      */
     private $cDgSaved;
 
     /**
-     * Total number of shapes saved (including group shapes)
+     * Total number of shapes saved (including group shapes).
      *
      * @var int
      */
     private $cSpSaved;
 
     /**
-     * BLIP Store Container
+     * BLIP Store Container.
      *
      * @var DggContainer\BstoreContainer
      */
     private $bstoreContainer;
 
     /**
-     * Array of options for the drawing group
+     * Array of options for the drawing group.
      *
      * @var array
      */
     private $OPT = array();
 
     /**
-     * Array of identifier clusters containg information about the maximum shape identifiers
+     * Array of identifier clusters containg information about the maximum shape identifiers.
      *
      * @var array
      */
     private $IDCLs = array();
 
     /**
-     * Get maximum shape index of all shapes in all drawings (plus one)
+     * Get maximum shape index of all shapes in all drawings (plus one).
      *
      * @return int
      */
@@ -82,7 +83,7 @@ class DggContainer
     }
 
     /**
-     * Set maximum shape index of all shapes in all drawings (plus one)
+     * Set maximum shape index of all shapes in all drawings (plus one).
      *
      * @param int
      */
@@ -92,7 +93,7 @@ class DggContainer
     }
 
     /**
-     * Get total number of drawings saved
+     * Get total number of drawings saved.
      *
      * @return int
      */
@@ -102,7 +103,7 @@ class DggContainer
     }
 
     /**
-     * Set total number of drawings saved
+     * Set total number of drawings saved.
      *
      * @param int
      */
@@ -112,7 +113,7 @@ class DggContainer
     }
 
     /**
-     * Get total number of shapes saved (including group shapes)
+     * Get total number of shapes saved (including group shapes).
      *
      * @return int
      */
@@ -122,7 +123,7 @@ class DggContainer
     }
 
     /**
-     * Set total number of shapes saved (including group shapes)
+     * Set total number of shapes saved (including group shapes).
      *
      * @param int
      */
@@ -132,7 +133,7 @@ class DggContainer
     }
 
     /**
-     * Get BLIP Store Container
+     * Get BLIP Store Container.
      *
      * @return DggContainer\BstoreContainer
      */
@@ -142,7 +143,7 @@ class DggContainer
     }
 
     /**
-     * Set BLIP Store Container
+     * Set BLIP Store Container.
      *
      * @param DggContainer\BstoreContainer $bstoreContainer
      */
@@ -152,9 +153,9 @@ class DggContainer
     }
 
     /**
-     * Set an option for the drawing group
+     * Set an option for the drawing group.
      *
-     * @param int $property The number specifies the option
+     * @param int   $property The number specifies the option
      * @param mixed $value
      */
     public function setOPT($property, $value)
@@ -163,9 +164,10 @@ class DggContainer
     }
 
     /**
-     * Get an option for the drawing group
+     * Get an option for the drawing group.
      *
      * @param int $property The number specifies the option
+     *
      * @return mixed
      */
     public function getOPT($property)
@@ -173,11 +175,12 @@ class DggContainer
         if (isset($this->OPT[$property])) {
             return $this->OPT[$property];
         }
-        return null;
+
+        return;
     }
 
     /**
-     * Get identifier clusters
+     * Get identifier clusters.
      *
      * @return array
      */
@@ -187,7 +190,7 @@ class DggContainer
     }
 
     /**
-     * Set identifier clusters. array(<drawingId> => <max shape id>, ...)
+     * Set identifier clusters. array(<drawingId> => <max shape id>, ...).
      *
      * @param array $pValue
      */

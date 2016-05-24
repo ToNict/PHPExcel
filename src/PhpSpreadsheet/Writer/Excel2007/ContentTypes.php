@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\ContentTypes
+ * PhpOffice\PhpExcel\Writer\Excel2007\ContentTypes.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,20 +22,23 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class ContentTypes extends WriterPart
 {
     /**
-     * Write content types to XML format
+     * Write content types to XML format.
      *
-     * @param     \PhpOffice\PhpExcel\Spreadsheet    $pPHPExcel
-     * @param    boolean        $includeCharts    Flag indicating if we should include drawing details for charts
-     * @return string                  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Spreadsheet $pPHPExcel
+     * @param bool                            $includeCharts Flag indicating if we should include drawing details for charts
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeContentTypes(\PhpOffice\PhpExcel\Spreadsheet $pPHPExcel = null, $includeCharts = false)
     {
@@ -75,11 +78,13 @@ class ContentTypes extends WriterPart
             $this->writeOverrideContentType($objWriter, '/xl/workbook.xml', 'application/vnd.ms-excel.sheet.macroEnabled.main+xml');
             //... and define a new type for the VBA project
             $this->writeDefaultContentType($objWriter, 'bin', 'application/vnd.ms-office.vbaProject');
-            if ($pPHPExcel->hasMacrosCertificate()) {// signed macros ?
+            if ($pPHPExcel->hasMacrosCertificate()) {
+                // signed macros ?
                 // Yes : add needed information
                 $this->writeOverrideContentType($objWriter, '/xl/vbaProjectSignature.bin', 'application/vnd.ms-office.vbaProjectSignature');
             }
-        } else {// no macros in workbook, so standard type
+        } else {
+            // no macros in workbook, so standard type
             $this->writeOverrideContentType($objWriter, '/xl/workbook.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml');
         }
 
@@ -96,7 +101,7 @@ class ContentTypes extends WriterPart
         // Worksheets
         $sheetCount = $pPHPExcel->getSheetCount();
         for ($i = 0; $i < $sheetCount; ++$i) {
-            $this->writeOverrideContentType($objWriter, '/xl/worksheets/sheet' . ($i + 1) . '.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml');
+            $this->writeOverrideContentType($objWriter, '/xl/worksheets/sheet'.($i + 1).'.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml');
         }
 
         // Shared strings
@@ -111,13 +116,13 @@ class ContentTypes extends WriterPart
 
             //    We need a drawing relationship for the worksheet if we have either drawings or charts
             if (($drawingCount > 0) || ($chartCount > 0)) {
-                $this->writeOverrideContentType($objWriter, '/xl/drawings/drawing' . ($i + 1) . '.xml', 'application/vnd.openxmlformats-officedocument.drawing+xml');
+                $this->writeOverrideContentType($objWriter, '/xl/drawings/drawing'.($i + 1).'.xml', 'application/vnd.openxmlformats-officedocument.drawing+xml');
             }
 
             //    If we have charts, then we need a chart relationship for every individual chart
             if ($chartCount > 0) {
                 for ($c = 0; $c < $chartCount; ++$c) {
-                    $this->writeOverrideContentType($objWriter, '/xl/charts/chart' . $chart++ . '.xml', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml');
+                    $this->writeOverrideContentType($objWriter, '/xl/charts/chart'.$chart++.'.xml', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml');
                 }
             }
         }
@@ -125,7 +130,7 @@ class ContentTypes extends WriterPart
         // Comments
         for ($i = 0; $i < $sheetCount; ++$i) {
             if (count($pPHPExcel->getSheet($i)->getComments()) > 0) {
-                $this->writeOverrideContentType($objWriter, '/xl/comments' . ($i + 1) . '.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml');
+                $this->writeOverrideContentType($objWriter, '/xl/comments'.($i + 1).'.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml');
             }
         }
 
@@ -133,8 +138,8 @@ class ContentTypes extends WriterPart
         $aMediaContentTypes = array();
         $mediaCount = $this->getParentWriter()->getDrawingHashTable()->count();
         for ($i = 0; $i < $mediaCount; ++$i) {
-            $extension     = '';
-            $mimeType     = '';
+            $extension = '';
+            $mimeType = '';
 
             if ($this->getParentWriter()->getDrawingHashTable()->getByIndex($i) instanceof \PhpOffice\PhpExcel\Worksheet\Drawing) {
                 $extension = strtolower($this->getParentWriter()->getDrawingHashTable()->getByIndex($i)->getExtension());
@@ -147,7 +152,7 @@ class ContentTypes extends WriterPart
                 $mimeType = $this->getParentWriter()->getDrawingHashTable()->getByIndex($i)->getMimeType();
             }
 
-            if (!isset( $aMediaContentTypes[$extension])) {
+            if (!isset($aMediaContentTypes[$extension])) {
                 $aMediaContentTypes[$extension] = $mimeType;
 
                 $this->writeDefaultContentType($objWriter, $extension, $mimeType);
@@ -156,9 +161,9 @@ class ContentTypes extends WriterPart
         if ($pPHPExcel->hasRibbonBinObjects()) {
             // Some additional objects in the ribbon ?
             // we need to write "Extension" but not already write for media content
-            $tabRibbonTypes=array_diff($pPHPExcel->getRibbonBinObjects('types'), array_keys($aMediaContentTypes));
+            $tabRibbonTypes = array_diff($pPHPExcel->getRibbonBinObjects('types'), array_keys($aMediaContentTypes));
             foreach ($tabRibbonTypes as $aRibbonType) {
-                $mimeType='image/.'.$aRibbonType;//we wrote $mimeType like customUI Editor
+                $mimeType = 'image/.'.$aRibbonType;//we wrote $mimeType like customUI Editor
                 $this->writeDefaultContentType($objWriter, $aRibbonType, $mimeType);
             }
         }
@@ -166,7 +171,7 @@ class ContentTypes extends WriterPart
         for ($i = 0; $i < $sheetCount; ++$i) {
             if (count($pPHPExcel->getSheet()->getHeaderFooter()->getImages()) > 0) {
                 foreach ($pPHPExcel->getSheet()->getHeaderFooter()->getImages() as $image) {
-                    if (!isset( $aMediaContentTypes[strtolower($image->getExtension())])) {
+                    if (!isset($aMediaContentTypes[strtolower($image->getExtension())])) {
                         $aMediaContentTypes[strtolower($image->getExtension())] = $this->getImageMimeType($image->getPath());
 
                         $this->writeDefaultContentType($objWriter, strtolower($image->getExtension()), $aMediaContentTypes[strtolower($image->getExtension())]);
@@ -182,16 +187,19 @@ class ContentTypes extends WriterPart
     }
 
     /**
-     * Get image mime type
+     * Get image mime type.
      *
-     * @param     string    $pFile    Filename
-     * @return     string    Mime Type
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param string $pFile Filename
+     *
+     * @return string Mime Type
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     private function getImageMimeType($pFile = '')
     {
         if (\PhpOffice\PhpExcel\Shared\File::fileExists($pFile)) {
             $image = getimagesize($pFile);
+
             return image_type_to_mime_type($image[2]);
         } else {
             throw new \PhpOffice\PhpExcel\Writer\Exception("File $pFile does not exist");
@@ -199,12 +207,13 @@ class ContentTypes extends WriterPart
     }
 
     /**
-     * Write Default content type
+     * Write Default content type.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter     $objWriter         XML Writer
-     * @param     string                         $pPartname         Part name
-     * @param     string                         $pContentType     Content type
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter    XML Writer
+     * @param string                               $pPartname    Part name
+     * @param string                               $pContentType Content type
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     private function writeDefaultContentType(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, $pPartname = '', $pContentType = '')
     {
@@ -215,17 +224,18 @@ class ContentTypes extends WriterPart
             $objWriter->writeAttribute('ContentType', $pContentType);
             $objWriter->endElement();
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("Invalid parameters passed.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('Invalid parameters passed.');
         }
     }
 
     /**
-     * Write Override content type
+     * Write Override content type.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter     $objWriter         XML Writer
-     * @param     string                         $pPartname         Part name
-     * @param     string                         $pContentType     Content type
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter    XML Writer
+     * @param string                               $pPartname    Part name
+     * @param string                               $pContentType Content type
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     private function writeOverrideContentType(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, $pPartname = '', $pContentType = '')
     {
@@ -236,7 +246,7 @@ class ContentTypes extends WriterPart
             $objWriter->writeAttribute('ContentType', $pContentType);
             $objWriter->endElement();
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("Invalid parameters passed.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('Invalid parameters passed.');
         }
     }
 }

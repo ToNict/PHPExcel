@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Trend;
 
 /**
- * PhpOffice\PhpExcel\Shared\Trend\PolynomialBestFit
+ * PhpOffice\PhpExcel\Shared\Trend\PolynomialBestFit.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,46 +22,47 @@ namespace PhpOffice\PhpExcel\Shared\Trend;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Trend
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class PolynomialBestFit extends BestFit
 {
     /**
      * Algorithm type to use for best-fit
-     * (Name of this trend class)
+     * (Name of this trend class).
      *
-     * @var    string
+     * @var string
      **/
     protected $bestFitType = 'polynomial';
 
     /**
-     * Polynomial order
+     * Polynomial order.
      *
      * @protected
-     * @var    int
+     *
+     * @var int
      **/
     protected $order = 0;
 
-
     /**
-     * Return the order of this polynomial
+     * Return the order of this polynomial.
      *
-     * @return     int
+     * @return int
      **/
     public function getOrder()
     {
         return $this->order;
     }
 
-
     /**
-     * Return the Y-Value for a specified value of X
+     * Return the Y-Value for a specified value of X.
      *
-     * @param     float        $xValue            X-Value
-     * @return     float                        Y-Value
+     * @param float $xValue X-Value
+     *
+     * @return float Y-Value
      **/
     public function getValueOfYForX($xValue)
     {
@@ -72,51 +73,53 @@ class PolynomialBestFit extends BestFit
                 $retVal += $value * pow($xValue, $key + 1);
             }
         }
+
         return $retVal;
     }
 
-
     /**
-     * Return the X-Value for a specified value of Y
+     * Return the X-Value for a specified value of Y.
      *
-     * @param     float        $yValue            Y-Value
-     * @return     float                        X-Value
+     * @param float $yValue Y-Value
+     *
+     * @return float X-Value
      **/
     public function getValueOfXForY($yValue)
     {
         return ($yValue - $this->getIntersect()) / $this->getSlope();
     }
 
-
     /**
-     * Return the Equation of the best-fit line
+     * Return the Equation of the best-fit line.
      *
-     * @param     int        $dp        Number of places of decimal precision to display
-     * @return     string
+     * @param int $dp Number of places of decimal precision to display
+     *
+     * @return string
      **/
     public function getEquation($dp = 0)
     {
         $slope = $this->getSlope($dp);
         $intersect = $this->getIntersect($dp);
 
-        $equation = 'Y = ' . $intersect;
+        $equation = 'Y = '.$intersect;
         foreach ($slope as $key => $value) {
             if ($value != 0.0) {
-                $equation .= ' + ' . $value . ' * X';
+                $equation .= ' + '.$value.' * X';
                 if ($key > 0) {
-                    $equation .= '^' . ($key + 1);
+                    $equation .= '^'.($key + 1);
                 }
             }
         }
+
         return $equation;
     }
 
-
     /**
-     * Return the Slope of the line
+     * Return the Slope of the line.
      *
-     * @param     int        $dp        Number of places of decimal precision to display
-     * @return     string
+     * @param int $dp Number of places of decimal precision to display
+     *
+     * @return string
      **/
     public function getSlope($dp = 0)
     {
@@ -125,25 +128,25 @@ class PolynomialBestFit extends BestFit
             foreach ($this->_slope as $coefficient) {
                 $coefficients[] = round($coefficient, $dp);
             }
+
             return $coefficients;
         }
+
         return $this->_slope;
     }
-
 
     public function getCoefficients($dp = 0)
     {
         return array_merge(array($this->getIntersect($dp)), $this->getSlope($dp));
     }
 
-
     /**
-     * Execute the regression and calculate the goodness of fit for a set of X and Y data values
+     * Execute the regression and calculate the goodness of fit for a set of X and Y data values.
      *
-     * @param    int            $order        Order of Polynomial for this regression
-     * @param    float[]        $yValues    The set of Y-values for this regression
-     * @param    float[]        $xValues    The set of X-values for this regression
-     * @param    boolean        $const
+     * @param int     $order   Order of Polynomial for this regression
+     * @param float[] $yValues The set of Y-values for this regression
+     * @param float[] $xValues The set of X-values for this regression
+     * @param bool    $const
      */
     private function polynomialRegression($order, $yValues, $xValues, $const)
     {
@@ -169,7 +172,7 @@ class PolynomialBestFit extends BestFit
                 $A[$i][$j] = pow($xValues[$i], $j);
             }
         }
-        for ($i=0; $i < $this->valueCount; ++$i) {
+        for ($i = 0; $i < $this->valueCount; ++$i) {
             $B[$i] = array($yValues[$i]);
         }
         $matrixA = new Matrix($A);
@@ -194,14 +197,13 @@ class PolynomialBestFit extends BestFit
         }
     }
 
-
     /**
-     * Define the regression and calculate the goodness of fit for a set of X and Y data values
+     * Define the regression and calculate the goodness of fit for a set of X and Y data values.
      *
-     * @param    int            $order        Order of Polynomial for this regression
-     * @param    float[]        $yValues    The set of Y-values for this regression
-     * @param    float[]        $xValues    The set of X-values for this regression
-     * @param    boolean        $const
+     * @param int     $order   Order of Polynomial for this regression
+     * @param float[] $yValues The set of Y-values for this regression
+     * @param float[] $xValues The set of X-values for this regression
+     * @param bool    $const
      */
     public function __construct($order, $yValues, $xValues = array(), $const = true)
     {

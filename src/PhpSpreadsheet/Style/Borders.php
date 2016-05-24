@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Borders
+ * PhpOffice\PhpExcel\Style\Borders.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,56 +22,57 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 {
     /* Diagonal directions */
     const DIAGONAL_NONE = 0;
-    const DIAGONAL_UP   = 1;
+    const DIAGONAL_UP = 1;
     const DIAGONAL_DOWN = 2;
     const DIAGONAL_BOTH = 3;
 
     /**
-     * Left
+     * Left.
      *
      * @var Border
      */
     protected $left;
 
     /**
-     * Right
+     * Right.
      *
      * @var Border
      */
     protected $right;
 
     /**
-     * Top
+     * Top.
      *
      * @var Border
      */
     protected $top;
 
     /**
-     * Bottom
+     * Bottom.
      *
      * @var Border
      */
     protected $bottom;
 
     /**
-     * Diagonal
+     * Diagonal.
      *
      * @var Border
      */
     protected $diagonal;
 
     /**
-     * DiagonalDirection
+     * DiagonalDirection.
      *
      * @var int
      */
@@ -113,14 +114,14 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     protected $horizontal;
 
     /**
-     * Create a new Borders
+     * Create a new Borders.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
-     * @param    boolean    $isConditional    Flag indicating if this is a conditional style or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -160,7 +161,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Borders
      */
@@ -170,9 +171,10 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -181,7 +183,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->getBorders()->applyFromArray(
@@ -214,9 +216,11 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * );
      * </code>
      *
-     * @param   array    $pStyles    Array containing style information
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  Borders
+     * @param array $pStyles Array containing style information
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return Borders
      */
     public function applyFromArray($pStyles = null)
     {
@@ -250,13 +254,14 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 }
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Invalid style array passed.");
+            throw new \PhpOffice\PhpExcel\Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get Left
+     * Get Left.
      *
      * @return Border
      */
@@ -266,7 +271,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Get Right
+     * Get Right.
      *
      * @return Border
      */
@@ -276,7 +281,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Get Top
+     * Get Top.
      *
      * @return Border
      */
@@ -286,7 +291,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Get Bottom
+     * Get Bottom.
      *
      * @return Border
      */
@@ -296,7 +301,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Get Diagonal
+     * Get Diagonal.
      *
      * @return Border
      */
@@ -308,21 +313,24 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     /**
      * Get AllBorders (pseudo-border). Only applies to supervisor.
      *
-     * @return  Border
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @return Border
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getAllBorders()
     {
         if (!$this->isSupervisor) {
             throw new \PhpOffice\PhpExcel\Exception('Can only get pseudo-border for supervisor.');
         }
+
         return $this->allBorders;
     }
 
     /**
      * Get Outline (pseudo-border). Only applies to supervisor.
      *
-     * @return boolean
+     * @return bool
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getOutline()
@@ -330,13 +338,15 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if (!$this->isSupervisor) {
             throw new \PhpOffice\PhpExcel\Exception('Can only get pseudo-border for supervisor.');
         }
+
         return $this->outline;
     }
 
     /**
      * Get Inside (pseudo-border). Only applies to supervisor.
      *
-     * @return boolean
+     * @return bool
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getInside()
@@ -344,6 +354,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if (!$this->isSupervisor) {
             throw new \PhpOffice\PhpExcel\Exception('Can only get pseudo-border for supervisor.');
         }
+
         return $this->inside;
     }
 
@@ -351,6 +362,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * Get Vertical (pseudo-border). Only applies to supervisor.
      *
      * @return Border
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getVertical()
@@ -358,6 +370,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if (!$this->isSupervisor) {
             throw new \PhpOffice\PhpExcel\Exception('Can only get pseudo-border for supervisor.');
         }
+
         return $this->vertical;
     }
 
@@ -365,6 +378,7 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * Get Horizontal (pseudo-border). Only applies to supervisor.
      *
      * @return Border
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getHorizontal()
@@ -372,11 +386,12 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if (!$this->isSupervisor) {
             throw new \PhpOffice\PhpExcel\Exception('Can only get pseudo-border for supervisor.');
         }
+
         return $this->horizontal;
     }
 
     /**
-     * Get DiagonalDirection
+     * Get DiagonalDirection.
      *
      * @return int
      */
@@ -385,13 +400,15 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getDiagonalDirection();
         }
+
         return $this->diagonalDirection;
     }
 
     /**
-     * Set DiagonalDirection
+     * Set DiagonalDirection.
      *
      * @param int $pValue
+     *
      * @return Borders
      */
     public function setDiagonalDirection($pValue = self::DIAGONAL_NONE)
@@ -405,26 +422,28 @@ class Borders extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->diagonalDirection = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashcode();
         }
+
         return md5(
-            $this->getLeft()->getHashCode() .
-            $this->getRight()->getHashCode() .
-            $this->getTop()->getHashCode() .
-            $this->getBottom()->getHashCode() .
-            $this->getDiagonal()->getHashCode() .
-            $this->getDiagonalDirection() .
+            $this->getLeft()->getHashCode().
+            $this->getRight()->getHashCode().
+            $this->getTop()->getHashCode().
+            $this->getBottom()->getHashCode().
+            $this->getDiagonal()->getHashCode().
+            $this->getDiagonalDirection().
             __CLASS__
         );
     }

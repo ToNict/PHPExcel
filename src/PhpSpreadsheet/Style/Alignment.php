@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Alignment
+ * PhpOffice\PhpExcel\Style\Alignment.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,93 +22,94 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 {
     /* Horizontal alignment styles */
-    const HORIZONTAL_GENERAL           = 'general';
-    const HORIZONTAL_LEFT              = 'left';
-    const HORIZONTAL_RIGHT             = 'right';
-    const HORIZONTAL_CENTER            = 'center';
+    const HORIZONTAL_GENERAL = 'general';
+    const HORIZONTAL_LEFT = 'left';
+    const HORIZONTAL_RIGHT = 'right';
+    const HORIZONTAL_CENTER = 'center';
     const HORIZONTAL_CENTER_CONTINUOUS = 'centerContinuous';
-    const HORIZONTAL_JUSTIFY           = 'justify';
-    const HORIZONTAL_FILL              = 'fill';
-    const HORIZONTAL_DISTRIBUTED       = 'distributed';        // Excel2007 only
+    const HORIZONTAL_JUSTIFY = 'justify';
+    const HORIZONTAL_FILL = 'fill';
+    const HORIZONTAL_DISTRIBUTED = 'distributed';        // Excel2007 only
 
     /* Vertical alignment styles */
-    const VERTICAL_BOTTOM      = 'bottom';
-    const VERTICAL_TOP         = 'top';
-    const VERTICAL_CENTER      = 'center';
-    const VERTICAL_JUSTIFY     = 'justify';
+    const VERTICAL_BOTTOM = 'bottom';
+    const VERTICAL_TOP = 'top';
+    const VERTICAL_CENTER = 'center';
+    const VERTICAL_JUSTIFY = 'justify';
     const VERTICAL_DISTRIBUTED = 'distributed';        // Excel2007 only
 
     /* Read order */
     const READORDER_CONTEXT = 0;
-    const READORDER_LTR     = 1;
-    const READORDER_RTL     = 2;
+    const READORDER_LTR = 1;
+    const READORDER_RTL = 2;
 
     /**
-     * Horizontal alignment
+     * Horizontal alignment.
      *
      * @var string
      */
     protected $horizontal = self::HORIZONTAL_GENERAL;
 
     /**
-     * Vertical alignment
+     * Vertical alignment.
      *
      * @var string
      */
     protected $vertical = self::VERTICAL_BOTTOM;
 
     /**
-     * Text rotation
+     * Text rotation.
      *
-     * @var integer
+     * @var int
      */
     protected $textRotation = 0;
 
     /**
-     * Wrap text
+     * Wrap text.
      *
-     * @var boolean
+     * @var bool
      */
     protected $wrapText = false;
 
     /**
-     * Shrink to fit
+     * Shrink to fit.
      *
-     * @var boolean
+     * @var bool
      */
     protected $shrinkToFit = false;
 
     /**
-     * Indent - only possible with horizontal alignment left and right
+     * Indent - only possible with horizontal alignment left and right.
      *
-     * @var integer
+     * @var int
      */
     protected $indent = 0;
 
     /**
-     * Read order
+     * Read order.
      *
-     * @var integer
+     * @var int
      */
     protected $readorder = 0;
 
     /**
-     * Create a new Alignment
+     * Create a new Alignment.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                       Leave this value at default unless you understand exactly what
-     *                                          its ramifications are
-     * @param    boolean    $isConditional   Flag indicating if this is a conditional style or not
-     *                                       Leave this value at default unless you understand exactly what
-     *                                          its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -116,15 +117,15 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         parent::__construct($isSupervisor);
 
         if ($isConditional) {
-            $this->horizontal   = null;
-            $this->vertical     = null;
+            $this->horizontal = null;
+            $this->vertical = null;
             $this->textRotation = null;
         }
     }
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Alignment
      */
@@ -134,9 +135,10 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -145,7 +147,7 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->getAlignment()->applyFromArray(
@@ -158,9 +160,11 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * );
      * </code>
      *
-     * @param   array    $pStyles    Array containing style information
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  Alignment
+     * @param array $pStyles Array containing style information
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return Alignment
      */
     public function applyFromArray($pStyles = null)
     {
@@ -192,13 +196,14 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 }
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Invalid style array passed.");
+            throw new \PhpOffice\PhpExcel\Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get Horizontal
+     * Get Horizontal.
      *
      * @return string
      */
@@ -207,13 +212,15 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHorizontal();
         }
+
         return $this->horizontal;
     }
 
     /**
-     * Set Horizontal
+     * Set Horizontal.
      *
      * @param string $pValue
+     *
      * @return Alignment
      */
     public function setHorizontal($pValue = self::HORIZONTAL_GENERAL)
@@ -228,11 +235,12 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->horizontal = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Vertical
+     * Get Vertical.
      *
      * @return string
      */
@@ -241,13 +249,15 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getVertical();
         }
+
         return $this->vertical;
     }
 
     /**
-     * Set Vertical
+     * Set Vertical.
      *
      * @param string $pValue
+     *
      * @return Alignment
      */
     public function setVertical($pValue = self::VERTICAL_BOTTOM)
@@ -262,11 +272,12 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->vertical = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get TextRotation
+     * Get TextRotation.
      *
      * @return int
      */
@@ -275,14 +286,17 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getTextRotation();
         }
+
         return $this->textRotation;
     }
 
     /**
-     * Set TextRotation
+     * Set TextRotation.
      *
      * @param int $pValue
+     *
      * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Alignment
      */
     public function setTextRotation($pValue = 0)
@@ -301,29 +315,31 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 $this->textRotation = $pValue;
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Text rotation should be a value between -90 and 90.");
+            throw new \PhpOffice\PhpExcel\Exception('Text rotation should be a value between -90 and 90.');
         }
 
         return $this;
     }
 
     /**
-     * Get Wrap Text
+     * Get Wrap Text.
      *
-     * @return boolean
+     * @return bool
      */
     public function getWrapText()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getWrapText();
         }
+
         return $this->wrapText;
     }
 
     /**
-     * Set Wrap Text
+     * Set Wrap Text.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Alignment
      */
     public function setWrapText($pValue = false)
@@ -337,26 +353,29 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->wrapText = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Shrink to fit
+     * Get Shrink to fit.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShrinkToFit()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getShrinkToFit();
         }
+
         return $this->shrinkToFit;
     }
 
     /**
-     * Set Shrink to fit
+     * Set Shrink to fit.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Alignment
      */
     public function setShrinkToFit($pValue = false)
@@ -370,11 +389,12 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->shrinkToFit = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get indent
+     * Get indent.
      *
      * @return int
      */
@@ -383,13 +403,15 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getIndent();
         }
+
         return $this->indent;
     }
 
     /**
-     * Set indent
+     * Set indent.
      *
      * @param int $pValue
+     *
      * @return Alignment
      */
     public function setIndent($pValue = 0)
@@ -407,26 +429,29 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->indent = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get read order
+     * Get read order.
      *
-     * @return integer
+     * @return int
      */
     public function getReadorder()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getReadorder();
         }
+
         return $this->readorder;
     }
 
     /**
-     * Set read order
+     * Set read order.
      *
      * @param int $pValue
+     *
      * @return Alignment
      */
     public function setReadorder($pValue = 0)
@@ -440,27 +465,29 @@ class Alignment extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->readorder = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashCode();
         }
+
         return md5(
-            $this->horizontal .
-            $this->vertical .
-            $this->textRotation .
-            ($this->wrapText ? 't' : 'f') .
-            ($this->shrinkToFit ? 't' : 'f') .
-            $this->indent .
-            $this->readorder .
+            $this->horizontal.
+            $this->vertical.
+            $this->textRotation.
+            ($this->wrapText ? 't' : 'f').
+            ($this->shrinkToFit ? 't' : 'f').
+            $this->indent.
+            $this->readorder.
             __CLASS__
         );
     }

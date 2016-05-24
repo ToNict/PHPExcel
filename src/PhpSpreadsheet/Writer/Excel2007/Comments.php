@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\Comments
+ * PhpOffice\PhpExcel\Writer\Excel2007\Comments.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Comments extends WriterPart
 {
     /**
-     * Write comments to XML format
+     * Write comments to XML format.
      *
-     * @param     \PhpOffice\PhpExcel\Worksheet                $pWorksheet
-     * @return string                          XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Worksheet $pWorksheet
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeComments(\PhpOffice\PhpExcel\Worksheet $pWorksheet = null)
     {
@@ -50,11 +53,11 @@ class Comments extends WriterPart
         $objWriter->startDocument('1.0', 'UTF-8', 'yes');
 
           // Comments cache
-          $comments    = $pWorksheet->getComments();
+          $comments = $pWorksheet->getComments();
 
           // Authors cache
-          $authors    = array();
-          $authorId    = 0;
+          $authors = array();
+        $authorId = 0;
         foreach ($comments as $comment) {
             if (!isset($authors[$comment->getAuthor()])) {
                 $authors[$comment->getAuthor()] = $authorId++;
@@ -86,13 +89,14 @@ class Comments extends WriterPart
     }
 
     /**
-     * Write comment to XML format
+     * Write comment to XML format.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter        $objWriter             XML Writer
-     * @param    string                            $pCellReference        Cell reference
-     * @param     \PhpOffice\PhpExcel\Comment                $pComment            Comment
-     * @param    array                            $pAuthors            Array of authors
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter      XML Writer
+     * @param string                               $pCellReference Cell reference
+     * @param \PhpOffice\PhpExcel\Comment          $pComment       Comment
+     * @param array                                $pAuthors       Array of authors
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     private function writeComment(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, $pCellReference = 'A1', \PhpOffice\PhpExcel\Comment $pComment = null, $pAuthors = null)
     {
@@ -110,10 +114,12 @@ class Comments extends WriterPart
     }
 
     /**
-     * Write VML comments to XML format
+     * Write VML comments to XML format.
      *
      * @param \PhpOffice\PhpExcel\Worksheet $pWorksheet
+     *
      * @return string XML Output
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeVMLComments(\PhpOffice\PhpExcel\Worksheet $pWorksheet = null)
@@ -130,7 +136,7 @@ class Comments extends WriterPart
         $objWriter->startDocument('1.0', 'UTF-8', 'yes');
 
           // Comments cache
-          $comments    = $pWorksheet->getComments();
+          $comments = $pWorksheet->getComments();
 
         // xml
         $objWriter->startElement('xml');
@@ -144,9 +150,9 @@ class Comments extends WriterPart
 
             // o:idmap
             $objWriter->startElement('o:idmap');
-            $objWriter->writeAttribute('v:ext', 'edit');
-            $objWriter->writeAttribute('data', '1');
-            $objWriter->endElement();
+        $objWriter->writeAttribute('v:ext', 'edit');
+        $objWriter->writeAttribute('data', '1');
+        $objWriter->endElement();
 
         $objWriter->endElement();
 
@@ -159,14 +165,14 @@ class Comments extends WriterPart
 
             // v:stroke
             $objWriter->startElement('v:stroke');
-            $objWriter->writeAttribute('joinstyle', 'miter');
-            $objWriter->endElement();
+        $objWriter->writeAttribute('joinstyle', 'miter');
+        $objWriter->endElement();
 
             // v:path
             $objWriter->startElement('v:path');
-            $objWriter->writeAttribute('gradientshapeok', 't');
-            $objWriter->writeAttribute('o:connecttype', 'rect');
-            $objWriter->endElement();
+        $objWriter->writeAttribute('gradientshapeok', 't');
+        $objWriter->writeAttribute('o:connecttype', 'rect');
+        $objWriter->endElement();
 
         $objWriter->endElement();
 
@@ -182,60 +188,61 @@ class Comments extends WriterPart
     }
 
     /**
-     * Write VML comment to XML format
+     * Write VML comment to XML format.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter        $objWriter             XML Writer
-     * @param    string                            $pCellReference        Cell reference
-     * @param     \PhpOffice\PhpExcel\Comment                $pComment            Comment
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter      XML Writer
+     * @param string                               $pCellReference Cell reference
+     * @param \PhpOffice\PhpExcel\Comment          $pComment       Comment
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     private function writeVMLComment(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, $pCellReference = 'A1', \PhpOffice\PhpExcel\Comment $pComment = null)
     {
-         // Metadata
+        // Metadata
          list($column, $row) = \PhpOffice\PhpExcel\Cell::coordinateFromString($pCellReference);
-         $column = \PhpOffice\PhpExcel\Cell::columnIndexFromString($column);
-         $id = 1024 + $column + $row;
-         $id = substr($id, 0, 4);
+        $column = \PhpOffice\PhpExcel\Cell::columnIndexFromString($column);
+        $id = 1024 + $column + $row;
+        $id = substr($id, 0, 4);
 
         // v:shape
         $objWriter->startElement('v:shape');
-        $objWriter->writeAttribute('id', '_x0000_s' . $id);
+        $objWriter->writeAttribute('id', '_x0000_s'.$id);
         $objWriter->writeAttribute('type', '#_x0000_t202');
-        $objWriter->writeAttribute('style', 'position:absolute;margin-left:' . $pComment->getMarginLeft() . ';margin-top:' . $pComment->getMarginTop() . ';width:' . $pComment->getWidth() . ';height:' . $pComment->getHeight() . ';z-index:1;visibility:' . ($pComment->getVisible() ? 'visible' : 'hidden'));
-        $objWriter->writeAttribute('fillcolor', '#' . $pComment->getFillColor()->getRGB());
+        $objWriter->writeAttribute('style', 'position:absolute;margin-left:'.$pComment->getMarginLeft().';margin-top:'.$pComment->getMarginTop().';width:'.$pComment->getWidth().';height:'.$pComment->getHeight().';z-index:1;visibility:'.($pComment->getVisible() ? 'visible' : 'hidden'));
+        $objWriter->writeAttribute('fillcolor', '#'.$pComment->getFillColor()->getRGB());
         $objWriter->writeAttribute('o:insetmode', 'auto');
 
             // v:fill
             $objWriter->startElement('v:fill');
-            $objWriter->writeAttribute('color2', '#' . $pComment->getFillColor()->getRGB());
-            $objWriter->endElement();
+        $objWriter->writeAttribute('color2', '#'.$pComment->getFillColor()->getRGB());
+        $objWriter->endElement();
 
             // v:shadow
             $objWriter->startElement('v:shadow');
-            $objWriter->writeAttribute('on', 't');
-            $objWriter->writeAttribute('color', 'black');
-            $objWriter->writeAttribute('obscured', 't');
-            $objWriter->endElement();
+        $objWriter->writeAttribute('on', 't');
+        $objWriter->writeAttribute('color', 'black');
+        $objWriter->writeAttribute('obscured', 't');
+        $objWriter->endElement();
 
             // v:path
             $objWriter->startElement('v:path');
-            $objWriter->writeAttribute('o:connecttype', 'none');
-            $objWriter->endElement();
+        $objWriter->writeAttribute('o:connecttype', 'none');
+        $objWriter->endElement();
 
             // v:textbox
             $objWriter->startElement('v:textbox');
-            $objWriter->writeAttribute('style', 'mso-direction-alt:auto');
+        $objWriter->writeAttribute('style', 'mso-direction-alt:auto');
 
                 // div
                 $objWriter->startElement('div');
-                $objWriter->writeAttribute('style', 'text-align:left');
-                $objWriter->endElement();
+        $objWriter->writeAttribute('style', 'text-align:left');
+        $objWriter->endElement();
 
-            $objWriter->endElement();
+        $objWriter->endElement();
 
             // x:ClientData
             $objWriter->startElement('x:ClientData');
-            $objWriter->writeAttribute('ObjectType', 'Note');
+        $objWriter->writeAttribute('ObjectType', 'Note');
 
                 // x:MoveWithCells
                 $objWriter->writeElement('x:MoveWithCells', '');
@@ -255,7 +262,7 @@ class Comments extends WriterPart
                 // x:Column
                 $objWriter->writeElement('x:Column', ($column - 1));
 
-            $objWriter->endElement();
+        $objWriter->endElement();
 
         $objWriter->endElement();
     }

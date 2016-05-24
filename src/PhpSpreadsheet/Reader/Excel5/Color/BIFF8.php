@@ -63,10 +63,11 @@ class BIFF8
         0x3F => '333333',
     );
 
-   /**
-     * Map color array from BIFF8 built-in color index
+    /**
+     * Map color array from BIFF8 built-in color index.
      *
      * @param int $color
+     *
      * @return array
      */
     public static function lookup($color)
@@ -74,6 +75,7 @@ class BIFF8
         if (isset(self::$map[$color])) {
             return array('rgb' => self::$map[$color]);
         }
+
         return array('rgb' => '000000');
     }
 }

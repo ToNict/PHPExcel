@@ -6,25 +6,24 @@ namespace PhpOffice\PhpExcel\Chart;
  * Created by PhpStorm.
  * User: Wiktor Trzonkowski
  * Date: 6/17/14
- * Time: 12:11 PM
+ * Time: 12:11 PM.
  */
-
 class Axis extends Properties
 {
     /**
-     * Axis Number
+     * Axis Number.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $axisNumber = array(
         'format' => self::FORMAT_CODE_GENERAL,
-        'source_linked' => 1
+        'source_linked' => 1,
     );
 
     /**
-     * Axis Options
+     * Axis Options.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $axisOptions = array(
         'minimum' => null,
@@ -36,35 +35,35 @@ class Axis extends Properties
         'major_tick_mark' => self::TICK_MARK_NONE,
         'axis_labels' => self::AXIS_LABELS_NEXT_TO,
         'horizontal_crosses' => self::HORIZONTAL_CROSSES_AUTOZERO,
-        'horizontal_crosses_value' => null
+        'horizontal_crosses_value' => null,
     );
 
     /**
-     * Fill Properties
+     * Fill Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $fillProperties = array(
         'type' => self::EXCEL_COLOR_TYPE_ARGB,
         'value' => null,
-        'alpha' => 0
+        'alpha' => 0,
     );
 
     /**
-     * Line Properties
+     * Line Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $lineProperties = array(
         'type' => self::EXCEL_COLOR_TYPE_ARGB,
         'value' => null,
-        'alpha' => 0
+        'alpha' => 0,
     );
 
     /**
-     * Line Style Properties
+     * Line Style Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $lineStyleProperties = array(
         'width' => '9525',
@@ -75,19 +74,19 @@ class Axis extends Properties
         'arrow' => array(
             'head' => array(
                 'type' => self::LINE_STYLE_ARROW_TYPE_NOARROW,
-                'size' => self::LINE_STYLE_ARROW_SIZE_5
+                'size' => self::LINE_STYLE_ARROW_SIZE_5,
             ),
             'end' => array(
                 'type' => self::LINE_STYLE_ARROW_TYPE_NOARROW,
-                'size' => self::LINE_STYLE_ARROW_SIZE_8
+                'size' => self::LINE_STYLE_ARROW_SIZE_8,
             ),
-        )
+        ),
     );
 
     /**
-     * Shadow Properties
+     * Shadow Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $shadowProperties = array(
         'presets' => self::SHADOW_PRESETS_NOSHADOW,
@@ -100,42 +99,42 @@ class Axis extends Properties
         'size' => array(
             'sx' => null,
             'sy' => null,
-            'kx' => null
+            'kx' => null,
         ),
         'blur' => null,
         'direction' => null,
         'distance' => null,
         'algn' => null,
-        'rotWithShape' => null
+        'rotWithShape' => null,
     );
 
     /**
-     * Glow Properties
+     * Glow Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $glowProperties = array(
         'size' => null,
         'color' => array(
             'type' => self::EXCEL_COLOR_TYPE_STANDARD,
             'value' => 'black',
-            'alpha' => 40
-        )
+            'alpha' => 40,
+        ),
     );
 
     /**
-     * Soft Edge Properties
+     * Soft Edge Properties.
      *
-     * @var  array of mixed
+     * @var array of mixed
      */
     private $softEdges = array(
-        'size' => null
+        'size' => null,
     );
 
     /**
-     * Get Series Data Type
+     * Get Series Data Type.
      *
-     * @return  string
+     * @return string
      */
     public function setAxisNumberProperties($format_code)
     {
@@ -144,9 +143,9 @@ class Axis extends Properties
     }
 
     /**
-     * Get Axis Number Format Data Type
+     * Get Axis Number Format Data Type.
      *
-     * @return  string
+     * @return string
      */
     public function getAxisNumberFormat()
     {
@@ -154,9 +153,9 @@ class Axis extends Properties
     }
 
     /**
-     * Get Axis Number Source Linked
+     * Get Axis Number Source Linked.
      *
-     * @return  string
+     * @return string
      */
     public function getAxisNumberSourceLinked()
     {
@@ -164,7 +163,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Axis Options Properties
+     * Set Axis Options Properties.
      *
      * @param string $axis_labels
      * @param string $horizontal_crosses_value
@@ -176,7 +175,6 @@ class Axis extends Properties
      * @param string $maximum
      * @param string $major_unit
      * @param string $minor_unit
-     *
      */
     public function setAxisOptionsProperties($axis_labels, $horizontal_crosses_value = null, $horizontal_crosses = null, $axis_orientation = null, $major_tmt = null, $minor_tmt = null, $minimum = null, $maximum = null, $major_unit = null, $minor_unit = null)
     {
@@ -194,7 +192,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Axis Options Property
+     * Get Axis Options Property.
      *
      * @param string $property
      *
@@ -206,10 +204,9 @@ class Axis extends Properties
     }
 
     /**
-     * Set Axis Orientation Property
+     * Set Axis Orientation Property.
      *
      * @param string $orientation
-     *
      */
     public function setAxisOrientation($orientation)
     {
@@ -217,12 +214,11 @@ class Axis extends Properties
     }
 
     /**
-     * Set Fill Property
+     * Set Fill Property.
      *
      * @param string $color
-     * @param int $alpha
+     * @param int    $alpha
      * @param string $type
-     *
      */
     public function setFillParameters($color, $alpha = 0, $type = self::EXCEL_COLOR_TYPE_ARGB)
     {
@@ -230,12 +226,11 @@ class Axis extends Properties
     }
 
     /**
-     * Set Line Property
+     * Set Line Property.
      *
      * @param string $color
-     * @param int $alpha
+     * @param int    $alpha
      * @param string $type
-     *
      */
     public function setLineParameters($color, $alpha = 0, $type = self::EXCEL_COLOR_TYPE_ARGB)
     {
@@ -243,7 +238,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Fill Property
+     * Get Fill Property.
      *
      * @param string $property
      *
@@ -255,7 +250,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Line Property
+     * Get Line Property.
      *
      * @param string $property
      *
@@ -267,9 +262,9 @@ class Axis extends Properties
     }
 
     /**
-     * Set Line Style Properties
+     * Set Line Style Properties.
      *
-     * @param float $line_width
+     * @param float  $line_width
      * @param string $compound_type
      * @param string $dash_type
      * @param string $cap_type
@@ -278,7 +273,6 @@ class Axis extends Properties
      * @param string $head_arrow_size
      * @param string $end_arrow_type
      * @param string $end_arrow_size
-     *
      */
     public function setLineStyleProperties($line_width = null, $compound_type = null, $dash_type = null, $cap_type = null, $join_type = null, $head_arrow_type = null, $head_arrow_size = null, $end_arrow_type = null, $end_arrow_size = null)
     {
@@ -294,7 +288,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Line Style Property
+     * Get Line Style Property.
      *
      * @param array|string $elements
      *
@@ -306,7 +300,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Line Style Arrow Excel Width
+     * Get Line Style Arrow Excel Width.
      *
      * @param string $arrow
      *
@@ -318,7 +312,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Line Style Arrow Excel Length
+     * Get Line Style Arrow Excel Length.
      *
      * @param string $arrow
      *
@@ -330,16 +324,15 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Properties
+     * Set Shadow Properties.
      *
-     * @param int $shadow_presets
+     * @param int    $shadow_presets
      * @param string $sh_color_value
      * @param string $sh_color_type
      * @param string $sh_color_alpha
-     * @param float $sh_blur
-     * @param int $sh_angle
-     * @param float $sh_distance
-     *
+     * @param float  $sh_blur
+     * @param int    $sh_angle
+     * @param float  $sh_distance
      */
     public function setShadowProperties($sh_presets, $sh_color_value = null, $sh_color_type = null, $sh_color_alpha = null, $sh_blur = null, $sh_angle = null, $sh_distance = null)
     {
@@ -355,7 +348,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Color
+     * Set Shadow Color.
      *
      * @param int $shadow_presets
      *
@@ -370,10 +363,10 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Properties from Maped Values
+     * Set Shadow Properties from Maped Values.
      *
      * @param array $properties_map
-     * @param * $reference
+     * @param *     $reference
      *
      * @return Axis
      */
@@ -383,9 +376,9 @@ class Axis extends Properties
         foreach ($properties_map as $property_key => $property_val) {
             if (is_array($property_val)) {
                 if ($reference === null) {
-                    $reference = & $this->shadowProperties[$property_key];
+                    $reference = &$this->shadowProperties[$property_key];
                 } else {
-                    $reference = & $reference[$property_key];
+                    $reference = &$reference[$property_key];
                 }
                 $this->setShadowProperiesMapValues($property_val, $reference);
             } else {
@@ -401,10 +394,10 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Color
+     * Set Shadow Color.
      *
      * @param string $color
-     * @param int $alpha
+     * @param int    $alpha
      * @param string $type
      *
      * @return Axis
@@ -417,7 +410,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Blur
+     * Set Shadow Blur.
      *
      * @param float $blur
      *
@@ -433,7 +426,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Angle
+     * Set Shadow Angle.
      *
      * @param int $angle
      *
@@ -449,7 +442,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Shadow Distance
+     * Set Shadow Distance.
      *
      * @param float $distance
      *
@@ -465,11 +458,11 @@ class Axis extends Properties
     }
 
     /**
-     * Get Glow Property
+     * Get Glow Property.
      *
-     * @param float $size
+     * @param float  $size
      * @param string $color_value
-     * @param int $color_alpha
+     * @param int    $color_alpha
      * @param string $color_type
      */
     public function getShadowProperty($elements)
@@ -478,11 +471,11 @@ class Axis extends Properties
     }
 
     /**
-     * Set Glow Properties
+     * Set Glow Properties.
      *
-     * @param float $size
+     * @param float  $size
      * @param string $color_value
-     * @param int $color_alpha
+     * @param int    $color_alpha
      * @param string $color_type
      */
     public function setGlowProperties($size, $color_value = null, $color_alpha = null, $color_type = null)
@@ -496,7 +489,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Glow Property
+     * Get Glow Property.
      *
      * @param array|string $property
      *
@@ -508,7 +501,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Glow Color
+     * Set Glow Color.
      *
      * @param float $size
      *
@@ -524,10 +517,10 @@ class Axis extends Properties
     }
 
     /**
-     * Set Glow Color
+     * Set Glow Color.
      *
      * @param string $color
-     * @param int $alpha
+     * @param int    $alpha
      * @param string $type
      *
      * @return Axis
@@ -540,7 +533,7 @@ class Axis extends Properties
     }
 
     /**
-     * Set Soft Edges Size
+     * Set Soft Edges Size.
      *
      * @param float $size
      */
@@ -552,7 +545,7 @@ class Axis extends Properties
     }
 
     /**
-     * Get Soft Edges Size
+     * Get Soft Edges Size.
      *
      * @return string
      */

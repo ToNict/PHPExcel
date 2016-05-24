@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Cell;
 
 /**
- * PhpOffice\PhpExcel\Cell\Hyperlink
+ * PhpOffice\PhpExcel\Cell\Hyperlink.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,42 +22,43 @@ namespace PhpOffice\PhpExcel\Cell;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Cell
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Hyperlink
 {
     /**
-     * URL to link the cell to
+     * URL to link the cell to.
      *
      * @var string
      */
     private $url;
 
     /**
-     * Tooltip to display on the hyperlink
+     * Tooltip to display on the hyperlink.
      *
      * @var string
      */
     private $tooltip;
 
     /**
-     * Create a new Hyperlink
+     * Create a new Hyperlink.
      *
-     * @param  string  $pUrl      Url to link the cell to
-     * @param  string  $pTooltip  Tooltip to display on the hyperlink
+     * @param string $pUrl     Url to link the cell to
+     * @param string $pTooltip Tooltip to display on the hyperlink
      */
     public function __construct($pUrl = '', $pTooltip = '')
     {
         // Initialise member variables
-        $this->url     = $pUrl;
+        $this->url = $pUrl;
         $this->tooltip = $pTooltip;
     }
 
     /**
-     * Get URL
+     * Get URL.
      *
      * @return string
      */
@@ -67,19 +68,21 @@ class Hyperlink
     }
 
     /**
-     * Set URL
+     * Set URL.
      *
-     * @param  string    $value
+     * @param string $value
+     *
      * @return Hyperlink
      */
     public function setUrl($value = '')
     {
         $this->url = $value;
+
         return $this;
     }
 
     /**
-     * Get tooltip
+     * Get tooltip.
      *
      * @return string
      */
@@ -89,21 +92,23 @@ class Hyperlink
     }
 
     /**
-     * Set tooltip
+     * Set tooltip.
      *
-     * @param  string    $value
+     * @param string $value
+     *
      * @return Hyperlink
      */
     public function setTooltip($value = '')
     {
         $this->tooltip = $value;
+
         return $this;
     }
 
     /**
-     * Is this hyperlink internal? (to another worksheet)
+     * Is this hyperlink internal? (to another worksheet).
      *
-     * @return boolean
+     * @return bool
      */
     public function isInternal()
     {
@@ -111,15 +116,15 @@ class Hyperlink
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         return md5(
-            $this->url .
-            $this->tooltip .
+            $this->url.
+            $this->tooltip.
             __CLASS__
         );
     }

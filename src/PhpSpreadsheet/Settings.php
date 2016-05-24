@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\Settings
+ * PhpOffice\PhpExcel\Settings.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,26 +22,26 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Settings
 {
     /**    constants */
     /**    Available Zip library classes */
-    const PCLZIP     = '\\PhpOffice\\PhpExcel\\Shared\\ZipArchive';
+    const PCLZIP = '\\PhpOffice\\PhpExcel\\Shared\\ZipArchive';
     const ZIPARCHIVE = '\\ZipArchive';
 
     /**    Optional Chart Rendering libraries */
     const CHART_RENDERER_JPGRAPH = 'jpgraph';
 
     /**    Optional PDF Rendering libraries */
-    const PDF_RENDERER_TCPDF  = 'tcPDF';
+    const PDF_RENDERER_TCPDF = 'tcPDF';
     const PDF_RENDERER_DOMPDF = 'DomPDF';
-    const PDF_RENDERER_MPDF   = 'mPDF';
-
+    const PDF_RENDERER_MPDF = 'mPDF';
 
     private static $chartRenderers = array(
         self::CHART_RENDERER_JPGRAPH,
@@ -53,91 +53,89 @@ class Settings
         self::PDF_RENDERER_MPDF,
     );
 
-
     /**
      * Name of the class used for Zip file management
      *    e.g.
-     *        ZipArchive
+     *        ZipArchive.
      *
      * @var string
      */
     private static $zipClass = self::ZIPARCHIVE;
 
-
     /**
      * Name of the external Library used for rendering charts
      *    e.g.
-     *        jpgraph
+     *        jpgraph.
      *
      * @var string
      */
     private static $chartRendererName;
 
     /**
-     * Directory Path to the external Library used for rendering charts
+     * Directory Path to the external Library used for rendering charts.
      *
      * @var string
      */
     private static $chartRendererPath;
 
-
     /**
      * Name of the external Library used for rendering PDF files
      *    e.g.
-     *         mPDF
+     *         mPDF.
      *
      * @var string
      */
     private static $pdfRendererName;
 
     /**
-     * Directory Path to the external Library used for rendering PDF files
+     * Directory Path to the external Library used for rendering PDF files.
      *
      * @var string
      */
     private static $pdfRendererPath;
 
     /**
-     * Default options for libxml loader
+     * Default options for libxml loader.
      *
      * @var int
      */
     private static $libXmlLoaderOptions = null;
 
     /**
-     * Set the Zip handler Class that PHPExcel should use for Zip file management (PCLZip or ZipArchive)
+     * Set the Zip handler Class that PHPExcel should use for Zip file management (PCLZip or ZipArchive).
      *
-     * @param string $zipClass    The Zip handler class that PHPExcel should use for Zip file management
-     *      e.g. \PhpOffice\PhpExcel\Settings::PCLZip or \PhpOffice\PhpExcel\Settings::ZipArchive
-     * @return    boolean    Success or failure
+     * @param string $zipClass The Zip handler class that PHPExcel should use for Zip file management
+     *                         e.g. \PhpOffice\PhpExcel\Settings::PCLZip or \PhpOffice\PhpExcel\Settings::ZipArchive
+     *
+     * @return bool Success or failure
      */
     public static function setZipClass($zipClass)
     {
         if (($zipClass === self::PCLZIP) ||
             ($zipClass === self::ZIPARCHIVE)) {
             self::$zipClass = $zipClass;
+
             return true;
         }
+
         return false;
     }
 
-
     /**
      * Return the name of the Zip handler Class that PHPExcel is configured to use (PCLZip or ZipArchive)
-     *    or Zip file management
+     *    or Zip file management.
      *
      * @return string Name of the Zip handler Class that PHPExcel is configured to use
-     *    for Zip file management
-     *    e.g. \PhpOffice\PhpExcel\Settings::PCLZip or \PhpOffice\PhpExcel\Settings::ZipArchive
+     *                for Zip file management
+     *                e.g. \PhpOffice\PhpExcel\Settings::PCLZip or \PhpOffice\PhpExcel\Settings::ZipArchive
      */
     public static function getZipClass()
     {
         return self::$zipClass;
     }
 
-
     /**
-     * Return the name of the method that is currently configured for cell cacheing
+     * Return the name of the method that is currently configured for cell cacheing.
      *
      * @return string Name of the cacheing method
      */
@@ -146,9 +144,8 @@ class Settings
         return CachedObjectStorageFactory::getCacheStorageMethod();
     }
 
-
     /**
-     * Return the name of the class that is currently being used for cell cacheing
+     * Return the name of the class that is currently being used for cell cacheing.
      *
      * @return string Name of the class currently being used for cacheing
      */
@@ -157,57 +154,56 @@ class Settings
         return CachedObjectStorageFactory::getCacheStorageClass();
     }
 
-
     /**
-     * Set the method that should be used for cell cacheing
+     * Set the method that should be used for cell cacheing.
      *
-     * @param string $method Name of the cacheing method
-     * @param array $arguments Optional configuration arguments for the cacheing method
-     * @return boolean Success or failure
+     * @param string $method    Name of the cacheing method
+     * @param array  $arguments Optional configuration arguments for the cacheing method
+     *
+     * @return bool Success or failure
      */
     public static function setCacheStorageMethod($method = CachedObjectStorageFactory::cache_in_memory, $arguments = array())
     {
         return CachedObjectStorageFactory::initialize($method, $arguments);
     }
 
-
     /**
-     * Set the locale code to use for formula translations and any special formatting
+     * Set the locale code to use for formula translations and any special formatting.
      *
      * @param string $locale The locale code to use (e.g. "fr" or "pt_br" or "en_uk")
-     * @return boolean Success or failure
+     *
+     * @return bool Success or failure
      */
     public static function setLocale($locale = 'en_us')
     {
         return Calculation::getInstance()->setLocale($locale);
     }
 
-
     /**
-     * Set details of the external library that PHPExcel should use for rendering charts
+     * Set details of the external library that PHPExcel should use for rendering charts.
      *
      * @param string $libraryName    Internal reference name of the library
-     *    e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
+     *                               e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
      * @param string $libraryBaseDir Directory path to the library's base folder
      *
-     * @return    boolean    Success or failure
+     * @return bool Success or failure
      */
     public static function setChartRenderer($libraryName, $libraryBaseDir)
     {
         if (!self::setChartRendererName($libraryName)) {
             return false;
         }
+
         return self::setChartRendererPath($libraryBaseDir);
     }
 
-
     /**
-     * Identify to PHPExcel the external library to use for rendering charts
+     * Identify to PHPExcel the external library to use for rendering charts.
      *
-     * @param string $libraryName    Internal reference name of the library
-     *    e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
+     * @param string $libraryName Internal reference name of the library
+     *                            e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
      *
-     * @return    boolean    Success or failure
+     * @return bool Success or failure
      */
     public static function setChartRendererName($libraryName)
     {
@@ -219,12 +215,12 @@ class Settings
         return true;
     }
 
-
     /**
-     * Tell PHPExcel where to find the external library to use for rendering charts
+     * Tell PHPExcel where to find the external library to use for rendering charts.
      *
-     * @param string $libraryBaseDir    Directory path to the library's base folder
-     * @return    boolean    Success or failure
+     * @param string $libraryBaseDir Directory path to the library's base folder
+     *
+     * @return bool Success or failure
      */
     public static function setChartRendererPath($libraryBaseDir)
     {
@@ -236,61 +232,58 @@ class Settings
         return true;
     }
 
-
     /**
-     * Return the Chart Rendering Library that PHPExcel is currently configured to use (e.g. jpgraph)
+     * Return the Chart Rendering Library that PHPExcel is currently configured to use (e.g. jpgraph).
      *
-     * @return string|NULL Internal reference name of the Chart Rendering Library that PHPExcel is
-     *    currently configured to use
-     *    e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
+     * @return string|null Internal reference name of the Chart Rendering Library that PHPExcel is
+     *                     currently configured to use
+     *                     e.g. \PhpOffice\PhpExcel\Settings::CHART_RENDERER_JPGRAPH
      */
     public static function getChartRendererName()
     {
         return self::$chartRendererName;
     }
 
-
     /**
-     * Return the directory path to the Chart Rendering Library that PHPExcel is currently configured to use
+     * Return the directory path to the Chart Rendering Library that PHPExcel is currently configured to use.
      *
-     * @return string|NULL Directory Path to the Chart Rendering Library that PHPExcel is
-     *     currently configured to use
+     * @return string|null Directory Path to the Chart Rendering Library that PHPExcel is
+     *                     currently configured to use
      */
     public static function getChartRendererPath()
     {
         return self::$chartRendererPath;
     }
 
-
     /**
-     * Set details of the external library that PHPExcel should use for rendering PDF files
+     * Set details of the external library that PHPExcel should use for rendering PDF files.
      *
-     * @param string $libraryName Internal reference name of the library
-     *     e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
-     *          \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
-     *       or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
+     * @param string $libraryName    Internal reference name of the library
+     *                               e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
+     *                               \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
+     *                               or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
      * @param string $libraryBaseDir Directory path to the library's base folder
      *
-     * @return boolean Success or failure
+     * @return bool Success or failure
      */
     public static function setPdfRenderer($libraryName, $libraryBaseDir)
     {
         if (!self::setPdfRendererName($libraryName)) {
             return false;
         }
+
         return self::setPdfRendererPath($libraryBaseDir);
     }
 
-
     /**
-     * Identify to PHPExcel the external library to use for rendering PDF files
+     * Identify to PHPExcel the external library to use for rendering PDF files.
      *
      * @param string $libraryName Internal reference name of the library
-     *     e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
-     *          \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
-     *       or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
+     *                            e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
+     *                            \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
+     *                            or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
      *
-     * @return boolean Success or failure
+     * @return bool Success or failure
      */
     public static function setPdfRendererName($libraryName)
     {
@@ -302,12 +295,12 @@ class Settings
         return true;
     }
 
-
     /**
-     * Tell PHPExcel where to find the external library to use for rendering PDF files
+     * Tell PHPExcel where to find the external library to use for rendering PDF files.
      *
      * @param string $libraryBaseDir Directory path to the library's base folder
-     * @return boolean Success or failure
+     *
+     * @return bool Success or failure
      */
     public static function setPdfRendererPath($libraryBaseDir)
     {
@@ -319,15 +312,14 @@ class Settings
         return true;
     }
 
-
     /**
-     * Return the PDF Rendering Library that PHPExcel is currently configured to use (e.g. dompdf)
+     * Return the PDF Rendering Library that PHPExcel is currently configured to use (e.g. dompdf).
      *
-     * @return string|NULL Internal reference name of the PDF Rendering Library that PHPExcel is
-     *     currently configured to use
-     *  e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
-     *       \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
-     *    or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
+     * @return string|null Internal reference name of the PDF Rendering Library that PHPExcel is
+     *                     currently configured to use
+     *                     e.g. \PhpOffice\PhpExcel\Settings::PDF_RENDERER_TCPDF,
+     *                     \PhpOffice\PhpExcel\Settings::PDF_RENDERER_DOMPDF
+     *                     or \PhpOffice\PhpExcel\Settings::PDF_RENDERER_MPDF
      */
     public static function getPdfRendererName()
     {
@@ -335,10 +327,10 @@ class Settings
     }
 
     /**
-     * Return the directory path to the PDF Rendering Library that PHPExcel is currently configured to use
+     * Return the directory path to the PDF Rendering Library that PHPExcel is currently configured to use.
      *
-     * @return string|NULL Directory Path to the PDF Rendering Library that PHPExcel is
-     *        currently configured to use
+     * @return string|null Directory Path to the PDF Rendering Library that PHPExcel is
+     *                     currently configured to use
      */
     public static function getPdfRendererPath()
     {
@@ -346,7 +338,7 @@ class Settings
     }
 
     /**
-     * Set default options for libxml loader
+     * Set default options for libxml loader.
      *
      * @param int $options Default options for libxml loader
      */
@@ -375,6 +367,7 @@ class Settings
         if (version_compare(PHP_VERSION, '5.2.11') >= 0) {
             @libxml_disable_entity_loader(self::$libXmlLoaderOptions == (LIBXML_DTDLOAD | LIBXML_DTDATTR));
         }
+
         return self::$libXmlLoaderOptions;
     }
 }

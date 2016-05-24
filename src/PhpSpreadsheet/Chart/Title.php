@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Chart;
 
 /**
- * PhpOffice\PhpExcel\Chart\Title
+ * PhpOffice\PhpExcel\Chart\Title.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,30 +22,30 @@ namespace PhpOffice\PhpExcel\Chart;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Chart
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Title
 {
-
     /**
-     * Title Caption
+     * Title Caption.
      *
      * @var string
      */
     private $caption = null;
 
     /**
-     * Title Layout
+     * Title Layout.
      *
      * @var Layout
      */
     private $layout = null;
 
     /**
-     * Create a new Title
+     * Create a new Title.
      */
     public function __construct($caption = null, Layout $layout = null)
     {
@@ -54,7 +54,7 @@ class Title
     }
 
     /**
-     * Get caption
+     * Get caption.
      *
      * @return string
      */
@@ -64,20 +64,21 @@ class Title
     }
 
     /**
-     * Set caption
+     * Set caption.
      *
      * @param string $caption
+     *
      * @return Title
      */
     public function setCaption($caption = null)
     {
         $this->caption = $caption;
-        
+
         return $this;
     }
 
     /**
-     * Get Layout
+     * Get Layout.
      *
      * @return Layout
      */

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\RichText;
 
 /**
- * PhpOffice\PhpExcel\RichText\TextElement
+ * PhpOffice\PhpExcel\RichText\TextElement.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,24 +20,25 @@ namespace PhpOffice\PhpExcel\RichText;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\RichText
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class TextElement implements ITextElement
 {
     /**
-     * Text
+     * Text.
      *
      * @var string
      */
     private $text;
 
     /**
-     * Create a new TextElement instance
+     * Create a new TextElement instance.
      *
-     * @param     string        $pText        Text
+     * @param string $pText Text
      */
     public function __construct($pText = '')
     {
@@ -46,9 +47,9 @@ class TextElement implements ITextElement
     }
 
     /**
-     * Get text
+     * Get text.
      *
-     * @return string    Text
+     * @return string Text
      */
     public function getText()
     {
@@ -56,36 +57,38 @@ class TextElement implements ITextElement
     }
 
     /**
-     * Set text
+     * Set text.
      *
      * @param   $pText string    Text
-     * @return  ITextElement
+     *
+     * @return ITextElement
      */
     public function setText($pText = '')
     {
         $this->text = $pText;
+
         return $this;
     }
 
     /**
-     * Get font
+     * Get font.
      *
      * @return \PhpOffice\PhpExcel\Style\Font
      */
     public function getFont()
     {
-        return null;
+        return;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         return md5(
-            $this->text .
+            $this->text.
             __CLASS__
         );
     }

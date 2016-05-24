@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\DocProps
+ * PhpOffice\PhpExcel\Writer\Excel2007\DocProps.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class DocProps extends WriterPart
 {
     /**
-     * Write docProps/app.xml to XML format
+     * Write docProps/app.xml to XML format.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
-     * @return string  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeDocPropsApp(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {
@@ -127,11 +130,13 @@ class DocProps extends WriterPart
     }
 
     /**
-     * Write docProps/core.xml to XML format
+     * Write docProps/core.xml to XML format.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
-     * @return string  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeDocPropsCore(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {
@@ -194,11 +199,13 @@ class DocProps extends WriterPart
     }
 
     /**
-     * Write docProps/custom.xml to XML format
+     * Write docProps/custom.xml to XML format.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
-     * @return string  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeDocPropsCustom(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {
@@ -223,14 +230,13 @@ class DocProps extends WriterPart
         $objWriter->writeAttribute('xmlns', 'http://schemas.openxmlformats.org/officeDocument/2006/custom-properties');
         $objWriter->writeAttribute('xmlns:vt', 'http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes');
 
-
         foreach ($customPropertyList as $key => $customProperty) {
             $propertyValue = $pPHPExcel->getProperties()->getCustomPropertyValue($customProperty);
             $propertyType = $pPHPExcel->getProperties()->getCustomPropertyType($customProperty);
 
             $objWriter->startElement('property');
             $objWriter->writeAttribute('fmtid', '{D5CDD505-2E9C-101B-9397-08002B2CF9AE}');
-            $objWriter->writeAttribute('pid', $key+2);
+            $objWriter->writeAttribute('pid', $key + 2);
             $objWriter->writeAttribute('name', $customProperty);
 
             switch ($propertyType) {
@@ -255,7 +261,6 @@ class DocProps extends WriterPart
 
             $objWriter->endElement();
         }
-
 
         $objWriter->endElement();
 

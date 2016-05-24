@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Chart;
 
 /**
- * PhpOffice\PhpExcel\Chart\Layout
+ * PhpOffice\PhpExcel\Chart\Layout.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,57 +22,58 @@ namespace PhpOffice\PhpExcel\Chart;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category    PHPExcel
- * @package     PhpOffice\PhpExcel\Chart
+ *
  * @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class Layout
 {
     /**
-     * layoutTarget
+     * layoutTarget.
      *
      * @var string
      */
     private $layoutTarget;
 
     /**
-     * X Mode
+     * X Mode.
      *
      * @var string
      */
     private $xMode;
 
     /**
-     * Y Mode
+     * Y Mode.
      *
      * @var string
      */
     private $yMode;
 
     /**
-     * X-Position
+     * X-Position.
      *
      * @var float
      */
     private $xPos;
 
     /**
-     * Y-Position
+     * Y-Position.
      *
      * @var float
      */
     private $yPos;
 
     /**
-     * width
+     * width.
      *
      * @var float
      */
     private $width;
 
     /**
-     * height
+     * height.
      *
      * @var float
      */
@@ -80,9 +81,9 @@ class Layout
 
     /**
      * show legend key
-     * Specifies that legend keys should be shown in data labels
+     * Specifies that legend keys should be shown in data labels.
      *
-     * @var boolean
+     * @var bool
      */
     private $showLegendKey;
 
@@ -90,7 +91,7 @@ class Layout
      * show value
      * Specifies that the value should be shown in a data label.
      *
-     * @var boolean
+     * @var bool
      */
     private $showVal;
 
@@ -98,7 +99,7 @@ class Layout
      * show category name
      * Specifies that the category name should be shown in the data label.
      *
-     * @var boolean
+     * @var bool
      */
     private $showCatName;
 
@@ -106,7 +107,7 @@ class Layout
      * show data series name
      * Specifies that the series name should be shown in the data label.
      *
-     * @var boolean
+     * @var bool
      */
     private $showSerName;
 
@@ -114,14 +115,14 @@ class Layout
      * show percentage
      * Specifies that the percentage should be shown in the data label.
      *
-     * @var boolean
+     * @var bool
      */
     private $showPercent;
 
     /**
-     * show bubble size
+     * show bubble size.
      *
-     * @var boolean
+     * @var bool
      */
     private $showBubbleSize;
 
@@ -129,13 +130,12 @@ class Layout
      * show leader lines
      * Specifies that leader lines should be shown for the data label.
      *
-     * @var boolean
+     * @var bool
      */
     private $showLeaderLines;
 
-
     /**
-     * Create a new Layout
+     * Create a new Layout.
      */
     public function __construct($layout = array())
     {
@@ -163,7 +163,7 @@ class Layout
     }
 
     /**
-     * Get Layout Target
+     * Get Layout Target.
      *
      * @return string
      */
@@ -173,19 +173,21 @@ class Layout
     }
 
     /**
-     * Set Layout Target
+     * Set Layout Target.
      *
      * @param Layout Target $value
+     *
      * @return Layout
      */
     public function setLayoutTarget($value)
     {
         $this->layoutTarget = $value;
+
         return $this;
     }
 
     /**
-     * Get X-Mode
+     * Get X-Mode.
      *
      * @return string
      */
@@ -195,19 +197,21 @@ class Layout
     }
 
     /**
-     * Set X-Mode
+     * Set X-Mode.
      *
      * @param X-Mode $value
+     *
      * @return Layout
      */
     public function setXMode($value)
     {
         $this->xMode = $value;
+
         return $this;
     }
 
     /**
-     * Get Y-Mode
+     * Get Y-Mode.
      *
      * @return string
      */
@@ -217,19 +221,21 @@ class Layout
     }
 
     /**
-     * Set Y-Mode
+     * Set Y-Mode.
      *
      * @param Y-Mode $value
+     *
      * @return Layout
      */
     public function setYMode($value)
     {
         $this->yMode = $value;
+
         return $this;
     }
 
     /**
-     * Get X-Position
+     * Get X-Position.
      *
      * @return number
      */
@@ -239,19 +245,21 @@ class Layout
     }
 
     /**
-     * Set X-Position
+     * Set X-Position.
      *
      * @param X-Position $value
+     *
      * @return Layout
      */
     public function setXPosition($value)
     {
         $this->xPos = $value;
+
         return $this;
     }
 
     /**
-     * Get Y-Position
+     * Get Y-Position.
      *
      * @return number
      */
@@ -261,19 +269,21 @@ class Layout
     }
 
     /**
-     * Set Y-Position
+     * Set Y-Position.
      *
      * @param Y-Position $value
+     *
      * @return Layout
      */
     public function setYPosition($value)
     {
         $this->yPos = $value;
+
         return $this;
     }
 
     /**
-     * Get Width
+     * Get Width.
      *
      * @return number
      */
@@ -283,19 +293,21 @@ class Layout
     }
 
     /**
-     * Set Width
+     * Set Width.
      *
      * @param Width $value
+     *
      * @return Layout
      */
     public function setWidth($value)
     {
         $this->width = $value;
+
         return $this;
     }
 
     /**
-     * Get Height
+     * Get Height.
      *
      * @return number
      */
@@ -305,22 +317,23 @@ class Layout
     }
 
     /**
-     * Set Height
+     * Set Height.
      *
      * @param Height $value
+     *
      * @return Layout
      */
     public function setHeight($value)
     {
         $this->height = $value;
+
         return $this;
     }
 
-
     /**
-     * Get show legend key
+     * Get show legend key.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowLegendKey()
     {
@@ -331,19 +344,21 @@ class Layout
      * Set show legend key
      * Specifies that legend keys should be shown in data labels.
      *
-     * @param boolean $value        Show legend key
+     * @param bool $value Show legend key
+     *
      * @return Layout
      */
     public function setShowLegendKey($value)
     {
         $this->showLegendKey = $value;
+
         return $this;
     }
 
     /**
-     * Get show value
+     * Get show value.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowVal()
     {
@@ -354,19 +369,21 @@ class Layout
      * Set show val
      * Specifies that the value should be shown in data labels.
      *
-     * @param boolean $value        Show val
+     * @param bool $value Show val
+     *
      * @return Layout
      */
     public function setShowVal($value)
     {
         $this->showVal = $value;
+
         return $this;
     }
 
     /**
-     * Get show category name
+     * Get show category name.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowCatName()
     {
@@ -377,19 +394,21 @@ class Layout
      * Set show cat name
      * Specifies that the category name should be shown in data labels.
      *
-     * @param boolean $value        Show cat name
+     * @param bool $value Show cat name
+     *
      * @return Layout
      */
     public function setShowCatName($value)
     {
         $this->showCatName = $value;
+
         return $this;
     }
 
     /**
-     * Get show data series name
+     * Get show data series name.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowSerName()
     {
@@ -400,19 +419,21 @@ class Layout
      * Set show ser name
      * Specifies that the series name should be shown in data labels.
      *
-     * @param boolean $value        Show series name
+     * @param bool $value Show series name
+     *
      * @return Layout
      */
     public function setShowSerName($value)
     {
         $this->showSerName = $value;
+
         return $this;
     }
 
     /**
-     * Get show percentage
+     * Get show percentage.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowPercent()
     {
@@ -423,19 +444,21 @@ class Layout
      * Set show percentage
      * Specifies that the percentage should be shown in data labels.
      *
-     * @param boolean $value        Show percentage
+     * @param bool $value Show percentage
+     *
      * @return Layout
      */
     public function setShowPercent($value)
     {
         $this->showPercent = $value;
+
         return $this;
     }
 
     /**
-     * Get show bubble size
+     * Get show bubble size.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowBubbleSize()
     {
@@ -446,19 +469,21 @@ class Layout
      * Set show bubble size
      * Specifies that the bubble size should be shown in data labels.
      *
-     * @param boolean $value        Show bubble size
+     * @param bool $value Show bubble size
+     *
      * @return Layout
      */
     public function setShowBubbleSize($value)
     {
         $this->showBubbleSize = $value;
+
         return $this;
     }
 
     /**
-     * Get show leader lines
+     * Get show leader lines.
      *
-     * @return boolean
+     * @return bool
      */
     public function getShowLeaderLines()
     {
@@ -469,12 +494,14 @@ class Layout
      * Set show leader lines
      * Specifies that leader lines should be shown in data labels.
      *
-     * @param boolean $value        Show leader lines
+     * @param bool $value Show leader lines
+     *
      * @return Layout
      */
     public function setShowLeaderLines($value)
     {
         $this->showLeaderLines = $value;
+
         return $this;
     }
 }

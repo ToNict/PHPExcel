@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PHPExcel
+ * PHPExcel.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,143 +22,144 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Spreadsheet
 {
     /**
-     * Unique ID
+     * Unique ID.
      *
      * @var string
      */
     private $uniqueID;
 
     /**
-     * Document properties
+     * Document properties.
      *
      * @var Document\Properties
      */
     private $properties;
 
     /**
-     * Document security
+     * Document security.
      *
      * @var Document\Security
      */
     private $security;
 
     /**
-     * Collection of Worksheet objects
+     * Collection of Worksheet objects.
      *
      * @var Worksheet[]
      */
     private $workSheetCollection = array();
 
     /**
-     * Calculation Engine
+     * Calculation Engine.
      *
      * @var Calculation
      */
     private $calculationEngine;
 
     /**
-     * Active sheet index
+     * Active sheet index.
      *
-     * @var integer
+     * @var int
      */
     private $activeSheetIndex = 0;
 
     /**
-     * Named ranges
+     * Named ranges.
      *
      * @var NamedRange[]
      */
     private $namedRanges = array();
 
     /**
-     * CellXf supervisor
+     * CellXf supervisor.
      *
      * @var Style
      */
     private $cellXfSupervisor;
 
     /**
-     * CellXf collection
+     * CellXf collection.
      *
      * @var Style[]
      */
     private $cellXfCollection = array();
 
     /**
-     * CellStyleXf collection
+     * CellStyleXf collection.
      *
      * @var Style[]
      */
     private $cellStyleXfCollection = array();
 
     /**
-    * hasMacros : this workbook have macros ?
-    *
-    * @var bool
-    */
+     * hasMacros : this workbook have macros ?
+     *
+     * @var bool
+     */
     private $hasMacros = false;
 
     /**
-    * macrosCode : all macros code (the vbaProject.bin file, this include form, code,  etc.), null if no macro
-    *
-    * @var binary
-    */
+     * macrosCode : all macros code (the vbaProject.bin file, this include form, code,  etc.), null if no macro.
+     *
+     * @var binary
+     */
     private $macrosCode;
     /**
-    * macrosCertificate : if macros are signed, contains vbaProjectSignature.bin file, null if not signed
-    *
-    * @var binary
-    */
+     * macrosCertificate : if macros are signed, contains vbaProjectSignature.bin file, null if not signed.
+     *
+     * @var binary
+     */
     private $macrosCertificate;
 
     /**
-    * ribbonXMLData : null if workbook is'nt Excel 2007 or not contain a customized UI
-    *
-    * @var null|string
-    */
+     * ribbonXMLData : null if workbook is'nt Excel 2007 or not contain a customized UI.
+     *
+     * @var null|string
+     */
     private $ribbonXMLData;
 
     /**
-    * ribbonBinObjects : null if workbook is'nt Excel 2007 or not contain embedded objects (picture(s)) for Ribbon Elements
-    * ignored if $ribbonXMLData is null
-    *
-    * @var null|array
-    */
+     * ribbonBinObjects : null if workbook is'nt Excel 2007 or not contain embedded objects (picture(s)) for Ribbon Elements
+     * ignored if $ribbonXMLData is null.
+     *
+     * @var null|array
+     */
     private $ribbonBinObjects;
 
     /**
-    * The workbook has macros ?
-    *
-    * @return true if workbook has macros, false if not
-    */
+     * The workbook has macros ?
+     *
+     * @return true if workbook has macros, false if not
+     */
     public function hasMacros()
     {
         return $this->hasMacros;
     }
 
     /**
-    * Define if a workbook has macros
-    *
-    * @param boolean $hasMacros true|false
-    */
+     * Define if a workbook has macros.
+     *
+     * @param bool $hasMacros true|false
+     */
     public function setHasMacros($hasMacros = false)
     {
         $this->hasMacros = (bool) $hasMacros;
     }
 
     /**
-    * Set the macros code
-    *
-    * @param string $macroCode string|null
-    */
+     * Set the macros code.
+     *
+     * @param string $macroCode string|null
+     */
     public function setMacrosCode($macroCode = null)
     {
         $this->macrosCode = $macroCode;
@@ -166,49 +167,48 @@ class Spreadsheet
     }
 
     /**
-    * Return the macros code
-    *
-    * @return string|null
-    */
+     * Return the macros code.
+     *
+     * @return string|null
+     */
     public function getMacrosCode()
     {
         return $this->macrosCode;
     }
 
     /**
-    * Set the macros certificate
-    *
-    * @param string|null $Certificate
-    */
+     * Set the macros certificate.
+     *
+     * @param string|null $Certificate
+     */
     public function setMacrosCertificate($certificate = null)
     {
         $this->macrosCertificate = $certificate;
     }
 
     /**
-    * Is the project signed ?
-    *
-    * @return boolean true|false
-    */
+     * Is the project signed ?
+     *
+     * @return bool true|false
+     */
     public function hasMacrosCertificate()
     {
         return !is_null($this->macrosCertificate);
     }
 
     /**
-    * Return the macros certificate
-    *
-    * @return string|null
-    */
+     * Return the macros certificate.
+     *
+     * @return string|null
+     */
     public function getMacrosCertificate()
     {
         return $this->macrosCertificate;
     }
 
     /**
-    * Remove all macros, certificate from spreadsheet
-    *
-    */
+     * Remove all macros, certificate from spreadsheet.
+     */
     public function discardMacros()
     {
         $this->hasMacros = false;
@@ -217,9 +217,8 @@ class Spreadsheet
     }
 
     /**
-    * set ribbon XML data
-    *
-    */
+     * set ribbon XML data.
+     */
     public function setRibbonXMLData($target = null, $xmlData = null)
     {
         if (!is_null($target) && !is_null($xmlData)) {
@@ -230,15 +229,15 @@ class Spreadsheet
     }
 
     /**
-    * retrieve ribbon XML Data
-    *
-    * return string|null|array
-    */
+     * retrieve ribbon XML Data.
+     *
+     * return string|null|array
+     */
     public function getRibbonXMLData($what = 'all') //we need some constants here...
     {
         $returnData = null;
         $what = strtolower($what);
-        switch ($what){
+        switch ($what) {
             case 'all':
                 $returnData = $this->ribbonXMLData;
                 break;
@@ -254,9 +253,8 @@ class Spreadsheet
     }
 
     /**
-    * store binaries ribbon objects (pictures)
-    *
-    */
+     * store binaries ribbon objects (pictures).
+     */
     public function setRibbonBinObjects($BinObjectsNames = null, $BinObjectsData = null)
     {
         if (!is_null($BinObjectsNames) && !is_null($BinObjectsData)) {
@@ -266,80 +264,81 @@ class Spreadsheet
         }
     }
     /**
-    * return the extension of a filename. Internal use for a array_map callback (php<5.3 don't like lambda function)
-    *
-    */
+     * return the extension of a filename. Internal use for a array_map callback (php<5.3 don't like lambda function).
+     */
     private function getExtensionOnly($ThePath)
     {
         return pathinfo($ThePath, PATHINFO_EXTENSION);
     }
 
     /**
-    * retrieve Binaries Ribbon Objects
-    *
-    */
+     * retrieve Binaries Ribbon Objects.
+     */
     public function getRibbonBinObjects($What = 'all')
     {
         $ReturnData = null;
         $What = strtolower($What);
-        switch($What) {
+        switch ($What) {
             case 'all':
                 return $this->ribbonBinObjects;
                 break;
             case 'names':
             case 'data':
                 if (is_array($this->ribbonBinObjects) && array_key_exists($What, $this->ribbonBinObjects)) {
-                    $ReturnData=$this->ribbonBinObjects[$What];
+                    $ReturnData = $this->ribbonBinObjects[$What];
                 }
                 break;
             case 'types':
                 if (is_array($this->ribbonBinObjects) &&
                     array_key_exists('data', $this->ribbonBinObjects) && is_array($this->ribbonBinObjects['data'])) {
-                    $tmpTypes=array_keys($this->ribbonBinObjects['data']);
+                    $tmpTypes = array_keys($this->ribbonBinObjects['data']);
                     $ReturnData = array_unique(array_map(array($this, 'getExtensionOnly'), $tmpTypes));
                 } else {
-                    $ReturnData=array(); // the caller want an array... not null if empty
+                    $ReturnData = array(); // the caller want an array... not null if empty
                 }
                 break;
         }
+
         return $ReturnData;
     }
 
     /**
-    * This workbook have a custom UI ?
-    *
-    * @return true|false
-    */
+     * This workbook have a custom UI ?
+     *
+     * @return true|false
+     */
     public function hasRibbon()
     {
         return !is_null($this->ribbonXMLData);
     }
 
     /**
-    * This workbook have additionnal object for the ribbon ?
-    *
-    * @return true|false
-    */
+     * This workbook have additionnal object for the ribbon ?
+     *
+     * @return true|false
+     */
     public function hasRibbonBinObjects()
     {
         return !is_null($this->ribbonBinObjects);
     }
 
     /**
-     * Check if a sheet with a specified code name already exists
+     * Check if a sheet with a specified code name already exists.
      *
-     * @param string $pSheetCodeName  Name of the worksheet to check
-     * @return boolean
+     * @param string $pSheetCodeName Name of the worksheet to check
+     *
+     * @return bool
      */
     public function sheetCodeNameExists($pSheetCodeName)
     {
-        return ($this->getSheetByCodeName($pSheetCodeName) !== null);
+        return $this->getSheetByCodeName($pSheetCodeName) !== null;
     }
 
     /**
      * Get sheet by code name. Warning : sheet don't have always a code name !
      *
      * @param string $pName Sheet name
+     *
      * @return Worksheet
      */
     public function getSheetByCodeName($pName = '')
@@ -351,11 +350,11 @@ class Spreadsheet
             }
         }
 
-        return null;
+        return;
     }
 
-     /**
-     * Create a new PHPExcel with one Worksheet
+    /**
+     * Create a new PHPExcel with one Worksheet.
      */
     public function __construct()
     {
@@ -381,13 +380,12 @@ class Spreadsheet
         $this->cellXfSupervisor->bindParent($this);
 
         // Create the default style
-        $this->addCellXf(new Style);
-        $this->addCellStyleXf(new Style);
+        $this->addCellXf(new Style());
+        $this->addCellStyleXf(new Style());
     }
 
     /**
-     * Code to execute when this worksheet is unset()
-     *
+     * Code to execute when this worksheet is unset().
      */
     public function __destruct()
     {
@@ -397,8 +395,7 @@ class Spreadsheet
 
     /**
      * Disconnect all worksheets from this PHPExcel workbook object,
-     *    typically so that the PHPExcel object can be unset
-     *
+     *    typically so that the PHPExcel object can be unset.
      */
     public function disconnectWorksheets()
     {
@@ -412,7 +409,7 @@ class Spreadsheet
     }
 
     /**
-     * Return the calculation engine for this worksheet
+     * Return the calculation engine for this worksheet.
      *
      * @return Calculation
      */
@@ -422,7 +419,7 @@ class Spreadsheet
     }    //    function getCellCacheController()
 
     /**
-     * Get properties
+     * Get properties.
      *
      * @return Document\Properties
      */
@@ -432,9 +429,9 @@ class Spreadsheet
     }
 
     /**
-     * Set properties
+     * Set properties.
      *
-     * @param Document\Properties    $pValue
+     * @param Document\Properties $pValue
      */
     public function setProperties(Document\Properties $pValue)
     {
@@ -442,7 +439,7 @@ class Spreadsheet
     }
 
     /**
-     * Get security
+     * Get security.
      *
      * @return Document\Security
      */
@@ -452,9 +449,9 @@ class Spreadsheet
     }
 
     /**
-     * Set security
+     * Set security.
      *
-     * @param Document\Security    $pValue
+     * @param Document\Security $pValue
      */
     public function setSecurity(Document\Security $pValue)
     {
@@ -462,7 +459,7 @@ class Spreadsheet
     }
 
     /**
-     * Get active sheet
+     * Get active sheet.
      *
      * @return Worksheet
      *
@@ -474,36 +471,42 @@ class Spreadsheet
     }
 
     /**
-     * Create sheet and add it to this workbook
+     * Create sheet and add it to this workbook.
      *
-     * @param  int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     * @param int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     *
      * @return Worksheet
+     *
      * @throws Exception
      */
     public function createSheet($iSheetIndex = null)
     {
         $newSheet = new Worksheet($this);
         $this->addSheet($newSheet, $iSheetIndex);
+
         return $newSheet;
     }
 
     /**
-     * Check if a sheet with a specified name already exists
+     * Check if a sheet with a specified name already exists.
      *
-     * @param  string $pSheetName  Name of the worksheet to check
-     * @return boolean
+     * @param string $pSheetName Name of the worksheet to check
+     *
+     * @return bool
      */
     public function sheetNameExists($pSheetName)
     {
-        return ($this->getSheetByName($pSheetName) !== null);
+        return $this->getSheetByName($pSheetName) !== null;
     }
 
     /**
-     * Add sheet
+     * Add sheet.
      *
-     * @param  Worksheet $pSheet
-     * @param  int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     * @param Worksheet $pSheet
+     * @param int|null  $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     *
      * @return Worksheet
+     *
      * @throws Exception
      */
     public function addSheet(Worksheet $pSheet, $iSheetIndex = null)
@@ -542,14 +545,14 @@ class Spreadsheet
     }
 
     /**
-     * Remove sheet by index
+     * Remove sheet by index.
      *
-     * @param  int $pIndex Active sheet index
+     * @param int $pIndex Active sheet index
+     *
      * @throws Exception
      */
     public function removeSheetByIndex($pIndex = 0)
     {
-
         $numSheets = count($this->workSheetCollection);
         if ($pIndex > $numSheets - 1) {
             throw new Exception(
@@ -563,14 +566,15 @@ class Spreadsheet
             ($pIndex > count($this->workSheetCollection) - 1)) {
             --$this->activeSheetIndex;
         }
-
     }
 
     /**
-     * Get sheet by index
+     * Get sheet by index.
      *
-     * @param  int $pIndex Sheet index
+     * @param int $pIndex Sheet index
+     *
      * @return Worksheet
+     *
      * @throws Exception
      */
     public function getSheet($pIndex = 0)
@@ -586,7 +590,7 @@ class Spreadsheet
     }
 
     /**
-     * Get all sheets
+     * Get all sheets.
      *
      * @return Worksheet[]
      */
@@ -596,9 +600,10 @@ class Spreadsheet
     }
 
     /**
-     * Get sheet by name
+     * Get sheet by name.
      *
-     * @param  string $pName Sheet name
+     * @param string $pName Sheet name
+     *
      * @return Worksheet
      */
     public function getSheetByName($pName = '')
@@ -610,14 +615,16 @@ class Spreadsheet
             }
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Get index for sheet
+     * Get index for sheet.
      *
-     * @param  Worksheet $pSheet
+     * @param Worksheet $pSheet
+     *
      * @return Sheet index
+     *
      * @throws Exception
      */
     public function getIndex(Worksheet $pSheet)
@@ -628,15 +635,17 @@ class Spreadsheet
             }
         }
 
-        throw new Exception("Sheet does not exist.");
+        throw new Exception('Sheet does not exist.');
     }
 
     /**
      * Set index for sheet by sheet name.
      *
-     * @param  string $sheetName Sheet name to modify index for
-     * @param  int $newIndex New index for the sheet
+     * @param string $sheetName Sheet name to modify index for
+     * @param int    $newIndex  New index for the sheet
+     *
      * @return New sheet index
+     *
      * @throws Exception
      */
     public function setIndexByName($sheetName, $newIndex)
@@ -653,11 +662,12 @@ class Spreadsheet
             0,
             $pSheet
         );
+
         return $newIndex;
     }
 
     /**
-     * Get sheet count
+     * Get sheet count.
      *
      * @return int
      */
@@ -667,7 +677,7 @@ class Spreadsheet
     }
 
     /**
-     * Get active sheet index
+     * Get active sheet index.
      *
      * @return int Active sheet index
      */
@@ -677,10 +687,12 @@ class Spreadsheet
     }
 
     /**
-     * Set active sheet index
+     * Set active sheet index.
      *
-     * @param  int $pIndex Active sheet index
+     * @param int $pIndex Active sheet index
+     *
      * @throws Exception
+     *
      * @return Worksheet
      */
     public function setActiveSheetIndex($pIndex = 0)
@@ -694,28 +706,32 @@ class Spreadsheet
         } else {
             $this->activeSheetIndex = $pIndex;
         }
+
         return $this->getActiveSheet();
     }
 
     /**
-     * Set active sheet index by name
+     * Set active sheet index by name.
      *
-     * @param  string $pValue Sheet title
+     * @param string $pValue Sheet title
+     *
      * @return Worksheet
+     *
      * @throws Exception
      */
     public function setActiveSheetIndexByName($pValue = '')
     {
         if (($worksheet = $this->getSheetByName($pValue)) instanceof Worksheet) {
             $this->setActiveSheetIndex($this->getIndex($worksheet));
+
             return $worksheet;
         }
 
-        throw new Exception('Workbook does not contain sheet:' . $pValue);
+        throw new Exception('Workbook does not contain sheet:'.$pValue);
     }
 
     /**
-     * Get sheet names
+     * Get sheet names.
      *
      * @return string[]
      */
@@ -731,11 +747,13 @@ class Spreadsheet
     }
 
     /**
-     * Add external sheet
+     * Add external sheet.
      *
-     * @param  Worksheet $pSheet External sheet to add
-     * @param  int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     * @param Worksheet $pSheet      External sheet to add
+     * @param int|null  $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+     *
      * @throws Exception
+     *
      * @return Worksheet
      */
     public function addExternalSheet(Worksheet $pSheet, $iSheetIndex = null)
@@ -765,7 +783,7 @@ class Spreadsheet
     }
 
     /**
-     * Get named ranges
+     * Get named ranges.
      *
      * @return NamedRange[]
      */
@@ -775,9 +793,10 @@ class Spreadsheet
     }
 
     /**
-     * Add named range
+     * Add named range.
      *
-     * @param  NamedRange $namedRange
+     * @param NamedRange $namedRange
+     *
      * @return PHPExcel
      */
     public function addNamedRange(NamedRange $namedRange)
@@ -789,14 +808,16 @@ class Spreadsheet
             // local scope
             $this->namedRanges[$namedRange->getScope()->getTitle().'!'.$namedRange->getName()] = $namedRange;
         }
+
         return true;
     }
 
     /**
-     * Get named range
+     * Get named range.
      *
-     * @param  string $namedRange
-     * @param  Worksheet|null $pSheet Scope. Use null for global scope
+     * @param string         $namedRange
+     * @param Worksheet|null $pSheet     Scope. Use null for global scope
+     *
      * @return NamedRange|null
      */
     public function getNamedRange($namedRange, Worksheet $pSheet = null)
@@ -810,8 +831,8 @@ class Spreadsheet
             }
 
             // then look for local defined name (has priority over global defined name if both names exist)
-            if (($pSheet !== null) && isset($this->namedRanges[$pSheet->getTitle() . '!' . $namedRange])) {
-                $returnValue = $this->namedRanges[$pSheet->getTitle() . '!' . $namedRange];
+            if (($pSheet !== null) && isset($this->namedRanges[$pSheet->getTitle().'!'.$namedRange])) {
+                $returnValue = $this->namedRanges[$pSheet->getTitle().'!'.$namedRange];
             }
         }
 
@@ -819,10 +840,11 @@ class Spreadsheet
     }
 
     /**
-     * Remove named range
+     * Remove named range.
      *
-     * @param  string  $namedRange
-     * @param  Worksheet|null  $pSheet  Scope: use null for global scope.
+     * @param string         $namedRange
+     * @param Worksheet|null $pSheet     Scope: use null for global scope.
+     *
      * @return PHPExcel
      */
     public function removeNamedRange($namedRange, Worksheet $pSheet = null)
@@ -832,15 +854,16 @@ class Spreadsheet
                 unset($this->namedRanges[$namedRange]);
             }
         } else {
-            if (isset($this->namedRanges[$pSheet->getTitle() . '!' . $namedRange])) {
-                unset($this->namedRanges[$pSheet->getTitle() . '!' . $namedRange]);
+            if (isset($this->namedRanges[$pSheet->getTitle().'!'.$namedRange])) {
+                unset($this->namedRanges[$pSheet->getTitle().'!'.$namedRange]);
             }
         }
+
         return $this;
     }
 
     /**
-     * Get worksheet iterator
+     * Get worksheet iterator.
      *
      * @return WorksheetIterator
      */
@@ -850,7 +873,7 @@ class Spreadsheet
     }
 
     /**
-     * Copy workbook (!= clone!)
+     * Copy workbook (!= clone!).
      *
      * @return PHPExcel
      */
@@ -880,7 +903,7 @@ class Spreadsheet
     }
 
     /**
-     * Get the workbook collection of cellXfs
+     * Get the workbook collection of cellXfs.
      *
      * @return Style[]
      */
@@ -890,9 +913,10 @@ class Spreadsheet
     }
 
     /**
-     * Get cellXf by index
+     * Get cellXf by index.
      *
-     * @param  int $pIndex
+     * @param int $pIndex
+     *
      * @return Style
      */
     public function getCellXfByIndex($pIndex = 0)
@@ -901,9 +925,10 @@ class Spreadsheet
     }
 
     /**
-     * Get cellXf by hash code
+     * Get cellXf by hash code.
      *
-     * @param  string $pValue
+     * @param string $pValue
+     *
      * @return Style|false
      */
     public function getCellXfByHashCode($pValue = '')
@@ -913,14 +938,16 @@ class Spreadsheet
                 return $cellXf;
             }
         }
+
         return false;
     }
 
     /**
-     * Check if style exists in style collection
+     * Check if style exists in style collection.
      *
-     * @param  Style $pCellStyle
-     * @return boolean
+     * @param Style $pCellStyle
+     *
+     * @return bool
      */
     public function cellXfExists($pCellStyle = null)
     {
@@ -928,9 +955,10 @@ class Spreadsheet
     }
 
     /**
-     * Get default style
+     * Get default style.
      *
      * @return Style
+     *
      * @throws Exception
      */
     public function getDefaultStyle()
@@ -942,7 +970,7 @@ class Spreadsheet
     }
 
     /**
-     * Add a cellXf to the workbook
+     * Add a cellXf to the workbook.
      *
      * @param Style $style
      */
@@ -955,13 +983,14 @@ class Spreadsheet
     /**
      * Remove cellXf by index. It is ensured that all cells get their xf index updated.
      *
-     * @param integer $pIndex Index to cellXf
+     * @param int $pIndex Index to cellXf
+     *
      * @throws Exception
      */
     public function removeCellXfByIndex($pIndex = 0)
     {
         if ($pIndex > count($this->cellXfCollection) - 1) {
-            throw new Exception("CellXf index is out of bounds.");
+            throw new Exception('CellXf index is out of bounds.');
         } else {
             // first remove the cellXf
             array_splice($this->cellXfCollection, $pIndex, 1);
@@ -984,7 +1013,7 @@ class Spreadsheet
     }
 
     /**
-     * Get the cellXf supervisor
+     * Get the cellXf supervisor.
      *
      * @return Style
      */
@@ -994,7 +1023,7 @@ class Spreadsheet
     }
 
     /**
-     * Get the workbook collection of cellStyleXfs
+     * Get the workbook collection of cellStyleXfs.
      *
      * @return Style[]
      */
@@ -1004,9 +1033,10 @@ class Spreadsheet
     }
 
     /**
-     * Get cellStyleXf by index
+     * Get cellStyleXf by index.
      *
-     * @param integer $pIndex Index to cellXf
+     * @param int $pIndex Index to cellXf
+     *
      * @return Style
      */
     public function getCellStyleXfByIndex($pIndex = 0)
@@ -1015,9 +1045,10 @@ class Spreadsheet
     }
 
     /**
-     * Get cellStyleXf by hash code
+     * Get cellStyleXf by hash code.
      *
-     * @param  string $pValue
+     * @param string $pValue
+     *
      * @return Style|false
      */
     public function getCellStyleXfByHashCode($pValue = '')
@@ -1027,11 +1058,12 @@ class Spreadsheet
                 return $cellStyleXf;
             }
         }
+
         return false;
     }
 
     /**
-     * Add a cellStyleXf to the workbook
+     * Add a cellStyleXf to the workbook.
      *
      * @param Style $pStyle
      */
@@ -1042,15 +1074,16 @@ class Spreadsheet
     }
 
     /**
-     * Remove cellStyleXf by index
+     * Remove cellStyleXf by index.
      *
-     * @param integer $pIndex Index to cellXf
+     * @param int $pIndex Index to cellXf
+     *
      * @throws Exception
      */
     public function removeCellStyleXfByIndex($pIndex = 0)
     {
         if ($pIndex > count($this->cellStyleXfCollection) - 1) {
-            throw new Exception("CellStyleXf index is out of bounds.");
+            throw new Exception('CellStyleXf index is out of bounds.');
         } else {
             array_splice($this->cellStyleXfCollection, $pIndex, 1);
         }
@@ -1058,7 +1091,7 @@ class Spreadsheet
 
     /**
      * Eliminate all unneeded cellXf and afterwards update the xfIndex for all cells
-     * and columns in the workbook
+     * and columns in the workbook.
      */
     public function garbageCollect()
     {
@@ -1137,7 +1170,7 @@ class Spreadsheet
     }
 
     /**
-     * Return the unique ID value assigned to this spreadsheet workbook
+     * Return the unique ID value assigned to this spreadsheet workbook.
      *
      * @return string
      */

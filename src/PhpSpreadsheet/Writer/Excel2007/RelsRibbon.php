@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\RelsRibbon
+ * PhpOffice\PhpExcel\Writer\Excel2007\RelsRibbon.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class RelsRibbon extends WriterPart
 {
     /**
-     * Write relationships for additional objects of custom UI (ribbon)
+     * Write relationships for additional objects of custom UI (ribbon).
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
+     *
      * @return string XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeRibbonRelationships(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {

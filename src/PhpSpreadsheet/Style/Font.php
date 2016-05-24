@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Font
+ * PhpOffice\PhpExcel\Style\Font.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,92 +22,93 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 {
     /* Underline types */
-    const UNDERLINE_NONE             = 'none';
-    const UNDERLINE_DOUBLE           = 'double';
+    const UNDERLINE_NONE = 'none';
+    const UNDERLINE_DOUBLE = 'double';
     const UNDERLINE_DOUBLEACCOUNTING = 'doubleAccounting';
-    const UNDERLINE_SINGLE           = 'single';
+    const UNDERLINE_SINGLE = 'single';
     const UNDERLINE_SINGLEACCOUNTING = 'singleAccounting';
 
     /**
-     * Font Name
+     * Font Name.
      *
      * @var string
      */
     protected $name = 'Calibri';
 
     /**
-     * Font Size
+     * Font Size.
      *
      * @var float
      */
     protected $size = 11;
 
     /**
-     * Bold
+     * Bold.
      *
-     * @var boolean
+     * @var bool
      */
     protected $bold = false;
 
     /**
-     * Italic
+     * Italic.
      *
-     * @var boolean
+     * @var bool
      */
     protected $italic = false;
 
     /**
-     * Superscript
+     * Superscript.
      *
-     * @var boolean
+     * @var bool
      */
     protected $superScript = false;
 
     /**
-     * Subscript
+     * Subscript.
      *
-     * @var boolean
+     * @var bool
      */
     protected $subScript = false;
 
     /**
-     * Underline
+     * Underline.
      *
      * @var string
      */
     protected $underline = self::UNDERLINE_NONE;
 
     /**
-     * Strikethrough
+     * Strikethrough.
      *
-     * @var boolean
+     * @var bool
      */
     protected $strikethrough = false;
 
     /**
-     * Foreground color
+     * Foreground color.
      *
      * @var Color
      */
     protected $color;
 
     /**
-     * Create a new Font
+     * Create a new Font.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
-     * @param    boolean    $isConditional    Flag indicating if this is a conditional style or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -136,7 +137,7 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Font
      */
@@ -146,9 +147,10 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -157,7 +159,7 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->getFont()->applyFromArray(
@@ -174,8 +176,10 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * );
      * </code>
      *
-     * @param   array    $pStyles    Array containing style information
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param array $pStyles Array containing style information
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Font
      */
     public function applyFromArray($pStyles = null)
@@ -213,13 +217,14 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 }
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Invalid style array passed.");
+            throw new \PhpOffice\PhpExcel\Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get Name
+     * Get Name.
      *
      * @return string
      */
@@ -228,13 +233,15 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getName();
         }
+
         return $this->name;
     }
 
     /**
-     * Set Name
+     * Set Name.
      *
      * @param string $pValue
+     *
      * @return Font
      */
     public function setName($pValue = 'Calibri')
@@ -248,26 +255,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->name = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Size
+     * Get Size.
      *
-     * @return double
+     * @return float
      */
     public function getSize()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getSize();
         }
+
         return $this->size;
     }
 
     /**
-     * Set Size
+     * Set Size.
      *
-     * @param double $pValue
+     * @param float $pValue
+     *
      * @return Font
      */
     public function setSize($pValue = 10)
@@ -281,26 +291,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->size = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Bold
+     * Get Bold.
      *
-     * @return boolean
+     * @return bool
      */
     public function getBold()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getBold();
         }
+
         return $this->bold;
     }
 
     /**
-     * Set Bold
+     * Set Bold.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Font
      */
     public function setBold($pValue = false)
@@ -314,26 +327,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->bold = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Italic
+     * Get Italic.
      *
-     * @return boolean
+     * @return bool
      */
     public function getItalic()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getItalic();
         }
+
         return $this->italic;
     }
 
     /**
-     * Set Italic
+     * Set Italic.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Font
      */
     public function setItalic($pValue = false)
@@ -347,26 +363,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->italic = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get SuperScript
+     * Get SuperScript.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSuperScript()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getSuperScript();
         }
+
         return $this->superScript;
     }
 
     /**
-     * Set SuperScript
+     * Set SuperScript.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Font
      */
     public function setSuperScript($pValue = false)
@@ -381,26 +400,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
             $this->superScript = $pValue;
             $this->subScript = !$pValue;
         }
+
         return $this;
     }
 
-        /**
-     * Get SubScript
+    /**
+     * Get SubScript.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSubScript()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getSubScript();
         }
+
         return $this->subScript;
     }
 
     /**
-     * Set SubScript
+     * Set SubScript.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Font
      */
     public function setSubScript($pValue = false)
@@ -415,11 +437,12 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
             $this->subScript = $pValue;
             $this->superScript = !$pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Underline
+     * Get Underline.
      *
      * @return string
      */
@@ -428,15 +451,17 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getUnderline();
         }
+
         return $this->underline;
     }
 
     /**
-     * Set Underline
+     * Set Underline.
      *
-     * @param string|boolean $pValue    \PhpOffice\PhpExcel\Style\Font underline type
-     *                                    If a boolean is passed, then TRUE equates to UNDERLINE_SINGLE,
-     *                                        false equates to UNDERLINE_NONE
+     * @param string|bool $pValue \PhpOffice\PhpExcel\Style\Font underline type
+     *                            If a boolean is passed, then TRUE equates to UNDERLINE_SINGLE,
+     *                            false equates to UNDERLINE_NONE
+     *
      * @return Font
      */
     public function setUnderline($pValue = self::UNDERLINE_NONE)
@@ -452,26 +477,29 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->underline = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Strikethrough
+     * Get Strikethrough.
      *
-     * @return boolean
+     * @return bool
      */
     public function getStrikethrough()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getStrikethrough();
         }
+
         return $this->strikethrough;
     }
 
     /**
-     * Set Strikethrough
+     * Set Strikethrough.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Font
      */
     public function setStrikethrough($pValue = false)
@@ -485,11 +513,12 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->strikethrough = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Color
+     * Get Color.
      *
      * @return Color
      */
@@ -499,10 +528,12 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Color
+     * Set Color.
      *
-     * @param    Color $pValue
-     * @throws   \PhpOffice\PhpExcel\Exception
+     * @param Color $pValue
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Font
      */
     public function setColor(Color $pValue = null)
@@ -516,29 +547,31 @@ class Font extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->color = $color;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashCode();
         }
+
         return md5(
-            $this->name .
-            $this->size .
-            ($this->bold ? 't' : 'f') .
-            ($this->italic ? 't' : 'f') .
-            ($this->superScript ? 't' : 'f') .
-            ($this->subScript ? 't' : 'f') .
-            $this->underline .
-            ($this->strikethrough ? 't' : 'f') .
-            $this->color->getHashCode() .
+            $this->name.
+            $this->size.
+            ($this->bold ? 't' : 'f').
+            ($this->italic ? 't' : 'f').
+            ($this->superScript ? 't' : 'f').
+            ($this->subScript ? 't' : 'f').
+            $this->underline.
+            ($this->strikethrough ? 't' : 'f').
+            $this->color->getHashCode().
             __CLASS__
         );
     }

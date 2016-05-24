@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Cell;
 
 /**
- * PhpOffice\PhpExcel\Cell\DataType
+ * PhpOffice\PhpExcel\Cell\DataType.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,40 +22,41 @@ namespace PhpOffice\PhpExcel\Cell;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Cell
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class DataType
 {
     /* Data types */
-    const TYPE_STRING2  = 'str';
-    const TYPE_STRING   = 's';
-    const TYPE_FORMULA  = 'f';
-    const TYPE_NUMERIC  = 'n';
-    const TYPE_BOOL     = 'b';
-    const TYPE_NULL     = 'null';
-    const TYPE_INLINE   = 'inlineStr';
-    const TYPE_ERROR    = 'e';
+    const TYPE_STRING2 = 'str';
+    const TYPE_STRING = 's';
+    const TYPE_FORMULA = 'f';
+    const TYPE_NUMERIC = 'n';
+    const TYPE_BOOL = 'b';
+    const TYPE_NULL = 'null';
+    const TYPE_INLINE = 'inlineStr';
+    const TYPE_ERROR = 'e';
 
     /**
-     * List of error codes
+     * List of error codes.
      *
      * @var array
      */
     private static $errorCodes = array(
-        '#NULL!'  => 0,
+        '#NULL!' => 0,
         '#DIV/0!' => 1,
         '#VALUE!' => 2,
-        '#REF!'   => 3,
-        '#NAME?'  => 4,
-        '#NUM!'   => 5,
-        '#N/A'    => 6
+        '#REF!' => 3,
+        '#NAME?' => 4,
+        '#NUM!' => 5,
+        '#N/A' => 6,
     );
 
     /**
-     * Get list of error codes
+     * Get list of error codes.
      *
      * @return array
      */
@@ -65,11 +66,13 @@ class DataType
     }
 
     /**
-     * DataType for value
+     * DataType for value.
      *
      * @deprecated  Replaced by \PhpOffice\PhpExcel\Cell\IValueBinder infrastructure, will be removed in version 1.8.0
-     * @param       mixed  $pValue
-     * @return      string
+     *
+     * @param mixed $pValue
+     *
+     * @return string
      */
     public static function dataTypeForValue($pValue = null)
     {
@@ -77,10 +80,11 @@ class DataType
     }
 
     /**
-     * Check a string that it satisfies Excel requirements
+     * Check a string that it satisfies Excel requirements.
      *
      * @param  mixed  Value to sanitize to an Excel string
-     * @return mixed  Sanitized value
+     *
+     * @return mixed Sanitized value
      */
     public static function checkString($pValue = null)
     {
@@ -99,10 +103,11 @@ class DataType
     }
 
     /**
-     * Check a value that it is a valid error code
+     * Check a value that it is a valid error code.
      *
      * @param  mixed   Value to sanitize to an Excel error code
-     * @return string  Sanitized value
+     *
+     * @return string Sanitized value
      */
     public static function checkErrorCode($pValue = null)
     {

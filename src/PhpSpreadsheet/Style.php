@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\Style
+ * PhpOffice\PhpExcel\Style.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,57 +22,58 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Style extends Style\Supervisor implements IComparable
 {
     /**
-     * Font
+     * Font.
      *
      * @var Style\Font
      */
     protected $font;
 
     /**
-     * Fill
+     * Fill.
      *
      * @var Style\Fill
      */
     protected $fill;
 
     /**
-     * Borders
+     * Borders.
      *
      * @var Style\Borders
      */
     protected $borders;
 
     /**
-     * Alignment
+     * Alignment.
      *
      * @var Style\Alignment
      */
     protected $alignment;
 
     /**
-     * Number Format
+     * Number Format.
      *
      * @var Style\NumberFormat
      */
     protected $numberFormat;
 
     /**
-     * Conditional styles
+     * Conditional styles.
      *
      * @var Style\Conditional[]
      */
     protected $conditionalStyles;
 
     /**
-     * Protection
+     * Protection.
      *
      * @var Style\Protection
      */
@@ -88,19 +89,19 @@ class Style extends Style\Supervisor implements IComparable
     /**
      * Use Quote Prefix when displaying in cell editor. Only used for real style.
      *
-     * @var boolean
+     * @var bool
      */
     protected $quotePrefix = false;
 
     /**
-     * Create a new Style
+     * Create a new Style.
      *
-     * @param boolean $isSupervisor Flag indicating if this is a supervisor or not
-     *         Leave this value at default unless you understand exactly what
-     *    its ramifications are
-     * @param boolean $isConditional Flag indicating if this is a conditional style or not
-     *       Leave this value at default unless you understand exactly what
-     *    its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -109,12 +110,12 @@ class Style extends Style\Supervisor implements IComparable
 
         // Initialise values
         $this->conditionalStyles = array();
-        $this->font         = new Style\Font($isSupervisor, $isConditional);
-        $this->fill         = new Style\Fill($isSupervisor, $isConditional);
-        $this->borders      = new Style\Borders($isSupervisor, $isConditional);
-        $this->alignment    = new Style\Alignment($isSupervisor, $isConditional);
+        $this->font = new Style\Font($isSupervisor, $isConditional);
+        $this->fill = new Style\Fill($isSupervisor, $isConditional);
+        $this->borders = new Style\Borders($isSupervisor, $isConditional);
+        $this->alignment = new Style\Alignment($isSupervisor, $isConditional);
         $this->numberFormat = new Style\NumberFormat($isSupervisor, $isConditional);
-        $this->protection   = new Style\Protection($isSupervisor, $isConditional);
+        $this->protection = new Style\Protection($isSupervisor, $isConditional);
 
         // bind parent if we are a supervisor
         if ($isSupervisor) {
@@ -129,7 +130,7 @@ class Style extends Style\Supervisor implements IComparable
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Style
      */
@@ -148,7 +149,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Get parent. Only used for style supervisor
+     * Get parent. Only used for style supervisor.
      *
      * @return PHPExcel
      */
@@ -158,9 +159,10 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -169,7 +171,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->applyFromArray(
@@ -203,9 +205,11 @@ class Style extends Style\Supervisor implements IComparable
      * );
      * </code>
      *
-     * @param   array    $pStyles    Array containing style information
-     * @param   boolean        $pAdvanced    Advanced mode for setting borders.
-     * @throws  Exception
+     * @param array $pStyles   Array containing style information
+     * @param bool  $pAdvanced Advanced mode for setting borders.
+     *
+     * @throws Exception
+     *
      * @return Style
      */
     public function applyFromArray($pStyles = null, $pAdvanced = true)
@@ -227,11 +231,11 @@ class Style extends Style\Supervisor implements IComparable
 
                 // Calculate range outer borders
                 $rangeStart = Cell::coordinateFromString($rangeA);
-                $rangeEnd   = Cell::coordinateFromString($rangeB);
+                $rangeEnd = Cell::coordinateFromString($rangeB);
 
                 // Translate column into index
                 $rangeStart[0] = Cell::columnIndexFromString($rangeStart[0]) - 1;
-                $rangeEnd[0]   = Cell::columnIndexFromString($rangeEnd[0]) - 1;
+                $rangeEnd[0] = Cell::columnIndexFromString($rangeEnd[0]) - 1;
 
                 // Make sure we can loop upwards on rows and columns
                 if ($rangeStart[0] > $rangeEnd[0] && $rangeStart[1] > $rangeEnd[1]) {
@@ -316,7 +320,7 @@ class Style extends Style\Supervisor implements IComparable
                                 $rangeStart[1] : $rangeEnd[1] - $yMax + $y;
 
                             // build range for region
-                            $range = $colStart . $rowStart . ':' . $colEnd . $rowEnd;
+                            $range = $colStart.$rowStart.':'.$colEnd.$rowEnd;
 
                             // retrieve relevant style array for region
                             $regionStyles = $pStyles;
@@ -353,6 +357,7 @@ class Style extends Style\Supervisor implements IComparable
                             $this->getActiveSheet()->getStyle($range)->applyFromArray($regionStyles, false);
                         }
                     }
+
                     return $this;
                 }
 
@@ -440,7 +445,6 @@ class Style extends Style\Supervisor implements IComparable
                         }
                         break;
                 }
-
             } else {
                 // not a supervisor, just apply the style array directly on style object
                 if (array_key_exists('fill', $pStyles)) {
@@ -466,13 +470,14 @@ class Style extends Style\Supervisor implements IComparable
                 }
             }
         } else {
-            throw new Exception("Invalid style array passed.");
+            throw new Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get Fill
+     * Get Fill.
      *
      * @return Style\Fill
      */
@@ -482,7 +487,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Get Font
+     * Get Font.
      *
      * @return Style\Font
      */
@@ -492,19 +497,21 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Set font
+     * Set font.
      *
      * @param Style\Font $font
+     *
      * @return Style
      */
     public function setFont(Style\Font $font)
     {
         $this->font = $font;
+
         return $this;
     }
 
     /**
-     * Get Borders
+     * Get Borders.
      *
      * @return Style\Borders
      */
@@ -514,7 +521,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Get Alignment
+     * Get Alignment.
      *
      * @return Style\Alignment
      */
@@ -524,7 +531,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Get Number Format
+     * Get Number Format.
      *
      * @return Style\NumberFormat
      */
@@ -547,6 +554,7 @@ class Style extends Style\Supervisor implements IComparable
      * Set Conditional Styles. Only used on supervisor.
      *
      * @param Style\Conditional[] $pValue Array of condtional styles
+     *
      * @return Style
      */
     public function setConditionalStyles($pValue = null)
@@ -554,11 +562,12 @@ class Style extends Style\Supervisor implements IComparable
         if (is_array($pValue)) {
             $this->getActiveSheet()->setConditionalStyles($this->getSelectedCells(), $pValue);
         }
+
         return $this;
     }
 
     /**
-     * Get Protection
+     * Get Protection.
      *
      * @return Style\Protection
      */
@@ -568,22 +577,23 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Get quote prefix
+     * Get quote prefix.
      *
-     * @return boolean
+     * @return bool
      */
     public function getQuotePrefix()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getQuotePrefix();
         }
+
         return $this->quotePrefix;
     }
 
     /**
-     * Set quote prefix
+     * Set quote prefix.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
      */
     public function setQuotePrefix($pValue)
     {
@@ -596,11 +606,12 @@ class Style extends Style\Supervisor implements IComparable
         } else {
             $this->quotePrefix = (boolean) $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
      * @return string Hash code
      */
@@ -612,20 +623,20 @@ class Style extends Style\Supervisor implements IComparable
         }
 
         return md5(
-            $this->fill->getHashCode() .
-            $this->font->getHashCode() .
-            $this->borders->getHashCode() .
-            $this->alignment->getHashCode() .
-            $this->numberFormat->getHashCode() .
-            $hashConditionals .
-            $this->protection->getHashCode() .
-            ($this->quotePrefix  ? 't' : 'f') .
+            $this->fill->getHashCode().
+            $this->font->getHashCode().
+            $this->borders->getHashCode().
+            $this->alignment->getHashCode().
+            $this->numberFormat->getHashCode().
+            $hashConditionals.
+            $this->protection->getHashCode().
+            ($this->quotePrefix  ? 't' : 'f').
             __CLASS__
         );
     }
 
     /**
-     * Get own index in style collection
+     * Get own index in style collection.
      *
      * @return int
      */
@@ -635,7 +646,7 @@ class Style extends Style\Supervisor implements IComparable
     }
 
     /**
-     * Set own index in style collection
+     * Set own index in style collection.
      *
      * @param int $pValue
      */

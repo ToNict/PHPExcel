@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\CalcEngine;
 
 /**
- * PhpOffice\PhpExcel\CalcEngine\CyclicReferenceStack
+ * PhpOffice\PhpExcel\CalcEngine\CyclicReferenceStack.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,24 +22,25 @@ namespace PhpOffice\PhpExcel\CalcEngine;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\CalcEngine
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class CyclicReferenceStack
 {
     /**
-     *  The call stack for calculated cells
+     *  The call stack for calculated cells.
      *
      *  @var mixed[]
      */
     private $stack = array();
 
     /**
-     * Return the number of entries on the stack
+     * Return the number of entries on the stack.
      *
-     * @return  integer
+     * @return int
      */
     public function count()
     {
@@ -47,9 +48,9 @@ class CyclicReferenceStack
     }
 
     /**
-     * Push a new entry onto the stack
+     * Push a new entry onto the stack.
      *
-     * @param  mixed  $value
+     * @param mixed $value
      */
     public function push($value)
     {
@@ -57,9 +58,9 @@ class CyclicReferenceStack
     }
 
     /**
-     * Pop the last entry from the stack
+     * Pop the last entry from the stack.
      *
-     * @return  mixed
+     * @return mixed
      */
     public function pop()
     {
@@ -67,9 +68,9 @@ class CyclicReferenceStack
     }
 
     /**
-     * Test to see if a specified entry exists on the stack
+     * Test to see if a specified entry exists on the stack.
      *
-     * @param  mixed  $value  The value to test
+     * @param mixed $value The value to test
      */
     public function onStack($value)
     {
@@ -77,7 +78,7 @@ class CyclicReferenceStack
     }
 
     /**
-     * Clear the stack
+     * Clear the stack.
      */
     public function clear()
     {
@@ -85,9 +86,9 @@ class CyclicReferenceStack
     }
 
     /**
-     * Return an array of all entries on the stack
+     * Return an array of all entries on the stack.
      *
-     * @return  mixed[]
+     * @return mixed[]
      */
     public function showStack()
     {

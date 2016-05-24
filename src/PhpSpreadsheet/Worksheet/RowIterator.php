@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\RowIterator
+ * PhpOffice\PhpExcel\Worksheet\RowIterator.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,49 +22,48 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class RowIterator implements \Iterator
 {
     /**
-     * PhpOffice\PhpExcel\Worksheet to iterate
+     * PhpOffice\PhpExcel\Worksheet to iterate.
      *
      * @var \PhpOffice\PhpExcel\Worksheet
      */
     private $subject;
 
     /**
-     * Current iterator position
+     * Current iterator position.
      *
      * @var int
      */
     private $position = 1;
 
     /**
-     * Start position
+     * Start position.
      *
      * @var int
      */
     private $startRow = 1;
 
-
     /**
-     * End position
+     * End position.
      *
      * @var int
      */
     private $endRow = 1;
 
-
     /**
-     * Create a new row iterator
+     * Create a new row iterator.
      *
-     * @param    \PhpOffice\PhpExcel\Worksheet    $subject    The worksheet to iterate over
-     * @param    integer                $startRow   The row number at which to start iterating
-     * @param    integer                $endRow     Optionally, the row number at which to stop iterating
+     * @param \PhpOffice\PhpExcel\Worksheet $subject  The worksheet to iterate over
+     * @param int                           $startRow The row number at which to start iterating
+     * @param int                           $endRow   Optionally, the row number at which to stop iterating
      */
     public function __construct(\PhpOffice\PhpExcel\Worksheet $subject, $startRow = 1, $endRow = null)
     {
@@ -75,7 +74,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -83,10 +82,12 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * (Re)Set the start row and the current row pointer
+     * (Re)Set the start row and the current row pointer.
      *
-     * @param integer    $startRow    The row number at which to start iterating
+     * @param int $startRow The row number at which to start iterating
+     *
      * @return RowIterator
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function resetStart($startRow = 1)
@@ -105,9 +106,10 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * (Re)Set the end row
+     * (Re)Set the end row.
      *
-     * @param integer    $endRow    The row number at which to stop iterating
+     * @param int $endRow The row number at which to stop iterating
+     *
      * @return RowIterator
      */
     public function resetEnd($endRow = null)
@@ -118,10 +120,12 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Set the row pointer to the selected row
+     * Set the row pointer to the selected row.
      *
-     * @param integer    $row    The row number to set the current pointer at
+     * @param int $row The row number to set the current pointer at
+     *
      * @return RowIterator
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function seek($row = 1)
@@ -135,7 +139,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Rewind the iterator to the starting row
+     * Rewind the iterator to the starting row.
      */
     public function rewind()
     {
@@ -143,7 +147,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Return the current row in this worksheet
+     * Return the current row in this worksheet.
      *
      * @return Row
      */
@@ -153,7 +157,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Return the current iterator key
+     * Return the current iterator key.
      *
      * @return int
      */
@@ -163,7 +167,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Set the iterator to its next value
+     * Set the iterator to its next value.
      */
     public function next()
     {
@@ -171,7 +175,7 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Set the iterator to its previous value
+     * Set the iterator to its previous value.
      *
      * @throws \PhpOffice\PhpExcel\Exception
      */
@@ -185,9 +189,9 @@ class RowIterator implements \Iterator
     }
 
     /**
-     * Indicate if more rows exist in the worksheet range of rows that we're iterating
+     * Indicate if more rows exist in the worksheet range of rows that we're iterating.
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

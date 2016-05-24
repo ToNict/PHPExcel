@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\MemoryDrawing
+ * PhpOffice\PhpExcel\Worksheet\MemoryDrawing.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,70 +22,71 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparable
 {
     /* Rendering functions */
     const RENDERING_DEFAULT = 'imagepng';
-    const RENDERING_PNG     = 'imagepng';
-    const RENDERING_GIF     = 'imagegif';
-    const RENDERING_JPEG    = 'imagejpeg';
+    const RENDERING_PNG = 'imagepng';
+    const RENDERING_GIF = 'imagegif';
+    const RENDERING_JPEG = 'imagejpeg';
 
     /* MIME types */
-    const MIMETYPE_DEFAULT  = 'image/png';
-    const MIMETYPE_PNG      = 'image/png';
-    const MIMETYPE_GIF      = 'image/gif';
-    const MIMETYPE_JPEG     = 'image/jpeg';
+    const MIMETYPE_DEFAULT = 'image/png';
+    const MIMETYPE_PNG = 'image/png';
+    const MIMETYPE_GIF = 'image/gif';
+    const MIMETYPE_JPEG = 'image/jpeg';
 
     /**
-     * Image resource
+     * Image resource.
      *
      * @var resource
      */
     private $imageResource;
 
     /**
-     * Rendering function
+     * Rendering function.
      *
      * @var string
      */
     private $renderingFunction;
 
     /**
-     * Mime type
+     * Mime type.
      *
      * @var string
      */
     private $mimeType;
 
     /**
-     * Unique name
+     * Unique name.
      *
      * @var string
      */
     private $uniqueName;
 
     /**
-     * Create a new MemoryDrawing
+     * Create a new MemoryDrawing.
      */
     public function __construct()
     {
         // Initialise values
-        $this->imageResource     = null;
+        $this->imageResource = null;
         $this->renderingFunction = self::RENDERING_DEFAULT;
-        $this->mimeType          = self::MIMETYPE_DEFAULT;
-        $this->uniqueName        = md5(rand(0, 9999). time() . rand(0, 9999));
+        $this->mimeType = self::MIMETYPE_DEFAULT;
+        $this->uniqueName = md5(rand(0, 9999).time().rand(0, 9999));
 
         // Initialize parent
         parent::__construct();
     }
 
     /**
-     * Get image resource
+     * Get image resource.
      *
      * @return resource
      */
@@ -95,9 +96,10 @@ class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparab
     }
 
     /**
-     * Set image resource
+     * Set image resource.
      *
-     * @param    $value resource
+     * @param   $value resource
+     *
      * @return MemoryDrawing
      */
     public function setImageResource($value = null)
@@ -106,14 +108,15 @@ class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparab
 
         if (!is_null($this->imageResource)) {
             // Get width/height
-            $this->width  = imagesx($this->imageResource);
+            $this->width = imagesx($this->imageResource);
             $this->height = imagesy($this->imageResource);
         }
+
         return $this;
     }
 
     /**
-     * Get rendering function
+     * Get rendering function.
      *
      * @return string
      */
@@ -123,19 +126,21 @@ class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparab
     }
 
     /**
-     * Set rendering function
+     * Set rendering function.
      *
      * @param string $value
+     *
      * @return MemoryDrawing
      */
     public function setRenderingFunction($value = self::RENDERING_DEFAULT)
     {
         $this->renderingFunction = $value;
+
         return $this;
     }
 
     /**
-     * Get mime type
+     * Get mime type.
      *
      * @return string
      */
@@ -145,19 +150,21 @@ class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparab
     }
 
     /**
-     * Set mime type
+     * Set mime type.
      *
      * @param string $value
+     *
      * @return MemoryDrawing
      */
     public function setMimeType($value = self::MIMETYPE_DEFAULT)
     {
         $this->mimeType = $value;
+
         return $this;
     }
 
     /**
-     * Get indexed filename (using image index)
+     * Get indexed filename (using image index).
      *
      * @return string
      */
@@ -167,21 +174,21 @@ class MemoryDrawing extends BaseDrawing implements \PhpOffice\PhpExcel\IComparab
         $extension = explode('/', $extension);
         $extension = $extension[1];
 
-        return $this->uniqueName . $this->getImageIndex() . '.' . $extension;
+        return $this->uniqueName.$this->getImageIndex().'.'.$extension;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         return md5(
-            $this->renderingFunction .
-            $this->mimeType .
-            $this->uniqueName .
-            parent::getHashCode() .
+            $this->renderingFunction.
+            $this->mimeType.
+            $this->uniqueName.
+            parent::getHashCode().
             __CLASS__
         );
     }

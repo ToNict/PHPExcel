@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\Row
+ * PhpOffice\PhpExcel\Worksheet\Row.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,42 +22,43 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Row
 {
     /**
-     * PhpOffice\PhpExcel\Worksheet
+     * PhpOffice\PhpExcel\Worksheet.
      *
      * @var \PhpOffice\PhpExcel\Worksheet
      */
     private $parent;
 
     /**
-     * Row index
+     * Row index.
      *
      * @var int
      */
     private $rowIndex = 0;
 
     /**
-     * Create a new row
+     * Create a new row.
      *
-     * @param \PhpOffice\PhpExcel\Worksheet         $parent
-     * @param int                        $rowIndex
+     * @param \PhpOffice\PhpExcel\Worksheet $parent
+     * @param int                           $rowIndex
      */
     public function __construct(\PhpOffice\PhpExcel\Worksheet $parent = null, $rowIndex = 1)
     {
         // Set parent and row index
-        $this->parent   = $parent;
+        $this->parent = $parent;
         $this->rowIndex = $rowIndex;
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -65,7 +66,7 @@ class Row
     }
 
     /**
-     * Get row index
+     * Get row index.
      *
      * @return int
      */
@@ -75,10 +76,11 @@ class Row
     }
 
     /**
-     * Get cell iterator
+     * Get cell iterator.
      *
-     * @param    string                $startColumn    The column address at which to start iterating
-     * @param    string                $endColumn        Optionally, the column address at which to stop iterating
+     * @param string $startColumn The column address at which to start iterating
+     * @param string $endColumn   Optionally, the column address at which to stop iterating
+     *
      * @return RowCellIterator
      */
     public function getCellIterator($startColumn = 'A', $endColumn = null)

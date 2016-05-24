@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\HTML
+ * PhpOffice\PhpExcel\Reader\HTML.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,31 +22,31 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 /** PHPExcel root directory */
 class HTML extends BaseReader implements IReader
 {
-
     /**
-     * Input encoding
+     * Input encoding.
      *
      * @var string
      */
     protected $inputEncoding = 'ANSI';
 
     /**
-     * Sheet index to read
+     * Sheet index to read.
      *
      * @var int
      */
     protected $sheetIndex = 0;
 
     /**
-     * Formats
+     * Formats.
      *
      * @var array
      */
@@ -110,7 +110,7 @@ class HTML extends BaseReader implements IReader
     protected $rowspan = array();
 
     /**
-     * Create a new HTML Reader instance
+     * Create a new HTML Reader instance.
      */
     public function __construct()
     {
@@ -118,9 +118,9 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Validate that the current file is an HTML file
+     * Validate that the current file is an HTML file.
      *
-     * @return boolean
+     * @return bool
      */
     protected function isValidFormat()
     {
@@ -135,10 +135,12 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param  string                    $pFilename
+     * @param string $pFilename
+     *
      * @return PHPExcel
+     *
      * @throws Exception
      */
     public function load($pFilename)
@@ -151,7 +153,7 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Set input encoding
+     * Set input encoding.
      *
      * @param string $pValue Input encoding
      */
@@ -163,7 +165,7 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Get input encoding
+     * Get input encoding.
      *
      * @return string
      */
@@ -209,13 +211,13 @@ class HTML extends BaseReader implements IReader
 //                echo 'FLUSH CELL: ' , $column , $row , ' => ' , $cellContent , '<br />';
                 //    Write to worksheet to be done here...
                 //    ... we return the cell so we can mess about with styles more easily
-                $sheet->setCellValue($column . $row, $cellContent, true);
+                $sheet->setCellValue($column.$row, $cellContent, true);
                 $this->dataArray[$row][$column] = $cellContent;
             }
         } else {
             //    We have a Rich Text run
             //    TODO
-            $this->dataArray[$row][$column] = 'RICH TEXT: ' . $cellContent;
+            $this->dataArray[$row][$column] = 'RICH TEXT: '.$cellContent;
         }
         $cellContent = (string) '';
     }
@@ -233,11 +235,11 @@ class HTML extends BaseReader implements IReader
                     //    TODO
                 }
             } elseif ($child instanceof DOMElement) {
-//                echo '<b>DOM ELEMENT: </b>' , strtoupper($child->nodeName) , '<br />';
+                //                echo '<b>DOM ELEMENT: </b>' , strtoupper($child->nodeName) , '<br />';
 
                 $attributeArray = array();
                 foreach ($child->attributes as $attribute) {
-//                    echo '<b>ATTRIBUTE: </b>' , $attribute->name , ' => ' , $attribute->value , '<br />';
+                    //                    echo '<b>ATTRIBUTE: </b>' , $attribute->name , ' => ' , $attribute->value , '<br />';
                     $attributeArray[$attribute->name] = $attribute->value;
                 }
 
@@ -279,7 +281,7 @@ class HTML extends BaseReader implements IReader
                         $this->flushCell($sheet, $column, $row, $cellContent);
                         ++$row;
                         if (isset($this->formats[$child->nodeName])) {
-                            $sheet->getStyle($column . $row)->applyFromArray($this->formats[$child->nodeName]);
+                            $sheet->getStyle($column.$row)->applyFromArray($this->formats[$child->nodeName]);
                         } else {
                             $cellContent = '----------';
                             $this->flushCell($sheet, $column, $row, $cellContent);
@@ -303,9 +305,9 @@ class HTML extends BaseReader implements IReader
                             switch ($attributeName) {
                                 case 'href':
 //                                    echo 'Link to ' , $attributeValue , '<br />';
-                                    $sheet->getCell($column . $row)->getHyperlink()->setUrl($attributeValue);
+                                    $sheet->getCell($column.$row)->getHyperlink()->setUrl($attributeValue);
                                     if (isset($this->formats[$child->nodeName])) {
-                                        $sheet->getStyle($column . $row)->applyFromArray($this->formats[$child->nodeName]);
+                                        $sheet->getStyle($column.$row)->applyFromArray($this->formats[$child->nodeName]);
                                     }
                                     break;
                             }
@@ -332,7 +334,7 @@ class HTML extends BaseReader implements IReader
                         } else {
                             if ($cellContent > '') {
                                 $this->flushCell($sheet, $column, $row, $cellContent);
-                                $row++;
+                                ++$row;
                             }
 //                            echo 'START OF PARAGRAPH: ' , '<br />';
                             $this->processDomElement($child, $sheet, $row, $column, $cellContent);
@@ -340,10 +342,10 @@ class HTML extends BaseReader implements IReader
                             $this->flushCell($sheet, $column, $row, $cellContent);
 
                             if (isset($this->formats[$child->nodeName])) {
-                                $sheet->getStyle($column . $row)->applyFromArray($this->formats[$child->nodeName]);
+                                $sheet->getStyle($column.$row)->applyFromArray($this->formats[$child->nodeName]);
                             }
 
-                            $row++;
+                            ++$row;
                             $column = 'A';
                         }
                         break;
@@ -400,7 +402,7 @@ class HTML extends BaseReader implements IReader
                         $this->processDomElement($child, $sheet, $row, $column, $cellContent);
 //                        echo 'END OF TABLE ' , $this->tableLevel , ' CELL<br />';
 
-                        while (isset($this->rowspan[$column . $row])) {
+                        while (isset($this->rowspan[$column.$row])) {
                             ++$column;
                         }
 
@@ -417,10 +419,10 @@ class HTML extends BaseReader implements IReader
                         if (isset($attributeArray['rowspan']) && isset($attributeArray['colspan'])) {
                             //create merging rowspan and colspan
                             $columnTo = $column;
-                            for ($i = 0; $i < $attributeArray['colspan'] - 1; $i++) {
+                            for ($i = 0; $i < $attributeArray['colspan'] - 1; ++$i) {
                                 ++$columnTo;
                             }
-                            $range = $column . $row . ':' . $columnTo . ($row + $attributeArray['rowspan'] - 1);
+                            $range = $column.$row.':'.$columnTo.($row + $attributeArray['rowspan'] - 1);
                             foreach (\PhpOffice\PhpExcel\Cell::extractAllCellReferencesInRange($range) as $value) {
                                 $this->rowspan[$value] = true;
                             }
@@ -428,7 +430,7 @@ class HTML extends BaseReader implements IReader
                             $column = $columnTo;
                         } elseif (isset($attributeArray['rowspan'])) {
                             //create merging rowspan
-                            $range = $column . $row . ':' . $column . ($row + $attributeArray['rowspan'] - 1);
+                            $range = $column.$row.':'.$column.($row + $attributeArray['rowspan'] - 1);
                             foreach (\PhpOffice\PhpExcel\Cell::extractAllCellReferencesInRange($range) as $value) {
                                 $this->rowspan[$value] = true;
                             }
@@ -436,10 +438,10 @@ class HTML extends BaseReader implements IReader
                         } elseif (isset($attributeArray['colspan'])) {
                             //create merging colspan
                             $columnTo = $column;
-                            for ($i = 0; $i < $attributeArray['colspan'] - 1; $i++) {
+                            for ($i = 0; $i < $attributeArray['colspan'] - 1; ++$i) {
                                 ++$columnTo;
                             }
-                            $sheet->mergeCells($column . $row . ':' . $columnTo . $row);
+                            $sheet->mergeCells($column.$row.':'.$columnTo.$row);
                             $column = $columnTo;
                         }
                         ++$column;
@@ -459,11 +461,13 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file into PHPExcel instance
+     * Loads PHPExcel from file into PHPExcel instance.
      *
-     * @param  string                    $pFilename
-     * @param  PHPExcel                  $objPHPExcel
+     * @param string   $pFilename
+     * @param PHPExcel $objPHPExcel
+     *
      * @return PHPExcel
+     *
      * @throws Exception
      */
     public function loadIntoExisting($pFilename, PHPExcel $objPHPExcel)
@@ -472,7 +476,7 @@ class HTML extends BaseReader implements IReader
         $this->openFile($pFilename);
         if (!$this->isValidFormat()) {
             fclose($this->fileHandle);
-            throw new Exception($pFilename . " is an Invalid HTML file.");
+            throw new Exception($pFilename.' is an Invalid HTML file.');
         }
         //    Close after validating
         fclose($this->fileHandle);
@@ -484,11 +488,11 @@ class HTML extends BaseReader implements IReader
         $objPHPExcel->setActiveSheetIndex($this->sheetIndex);
 
         //    Create a new DOM object
-        $dom = new domDocument;
+        $dom = new domDocument();
         //    Reload the HTML file into the DOM object
         $loaded = $dom->loadHTML(mb_convert_encoding($this->securityScanFile($pFilename), 'HTML-ENTITIES', 'UTF-8'));
         if ($loaded === false) {
-            throw new Exception('Failed to load ' . $pFilename . ' as a DOM Document');
+            throw new Exception('Failed to load '.$pFilename.' as a DOM Document');
         }
 
         //    Discard white space
@@ -504,7 +508,7 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Get sheet index
+     * Get sheet index.
      *
      * @return int
      */
@@ -514,9 +518,10 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Set sheet index
+     * Set sheet index.
      *
-     * @param  int                  $pValue Sheet index
+     * @param int $pValue Sheet index
+     *
      * @return HTML
      */
     public function setSheetIndex($pValue = 0)
@@ -527,17 +532,19 @@ class HTML extends BaseReader implements IReader
     }
 
     /**
-     * Scan theXML for use of <!ENTITY to prevent XXE/XEE attacks
+     * Scan theXML for use of <!ENTITY to prevent XXE/XEE attacks.
      *
-     * @param     string         $xml
+     * @param string $xml
+     *
      * @throws Exception
      */
     public function securityScan($xml)
     {
-        $pattern = '/\\0?' . implode('\\0?', str_split('<!ENTITY')) . '\\0?/';
+        $pattern = '/\\0?'.implode('\\0?', str_split('<!ENTITY')).'\\0?/';
         if (preg_match($pattern, $xml)) {
             throw new Exception('Detected use of ENTITY in XML, spreadsheet file load() aborted to prevent XXE/XEE attacks');
         }
+
         return $xml;
     }
 }

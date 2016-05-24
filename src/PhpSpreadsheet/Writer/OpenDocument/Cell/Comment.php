@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\OpenDocument\Cell;
 
 /**
- * PhpOffice\PhpExcel\Writer\OpenDocument\Cell\Comment
+ * PhpOffice\PhpExcel\Writer\OpenDocument\Cell\Comment.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,18 +22,18 @@ namespace PhpOffice\PhpExcel\Writer\OpenDocument\Cell;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\OpenDocument
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 
-
 /**
- * PhpOffice\PhpExcel\Writer\OpenDocument\Cell\Comment
+ * PhpOffice\PhpExcel\Writer\OpenDocument\Cell\Comment.
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\OpenDocument
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @author     Alexander Pervakov <frost-nzcr4@jagmort.com>
  */
@@ -51,9 +51,9 @@ class Comment
             //$objWriter->writeAttribute('draw:style-name', 'gr1');
             //$objWriter->writeAttribute('draw:text-style-name', 'P1');
             $objWriter->writeAttribute('svg:width', $comment->getWidth());
-            $objWriter->writeAttribute('svg:height', $comment->getHeight());
-            $objWriter->writeAttribute('svg:x', $comment->getMarginLeft());
-            $objWriter->writeAttribute('svg:y', $comment->getMarginTop());
+        $objWriter->writeAttribute('svg:height', $comment->getHeight());
+        $objWriter->writeAttribute('svg:x', $comment->getMarginLeft());
+        $objWriter->writeAttribute('svg:y', $comment->getMarginTop());
             //$objWriter->writeAttribute('draw:caption-point-x', $comment->getMarginLeft());
             //$objWriter->writeAttribute('draw:caption-point-y', $comment->getMarginTop());
                 $objWriter->writeElement('dc:creator', $comment->getAuthor());

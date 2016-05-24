@@ -6,9 +6,8 @@ namespace PhpOffice\PhpExcel\Chart;
  * Created by PhpStorm.
  * User: nhw2h8s
  * Date: 7/2/14
- * Time: 5:45 PM
+ * Time: 5:45 PM.
  */
-
 abstract class Properties
 {
     const
@@ -128,7 +127,7 @@ abstract class Properties
 
     protected function getTrueAlpha($alpha)
     {
-        return (string) 100 - $alpha . '000';
+        return (string) 100 - $alpha.'000';
     }
 
     protected function setColorProperties($color, $alpha, $type)
@@ -136,7 +135,7 @@ abstract class Properties
         return array(
             'type' => (string) $type,
             'value' => (string) $color,
-            'alpha' => (string) $this->getTrueAlpha($alpha)
+            'alpha' => (string) $this->getTrueAlpha($alpha),
         );
     }
 
@@ -151,7 +150,7 @@ abstract class Properties
             6 => array('w' => 'med', 'len' => 'lg'),
             7 => array('w' => 'lg', 'len' => 'sm'),
             8 => array('w' => 'lg', 'len' => 'med'),
-            9 => array('w' => 'lg', 'len' => 'lg')
+            9 => array('w' => 'lg', 'len' => 'lg'),
         );
 
         return $sizes[$array_selector][$array_kay_selector];
@@ -167,7 +166,7 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '2700000',
                 'algn' => 'tl',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             2 => array(
                 'effect' => 'outerShdw',
@@ -175,7 +174,7 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '5400000',
                 'algn' => 't',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             3 => array(
                 'effect' => 'outerShdw',
@@ -183,26 +182,25 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '8100000',
                 'algn' => 'tr',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             4 => array(
                 'effect' => 'outerShdw',
                 'blur' => '50800',
                 'distance' => '38100',
                 'algn' => 'l',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             5 => array(
                 'effect' => 'outerShdw',
                 'size' => array(
                     'sx' => '102000',
-                    'sy' => '102000'
-                )
-                ,
+                    'sy' => '102000',
+                ),
                 'blur' => '63500',
                 'distance' => '38100',
                 'algn' => 'ctr',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             6 => array(
                 'effect' => 'outerShdw',
@@ -210,7 +208,7 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '10800000',
                 'algn' => 'r',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             7 => array(
                 'effect' => 'outerShdw',
@@ -218,14 +216,14 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '18900000',
                 'algn' => 'bl',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             8 => array(
                 'effect' => 'outerShdw',
                 'blur' => '50800',
                 'distance' => '38100',
                 'direction' => '16200000',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             9 => array(
                 'effect' => 'outerShdw',
@@ -233,7 +231,7 @@ abstract class Properties
                 'distance' => '38100',
                 'direction' => '13500000',
                 'algn' => 'br',
-                'rotWithShape' => '0'
+                'rotWithShape' => '0',
             ),
             //INNER
             10 => array(
@@ -352,15 +350,17 @@ abstract class Properties
 
     protected function getArrayElementsValue($properties, $elements)
     {
-        $reference = & $properties;
+        $reference = &$properties;
         if (!is_array($elements)) {
             return $reference[$elements];
         } else {
             foreach ($elements as $keys) {
-                $reference = & $reference[$keys];
+                $reference = &$reference[$keys];
             }
+
             return $reference;
         }
+
         return $this;
     }
 }

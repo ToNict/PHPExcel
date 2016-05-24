@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet\Drawing;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\Drawing\Shadow
+ * PhpOffice\PhpExcel\Worksheet\Drawing\Shadow.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,32 +22,33 @@ namespace PhpOffice\PhpExcel\Worksheet\Drawing;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet\Drawing
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Shadow implements \PhpOffice\PhpExcel\IComparable
 {
     /* Shadow alignment */
-    const SHADOW_BOTTOM       = 'b';
-    const SHADOW_BOTTOM_LEFT  = 'bl';
+    const SHADOW_BOTTOM = 'b';
+    const SHADOW_BOTTOM_LEFT = 'bl';
     const SHADOW_BOTTOM_RIGHT = 'br';
-    const SHADOW_CENTER       = 'ctr';
-    const SHADOW_LEFT         = 'l';
-    const SHADOW_TOP          = 't';
-    const SHADOW_TOP_LEFT     = 'tl';
-    const SHADOW_TOP_RIGHT    = 'tr';
+    const SHADOW_CENTER = 'ctr';
+    const SHADOW_LEFT = 'l';
+    const SHADOW_TOP = 't';
+    const SHADOW_TOP_LEFT = 'tl';
+    const SHADOW_TOP_RIGHT = 'tr';
 
     /**
-     * Visible
+     * Visible.
      *
-     * @var boolean
+     * @var bool
      */
     private $visible;
 
     /**
-     * Blur radius
+     * Blur radius.
      *
      * Defaults to 6
      *
@@ -56,7 +57,7 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     private $blurRadius;
 
     /**
-     * Shadow distance
+     * Shadow distance.
      *
      * Defaults to 2
      *
@@ -65,52 +66,52 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     private $distance;
 
     /**
-     * Shadow direction (in degrees)
+     * Shadow direction (in degrees).
      *
      * @var int
      */
     private $direction;
 
     /**
-     * Shadow alignment
+     * Shadow alignment.
      *
      * @var int
      */
     private $alignment;
 
     /**
-     * Color
+     * Color.
      *
      * @var \PhpOffice\PhpExcel\Style\Color
      */
     private $color;
 
     /**
-     * Alpha
+     * Alpha.
      *
      * @var int
      */
     private $alpha;
 
     /**
-     * Create a new Shadow
+     * Create a new Shadow.
      */
     public function __construct()
     {
         // Initialise values
-        $this->visible     = false;
-        $this->blurRadius  = 6;
-        $this->distance    = 2;
-        $this->direction   = 0;
-        $this->alignment   = self::SHADOW_BOTTOM_RIGHT;
-        $this->color       = new \PhpOffice\PhpExcel\Style\Color(\PhpOffice\PhpExcel\Style\Color::COLOR_BLACK);
-        $this->alpha       = 50;
+        $this->visible = false;
+        $this->blurRadius = 6;
+        $this->distance = 2;
+        $this->direction = 0;
+        $this->alignment = self::SHADOW_BOTTOM_RIGHT;
+        $this->color = new \PhpOffice\PhpExcel\Style\Color(\PhpOffice\PhpExcel\Style\Color::COLOR_BLACK);
+        $this->alpha = 50;
     }
 
     /**
-     * Get Visible
+     * Get Visible.
      *
-     * @return boolean
+     * @return bool
      */
     public function getVisible()
     {
@@ -118,19 +119,21 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Visible
+     * Set Visible.
      *
-     * @param boolean $pValue
+     * @param bool $pValue
+     *
      * @return Shadow
      */
     public function setVisible($pValue = false)
     {
         $this->visible = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Blur radius
+     * Get Blur radius.
      *
      * @return int
      */
@@ -140,19 +143,21 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Blur radius
+     * Set Blur radius.
      *
      * @param int $pValue
+     *
      * @return Shadow
      */
     public function setBlurRadius($pValue = 6)
     {
         $this->blurRadius = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Shadow distance
+     * Get Shadow distance.
      *
      * @return int
      */
@@ -162,19 +167,21 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Shadow distance
+     * Set Shadow distance.
      *
      * @param int $pValue
+     *
      * @return Shadow
      */
     public function setDistance($pValue = 2)
     {
         $this->distance = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Shadow direction (in degrees)
+     * Get Shadow direction (in degrees).
      *
      * @return int
      */
@@ -184,19 +191,21 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Shadow direction (in degrees)
+     * Set Shadow direction (in degrees).
      *
      * @param int $pValue
+     *
      * @return Shadow
      */
     public function setDirection($pValue = 0)
     {
         $this->direction = $pValue;
+
         return $this;
     }
 
-   /**
-     * Get Shadow alignment
+    /**
+     * Get Shadow alignment.
      *
      * @return int
      */
@@ -206,19 +215,21 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Shadow alignment
+     * Set Shadow alignment.
      *
      * @param int $pValue
+     *
      * @return Shadow
      */
     public function setAlignment($pValue = 0)
     {
         $this->alignment = $pValue;
+
         return $this;
     }
 
-   /**
-     * Get Color
+    /**
+     * Get Color.
      *
      * @return \PhpOffice\PhpExcel\Style\Color
      */
@@ -228,20 +239,23 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Color
+     * Set Color.
      *
-     * @param    \PhpOffice\PhpExcel\Style_Color $pValue
-     * @throws   \PhpOffice\PhpExcel\Exception
-     * @return   Shadow
+     * @param \PhpOffice\PhpExcel\Style_Color $pValue
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return Shadow
      */
     public function setColor(\PhpOffice\PhpExcel\Style\Color $pValue = null)
     {
-           $this->color = $pValue;
-           return $this;
+        $this->color = $pValue;
+
+        return $this;
     }
 
-   /**
-     * Get Alpha
+    /**
+     * Get Alpha.
      *
      * @return int
      */
@@ -251,32 +265,34 @@ class Shadow implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Alpha
+     * Set Alpha.
      *
      * @param int $pValue
+     *
      * @return Shadow
      */
     public function setAlpha($pValue = 0)
     {
         $this->alpha = $pValue;
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         return md5(
-            ($this->visible ? 't' : 'f') .
-            $this->blurRadius .
-            $this->distance .
-            $this->direction .
-            $this->alignment .
-            $this->color->getHashCode() .
-            $this->alpha .
+            ($this->visible ? 't' : 'f').
+            $this->blurRadius.
+            $this->distance.
+            $this->direction.
+            $this->alignment.
+            $this->color->getHashCode().
+            $this->alpha.
             __CLASS__
         );
     }

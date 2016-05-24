@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\IOFactory
+ * PhpOffice\PhpExcel\IOFactory.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,30 +22,29 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class IOFactory
 {
     /**
-     * Search locations
+     * Search locations.
      *
-     * @var    array
-     * @access    private
+     * @var array
      * @static
      */
     private static $searchLocations = array(
-        array( 'type' => 'IWriter', 'path' => 'PhpExcel/Writer/{0}.php', 'class' => '\\PhpOffice\\PhpExcel\\Writer\\{0}' ),
-        array( 'type' => 'IReader', 'path' => 'PhpExcel/Reader/{0}.php', 'class' => '\\PhpOffice\\PhpExcel\\Reader\\{0}' )
+        array('type' => 'IWriter', 'path' => 'PhpExcel/Writer/{0}.php', 'class' => '\\PhpOffice\\PhpExcel\\Writer\\{0}'),
+        array('type' => 'IReader', 'path' => 'PhpExcel/Reader/{0}.php', 'class' => '\\PhpOffice\\PhpExcel\\Reader\\{0}'),
     );
 
     /**
-     * Autoresolve classes
+     * Autoresolve classes.
      *
-     * @var    array
-     * @access    private
+     * @var array
      * @static
      */
     private static $autoResolveClasses = array(
@@ -60,18 +59,18 @@ class IOFactory
     );
 
     /**
-     *    Private constructor for IOFactory
+     *    Private constructor for IOFactory.
      */
     private function __construct()
     {
     }
 
     /**
-     * Get search locations
+     * Get search locations.
      *
      * @static
-     * @access    public
-     * @return    array
+     *
+     * @return array
      */
     public static function getSearchLocations()
     {
@@ -79,12 +78,13 @@ class IOFactory
     }
 
     /**
-     * Set search locations
+     * Set search locations.
      *
      * @static
-     * @access    public
-     * @param    array $value
-     * @throws    Reader\Exception
+     *
+     * @param array $value
+     *
+     * @throws Reader\Exception
      */
     public static function setSearchLocations($value)
     {
@@ -96,28 +96,30 @@ class IOFactory
     }
 
     /**
-     * Add search location
+     * Add search location.
      *
      * @static
-     * @access    public
-     * @param    string $type        Example: IWriter
-     * @param    string $location    Example: PHPExcel/Writer/{0}.php
-     * @param    string $classname     Example: Writer\{0}
+     *
+     * @param string $type      Example: IWriter
+     * @param string $location  Example: PHPExcel/Writer/{0}.php
+     * @param string $classname Example: Writer\{0}
      */
     public static function addSearchLocation($type = '', $location = '', $classname = '')
     {
-        self::$searchLocations[] = array( 'type' => $type, 'path' => $location, 'class' => $classname );
+        self::$searchLocations[] = array('type' => $type, 'path' => $location, 'class' => $classname);
     }
 
     /**
-     * Create Writer\IWriter
+     * Create Writer\IWriter.
      *
      * @static
-     * @access    public
-     * @param    Spreadsheet $phpExcel
-     * @param    string  $writerType    Example: Excel2007
-     * @return    Writer\IWriter
-     * @throws    Writer\Exception
+     *
+     * @param Spreadsheet $phpExcel
+     * @param string      $writerType Example: Excel2007
+     *
+     * @return Writer\IWriter
+     *
+     * @throws Writer\Exception
      */
     public static function createWriter(Spreadsheet $phpExcel, $writerType = '')
     {
@@ -141,13 +143,15 @@ class IOFactory
     }
 
     /**
-     * Create Reader\IReader
+     * Create Reader\IReader.
      *
      * @static
-     * @access    public
-     * @param    string $readerType    Example: Excel2007
-     * @return    Reader\IReader
-     * @throws    Reader\Exception
+     *
+     * @param string $readerType Example: Excel2007
+     *
+     * @return Reader\IReader
+     *
+     * @throws Reader\Exception
      */
     public static function createReader($readerType = '')
     {
@@ -171,28 +175,33 @@ class IOFactory
     }
 
     /**
-     * Loads Spreadsheet from file using automatic Reader\IReader resolution
+     * Loads Spreadsheet from file using automatic Reader\IReader resolution.
      *
      * @static
-     * @access public
-     * @param     string         $pFilename        The name of the spreadsheet file
-     * @return    Spreadsheet
-     * @throws    Reader\Exception
+     *
+     * @param string $pFilename The name of the spreadsheet file
+     *
+     * @return Spreadsheet
+     *
+     * @throws Reader\Exception
      */
     public static function load($pFilename)
     {
         $reader = self::createReaderForFile($pFilename);
+
         return $reader->load($pFilename);
     }
 
     /**
-     * Identify file type using automatic Reader\IReader resolution
+     * Identify file type using automatic Reader\IReader resolution.
      *
      * @static
-     * @access public
-     * @param     string         $pFilename        The name of the spreadsheet file to identify
-     * @return    string
-     * @throws    Reader\Exception
+     *
+     * @param string $pFilename The name of the spreadsheet file to identify
+     *
+     * @return string
+     *
+     * @throws Reader\Exception
      */
     public static function identify($pFilename)
     {
@@ -200,17 +209,20 @@ class IOFactory
         $className = get_class($reader);
         $classType = explode('\\', $className);
         unset($reader);
+
         return array_pop($classType);
     }
 
     /**
-     * Create Reader\IReader for file using automatic Reader\IReader resolution
+     * Create Reader\IReader for file using automatic Reader\IReader resolution.
      *
      * @static
-     * @access    public
-     * @param     string         $pFilename        The name of the spreadsheet file
-     * @return    Reader\IReader
-     * @throws    Reader\Exception
+     *
+     * @param string $pFilename The name of the spreadsheet file
+     *
+     * @return Reader\IReader
+     *
+     * @throws Reader\Exception
      */
     public static function createReaderForFile($pFilename)
     {

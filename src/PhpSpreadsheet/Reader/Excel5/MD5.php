@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader\Excel5;
 
 /**
- * PhpOffice\PhpExcel\Reader\Excel5\MD5
+ * PhpOffice\PhpExcel\Reader\Excel5\MD5.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Reader\Excel5;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader\Excel5
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt        LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class MD5
@@ -36,7 +37,7 @@ class MD5
     private $d;
 
     /**
-     * MD5 stream constructor
+     * MD5 stream constructor.
      */
     public function __construct()
     {
@@ -44,7 +45,7 @@ class MD5
     }
 
     /**
-     * Reset the MD5 stream context
+     * Reset the MD5 stream context.
      */
     public function reset()
     {
@@ -55,7 +56,7 @@ class MD5
     }
 
     /**
-     * Get MD5 stream context
+     * Get MD5 stream context.
      *
      * @return string
      */
@@ -74,7 +75,7 @@ class MD5
     }
 
     /**
-     * Add data to context
+     * Add data to context.
      *
      * @param string $data Data to add
      */
@@ -87,10 +88,10 @@ class MD5
         $C = $this->c;
         $D = $this->d;
 
-        $F = ['self','f'];
-        $G = ['self','g'];
-        $H = ['self','h'];
-        $I = ['self','i'];
+        $F = ['self', 'f'];
+        $G = ['self', 'g'];
+        $H = ['self', 'h'];
+        $I = ['self', 'i'];
 
         /* ROUND 1 */
         self::step($F, $A, $B, $C, $D, $words[0], 7, 0xd76aa478);
@@ -172,22 +173,22 @@ class MD5
 
     private static function f($X, $Y, $Z)
     {
-        return (($X & $Y) | ((~ $X) & $Z)); // X AND Y OR NOT X AND Z
+        return ($X & $Y) | ((~$X) & $Z); // X AND Y OR NOT X AND Z
     }
 
     private static function g($X, $Y, $Z)
     {
-        return (($X & $Z) | ($Y & (~ $Z))); // X AND Z OR Y AND NOT Z
+        return ($X & $Z) | ($Y & (~$Z)); // X AND Z OR Y AND NOT Z
     }
 
     private static function h($X, $Y, $Z)
     {
-        return ($X ^ $Y ^ $Z); // X XOR Y XOR Z
+        return $X ^ $Y ^ $Z; // X XOR Y XOR Z
     }
 
     private static function i($X, $Y, $Z)
     {
-        return ($Y ^ ($X | (~ $Z))) ; // Y XOR (X OR NOT Z)
+        return $Y ^ ($X | (~$Z)); // Y XOR (X OR NOT Z)
     }
 
     private static function step($func, &$A, $B, $C, $D, $M, $s, $t)
@@ -199,7 +200,8 @@ class MD5
 
     private static function rotate($decimal, $bits)
     {
-        $binary = str_pad(decbin($decimal), 32, "0", STR_PAD_LEFT);
+        $binary = str_pad(decbin($decimal), 32, '0', STR_PAD_LEFT);
+
         return bindec(substr($binary, $bits).substr($binary, 0, $bits));
     }
 }

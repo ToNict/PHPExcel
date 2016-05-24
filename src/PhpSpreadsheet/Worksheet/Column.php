@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\Column
+ * PhpOffice\PhpExcel\Worksheet\Column.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,42 +22,43 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Column
 {
     /**
-     * PhpOffice\PhpExcel\Worksheet
+     * PhpOffice\PhpExcel\Worksheet.
      *
      * @var \PhpOffice\PhpExcel\Worksheet
      */
     private $parent;
 
     /**
-     * Column index
+     * Column index.
      *
      * @var string
      */
     private $columnIndex;
 
     /**
-     * Create a new column
+     * Create a new column.
      *
-     * @param \PhpOffice\PhpExcel\Worksheet     $parent
-     * @param string                $columnIndex
+     * @param \PhpOffice\PhpExcel\Worksheet $parent
+     * @param string                        $columnIndex
      */
     public function __construct(\PhpOffice\PhpExcel\Worksheet $parent = null, $columnIndex = 'A')
     {
         // Set parent and column index
-        $this->parent         = $parent;
+        $this->parent = $parent;
         $this->columnIndex = $columnIndex;
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -65,7 +66,7 @@ class Column
     }
 
     /**
-     * Get column index
+     * Get column index.
      *
      * @return string
      */
@@ -75,10 +76,11 @@ class Column
     }
 
     /**
-     * Get cell iterator
+     * Get cell iterator.
      *
-     * @param    integer                $startRow        The row number at which to start iterating
-     * @param    integer                $endRow            Optionally, the row number at which to stop iterating
+     * @param int $startRow The row number at which to start iterating
+     * @param int $endRow   Optionally, the row number at which to stop iterating
+     *
      * @return ColumnCellIterator
      */
     public function getCellIterator($startRow = 1, $endRow = null)

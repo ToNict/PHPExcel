@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Fill
+ * PhpOffice\PhpExcel\Style\Fill.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,73 +22,74 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 {
     /* Fill types */
-    const FILL_NONE                    = 'none';
-    const FILL_SOLID                   = 'solid';
-    const FILL_GRADIENT_LINEAR         = 'linear';
-    const FILL_GRADIENT_PATH           = 'path';
-    const FILL_PATTERN_DARKDOWN        = 'darkDown';
-    const FILL_PATTERN_DARKGRAY        = 'darkGray';
-    const FILL_PATTERN_DARKGRID        = 'darkGrid';
-    const FILL_PATTERN_DARKHORIZONTAL  = 'darkHorizontal';
-    const FILL_PATTERN_DARKTRELLIS     = 'darkTrellis';
-    const FILL_PATTERN_DARKUP          = 'darkUp';
-    const FILL_PATTERN_DARKVERTICAL    = 'darkVertical';
-    const FILL_PATTERN_GRAY0625        = 'gray0625';
-    const FILL_PATTERN_GRAY125         = 'gray125';
-    const FILL_PATTERN_LIGHTDOWN       = 'lightDown';
-    const FILL_PATTERN_LIGHTGRAY       = 'lightGray';
-    const FILL_PATTERN_LIGHTGRID       = 'lightGrid';
+    const FILL_NONE = 'none';
+    const FILL_SOLID = 'solid';
+    const FILL_GRADIENT_LINEAR = 'linear';
+    const FILL_GRADIENT_PATH = 'path';
+    const FILL_PATTERN_DARKDOWN = 'darkDown';
+    const FILL_PATTERN_DARKGRAY = 'darkGray';
+    const FILL_PATTERN_DARKGRID = 'darkGrid';
+    const FILL_PATTERN_DARKHORIZONTAL = 'darkHorizontal';
+    const FILL_PATTERN_DARKTRELLIS = 'darkTrellis';
+    const FILL_PATTERN_DARKUP = 'darkUp';
+    const FILL_PATTERN_DARKVERTICAL = 'darkVertical';
+    const FILL_PATTERN_GRAY0625 = 'gray0625';
+    const FILL_PATTERN_GRAY125 = 'gray125';
+    const FILL_PATTERN_LIGHTDOWN = 'lightDown';
+    const FILL_PATTERN_LIGHTGRAY = 'lightGray';
+    const FILL_PATTERN_LIGHTGRID = 'lightGrid';
     const FILL_PATTERN_LIGHTHORIZONTAL = 'lightHorizontal';
-    const FILL_PATTERN_LIGHTTRELLIS    = 'lightTrellis';
-    const FILL_PATTERN_LIGHTUP         = 'lightUp';
-    const FILL_PATTERN_LIGHTVERTICAL   = 'lightVertical';
-    const FILL_PATTERN_MEDIUMGRAY      = 'mediumGray';
+    const FILL_PATTERN_LIGHTTRELLIS = 'lightTrellis';
+    const FILL_PATTERN_LIGHTUP = 'lightUp';
+    const FILL_PATTERN_LIGHTVERTICAL = 'lightVertical';
+    const FILL_PATTERN_MEDIUMGRAY = 'mediumGray';
 
     /**
-     * Fill type
+     * Fill type.
      *
      * @var string
      */
     protected $fillType = self::FILL_NONE;
 
     /**
-     * Rotation
+     * Rotation.
      *
-     * @var double
+     * @var float
      */
     protected $rotation = 0;
 
     /**
-     * Start color
+     * Start color.
      *
      * @var Color
      */
     protected $startColor;
 
     /**
-     * End color
+     * End color.
      *
      * @var Color
      */
     protected $endColor;
 
     /**
-     * Create a new Fill
+     * Create a new Fill.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
-     * @param    boolean    $isConditional    Flag indicating if this is a conditional style or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -111,7 +112,7 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Fill
      */
@@ -121,9 +122,10 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -132,7 +134,7 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->getFill()->applyFromArray(
@@ -149,8 +151,10 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * );
      * </code>
      *
-     * @param   array    $pStyles    Array containing style information
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param array $pStyles Array containing style information
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Fill
      */
     public function applyFromArray($pStyles = null)
@@ -176,13 +180,14 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 }
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Invalid style array passed.");
+            throw new \PhpOffice\PhpExcel\Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get Fill Type
+     * Get Fill Type.
      *
      * @return string
      */
@@ -191,16 +196,18 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getFillType();
         }
+
         return $this->fillType;
     }
 
     /**
-     * Set Fill Type
+     * Set Fill Type.
      *
-     * @param string $pValue    Fill type
+     * @param string $pValue Fill type
+     *
      * @return Fill
      */
-    public function setFillType($pValue = Fill::FILL_NONE)
+    public function setFillType($pValue = self::FILL_NONE)
     {
         if ($this->isSupervisor) {
             $styleArray = $this->getStyleArray(array('type' => $pValue));
@@ -208,26 +215,29 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->fillType = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Rotation
+     * Get Rotation.
      *
-     * @return double
+     * @return float
      */
     public function getRotation()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getRotation();
         }
+
         return $this->rotation;
     }
 
     /**
-     * Set Rotation
+     * Set Rotation.
      *
-     * @param double $pValue
+     * @param float $pValue
+     *
      * @return Fill
      */
     public function setRotation($pValue = 0)
@@ -238,11 +248,12 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->rotation = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get Start Color
+     * Get Start Color.
      *
      * @return Color
      */
@@ -252,10 +263,12 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Start Color
+     * Set Start Color.
      *
-     * @param   Color $pValue
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param Color $pValue
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Fill
      */
     public function setStartColor(Color $pValue = null)
@@ -269,11 +282,12 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->startColor = $color;
         }
+
         return $this;
     }
 
     /**
-     * Get End Color
+     * Get End Color.
      *
      * @return Color
      */
@@ -283,10 +297,12 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set End Color
+     * Set End Color.
      *
-     * @param    Color $pValue
-     * @throws   \PhpOffice\PhpExcel\Exception
+     * @param Color $pValue
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Fill
      */
     public function setEndColor(Color $pValue = null)
@@ -300,24 +316,26 @@ class Fill extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->endColor = $color;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashCode();
         }
+
         return md5(
-            $this->getFillType() .
-            $this->getRotation() .
-            $this->getStartColor()->getHashCode() .
-            $this->getEndColor()->getHashCode() .
+            $this->getFillType().
+            $this->getRotation().
+            $this->getStartColor()->getHashCode().
+            $this->getEndColor()->getHashCode().
             __CLASS__
         );
     }

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer
+ * PhpOffice\PhpExcel\Shared\Escher\DggContainer\BstoreContainer.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,22 +22,23 @@ namespace PhpOffice\PhpExcel\Shared\Escher\DggContainer;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class BstoreContainer
 {
     /**
-     * BLIP Store Entries. Each of them holds one BLIP (Big Large Image or Picture)
+     * BLIP Store Entries. Each of them holds one BLIP (Big Large Image or Picture).
      *
      * @var array
      */
     private $BSECollection = array();
 
     /**
-     * Add a BLIP Store Entry
+     * Add a BLIP Store Entry.
      *
      * @param BstoreContainer\BSE $BSE
      */
@@ -48,7 +49,7 @@ class BstoreContainer
     }
 
     /**
-     * Get the collection of BLIP Store Entries
+     * Get the collection of BLIP Store Entries.
      *
      * @return BstoreContainer\BSE[]
      */

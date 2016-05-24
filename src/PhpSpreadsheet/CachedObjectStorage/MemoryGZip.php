@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\CachedObjectStorage;
 
 /**
- * PhpOffice\PhpExcel\CachedObjectStorage\MemoryGZip
+ * PhpOffice\PhpExcel\CachedObjectStorage\MemoryGZip.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,19 @@ namespace PhpOffice\PhpExcel\CachedObjectStorage;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\CachedObjectStorage
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class MemoryGZip extends CacheBase implements ICache
 {
     /**
      * Store cell data in cache for the current cell object if it's "dirty",
-     *     and the 'nullify' the current cell object
+     *     and the 'nullify' the current cell object.
      *
-     * @return  void
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     protected function storeData()
     {
@@ -47,14 +47,15 @@ class MemoryGZip extends CacheBase implements ICache
         $this->currentObjectID = $this->currentObject = null;
     }
 
-
     /**
-     * Add or Update a cell in cache identified by coordinate address
+     * Add or Update a cell in cache identified by coordinate address.
      *
-     * @param   string            $pCoord        Coordinate address of the cell to update
-     * @param   \PhpOffice\PhpExcel\Cell    $cell        Cell to update
-     * @return  \PhpOffice\PhpExcel\Cell
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param string                   $pCoord Coordinate address of the cell to update
+     * @param \PhpOffice\PhpExcel\Cell $cell   Cell to update
+     *
+     * @return \PhpOffice\PhpExcel\Cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function addCacheData($pCoord, \PhpOffice\PhpExcel\Cell $cell)
     {
@@ -69,13 +70,14 @@ class MemoryGZip extends CacheBase implements ICache
         return $cell;
     }
 
-
     /**
-     * Get cell at a specific coordinate
+     * Get cell at a specific coordinate.
      *
-     * @param   string             $pCoord        Coordinate of the cell
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  \PhpOffice\PhpExcel\Cell     Cell that was found, or null if not found
+     * @param string $pCoord Coordinate of the cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return \PhpOffice\PhpExcel\Cell Cell that was found, or null if not found
      */
     public function getCacheData($pCoord)
     {
@@ -87,7 +89,7 @@ class MemoryGZip extends CacheBase implements ICache
         //    Check if the entry that has been requested actually exists
         if (!isset($this->cellCache[$pCoord])) {
             //    Return null if requested entry doesn't exist in cache
-            return null;
+            return;
         }
 
         //    Set current entry to the requested entry
@@ -100,11 +102,10 @@ class MemoryGZip extends CacheBase implements ICache
         return $this->currentObject;
     }
 
-
     /**
-     * Get a list of all cell addresses currently held in cache
+     * Get a list of all cell addresses currently held in cache.
      *
-     * @return  string[]
+     * @return string[]
      */
     public function getCellList()
     {
@@ -115,11 +116,8 @@ class MemoryGZip extends CacheBase implements ICache
         return parent::getCellList();
     }
 
-
     /**
-     * Clear the cell collection and disconnect from our parent
-     *
-     * @return    void
+     * Clear the cell collection and disconnect from our parent.
      */
     public function unsetWorksheetCells()
     {

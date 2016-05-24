@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\CodePage
+ * PhpOffice\PhpExcel\Shared\CodePage.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class CodePage
 {
     /**
      * Convert Microsoft Code Page Identifier to Code Page Name which iconv
-     * and mbstring understands
+     * and mbstring understands.
      *
-     * @param integer $codePage Microsoft Code Page Indentifier
+     * @param int $codePage Microsoft Code Page Indentifier
+     *
      * @return string Code Page Name
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public static function numberToName($codePage = 1252)
@@ -118,10 +121,10 @@ class CodePage
                 return 'CP950';    //    Macintosh Chinese Traditional
             case 10003:
                 return 'CP1361';   //    Macintosh Korean
-            case 10004:	
+            case 10004:
                 return 'MACARABIC';  //	Apple Arabic
             case 10005:
-                return 'MACHEBREW';		//	Apple Hebrew
+                return 'MACHEBREW';        //	Apple Hebrew
             case 10006:
                 return 'MACGREEK';  //    Macintosh Greek
             case 10007:
@@ -129,11 +132,11 @@ class CodePage
             case 10008:
                 return 'CP936';  //    Macintosh - Simplified Chinese (GB 2312)
             case 10010:
-                return 'MACROMANIA';	//	Macintosh Romania
+                return 'MACROMANIA';    //	Macintosh Romania
             case 10017:
-                return 'MACUKRAINE';	//	Macintosh Ukraine
+                return 'MACUKRAINE';    //	Macintosh Ukraine
             case 10021:
-                return 'MACTHAI';	//	Macintosh Thai
+                return 'MACTHAI';    //	Macintosh Thai
             case 10029:
                 return 'MACCENTRALEUROPE';  //    Macintosh Central Europe
             case 10079:
@@ -141,7 +144,7 @@ class CodePage
             case 10081:
                 return 'MACTURKISH';  //    Macintosh Turkish
             case 10082:
-                return 'MACCROATIAN';	//	Macintosh Croatian
+                return 'MACCROATIAN';    //	Macintosh Croatian
             case 21010:
                 return 'UTF-16LE';  //    UTF-16 (BIFF8) This isn't correct, but some Excel writer libraries erroneously use Codepage 21010 for UTF-16LE
             case 32768:
@@ -153,6 +156,6 @@ class CodePage
             case 65001:
                 return 'UTF-8';    //    Unicode (UTF-8)
         }
-        throw new \PhpOffice\PhpExcel\Exception('Unknown codepage: ' . $codePage);
+        throw new \PhpOffice\PhpExcel\Exception('Unknown codepage: '.$codePage);
     }
 }

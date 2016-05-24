@@ -15,16 +15,18 @@ class ErrorCode
     );
 
     /**
-     * Map error code, e.g. '#N/A'
+     * Map error code, e.g. '#N/A'.
      *
      * @param int $code
-     * @return string|boolean
+     *
+     * @return string|bool
      */
     public static function lookup($code)
     {
         if (isset(self::$map[$code])) {
             return self::$map[$code];
         }
+
         return false;
     }
 }

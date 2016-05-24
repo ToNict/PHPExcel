@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007
+ * PhpOffice\PhpExcel\Writer\Excel2007.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,92 +22,93 @@ namespace PhpOffice\PhpExcel\Writer;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Excel2007 extends BaseWriter implements IWriter
 {
     /**
-     * Office2003 compatibility
+     * Office2003 compatibility.
      *
-     * @var boolean
+     * @var bool
      */
     private $office2003compatibility = false;
 
     /**
-     * Private writer parts
+     * Private writer parts.
      *
      * @var Excel2007\WriterPart[]
      */
-    private $writerParts    = array();
+    private $writerParts = array();
 
     /**
-     * Private Spreadsheet
+     * Private Spreadsheet.
      *
      * @var \PhpOffice\PhpExcel\Spreadsheet
      */
     private $spreadSheet;
 
     /**
-     * Private string table
+     * Private string table.
      *
      * @var string[]
      */
-    private $stringTable    = array();
+    private $stringTable = array();
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style\Conditional HashTable
+     * Private unique \PhpOffice\PhpExcel\Style\Conditional HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $stylesConditionalHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style HashTable
+     * Private unique \PhpOffice\PhpExcel\Style HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $styleHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style\Fill HashTable
+     * Private unique \PhpOffice\PhpExcel\Style\Fill HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $fillHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style\Font HashTable
+     * Private unique \PhpOffice\PhpExcel\Style\Font HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $fontHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style\Borders HashTable
+     * Private unique \PhpOffice\PhpExcel\Style\Borders HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
-    private $bordersHashTable ;
+    private $bordersHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Style\NumberFormat HashTable
+     * Private unique \PhpOffice\PhpExcel\Style\NumberFormat HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $numFmtHashTable;
 
     /**
-     * Private unique \PhpOffice\PhpExcel\Worksheet\BaseDrawing HashTable
+     * Private unique \PhpOffice\PhpExcel\Worksheet\BaseDrawing HashTable.
      *
      * @var \PhpOffice\PhpExcel\HashTable
      */
     private $drawingHashTable;
 
     /**
-     * Create a new Excel2007 Writer
+     * Create a new Excel2007 Writer.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
      */
@@ -117,19 +118,19 @@ class Excel2007 extends BaseWriter implements IWriter
         $this->setPHPExcel($pPHPExcel);
 
         $writerPartsArray = [
-            'stringtable'       => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\StringTable',
-            'contenttypes'      => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\ContentTypes',
-            'docprops'          => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\DocProps',
-            'rels'              => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Rels',
-            'theme'             => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Theme',
-            'style'             => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Style',
-            'workbook'          => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Workbook',
-            'worksheet'         => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Worksheet',
-            'drawing'           => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Drawing',
-            'comments'          => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Comments',
-            'chart'             => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Chart',
-            'relsvba'           => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\RelsVBA',
-            'relsribbonobjects' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\RelsRibbon'
+            'stringtable' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\StringTable',
+            'contenttypes' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\ContentTypes',
+            'docprops' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\DocProps',
+            'rels' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Rels',
+            'theme' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Theme',
+            'style' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Style',
+            'workbook' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Workbook',
+            'worksheet' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Worksheet',
+            'drawing' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Drawing',
+            'comments' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Comments',
+            'chart' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\Chart',
+            'relsvba' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\RelsVBA',
+            'relsribbonobjects' => '\\PhpOffice\\PhpExcel\\Writer\\Excel2007\\RelsRibbon',
         ];
 
         //    Initialise writer parts
@@ -138,37 +139,39 @@ class Excel2007 extends BaseWriter implements IWriter
             $this->writerParts[$writer] = new $class($this);
         }
 
-        $hashTablesArray = array( 'stylesConditionalHashTable',    'fillHashTable',        'fontHashTable',
+        $hashTablesArray = array('stylesConditionalHashTable',    'fillHashTable',        'fontHashTable',
                                   'bordersHashTable',                'numFmtHashTable',        'drawingHashTable',
-                                  'styleHashTable'
+                                  'styleHashTable',
                                 );
 
         // Set HashTable variables
         foreach ($hashTablesArray as $tableName) {
-            $this->$tableName     = new \PhpOffice\PhpExcel\HashTable();
+            $this->$tableName = new \PhpOffice\PhpExcel\HashTable();
         }
     }
 
     /**
-     * Get writer part
+     * Get writer part.
      *
-     * @param     string     $pPartName        Writer part name
-     * @return     \PhpOffice\PhpExcel\Writer\Excel2007\WriterPart
+     * @param string $pPartName Writer part name
+     *
+     * @return \PhpOffice\PhpExcel\Writer\Excel2007\WriterPart
      */
     public function getWriterPart($pPartName = '')
     {
         if ($pPartName != '' && isset($this->writerParts[strtolower($pPartName)])) {
             return $this->writerParts[strtolower($pPartName)];
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Save PHPExcel to file
+     * Save PHPExcel to file.
      *
-     * @param     string         $pFilename
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param string $pFilename
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function save($pFilename = null)
     {
@@ -224,7 +227,7 @@ class Excel2007 extends BaseWriter implements IWriter
             // Try opening the ZIP file
             if ($objZip->open($pFilename, $zipOverWrite) !== true) {
                 if ($objZip->open($pFilename, $zipCreate) !== true) {
-                    throw new \PhpOffice\PhpExcel\Writer\Exception("Could not open " . $pFilename . " for writing.");
+                    throw new \PhpOffice\PhpExcel\Writer\Exception('Could not open '.$pFilename.' for writing.');
                 }
             }
 
@@ -233,10 +236,12 @@ class Excel2007 extends BaseWriter implements IWriter
 
             //if hasMacros, add the vbaProject.bin file, Certificate file(if exists)
             if ($this->spreadSheet->hasMacros()) {
-                $macrosCode=$this->spreadSheet->getMacrosCode();
-                if (!is_null($macrosCode)) {// we have the code ?
+                $macrosCode = $this->spreadSheet->getMacrosCode();
+                if (!is_null($macrosCode)) {
+                    // we have the code ?
                     $objZip->addFromString('xl/vbaProject.bin', $macrosCode);//allways in 'xl', allways named vbaProject.bin
-                    if ($this->spreadSheet->hasMacrosCertificate()) {//signed macros ?
+                    if ($this->spreadSheet->hasMacrosCertificate()) {
+                        //signed macros ?
                         // Yes : add the certificate file and the related rels file
                         $objZip->addFromString('xl/vbaProjectSignature.bin', $this->spreadSheet->getMacrosCertificate());
                         $objZip->addFromString('xl/_rels/vbaProject.bin.rels', $this->getWriterPart('RelsVBA')->writeVBARelationships($this->spreadSheet));
@@ -245,11 +250,11 @@ class Excel2007 extends BaseWriter implements IWriter
             }
             //a custom UI in this workbook ? add it ("base" xml and additional objects (pictures) and rels)
             if ($this->spreadSheet->hasRibbon()) {
-                $tmpRibbonTarget=$this->spreadSheet->getRibbonXMLData('target');
+                $tmpRibbonTarget = $this->spreadSheet->getRibbonXMLData('target');
                 $objZip->addFromString($tmpRibbonTarget, $this->spreadSheet->getRibbonXMLData('data'));
                 if ($this->spreadSheet->hasRibbonBinObjects()) {
-                    $tmpRootPath=dirname($tmpRibbonTarget).'/';
-                    $ribbonBinObjects=$this->spreadSheet->getRibbonBinObjects('data');//the files to write
+                    $tmpRootPath = dirname($tmpRibbonTarget).'/';
+                    $ribbonBinObjects = $this->spreadSheet->getRibbonBinObjects('data');//the files to write
                     foreach ($ribbonBinObjects as $aPath => $aContent) {
                         $objZip->addFromString($tmpRootPath.$aPath, $aContent);
                     }
@@ -285,13 +290,13 @@ class Excel2007 extends BaseWriter implements IWriter
             $chartCount = 0;
             // Add worksheets
             for ($i = 0; $i < $this->spreadSheet->getSheetCount(); ++$i) {
-                $objZip->addFromString('xl/worksheets/sheet' . ($i + 1) . '.xml', $this->getWriterPart('Worksheet')->writeWorksheet($this->spreadSheet->getSheet($i), $this->stringTable, $this->includeCharts));
+                $objZip->addFromString('xl/worksheets/sheet'.($i + 1).'.xml', $this->getWriterPart('Worksheet')->writeWorksheet($this->spreadSheet->getSheet($i), $this->stringTable, $this->includeCharts));
                 if ($this->includeCharts) {
                     $charts = $this->spreadSheet->getSheet($i)->getChartCollection();
                     if (count($charts) > 0) {
                         foreach ($charts as $chart) {
-                            $objZip->addFromString('xl/charts/chart' . ($chartCount + 1) . '.xml', $this->getWriterPart('Chart')->writeChart($chart, $this->preCalculateFormulas));
-                            $chartCount++;
+                            $objZip->addFromString('xl/charts/chart'.($chartCount + 1).'.xml', $this->getWriterPart('Chart')->writeChart($chart, $this->preCalculateFormulas));
+                            ++$chartCount;
                         }
                     }
                 }
@@ -301,7 +306,7 @@ class Excel2007 extends BaseWriter implements IWriter
             // Add worksheet relationships (drawings, ...)
             for ($i = 0; $i < $this->spreadSheet->getSheetCount(); ++$i) {
                 // Add relationships
-                $objZip->addFromString('xl/worksheets/_rels/sheet' . ($i + 1) . '.xml.rels', $this->getWriterPart('Rels')->writeWorksheetRelationships($this->spreadSheet->getSheet($i), ($i + 1), $this->includeCharts));
+                $objZip->addFromString('xl/worksheets/_rels/sheet'.($i + 1).'.xml.rels', $this->getWriterPart('Rels')->writeWorksheetRelationships($this->spreadSheet->getSheet($i), ($i + 1), $this->includeCharts));
 
                 $drawings = $this->spreadSheet->getSheet($i)->getDrawingCollection();
                 $drawingCount = count($drawings);
@@ -312,32 +317,32 @@ class Excel2007 extends BaseWriter implements IWriter
                 // Add drawing and image relationship parts
                 if (($drawingCount > 0) || ($chartCount > 0)) {
                     // Drawing relationships
-                    $objZip->addFromString('xl/drawings/_rels/drawing' . ($i + 1) . '.xml.rels', $this->getWriterPart('Rels')->writeDrawingRelationships($this->spreadSheet->getSheet($i), $chartRef1, $this->includeCharts));
+                    $objZip->addFromString('xl/drawings/_rels/drawing'.($i + 1).'.xml.rels', $this->getWriterPart('Rels')->writeDrawingRelationships($this->spreadSheet->getSheet($i), $chartRef1, $this->includeCharts));
 
                     // Drawings
-                    $objZip->addFromString('xl/drawings/drawing' . ($i + 1) . '.xml', $this->getWriterPart('Drawing')->writeDrawings($this->spreadSheet->getSheet($i), $chartRef2, $this->includeCharts));
+                    $objZip->addFromString('xl/drawings/drawing'.($i + 1).'.xml', $this->getWriterPart('Drawing')->writeDrawings($this->spreadSheet->getSheet($i), $chartRef2, $this->includeCharts));
                 }
 
                 // Add comment relationship parts
                 if (count($this->spreadSheet->getSheet($i)->getComments()) > 0) {
                     // VML Comments
-                    $objZip->addFromString('xl/drawings/vmlDrawing' . ($i + 1) . '.vml', $this->getWriterPart('Comments')->writeVMLComments($this->spreadSheet->getSheet($i)));
+                    $objZip->addFromString('xl/drawings/vmlDrawing'.($i + 1).'.vml', $this->getWriterPart('Comments')->writeVMLComments($this->spreadSheet->getSheet($i)));
 
                     // Comments
-                    $objZip->addFromString('xl/comments' . ($i + 1) . '.xml', $this->getWriterPart('Comments')->writeComments($this->spreadSheet->getSheet($i)));
+                    $objZip->addFromString('xl/comments'.($i + 1).'.xml', $this->getWriterPart('Comments')->writeComments($this->spreadSheet->getSheet($i)));
                 }
 
                 // Add header/footer relationship parts
                 if (count($this->spreadSheet->getSheet($i)->getHeaderFooter()->getImages()) > 0) {
                     // VML Drawings
-                    $objZip->addFromString('xl/drawings/vmlDrawingHF' . ($i + 1) . '.vml', $this->getWriterPart('Drawing')->writeVMLHeaderFooterImages($this->spreadSheet->getSheet($i)));
+                    $objZip->addFromString('xl/drawings/vmlDrawingHF'.($i + 1).'.vml', $this->getWriterPart('Drawing')->writeVMLHeaderFooterImages($this->spreadSheet->getSheet($i)));
 
                     // VML Drawing relationships
-                    $objZip->addFromString('xl/drawings/_rels/vmlDrawingHF' . ($i + 1) . '.vml.rels', $this->getWriterPart('Rels')->writeHeaderFooterDrawingRelationships($this->spreadSheet->getSheet($i)));
+                    $objZip->addFromString('xl/drawings/_rels/vmlDrawingHF'.($i + 1).'.vml.rels', $this->getWriterPart('Rels')->writeHeaderFooterDrawingRelationships($this->spreadSheet->getSheet($i)));
 
                     // Media
                     foreach ($this->spreadSheet->getSheet($i)->getHeaderFooter()->getImages() as $image) {
-                        $objZip->addFromString('xl/media/' . $image->getIndexedFilename(), file_get_contents($image->getPath()));
+                        $objZip->addFromString('xl/media/'.$image->getIndexedFilename(), file_get_contents($image->getPath()));
                     }
                 }
             }
@@ -360,7 +365,7 @@ class Excel2007 extends BaseWriter implements IWriter
                         $imageContents = file_get_contents($imagePath);
                     }
 
-                    $objZip->addFromString('xl/media/' . str_replace(' ', '_', $this->getDrawingHashTable()->getByIndex($i)->getIndexedFilename()), $imageContents);
+                    $objZip->addFromString('xl/media/'.str_replace(' ', '_', $this->getDrawingHashTable()->getByIndex($i)->getIndexedFilename()), $imageContents);
                 } elseif ($this->getDrawingHashTable()->getByIndex($i) instanceof \PhpOffice\PhpExcel\Worksheet\MemoryDrawing) {
                     ob_start();
                     call_user_func(
@@ -370,7 +375,7 @@ class Excel2007 extends BaseWriter implements IWriter
                     $imageContents = ob_get_contents();
                     ob_end_clean();
 
-                    $objZip->addFromString('xl/media/' . str_replace(' ', '_', $this->getDrawingHashTable()->getByIndex($i)->getIndexedFilename()), $imageContents);
+                    $objZip->addFromString('xl/media/'.str_replace(' ', '_', $this->getDrawingHashTable()->getByIndex($i)->getIndexedFilename()), $imageContents);
                 }
             }
 
@@ -390,14 +395,15 @@ class Excel2007 extends BaseWriter implements IWriter
                 @unlink($pFilename);
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("PHPExcel object unassigned.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('PHPExcel object unassigned.');
         }
     }
 
     /**
-     * Get PHPExcel object
+     * Get PHPExcel object.
      *
      * @return PHPExcel
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function getPHPExcel()
@@ -405,25 +411,28 @@ class Excel2007 extends BaseWriter implements IWriter
         if ($this->spreadSheet !== null) {
             return $this->spreadSheet;
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("No PHPExcel object assigned.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('No PHPExcel object assigned.');
         }
     }
 
     /**
-     * Set PHPExcel object
+     * Set PHPExcel object.
      *
-     * @param     \PhpOffice\PhpExcel\Spreadsheet     $pPHPExcel    PHPExcel object
-     * @throws    Exception
-     * @return    Excel2007
+     * @param \PhpOffice\PhpExcel\Spreadsheet $pPHPExcel PHPExcel object
+     *
+     * @throws Exception
+     *
+     * @return Excel2007
      */
     public function setPHPExcel(\PhpOffice\PhpExcel\Spreadsheet $pPHPExcel = null)
     {
         $this->spreadSheet = $pPHPExcel;
+
         return $this;
     }
 
     /**
-     * Get string table
+     * Get string table.
      *
      * @return string[]
      */
@@ -433,7 +442,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style HashTable
+     * Get \PhpOffice\PhpExcel\Style HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -443,7 +452,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style\Conditional HashTable
+     * Get \PhpOffice\PhpExcel\Style\Conditional HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -453,7 +462,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style\Fill HashTable
+     * Get \PhpOffice\PhpExcel\Style\Fill HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -463,7 +472,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style\Font HashTable
+     * Get \PhpOffice\PhpExcel\Style\Font HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -473,7 +482,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style\Borders HashTable
+     * Get \PhpOffice\PhpExcel\Style\Borders HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -483,7 +492,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Style\NumberFormat HashTable
+     * Get \PhpOffice\PhpExcel\Style\NumberFormat HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -493,7 +502,7 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get \PhpOffice\PhpExcel\Worksheet\BaseDrawing HashTable
+     * Get \PhpOffice\PhpExcel\Worksheet\BaseDrawing HashTable.
      *
      * @return \PhpOffice\PhpExcel\HashTable
      */
@@ -503,9 +512,9 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Get Office2003 compatibility
+     * Get Office2003 compatibility.
      *
-     * @return boolean
+     * @return bool
      */
     public function getOffice2003Compatibility()
     {
@@ -513,14 +522,16 @@ class Excel2007 extends BaseWriter implements IWriter
     }
 
     /**
-     * Set Office2003 compatibility
+     * Set Office2003 compatibility.
      *
-     * @param boolean $pValue    Office2003 compatibility?
+     * @param bool $pValue Office2003 compatibility?
+     *
      * @return \PhpOffice\PhpExcel\Writer\Excel2007
      */
     public function setOffice2003Compatibility($pValue = false)
     {
         $this->office2003compatibility = $pValue;
+
         return $this;
     }
 }

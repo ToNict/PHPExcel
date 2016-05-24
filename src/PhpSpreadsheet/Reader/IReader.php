@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\IReader
+ * PhpOffice\PhpExcel\Reader\IReader.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 interface IReader
@@ -32,17 +33,20 @@ interface IReader
     /**
      * Can the current IReader read the file?
      *
-     * @param     string         $pFilename
-     * @return     boolean
+     * @param string $pFilename
+     *
+     * @return bool
      */
     public function canRead($pFilename);
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param     string         $pFilename
-     * @return  PHPExcel
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @return PHPExcel
+     *
+     * @throws Exception
      */
     public function load($pFilename);
 }

@@ -11,7 +11,7 @@ if (!defined('DEBUGMODE_ENABLED')) {
 }
 
 /**
- * PhpOffice\PhpExcel\Shared\XMLWriter
+ * PhpOffice\PhpExcel\Shared\XMLWriter.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -30,29 +30,30 @@ if (!defined('DEBUGMODE_ENABLED')) {
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class XMLWriter extends \XMLWriter
 {
     /** Temporary storage method */
-    const STORAGE_MEMORY    = 1;
-    const STORAGE_DISK      = 2;
+    const STORAGE_MEMORY = 1;
+    const STORAGE_DISK = 2;
 
     /**
-     * Temporary filename
+     * Temporary filename.
      *
      * @var string
      */
-    private $tempFileName  = '';
+    private $tempFileName = '';
 
     /**
-     * Create a new XMLWriter instance
+     * Create a new XMLWriter instance.
      *
-     * @param int      $pTemporaryStorage        Temporary storage location
-     * @param string   $pTemporaryStorageFolder  Temporary storage folder
+     * @param int    $pTemporaryStorage       Temporary storage location
+     * @param string $pTemporaryStorageFolder Temporary storage folder
      */
     public function __construct($pTemporaryStorage = self::STORAGE_MEMORY, $pTemporaryStorageFolder = null)
     {
@@ -80,7 +81,7 @@ class XMLWriter extends \XMLWriter
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -91,7 +92,7 @@ class XMLWriter extends \XMLWriter
     }
 
     /**
-     * Get written data
+     * Get written data.
      *
      * @return $data
      */
@@ -101,14 +102,16 @@ class XMLWriter extends \XMLWriter
             return $this->outputMemory(true);
         } else {
             $this->flush();
+
             return file_get_contents($this->tempFileName);
         }
     }
 
     /**
-     * Fallback method for writeRaw, introduced in PHP 5.2
+     * Fallback method for writeRaw, introduced in PHP 5.2.
      *
      * @param string $text
+     *
      * @return string
      */
     public function writeRawData($text)

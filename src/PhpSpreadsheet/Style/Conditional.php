@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Conditional
+ * PhpOffice\PhpExcel\Style\Conditional.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,83 +22,84 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Conditional implements \PhpOffice\PhpExcel\IComparable
 {
     /* Condition types */
-    const CONDITION_NONE         = 'none';
-    const CONDITION_CELLIS       = 'cellIs';
+    const CONDITION_NONE = 'none';
+    const CONDITION_CELLIS = 'cellIs';
     const CONDITION_CONTAINSTEXT = 'containsText';
-    const CONDITION_EXPRESSION   = 'expression';
+    const CONDITION_EXPRESSION = 'expression';
 
     /* Operator types */
-    const OPERATOR_NONE               = '';
-    const OPERATOR_BEGINSWITH         = 'beginsWith';
-    const OPERATOR_ENDSWITH           = 'endsWith';
-    const OPERATOR_EQUAL              = 'equal';
-    const OPERATOR_GREATERTHAN        = 'greaterThan';
+    const OPERATOR_NONE = '';
+    const OPERATOR_BEGINSWITH = 'beginsWith';
+    const OPERATOR_ENDSWITH = 'endsWith';
+    const OPERATOR_EQUAL = 'equal';
+    const OPERATOR_GREATERTHAN = 'greaterThan';
     const OPERATOR_GREATERTHANOREQUAL = 'greaterThanOrEqual';
-    const OPERATOR_LESSTHAN           = 'lessThan';
-    const OPERATOR_LESSTHANOREQUAL    = 'lessThanOrEqual';
-    const OPERATOR_NOTEQUAL           = 'notEqual';
-    const OPERATOR_CONTAINSTEXT       = 'containsText';
-    const OPERATOR_NOTCONTAINS        = 'notContains';
-    const OPERATOR_BETWEEN            = 'between';
+    const OPERATOR_LESSTHAN = 'lessThan';
+    const OPERATOR_LESSTHANOREQUAL = 'lessThanOrEqual';
+    const OPERATOR_NOTEQUAL = 'notEqual';
+    const OPERATOR_CONTAINSTEXT = 'containsText';
+    const OPERATOR_NOTCONTAINS = 'notContains';
+    const OPERATOR_BETWEEN = 'between';
 
     /**
-     * Condition type
+     * Condition type.
      *
      * @var int
      */
     private $conditionType;
 
     /**
-     * Operator type
+     * Operator type.
      *
      * @var int
      */
     private $operatorType;
 
     /**
-     * Text
+     * Text.
      *
      * @var string
      */
     private $text;
 
     /**
-     * Condition
+     * Condition.
      *
      * @var string[]
      */
     private $condition = array();
 
     /**
-     * Style
+     * Style.
      *
      * @var \PhpOffice\PhpExcel\Style
      */
     private $style;
 
     /**
-     * Create a new Conditional
+     * Create a new Conditional.
      */
     public function __construct()
     {
         // Initialise values
         $this->conditionType = self::CONDITION_NONE;
-        $this->operatorType  = self::OPERATOR_NONE;
-        $this->text          = null;
-        $this->condition     = array();
-        $this->style         = new \PhpOffice\PhpExcel\Style(false, true);
+        $this->operatorType = self::OPERATOR_NONE;
+        $this->text = null;
+        $this->condition = array();
+        $this->style = new \PhpOffice\PhpExcel\Style(false, true);
     }
 
     /**
-     * Get Condition type
+     * Get Condition type.
      *
      * @return string
      */
@@ -108,19 +109,21 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Condition type
+     * Set Condition type.
      *
-     * @param string $pValue    Condition type
+     * @param string $pValue Condition type
+     *
      * @return Conditional
      */
     public function setConditionType($pValue = self::CONDITION_NONE)
     {
         $this->conditionType = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Operator type
+     * Get Operator type.
      *
      * @return string
      */
@@ -130,19 +133,21 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Operator type
+     * Set Operator type.
      *
-     * @param string $pValue    Conditional operator type
+     * @param string $pValue Conditional operator type
+     *
      * @return Conditional
      */
     public function setOperatorType($pValue = self::OPERATOR_NONE)
     {
         $this->operatorType = $pValue;
+
         return $this;
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -152,21 +157,24 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set text
+     * Set text.
      *
      * @param string $value
+     *
      * @return Conditional
      */
     public function setText($value = null)
     {
         $this->text = $value;
+
         return $this;
     }
 
     /**
-     * Get Condition
+     * Get Condition.
      *
      * @deprecated Deprecated, use getConditions instead
+     *
      * @return string
      */
     public function getCondition()
@@ -179,10 +187,12 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Condition
+     * Set Condition.
      *
      * @deprecated Deprecated, use setConditions instead
-     * @param string $pValue    Condition
+     *
+     * @param string $pValue Condition
+     *
      * @return Conditional
      */
     public function setCondition($pValue = '')
@@ -195,7 +205,7 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Get Conditions
+     * Get Conditions.
      *
      * @return string[]
      */
@@ -205,9 +215,10 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Conditions
+     * Set Conditions.
      *
-     * @param string[] $pValue    Condition
+     * @param string[] $pValue Condition
+     *
      * @return Conditional
      */
     public function setConditions($pValue)
@@ -216,23 +227,26 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
             $pValue = array($pValue);
         }
         $this->condition = $pValue;
+
         return $this;
     }
 
     /**
-     * Add Condition
+     * Add Condition.
      *
-     * @param string $pValue    Condition
+     * @param string $pValue Condition
+     *
      * @return Conditional
      */
     public function addCondition($pValue = '')
     {
         $this->condition[] = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Style
+     * Get Style.
      *
      * @return \PhpOffice\PhpExcel\Style
      */
@@ -242,30 +256,33 @@ class Conditional implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Set Style
+     * Set Style.
      *
-     * @param   \PhpOffice\PhpExcel\Style $pValue
-     * @throws  \PhpOffice\PhpExcel\Exception
-     * @return  Conditional
+     * @param \PhpOffice\PhpExcel\Style $pValue
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
+     * @return Conditional
      */
     public function setStyle(\PhpOffice\PhpExcel\Style $pValue = null)
     {
-           $this->style = $pValue;
-           return $this;
+        $this->style = $pValue;
+
+        return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         return md5(
-            $this->conditionType .
-            $this->operatorType .
-            implode(';', $this->condition) .
-            $this->style->getHashCode() .
+            $this->conditionType.
+            $this->operatorType.
+            implode(';', $this->condition).
+            $this->style->getHashCode().
             __CLASS__
         );
     }

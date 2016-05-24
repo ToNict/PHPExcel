@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Protection
+ * PhpOffice\PhpExcel\Style\Protection.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,41 +22,42 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 {
     /** Protection styles */
-    const PROTECTION_INHERIT      = 'inherit';
-    const PROTECTION_PROTECTED    = 'protected';
-    const PROTECTION_UNPROTECTED  = 'unprotected';
+    const PROTECTION_INHERIT = 'inherit';
+    const PROTECTION_PROTECTED = 'protected';
+    const PROTECTION_UNPROTECTED = 'unprotected';
 
     /**
-     * Locked
+     * Locked.
      *
      * @var string
      */
     protected $locked;
 
     /**
-     * Hidden
+     * Hidden.
      *
      * @var string
      */
     protected $hidden;
 
     /**
-     * Create a new Protection
+     * Create a new Protection.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
-     * @param    boolean    $isConditional    Flag indicating if this is a conditional style or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
+     * @param bool $isSupervisor  Flag indicating if this is a supervisor or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
+     * @param bool $isConditional Flag indicating if this is a conditional style or not
+     *                            Leave this value at default unless you understand exactly what
+     *                            its ramifications are
      */
     public function __construct($isSupervisor = false, $isConditional = false)
     {
@@ -72,7 +73,7 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
 
     /**
      * Get the shared style component for the currently active cell in currently active sheet.
-     * Only used for style supervisor
+     * Only used for style supervisor.
      *
      * @return Protection
      */
@@ -82,9 +83,10 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Build style array from subcomponents
+     * Build style array from subcomponents.
      *
      * @param array $array
+     *
      * @return array
      */
     public function getStyleArray($array)
@@ -93,7 +95,7 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
     }
 
     /**
-     * Apply styles from array
+     * Apply styles from array.
      *
      * <code>
      * $objPHPExcel->getActiveSheet()->getStyle('B2')->getLocked()->applyFromArray(
@@ -104,8 +106,10 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
      * );
      * </code>
      *
-     * @param    array    $pStyles    Array containing style information
-     * @throws    \PhpOffice\PhpExcel\Exception
+     * @param array $pStyles Array containing style information
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Protection
      */
     public function applyFromArray($pStyles = null)
@@ -122,13 +126,14 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                 }
             }
         } else {
-            throw new \PhpOffice\PhpExcel\Exception("Invalid style array passed.");
+            throw new \PhpOffice\PhpExcel\Exception('Invalid style array passed.');
         }
+
         return $this;
     }
 
     /**
-     * Get locked
+     * Get locked.
      *
      * @return string
      */
@@ -137,13 +142,15 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getLocked();
         }
+
         return $this->locked;
     }
 
     /**
-     * Set locked
+     * Set locked.
      *
      * @param string $pValue
+     *
      * @return Protection
      */
     public function setLocked($pValue = self::PROTECTION_INHERIT)
@@ -154,11 +161,12 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->locked = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get hidden
+     * Get hidden.
      *
      * @return string
      */
@@ -167,13 +175,15 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHidden();
         }
+
         return $this->hidden;
     }
 
     /**
-     * Set hidden
+     * Set hidden.
      *
      * @param string $pValue
+     *
      * @return Protection
      */
     public function setHidden($pValue = self::PROTECTION_INHERIT)
@@ -184,22 +194,24 @@ class Protection extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         } else {
             $this->hidden = $pValue;
         }
+
         return $this;
     }
 
     /**
-     * Get hash code
+     * Get hash code.
      *
-     * @return string    Hash code
+     * @return string Hash code
      */
     public function getHashCode()
     {
         if ($this->isSupervisor) {
             return $this->getSharedComponent()->getHashCode();
         }
+
         return md5(
-            $this->locked .
-            $this->hidden .
+            $this->locked.
+            $this->hidden.
             __CLASS__
         );
     }

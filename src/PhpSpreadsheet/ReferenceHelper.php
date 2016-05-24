@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\ReferenceHelper (Singleton)
+ * PhpOffice\PhpExcel\ReferenceHelper (Singleton).
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,43 +22,44 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class ReferenceHelper
 {
     /**    Constants                */
     /**    Regular Expressions      */
-    const REFHELPER_REGEXP_CELLREF      = '((\w*|\'[^!]*\')!)?(?<![:a-z\$])(\$?[a-z]{1,3}\$?\d+)(?=[^:!\d\'])';
-    const REFHELPER_REGEXP_CELLRANGE    = '((\w*|\'[^!]*\')!)?(\$?[a-z]{1,3}\$?\d+):(\$?[a-z]{1,3}\$?\d+)';
-    const REFHELPER_REGEXP_ROWRANGE     = '((\w*|\'[^!]*\')!)?(\$?\d+):(\$?\d+)';
-    const REFHELPER_REGEXP_COLRANGE     = '((\w*|\'[^!]*\')!)?(\$?[a-z]{1,3}):(\$?[a-z]{1,3})';
+    const REFHELPER_REGEXP_CELLREF = '((\w*|\'[^!]*\')!)?(?<![:a-z\$])(\$?[a-z]{1,3}\$?\d+)(?=[^:!\d\'])';
+    const REFHELPER_REGEXP_CELLRANGE = '((\w*|\'[^!]*\')!)?(\$?[a-z]{1,3}\$?\d+):(\$?[a-z]{1,3}\$?\d+)';
+    const REFHELPER_REGEXP_ROWRANGE = '((\w*|\'[^!]*\')!)?(\$?\d+):(\$?\d+)';
+    const REFHELPER_REGEXP_COLRANGE = '((\w*|\'[^!]*\')!)?(\$?[a-z]{1,3}):(\$?[a-z]{1,3})';
 
     /**
-     * Instance of this class
+     * Instance of this class.
      *
      * @var ReferenceHelper
      */
     private static $instance;
 
     /**
-     * Get an instance of this class
+     * Get an instance of this class.
      *
      * @return ReferenceHelper
      */
     public static function getInstance()
     {
         if (!isset(self::$instance) || (self::$instance === null)) {
-            self::$instance = new ReferenceHelper();
+            self::$instance = new self();
         }
 
         return self::$instance;
     }
 
     /**
-     * Create a new ReferenceHelper
+     * Create a new ReferenceHelper.
      */
     protected function __construct()
     {
@@ -66,37 +67,40 @@ class ReferenceHelper
 
     /**
      * Compare two column addresses
-     * Intended for use as a Callback function for sorting column addresses by column
+     * Intended for use as a Callback function for sorting column addresses by column.
      *
-     * @param   string   $a  First column to test (e.g. 'AA')
-     * @param   string   $b  Second column to test (e.g. 'Z')
-     * @return  integer
+     * @param string $a First column to test (e.g. 'AA')
+     * @param string $b Second column to test (e.g. 'Z')
+     *
+     * @return int
      */
     public static function columnSort($a, $b)
     {
-        return strcasecmp(strlen($a) . $a, strlen($b) . $b);
+        return strcasecmp(strlen($a).$a, strlen($b).$b);
     }
 
     /**
      * Compare two column addresses
-     * Intended for use as a Callback function for reverse sorting column addresses by column
+     * Intended for use as a Callback function for reverse sorting column addresses by column.
      *
-     * @param   string   $a  First column to test (e.g. 'AA')
-     * @param   string   $b  Second column to test (e.g. 'Z')
-     * @return  integer
+     * @param string $a First column to test (e.g. 'AA')
+     * @param string $b Second column to test (e.g. 'Z')
+     *
+     * @return int
      */
     public static function columnReverseSort($a, $b)
     {
-        return 1 - strcasecmp(strlen($a) . $a, strlen($b) . $b);
+        return 1 - strcasecmp(strlen($a).$a, strlen($b).$b);
     }
 
     /**
      * Compare two cell addresses
-     * Intended for use as a Callback function for sorting cell addresses by column and row
+     * Intended for use as a Callback function for sorting cell addresses by column and row.
      *
-     * @param   string   $a  First cell to test (e.g. 'AA1')
-     * @param   string   $b  Second cell to test (e.g. 'Z1')
-     * @return  integer
+     * @param string $a First cell to test (e.g. 'AA1')
+     * @param string $b Second cell to test (e.g. 'Z1')
+     *
+     * @return int
      */
     public static function cellSort($a, $b)
     {
@@ -104,18 +108,20 @@ class ReferenceHelper
         sscanf($b, '%[A-Z]%d', $bc, $br);
 
         if ($ar == $br) {
-            return strcasecmp(strlen($ac) . $ac, strlen($bc) . $bc);
+            return strcasecmp(strlen($ac).$ac, strlen($bc).$bc);
         }
+
         return ($ar < $br) ? -1 : 1;
     }
 
     /**
      * Compare two cell addresses
-     * Intended for use as a Callback function for sorting cell addresses by column and row
+     * Intended for use as a Callback function for sorting cell addresses by column and row.
      *
-     * @param   string   $a  First cell to test (e.g. 'AA1')
-     * @param   string   $b  Second cell to test (e.g. 'Z1')
-     * @return  integer
+     * @param string $a First cell to test (e.g. 'AA1')
+     * @param string $b Second cell to test (e.g. 'Z1')
+     *
+     * @return int
      */
     public static function cellReverseSort($a, $b)
     {
@@ -123,20 +129,22 @@ class ReferenceHelper
         sscanf($b, '%[A-Z]%d', $bc, $br);
 
         if ($ar == $br) {
-            return 1 - strcasecmp(strlen($ac) . $ac, strlen($bc) . $bc);
+            return 1 - strcasecmp(strlen($ac).$ac, strlen($bc).$bc);
         }
+
         return ($ar < $br) ? 1 : -1;
     }
 
     /**
-     * Test whether a cell address falls within a defined range of cells
+     * Test whether a cell address falls within a defined range of cells.
      *
-     * @param   string     $cellAddress        Address of the cell we're testing
-     * @param   integer    $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer    $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
-     * @param   integer    $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer    $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @return  boolean
+     * @param string $cellAddress       Address of the cell we're testing
+     * @param int    $beforeRow         Number of the row we're inserting/deleting before
+     * @param int    $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
+     * @param int    $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int    $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     *
+     * @return bool
      */
     private static function cellAddressInDeleteRange($cellAddress, $beforeRow, $pNumRows, $beforeColumnIndex, $pNumCols)
     {
@@ -152,25 +160,26 @@ class ReferenceHelper
             ($cellColumnIndex < $beforeColumnIndex)) {
             return true;
         }
+
         return false;
     }
 
     /**
-     * Update page breaks when inserting/deleting rows/columns
+     * Update page breaks when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustPageBreaks(Worksheet $pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aBreaks = $pSheet->getBreaks();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aBreaks, array('self','cellReverseSort')) :
-            uksort($aBreaks, array('self','cellSort'));
+            uksort($aBreaks, array('self', 'cellReverseSort')) :
+            uksort($aBreaks, array('self', 'cellSort'));
 
         foreach ($aBreaks as $key => $value) {
             if (self::cellAddressInDeleteRange($key, $beforeRow, $pNumRows, $beforeColumnIndex, $pNumCols)) {
@@ -190,14 +199,14 @@ class ReferenceHelper
     }
 
     /**
-     * Update cell comments when inserting/deleting rows/columns
+     * Update cell comments when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustComments($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
@@ -217,21 +226,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update hyperlinks when inserting/deleting rows/columns
+     * Update hyperlinks when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustHyperlinks($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aHyperlinkCollection = $pSheet->getHyperlinkCollection();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aHyperlinkCollection, array('self','cellReverseSort')) :
-            uksort($aHyperlinkCollection, array('self','cellSort'));
+            uksort($aHyperlinkCollection, array('self', 'cellReverseSort')) :
+            uksort($aHyperlinkCollection, array('self', 'cellSort'));
 
         foreach ($aHyperlinkCollection as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
@@ -243,21 +252,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update data validations when inserting/deleting rows/columns
+     * Update data validations when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustDataValidations($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aDataValidationCollection = $pSheet->getDataValidationCollection();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aDataValidationCollection, array('self','cellReverseSort')) :
-            uksort($aDataValidationCollection, array('self','cellSort'));
+            uksort($aDataValidationCollection, array('self', 'cellReverseSort')) :
+            uksort($aDataValidationCollection, array('self', 'cellSort'));
 
         foreach ($aDataValidationCollection as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
@@ -269,14 +278,14 @@ class ReferenceHelper
     }
 
     /**
-     * Update merged cells when inserting/deleting rows/columns
+     * Update merged cells when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustMergeCells($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
@@ -290,21 +299,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update protected cells when inserting/deleting rows/columns
+     * Update protected cells when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustProtectedCells($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aProtectedCells = $pSheet->getProtectedCells();
         ($pNumCols > 0 || $pNumRows > 0) ?
-            uksort($aProtectedCells, array('self','cellReverseSort')) :
-            uksort($aProtectedCells, array('self','cellSort'));
+            uksort($aProtectedCells, array('self', 'cellReverseSort')) :
+            uksort($aProtectedCells, array('self', 'cellSort'));
         foreach ($aProtectedCells as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
             if ($key != $newReference) {
@@ -315,21 +324,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update column dimensions when inserting/deleting rows/columns
+     * Update column dimensions when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustColumnDimensions($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aColumnDimensions = array_reverse($pSheet->getColumnDimensions(), true);
         if (!empty($aColumnDimensions)) {
             foreach ($aColumnDimensions as $objColumnDimension) {
-                $newReference = $this->updateCellReference($objColumnDimension->getColumnIndex() . '1', $pBefore, $pNumCols, $pNumRows);
+                $newReference = $this->updateCellReference($objColumnDimension->getColumnIndex().'1', $pBefore, $pNumCols, $pNumRows);
                 list($newReference) = Cell::coordinateFromString($newReference);
                 if ($objColumnDimension->getColumnIndex() != $newReference) {
                     $objColumnDimension->setColumnIndex($newReference);
@@ -340,21 +349,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update row dimensions when inserting/deleting rows/columns
+     * Update row dimensions when inserting/deleting rows/columns.
      *
-     * @param   Worksheet  $pSheet             The worksheet that we're editing
-     * @param   string              $pBefore            Insert/Delete before this cell address (e.g. 'A1')
-     * @param   integer             $beforeColumnIndex  Index number of the column we're inserting/deleting before
-     * @param   integer             $pNumCols           Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $beforeRow          Number of the row we're inserting/deleting before
-     * @param   integer             $pNumRows           Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet            The worksheet that we're editing
+     * @param string    $pBefore           Insert/Delete before this cell address (e.g. 'A1')
+     * @param int       $beforeColumnIndex Index number of the column we're inserting/deleting before
+     * @param int       $pNumCols          Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $beforeRow         Number of the row we're inserting/deleting before
+     * @param int       $pNumRows          Number of rows to insert/delete (negative values indicate deletion)
      */
     protected function adjustRowDimensions($pSheet, $pBefore, $beforeColumnIndex, $pNumCols, $beforeRow, $pNumRows)
     {
         $aRowDimensions = array_reverse($pSheet->getRowDimensions(), true);
         if (!empty($aRowDimensions)) {
             foreach ($aRowDimensions as $objRowDimension) {
-                $newReference = $this->updateCellReference('A' . $objRowDimension->getRowIndex(), $pBefore, $pNumCols, $pNumRows);
+                $newReference = $this->updateCellReference('A'.$objRowDimension->getRowIndex(), $pBefore, $pNumCols, $pNumRows);
                 list(, $newReference) = Cell::coordinateFromString($newReference);
                 if ($objRowDimension->getRowIndex() != $newReference) {
                     $objRowDimension->setRowIndex($newReference);
@@ -374,13 +383,14 @@ class ReferenceHelper
     }
 
     /**
-     * Insert a new column or row, updating all possible related data
+     * Insert a new column or row, updating all possible related data.
      *
-     * @param   string              $pBefore    Insert before this cell address (e.g. 'A1')
-     * @param   integer             $pNumCols   Number of columns to insert/delete (negative values indicate deletion)
-     * @param   integer             $pNumRows   Number of rows to insert/delete (negative values indicate deletion)
-     * @param   Worksheet  $pSheet     The worksheet that we're editing
-     * @throws  Exception
+     * @param string    $pBefore  Insert before this cell address (e.g. 'A1')
+     * @param int       $pNumCols Number of columns to insert/delete (negative values indicate deletion)
+     * @param int       $pNumRows Number of rows to insert/delete (negative values indicate deletion)
+     * @param Worksheet $pSheet   The worksheet that we're editing
+     *
+     * @throws Exception
      */
     public function insertNewBefore($pBefore = 'A1', $pNumCols = 0, $pNumRows = 0, Worksheet $pSheet = null)
     {
@@ -388,20 +398,20 @@ class ReferenceHelper
         $aCellCollection = $pSheet->getCellCollection();
 
         // Get coordinates of $pBefore
-        $beforeColumn    = 'A';
-        $beforeRow        = 1;
+        $beforeColumn = 'A';
+        $beforeRow = 1;
         list($beforeColumn, $beforeRow) = Cell::coordinateFromString($pBefore);
         $beforeColumnIndex = Cell::columnIndexFromString($beforeColumn);
 
         // Clear cells if we are removing columns or rows
-        $highestColumn    = $pSheet->getHighestColumn();
-        $highestRow    = $pSheet->getHighestRow();
+        $highestColumn = $pSheet->getHighestColumn();
+        $highestRow = $pSheet->getHighestRow();
 
         // 1. Clear column strips if we are removing columns
         if ($pNumCols < 0 && $beforeColumnIndex - 2 + $pNumCols > 0) {
             for ($i = 1; $i <= $highestRow - 1; ++$i) {
                 for ($j = $beforeColumnIndex - 1 + $pNumCols; $j <= $beforeColumnIndex - 2; ++$j) {
-                    $coordinate = Cell::stringFromColumnIndex($j) . $i;
+                    $coordinate = Cell::stringFromColumnIndex($j).$i;
                     $pSheet->removeConditionalStyles($coordinate);
                     if ($pSheet->cellExists($coordinate)) {
                         $pSheet->getCell($coordinate)->setValueExplicit('', Cell\DataType::TYPE_NULL);
@@ -415,7 +425,7 @@ class ReferenceHelper
         if ($pNumRows < 0 && $beforeRow - 1 + $pNumRows > 0) {
             for ($i = $beforeColumnIndex - 1; $i <= Cell::columnIndexFromString($highestColumn) - 1; ++$i) {
                 for ($j = $beforeRow + $pNumRows; $j <= $beforeRow - 1; ++$j) {
-                    $coordinate = Cell::stringFromColumnIndex($i) . $j;
+                    $coordinate = Cell::stringFromColumnIndex($i).$j;
                     $pSheet->removeConditionalStyles($coordinate);
                     if ($pSheet->cellExists($coordinate)) {
                         $pSheet->getCell($coordinate)->setValueExplicit('', Cell\DataType::TYPE_NULL);
@@ -434,12 +444,12 @@ class ReferenceHelper
             $cell = $pSheet->getCell($cellID);
             $cellIndex = Cell::columnIndexFromString($cell->getColumn());
 
-            if ($cellIndex-1 + $pNumCols < 0) {
+            if ($cellIndex - 1 + $pNumCols < 0) {
                 continue;
             }
 
             // New coordinates
-            $newCoordinates = Cell::stringFromColumnIndex($cellIndex-1 + $pNumCols) . ($cell->getRow() + $pNumRows);
+            $newCoordinates = Cell::stringFromColumnIndex($cellIndex - 1 + $pNumCols).($cell->getRow() + $pNumRows);
 
             // Should the cell be updated? Move value and cellXf index from one cell to another.
             if (($cellIndex >= $beforeColumnIndex) && ($cell->getRow() >= $beforeRow)) {
@@ -465,18 +475,17 @@ class ReferenceHelper
                     // Formula should be adjusted
                     $cell->setValue($this->updateFormulaReferences($cell->getValue(), $pBefore, $pNumCols, $pNumRows, $pSheet->getTitle()));
                 }
-
             }
         }
 
         // Duplicate styles for the newly inserted cells
-        $highestColumn    = $pSheet->getHighestColumn();
-        $highestRow    = $pSheet->getHighestRow();
+        $highestColumn = $pSheet->getHighestColumn();
+        $highestRow = $pSheet->getHighestRow();
 
         if ($pNumCols > 0 && $beforeColumnIndex - 2 > 0) {
             for ($i = $beforeRow; $i <= $highestRow - 1; ++$i) {
                 // Style
-                $coordinate = Cell::stringFromColumnIndex($beforeColumnIndex - 2) . $i;
+                $coordinate = Cell::stringFromColumnIndex($beforeColumnIndex - 2).$i;
                 if ($pSheet->cellExists($coordinate)) {
                     $xfIndex = $pSheet->getCell($coordinate)->getXfIndex();
                     $conditionalStyles = $pSheet->conditionalStylesExists($coordinate) ?
@@ -488,30 +497,29 @@ class ReferenceHelper
                             foreach ($conditionalStyles as $conditionalStyle) {
                                 $cloned[] = clone $conditionalStyle;
                             }
-                            $pSheet->setConditionalStyles(Cell::stringFromColumnIndex($j) . $i, $cloned);
+                            $pSheet->setConditionalStyles(Cell::stringFromColumnIndex($j).$i, $cloned);
                         }
                     }
                 }
-
             }
         }
 
         if ($pNumRows > 0 && $beforeRow - 1 > 0) {
             for ($i = $beforeColumnIndex - 1; $i <= Cell::columnIndexFromString($highestColumn) - 1; ++$i) {
                 // Style
-                $coordinate = Cell::stringFromColumnIndex($i) . ($beforeRow - 1);
+                $coordinate = Cell::stringFromColumnIndex($i).($beforeRow - 1);
                 if ($pSheet->cellExists($coordinate)) {
                     $xfIndex = $pSheet->getCell($coordinate)->getXfIndex();
                     $conditionalStyles = $pSheet->conditionalStylesExists($coordinate) ?
                         $pSheet->getConditionalStyles($coordinate) : false;
                     for ($j = $beforeRow; $j <= $beforeRow - 1 + $pNumRows; ++$j) {
-                        $pSheet->getCell(Cell::stringFromColumnIndex($i) . $j)->setXfIndex($xfIndex);
+                        $pSheet->getCell(Cell::stringFromColumnIndex($i).$j)->setXfIndex($xfIndex);
                         if ($conditionalStyles) {
                             $cloned = array();
                             foreach ($conditionalStyles as $conditionalStyle) {
                                 $cloned[] = clone $conditionalStyle;
                             }
-                            $pSheet->setConditionalStyles(Cell::stringFromColumnIndex($i) . $j, $cloned);
+                            $pSheet->setConditionalStyles(Cell::stringFromColumnIndex($i).$j, $cloned);
                         }
                     }
                 }
@@ -570,23 +578,23 @@ class ReferenceHelper
                         //    Shuffle columns in autofilter range
                         if ($pNumCols > 0) {
                             //    For insert, we shuffle from end to beginning to avoid overwriting
-                            $startColID = Cell::stringFromColumnIndex($startCol-1);
-                            $toColID = Cell::stringFromColumnIndex($startCol+$pNumCols-1);
+                            $startColID = Cell::stringFromColumnIndex($startCol - 1);
+                            $toColID = Cell::stringFromColumnIndex($startCol + $pNumCols - 1);
                             $endColID = Cell::stringFromColumnIndex($rangeEnd[0]);
 
                             $startColRef = $startCol;
                             $endColRef = $rangeEnd[0];
-                            $toColRef = $rangeEnd[0]+$pNumCols;
+                            $toColRef = $rangeEnd[0] + $pNumCols;
 
                             do {
-                                $autoFilter->shiftColumn(Cell::stringFromColumnIndex($endColRef-1), Cell::stringFromColumnIndex($toColRef-1));
+                                $autoFilter->shiftColumn(Cell::stringFromColumnIndex($endColRef - 1), Cell::stringFromColumnIndex($toColRef - 1));
                                 --$endColRef;
                                 --$toColRef;
                             } while ($startColRef <= $endColRef);
                         } else {
                             //    For delete, we shuffle from beginning to end to avoid overwriting
-                            $startColID = Cell::stringFromColumnIndex($startCol-1);
-                            $toColID = Cell::stringFromColumnIndex($startCol+$pNumCols-1);
+                            $startColID = Cell::stringFromColumnIndex($startCol - 1);
+                            $toColID = Cell::stringFromColumnIndex($startCol + $pNumCols - 1);
                             $endColID = Cell::stringFromColumnIndex($rangeEnd[0]);
                             do {
                                 $autoFilter->shiftColumn($startColID, $toColID);
@@ -633,15 +641,17 @@ class ReferenceHelper
     }
 
     /**
-     * Update references within formulas
+     * Update references within formulas.
      *
-     * @param    string    $pFormula    Formula to update
-     * @param    int        $pBefore    Insert before this one
-     * @param    int        $pNumCols    Number of columns to insert
-     * @param    int        $pNumRows    Number of rows to insert
-     * @param   string  $sheetName  Worksheet name/title
-     * @return    string    Updated formula
-     * @throws    Exception
+     * @param string $pFormula  Formula to update
+     * @param int    $pBefore   Insert before this one
+     * @param int    $pNumCols  Number of columns to insert
+     * @param int    $pNumRows  Number of rows to insert
+     * @param string $sheetName Worksheet name/title
+     *
+     * @return string Updated formula
+     *
+     * @throws Exception
      */
     public function updateFormulaReferences($pFormula = '', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0, $sheetName = '')
     {
@@ -746,7 +756,7 @@ class ReferenceHelper
                                 //    Max worksheet size is 1,048,576 rows by 16,384 columns in Excel 2007, so our adjustments need to be at least one digit more
                                 $column = Cell::columnIndexFromString(trim($column, '$')) + 100000;
                                 $row = trim($row, '$') + 10000000;
-                                $cellIndex = $row . $column;
+                                $cellIndex = $row.$column;
 
                                 $newCellTokens[$cellIndex] = preg_quote($toString);
                                 $cellTokens[$cellIndex] = '/(?<![A-Z\$\!])'.preg_quote($fromString).'(?!\d)/i';
@@ -774,19 +784,21 @@ class ReferenceHelper
     }
 
     /**
-     * Update cell reference
+     * Update cell reference.
      *
-     * @param    string    $pCellRange            Cell range
-     * @param    int        $pBefore            Insert before this one
-     * @param    int        $pNumCols            Number of columns to increment
-     * @param    int        $pNumRows            Number of rows to increment
-     * @return    string    Updated cell range
-     * @throws    Exception
+     * @param string $pCellRange Cell range
+     * @param int    $pBefore    Insert before this one
+     * @param int    $pNumCols   Number of columns to increment
+     * @param int    $pNumRows   Number of rows to increment
+     *
+     * @return string Updated cell range
+     *
+     * @throws Exception
      */
     public function updateCellReference($pCellRange = 'A1', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0)
     {
         // Is it in another worksheet? Will not have to update anything.
-        if (strpos($pCellRange, "!") !== false) {
+        if (strpos($pCellRange, '!') !== false) {
             return $pCellRange;
         // Is it a range or a single cell?
         } elseif (strpos($pCellRange, ':') === false && strpos($pCellRange, ',') === false) {
@@ -802,11 +814,11 @@ class ReferenceHelper
     }
 
     /**
-     * Update named formulas (i.e. containing worksheet references / named ranges)
+     * Update named formulas (i.e. containing worksheet references / named ranges).
      *
-     * @param PHPExcel $pPhpExcel    Object to update
-     * @param string $oldName        Old name (name to replace)
-     * @param string $newName        New name
+     * @param PHPExcel $pPhpExcel Object to update
+     * @param string   $oldName   Old name (name to replace)
+     * @param string   $newName   New name
      */
     public function updateNamedFormulas(Spreadsheet $pPhpExcel, $oldName = '', $newName = '')
     {
@@ -820,8 +832,8 @@ class ReferenceHelper
                 if (($cell !== null) && ($cell->getDataType() == Cell\DataType::TYPE_FORMULA)) {
                     $formula = $cell->getValue();
                     if (strpos($formula, $oldName) !== false) {
-                        $formula = str_replace("'" . $oldName . "'!", "'" . $newName . "'!", $formula);
-                        $formula = str_replace($oldName . "!", $newName . "!", $formula);
+                        $formula = str_replace("'".$oldName."'!", "'".$newName."'!", $formula);
+                        $formula = str_replace($oldName.'!', $newName.'!', $formula);
                         $cell->setValueExplicit($formula, Cell\DataType::TYPE_FORMULA);
                     }
                 }
@@ -830,14 +842,16 @@ class ReferenceHelper
     }
 
     /**
-     * Update cell range
+     * Update cell range.
      *
-     * @param    string    $pCellRange            Cell range    (e.g. 'B2:D4', 'B:C' or '2:3')
-     * @param    int        $pBefore            Insert before this one
-     * @param    int        $pNumCols            Number of columns to increment
-     * @param    int        $pNumRows            Number of rows to increment
-     * @return    string    Updated cell range
-     * @throws    Exception
+     * @param string $pCellRange Cell range    (e.g. 'B2:D4', 'B:C' or '2:3')
+     * @param int    $pBefore    Insert before this one
+     * @param int    $pNumCols   Number of columns to increment
+     * @param int    $pNumRows   Number of rows to increment
+     *
+     * @return string Updated cell range
+     *
+     * @throws Exception
      */
     private function updateCellRange($pCellRange = 'A1:A1', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0)
     {
@@ -863,19 +877,21 @@ class ReferenceHelper
             // Recreate range string
             return Cell::buildRange($range);
         } else {
-            throw new Exception("Only cell ranges may be passed to this method.");
+            throw new Exception('Only cell ranges may be passed to this method.');
         }
     }
 
     /**
-     * Update single cell reference
+     * Update single cell reference.
      *
-     * @param    string    $pCellReference        Single cell reference
-     * @param    int        $pBefore            Insert before this one
-     * @param    int        $pNumCols            Number of columns to increment
-     * @param    int        $pNumRows            Number of rows to increment
-     * @return    string    Updated cell reference
-     * @throws    Exception
+     * @param string $pCellReference Single cell reference
+     * @param int    $pBefore        Insert before this one
+     * @param int    $pNumCols       Number of columns to increment
+     * @param int    $pNumRows       Number of rows to increment
+     *
+     * @return string Updated cell reference
+     *
+     * @throws Exception
      */
     private function updateSingleCellReference($pCellReference = 'A1', $pBefore = 'A1', $pNumCols = 0, $pNumRows = 0)
     {
@@ -892,28 +908,28 @@ class ReferenceHelper
 
             // Create new column reference
             if ($updateColumn) {
-                $newColumn    = Cell::stringFromColumnIndex(Cell::columnIndexFromString($newColumn) - 1 + $pNumCols);
+                $newColumn = Cell::stringFromColumnIndex(Cell::columnIndexFromString($newColumn) - 1 + $pNumCols);
             }
 
             // Create new row reference
             if ($updateRow) {
-                $newRow    = $newRow + $pNumRows;
+                $newRow = $newRow + $pNumRows;
             }
 
             // Return new reference
-            return $newColumn . $newRow;
+            return $newColumn.$newRow;
         } else {
-            throw new Exception("Only single cell references may be passed to this method.");
+            throw new Exception('Only single cell references may be passed to this method.');
         }
     }
 
     /**
      * __clone implementation. Cloning should not be allowed in a Singleton!
      *
-     * @throws    Exception
+     * @throws Exception
      */
     final public function __clone()
     {
-        throw new Exception("Cloning a Singleton is not allowed!");
+        throw new Exception('Cloning a Singleton is not allowed!');
     }
 }

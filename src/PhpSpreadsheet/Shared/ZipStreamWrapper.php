@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\ZipStreamWrapper
+ * PhpOffice\PhpExcel\Shared\ZipStreamWrapper.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,43 +22,44 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class ZipStreamWrapper
 {
     /**
-     * Internal ZipAcrhive
+     * Internal ZipAcrhive.
      *
      * @var ZipArchive
      */
     private $archive;
 
     /**
-     * Filename in ZipAcrhive
+     * Filename in ZipAcrhive.
      *
      * @var string
      */
     private $fileNameInArchive = '';
 
     /**
-     * Position in file
+     * Position in file.
      *
      * @var int
      */
     private $position = 0;
 
     /**
-     * Data
+     * Data.
      *
      * @var mixed
      */
     private $data = '';
 
     /**
-     * Register wrapper
+     * Register wrapper.
      */
     public static function register()
     {
@@ -69,18 +70,20 @@ class ZipStreamWrapper
     /**
      * Implements support for fopen().
      *
-     * @param    string    $path            resource name including scheme, e.g.
-     * @param    string    $mode            only "r" is supported
-     * @param    int        $options        mask of STREAM_REPORT_ERRORS and STREAM_USE_PATH
-     * @param    string  &$openedPath    absolute path of the opened stream (out parameter)
-     * @return   bool    true on success
-     * @throws   \PhpOffice\PhpExcel\Reader\Exception
+     * @param string $path        resource name including scheme, e.g.
+     * @param string $mode        only "r" is supported
+     * @param int    $options     mask of STREAM_REPORT_ERRORS and STREAM_USE_PATH
+     * @param string &$openedPath absolute path of the opened stream (out parameter)
+     *
+     * @return bool true on success
+     *
+     * @throws \PhpOffice\PhpExcel\Reader\Exception
      */
     public function stream_open($path, $mode, $options, &$opened_path)
     {
         // Check for mode
         if ($mode{0} != 'r') {
-            throw new \PhpOffice\PhpExcel\Reader\Exception('Mode ' . $mode . ' is not supported. Only read mode is supported.');
+            throw new \PhpOffice\PhpExcel\Reader\Exception('Mode '.$mode.' is not supported. Only read mode is supported.');
         }
 
         $pos = strrpos($path, '#');
@@ -101,7 +104,7 @@ class ZipStreamWrapper
     /**
      * Implements support for fstat().
      *
-     * @return  boolean
+     * @return bool
      */
     public function statName()
     {
@@ -111,7 +114,7 @@ class ZipStreamWrapper
     /**
      * Implements support for fstat().
      *
-     * @return  boolean
+     * @return bool
      */
     public function url_stat()
     {
@@ -121,7 +124,7 @@ class ZipStreamWrapper
     /**
      * Implements support for fstat().
      *
-     * @return  boolean
+     * @return bool
      */
     public function stream_stat()
     {
@@ -131,13 +134,15 @@ class ZipStreamWrapper
     /**
      * Implements support for fread(), fgets() etc.
      *
-     * @param   int        $count    maximum number of bytes to read
-     * @return  string
+     * @param int $count maximum number of bytes to read
+     *
+     * @return string
      */
     public function stream_read($count)
     {
         $ret = substr($this->data, $this->position, $count);
         $this->position += strlen($ret);
+
         return $ret;
     }
 
@@ -145,7 +150,7 @@ class ZipStreamWrapper
      * Returns the position of the file pointer, i.e. its offset into the file
      * stream. Implements support for ftell().
      *
-     * @return  int
+     * @return int
      */
     public function stream_tell()
     {
@@ -153,9 +158,9 @@ class ZipStreamWrapper
     }
 
     /**
-     * EOF stream
+     * EOF stream.
      *
-     * @return    bool
+     * @return bool
      */
     public function stream_eof()
     {
@@ -163,37 +168,41 @@ class ZipStreamWrapper
     }
 
     /**
-     * Seek stream
+     * Seek stream.
      *
-     * @param    int        $offset    byte offset
-     * @param    int        $whence    SEEK_SET, SEEK_CUR or SEEK_END
-     * @return    bool
+     * @param int $offset byte offset
+     * @param int $whence SEEK_SET, SEEK_CUR or SEEK_END
+     *
+     * @return bool
      */
     public function stream_seek($offset, $whence)
     {
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen($this->data) && $offset >= 0) {
-                     $this->position = $offset;
-                     return true;
+                    $this->position = $offset;
+
+                    return true;
                 } else {
-                     return false;
+                    return false;
                 }
                 break;
             case SEEK_CUR:
                 if ($offset >= 0) {
-                     $this->position += $offset;
-                     return true;
+                    $this->position += $offset;
+
+                    return true;
                 } else {
-                     return false;
+                    return false;
                 }
                 break;
             case SEEK_END:
                 if (strlen($this->data) + $offset >= 0) {
-                     $this->position = strlen($this->data) + $offset;
-                     return true;
+                    $this->position = strlen($this->data) + $offset;
+
+                    return true;
                 } else {
-                     return false;
+                    return false;
                 }
                 break;
             default:

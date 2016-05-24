@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\Excel5
+ * PhpOffice\PhpExcel\Reader\Excel5.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader\Excel5
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 // Original file header of ParseXL (used as the base for this class):
@@ -58,7 +59,6 @@ namespace PhpOffice\PhpExcel\Reader;
 //         external sheet reference structure
 class Excel5 extends BaseReader implements IReader
 {
-
     // ParseXL definitions
     const XLS_BIFF8 = 0x0600;
     const XLS_BIFF7 = 0x0500;
@@ -168,23 +168,23 @@ class Excel5 extends BaseReader implements IReader
     private $userDefinedProperties;
 
     /**
-     * Workbook stream data. (Includes workbook globals substream as well as sheet substreams)
+     * Workbook stream data. (Includes workbook globals substream as well as sheet substreams).
      *
      * @var string
      */
     private $data;
 
     /**
-     * Size in bytes of $this->data
+     * Size in bytes of $this->data.
      *
      * @var int
      */
     private $dataSize;
 
     /**
-     * Current position in stream
+     * Current position in stream.
      *
-     * @var integer
+     * @var int
      */
     private $pos;
 
@@ -203,7 +203,7 @@ class Excel5 extends BaseReader implements IReader
     private $phpSheet;
 
     /**
-     * BIFF version
+     * BIFF version.
      *
      * @var int
      */
@@ -211,42 +211,42 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Codepage set in the Excel file being read. Only important for BIFF5 (Excel 5.0 - Excel 95)
-     * For BIFF8 (Excel 97 - Excel 2003) this will always have the value 'UTF-16LE'
+     * For BIFF8 (Excel 97 - Excel 2003) this will always have the value 'UTF-16LE'.
      *
      * @var string
      */
     private $codepage;
 
     /**
-     * Shared formats
+     * Shared formats.
      *
      * @var array
      */
     private $formats;
 
     /**
-     * Shared fonts
+     * Shared fonts.
      *
      * @var array
      */
     private $objFonts;
 
     /**
-     * Color palette
+     * Color palette.
      *
      * @var array
      */
     private $palette;
 
     /**
-     * Worksheets
+     * Worksheets.
      *
      * @var array
      */
     private $sheets;
 
     /**
-     * External books
+     * External books.
      *
      * @var array
      */
@@ -260,14 +260,14 @@ class Excel5 extends BaseReader implements IReader
     private $ref;
 
     /**
-     * External names
+     * External names.
      *
      * @var array
      */
     private $externalNames;
 
     /**
-     * Defined names
+     * Defined names.
      *
      * @var array
      */
@@ -283,14 +283,14 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Panes are frozen? (in sheet currently being read). See WINDOW2 record.
      *
-     * @var boolean
+     * @var bool
      */
     private $frozen;
 
     /**
      * Fit printout to number of pages? (in sheet currently being read). See SHEETPR record.
      *
-     * @var boolean
+     * @var bool
      */
     private $isFitToPages;
 
@@ -309,42 +309,42 @@ class Excel5 extends BaseReader implements IReader
     private $textObjects;
 
     /**
-     * Cell Annotations (BIFF8)
+     * Cell Annotations (BIFF8).
      *
      * @var array
      */
     private $cellNotes;
 
     /**
-     * The combined MSODRAWINGGROUP data
+     * The combined MSODRAWINGGROUP data.
      *
      * @var string
      */
     private $drawingGroupData;
 
     /**
-     * The combined MSODRAWING data (per sheet)
+     * The combined MSODRAWING data (per sheet).
      *
      * @var string
      */
     private $drawingData;
 
     /**
-     * Keep track of XF index
+     * Keep track of XF index.
      *
      * @var int
      */
     private $xfIndex;
 
     /**
-     * Mapping of XF index (that is a cell XF) to final index in cellXf collection
+     * Mapping of XF index (that is a cell XF) to final index in cellXf collection.
      *
      * @var array
      */
     private $mapCellXfIndex;
 
     /**
-     * Mapping of XF index (that is a style XF) to final index in cellStyleXf collection
+     * Mapping of XF index (that is a style XF) to final index in cellStyleXf collection.
      *
      * @var array
      */
@@ -366,42 +366,42 @@ class Excel5 extends BaseReader implements IReader
     private $sharedFormulaParts;
 
     /**
-     * The type of encryption in use
+     * The type of encryption in use.
      *
      * @var int
      */
     private $encryption = 0;
 
     /**
-     * The position in the stream after which contents are encrypted
+     * The position in the stream after which contents are encrypted.
      *
      * @var int
      */
     private $encryptionStartPos = false;
 
     /**
-     * The current RC4 decryption object
+     * The current RC4 decryption object.
      *
      * @var Excel5\RC4
      */
     private $rc4Key = null;
 
     /**
-     * The position in the stream that the RC4 decryption object was left at
+     * The position in the stream that the RC4 decryption object was left at.
      *
      * @var int
      */
     private $rc4Pos = 0;
 
     /**
-     * The current MD5 context state
+     * The current MD5 context state.
      *
      * @var string
      */
     private $md5Ctxt = null;
 
     /**
-     * Create a new Excel5 Reader instance
+     * Create a new Excel5 Reader instance.
      */
     public function __construct()
     {
@@ -411,15 +411,17 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Can the current IReader read the file?
      *
-     * @param     string         $pFilename
-     * @return     boolean
+     * @param string $pFilename
+     *
+     * @return bool
+     *
      * @throws Exception
      */
     public function canRead($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         try {
@@ -428,6 +430,7 @@ class Excel5 extends BaseReader implements IReader
 
             // get excel data
             $res = $ole->read($pFilename);
+
             return true;
         } catch (\PhpOffice\PhpExcel\Exception $e) {
             return false;
@@ -435,16 +438,17 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object
+     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object.
      *
-     * @param     string         $pFilename
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetNames($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $worksheetNames = array();
@@ -491,16 +495,17 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
+     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
      *
-     * @param   string     $pFilename
-     * @throws   Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetInfo($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $worksheetInfo = array();
@@ -597,11 +602,13 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param     string         $pFilename
-     * @return    \PhpOffice\PhpExcel\Spreadsheet
-     * @throws    Exception
+     * @param string $pFilename
+     *
+     * @return \PhpOffice\PhpExcel\Spreadsheet
+     *
+     * @throws Exception
      */
     public function load($pFilename)
     {
@@ -989,7 +996,7 @@ class Excel5 extends BaseReader implements IReader
 
             // treat OBJ records
             foreach ($this->objs as $n => $obj) {
-//                echo '<hr /><b>Object</b> reference is ', $n,'<br />';
+                //                echo '<hr /><b>Object</b> reference is ', $n,'<br />';
 //                var_dump($obj);
 //                echo '<br />';
                 // the first shape container never has a corresponding OBJ record, hence $n + 1
@@ -1200,7 +1207,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read record data from stream, decrypting as required
+     * Read record data from stream, decrypting as required.
      *
      * @param string $data   Data stream to read from
      * @param int    $pos    Position to start reading from
@@ -1240,7 +1247,7 @@ class Excel5 extends BaseReader implements IReader
                 $data = substr($data, $step);
                 $pos += $step;
                 $len -= $step;
-                $block++;
+                ++$block;
                 $this->rc4Key = $this->makeKey($block, $this->md5Ctxt);
             }
             $recordData .= $this->rc4Key->RC4(substr($data, 0, $len));
@@ -1251,11 +1258,12 @@ class Excel5 extends BaseReader implements IReader
         } elseif ($this->encryption == self::MS_BIFF_CRYPTO_XOR) {
             throw new Exception('XOr encryption not supported');
         }
+
         return $recordData;
     }
 
     /**
-     * Use OLE reader to extract the relevant data streams from the OLE file
+     * Use OLE reader to extract the relevant data streams from the OLE file.
      *
      * @param string $pFilename
      */
@@ -1276,7 +1284,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read summary information
+     * Read summary information.
      */
     private function readSummaryInformation()
     {
@@ -1410,7 +1418,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read additional document summary information
+     * Read additional document summary information.
      */
     private function readDocumentSummaryInformation()
     {
@@ -1443,7 +1451,7 @@ class Excel5 extends BaseReader implements IReader
         //    offset: ($secOffset+8);    size: var
         //    loop through property decarations and properties
         for ($i = 0; $i < $countProperties; ++$i) {
-//            echo 'Property ', $i,'<br />';
+            //            echo 'Property ', $i,'<br />';
             //    offset: ($secOffset+8) + (8 * $i);    size: 4;    property ID
             $id = self::getInt4d($this->documentSummaryInformation, ($secOffset + 8) + (8 * $i));
 //            echo 'ID is ', $id,'<br />';
@@ -1556,7 +1564,7 @@ class Excel5 extends BaseReader implements IReader
      */
     private function readNote()
     {
-//        echo '<b>Read Cell Annotation</b><br />';
+        //        echo '<b>Read Cell Annotation</b><br />';
         $length = self::getInt2d($this->data, $this->pos + 2);
         $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
 
@@ -1579,7 +1587,7 @@ class Excel5 extends BaseReader implements IReader
             $this->cellNotes[$noteObjID] = array(
                 'cellRef' => $cellAddress,
                 'objectID' => $noteObjID,
-                'author' => $noteAuthor
+                'author' => $noteAuthor,
             );
         } else {
             $extension = false;
@@ -1640,10 +1648,10 @@ class Excel5 extends BaseReader implements IReader
         $text = $this->getSplicedRecordData();
 
         $this->textObjects[$this->textObjRef] = array(
-            'text' => substr($text["recordData"], $text["spliceOffsets"][0] + 1, $cchText),
-            'format' => substr($text["recordData"], $text["spliceOffsets"][1], $cbRuns),
+            'text' => substr($text['recordData'], $text['spliceOffsets'][0] + 1, $cchText),
+            'format' => substr($text['recordData'], $text['spliceOffsets'][1], $cbRuns),
             'alignment' => $grbitOpts,
-            'rotation' => $rot
+            'rotation' => $rot,
         );
 
 //        echo '<b>_readTextObject()</b><br />';
@@ -1652,7 +1660,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read BOF
+     * Read BOF.
      */
     private function readBof()
     {
@@ -1689,7 +1697,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * FILEPASS
+     * FILEPASS.
      *
      * This record is part of the File Protection Block. It
      * contains information about the read/write password of the
@@ -1727,9 +1735,9 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Make an RC4 decryptor for the given block
+     * Make an RC4 decryptor for the given block.
      *
-     * @var int    $block      Block for which to create decrypto
+     * @var int    Block for which to create decrypto
      * @var string $valContext MD5 context state
      *
      * @return Excel5\RC4
@@ -1738,7 +1746,7 @@ class Excel5 extends BaseReader implements IReader
     {
         $pwarray = str_repeat("\0", 64);
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; ++$i) {
             $pwarray[$i] = $valContext[$i];
         }
 
@@ -1754,13 +1762,14 @@ class Excel5 extends BaseReader implements IReader
         $md5->add($pwarray);
 
         $s = $md5->getContext();
+
         return new Excel5\RC4($s);
     }
 
     /**
-     * Verify RC4 file password
+     * Verify RC4 file password.
      *
-     * @var string $password        Password to check
+     * @var string Password to check
      * @var string $docid           Document id
      * @var string $salt_data       Salt data
      * @var string $hashedsalt_data Hashed salt data
@@ -1772,7 +1781,7 @@ class Excel5 extends BaseReader implements IReader
     {
         $pwarray = str_repeat("\0", 64);
 
-        for ($i = 0; $i < strlen($password); $i++) {
+        for ($i = 0; $i < strlen($password); ++$i) {
             $o = ord(substr($password, $i, 1));
             $pwarray[2 * $i] = chr($o & 0xff);
             $pwarray[2 * $i + 1] = chr(($o >> 8) & 0xff);
@@ -1795,7 +1804,7 @@ class Excel5 extends BaseReader implements IReader
             if ((64 - $offset) < 5) {
                 $tocopy = 64 - $offset;
             }
-            for ($i = 0; $i <= $tocopy; $i++) {
+            for ($i = 0; $i <= $tocopy; ++$i) {
                 $pwarray[$offset + $i] = $mdContext1[$keyoffset + $i];
             }
             $offset += $tocopy;
@@ -1810,14 +1819,14 @@ class Excel5 extends BaseReader implements IReader
 
             $keyoffset = 0;
             $tocopy = 5;
-            for ($i = 0; $i < 16; $i++) {
+            for ($i = 0; $i < 16; ++$i) {
                 $pwarray[$offset + $i] = $docid[$i];
             }
             $offset += 16;
         }
 
         $pwarray[16] = "\x80";
-        for ($i = 0; $i < 47; $i++) {
+        for ($i = 0; $i < 47; ++$i) {
             $pwarray[17 + $i] = "\0";
         }
         $pwarray[56] = "\x80";
@@ -1842,7 +1851,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * CODEPAGE
+     * CODEPAGE.
      *
      * This record stores the text encoding used to write byte
      * strings, stored as MS Windows code page identifier.
@@ -1865,7 +1874,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * DATEMODE
+     * DATEMODE.
      *
      * This record specifies the base date for displaying date
      * values. All dates are stored as count of days past this
@@ -1892,7 +1901,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read a FONT record
+     * Read a FONT record.
      */
     private function readFont()
     {
@@ -1982,7 +1991,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * FORMAT
+     * FORMAT.
      *
      * This record contains information about a number format.
      * All FORMAT records occur together in a sequential list.
@@ -2019,7 +2028,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * XF - Extended Format
+     * XF - Extended Format.
      *
      * This record contains formatting information for cells, rows, columns or styles.
      * According to http://support.microsoft.com/kb/147732 there are always at least 15 cell style XF
@@ -2472,7 +2481,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read STYLE record
+     * Read STYLE record.
      */
     private function readStyle()
     {
@@ -2510,7 +2519,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read PALETTE record
+     * Read PALETTE record.
      */
     private function readPalette()
     {
@@ -2533,7 +2542,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * SHEET
+     * SHEET.
      *
      * This record is  located in the  Workbook Globals
      * Substream  and represents a sheet inside the workbook.
@@ -2593,7 +2602,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read EXTERNALBOOK record
+     * Read EXTERNALBOOK record.
      */
     private function readExternalBook()
     {
@@ -2687,7 +2696,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read EXTERNSHEET record
+     * Read EXTERNSHEET record.
      */
     private function readExternSheet()
     {
@@ -2715,7 +2724,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * DEFINEDNAME
+     * DEFINEDNAME.
      *
      * This record is part of a Link Table. It contains the name
      * and the token array of an internal defined name. Token
@@ -2775,7 +2784,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read MSODRAWINGGROUP record
+     * Read MSODRAWINGGROUP record.
      */
     private function readMsoDrawingGroup()
     {
@@ -2789,7 +2798,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * SST - Shared String Table
+     * SST - Shared String Table.
      *
      * This record contains a list of all strings used anywhere
      * in the workbook. Each string occurs only once. The
@@ -2912,7 +2921,8 @@ class Excel5 extends BaseReader implements IReader
                         // this fragment compressed
                         $len = min($charsLeft, $limitpos - $pos);
                         for ($j = 0; $j < $len; ++$j) {
-                            $retstr .= $recordData{$pos + $j}.chr(0);
+                            $retstr .= $recordData{$pos + $j}
+                            .chr(0);
                         }
                         $charsLeft -= $len;
                         $isCompressed = false;
@@ -2973,7 +2983,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read PRINTGRIDLINES record
+     * Read PRINTGRIDLINES record.
      */
     private function readPrintGridlines()
     {
@@ -2991,7 +3001,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read DEFAULTROWHEIGHT record
+     * Read DEFAULTROWHEIGHT record.
      */
     private function readDefaultRowHeight()
     {
@@ -3008,7 +3018,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read SHEETPR record
+     * Read SHEETPR record.
      */
     private function readSheetPr()
     {
@@ -3033,7 +3043,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read HORIZONTALPAGEBREAKS record
+     * Read HORIZONTALPAGEBREAKS record.
      */
     private function readHorizontalPageBreaks()
     {
@@ -3060,7 +3070,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read VERTICALPAGEBREAKS record
+     * Read VERTICALPAGEBREAKS record.
      */
     private function readVerticalPageBreaks()
     {
@@ -3087,7 +3097,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read HEADER record
+     * Read HEADER record.
      */
     private function readHeader()
     {
@@ -3114,7 +3124,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read FOOTER record
+     * Read FOOTER record.
      */
     private function readFooter()
     {
@@ -3140,7 +3150,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read HCENTER record
+     * Read HCENTER record.
      */
     private function readHcenter()
     {
@@ -3159,7 +3169,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read VCENTER record
+     * Read VCENTER record.
      */
     private function readVcenter()
     {
@@ -3178,7 +3188,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read LEFTMARGIN record
+     * Read LEFTMARGIN record.
      */
     private function readLeftMargin()
     {
@@ -3195,7 +3205,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read RIGHTMARGIN record
+     * Read RIGHTMARGIN record.
      */
     private function readRightMargin()
     {
@@ -3212,7 +3222,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read TOPMARGIN record
+     * Read TOPMARGIN record.
      */
     private function readTopMargin()
     {
@@ -3229,7 +3239,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read BOTTOMMARGIN record
+     * Read BOTTOMMARGIN record.
      */
     private function readBottomMargin()
     {
@@ -3246,7 +3256,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read PAGESETUP record
+     * Read PAGESETUP record.
      */
     private function readPageSetup()
     {
@@ -3306,7 +3316,7 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * PROTECT - Sheet protection (BIFF2 through BIFF8)
-     *   if this record is omitted, then it also means no sheet protection
+     *   if this record is omitted, then it also means no sheet protection.
      */
     private function readProtect()
     {
@@ -3327,7 +3337,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * SCENPROTECT
+     * SCENPROTECT.
      */
     private function readScenProtect()
     {
@@ -3349,7 +3359,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * OBJECTPROTECT
+     * OBJECTPROTECT.
      */
     private function readObjectProtect()
     {
@@ -3371,7 +3381,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * PASSWORD - Sheet protection (hashed) password (BIFF2 through BIFF8)
+     * PASSWORD - Sheet protection (hashed) password (BIFF2 through BIFF8).
      */
     private function readPassword()
     {
@@ -3389,7 +3399,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read DEFCOLWIDTH record
+     * Read DEFCOLWIDTH record.
      */
     private function readDefColWidth()
     {
@@ -3407,7 +3417,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read COLINFO record
+     * Read COLINFO record.
      */
     private function readColInfo()
     {
@@ -3455,7 +3465,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * ROW
+     * ROW.
      *
      * This record contains the properties of a single row in a
      * sheet. Rows and cells in a sheet are divided into blocks
@@ -3893,7 +3903,7 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Read a STRING record from current stream position and advance the stream pointer to next record
      * This record is used for storing result from FORMULA record when it is a string, and
-     * it occurs directly after the FORMULA record
+     * it occurs directly after the FORMULA record.
      *
      * @return string The string contents as UTF-8
      */
@@ -3976,7 +3986,7 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Read MULBLANK record
      * This record represents a cell range of empty cells. All
-     * cells are located in the same row
+     * cells are located in the same row.
      *
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
@@ -4064,7 +4074,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read BLANK record
+     * Read BLANK record.
      */
     private function readBlank()
     {
@@ -4094,7 +4104,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read MSODRAWING record
+     * Read MSODRAWING record.
      */
     private function readMsoDrawing()
     {
@@ -4108,7 +4118,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read OBJ record
+     * Read OBJ record.
      */
     private function readObj()
     {
@@ -4141,7 +4151,7 @@ class Excel5 extends BaseReader implements IReader
             'cbCmoSize' => $cbCmoSize,
             'otObjType' => $otObjType,
             'idObjID' => $idObjID,
-            'grbitOpts' => $grbitOpts
+            'grbitOpts' => $grbitOpts,
         );
         $this->textObjRef = $idObjID;
 
@@ -4151,7 +4161,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read WINDOW2 record
+     * Read WINDOW2 record.
      */
     private function readWindow2()
     {
@@ -4222,7 +4232,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read PLV Record(Created by Excel2007 or upper)
+     * Read PLV Record(Created by Excel2007 or upper).
      */
     private function readPageLayoutView()
     {
@@ -4259,7 +4269,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read SCL record
+     * Read SCL record.
      */
     private function readScl()
     {
@@ -4280,7 +4290,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read PANE record
+     * Read PANE record.
      */
     private function readPane()
     {
@@ -4362,9 +4372,9 @@ class Excel5 extends BaseReader implements IReader
         if ($this->getReadFilter() !== null) {
             $includeCellRange = false;
             $rangeBoundaries = \PhpOffice\PhpExcel\Cell::getRangeBoundaries($cellRangeAddress);
-            $rangeBoundaries[1][0] ++;
-            for ($row = $rangeBoundaries[0][1]; $row <= $rangeBoundaries[1][1]; $row++) {
-                for ($column = $rangeBoundaries[0][0]; $column != $rangeBoundaries[1][0]; $column++) {
+            ++$rangeBoundaries[1][0];
+            for ($row = $rangeBoundaries[0][1]; $row <= $rangeBoundaries[1][1]; ++$row) {
+                for ($column = $rangeBoundaries[0][0]; $column != $rangeBoundaries[1][0]; ++$column) {
                     if ($this->getReadFilter()->readCell($column, $row, $this->phpSheet->getTitle())) {
                         $includeCellRange = true;
                         break 2;
@@ -4372,11 +4382,12 @@ class Excel5 extends BaseReader implements IReader
                 }
             }
         }
+
         return $includeCellRange;
     }
 
     /**
-     * MERGEDCELLS
+     * MERGEDCELLS.
      *
      * This record contains the addresses of merged cell ranges
      * in the current sheet.
@@ -4404,7 +4415,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read HYPERLINK record
+     * Read HYPERLINK record.
      */
     private function readHyperLink()
     {
@@ -4571,7 +4582,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read DATAVALIDATIONS record
+     * Read DATAVALIDATIONS record.
      */
     private function readDataValidations()
     {
@@ -4583,7 +4594,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read DATAVALIDATION record
+     * Read DATAVALIDATION record.
      */
     private function readDataValidation()
     {
@@ -4810,7 +4821,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read SHEETPROTECTION record (FEATHEADR)
+     * Read SHEETPROTECTION record (FEATHEADR).
      */
     private function readSheetProtection()
     {
@@ -4905,7 +4916,7 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Read RANGEPROTECTION record
      * Reading of this record is based on Microsoft Office Excel 97-2000 Binary File Format Specification,
-     * where it is referred to as FEAT record
+     * where it is referred to as FEAT record.
      */
     private function readRangeProtection()
     {
@@ -4965,7 +4976,7 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read IMDATA record
+     * Read IMDATA record.
      */
     private function readImData()
     {
@@ -5040,7 +5051,7 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Read a free CONTINUE record. Free CONTINUE record may be a camouflaged MSODRAWING record
      * When MSODRAWING data on a sheet exceeds 8224 bytes, CONTINUE records are used instead. Undocumented.
-     * In this case, we must treat the CONTINUE record as a MSODRAWING record
+     * In this case, we must treat the CONTINUE record as a MSODRAWING record.
      */
     private function readContinue()
     {
@@ -5089,7 +5100,7 @@ class Excel5 extends BaseReader implements IReader
      * Reads a record from current position in data stream and continues reading data as long as CONTINUE
      * records are found. Splices the record data pieces and returns the combined string as if record data
      * is in one piece.
-     * Moves to next current position in data stream to start of next record different from a CONtINUE record
+     * Moves to next current position in data stream to start of next record different from a CONtINUE record.
      *
      * @return array
      */
@@ -5125,10 +5136,11 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Convert formula structure into human readable Excel formula like 'A3+A5*5'
+     * Convert formula structure into human readable Excel formula like 'A3+A5*5'.
      *
      * @param string $formulaStructure The complete binary data for the formula
-     * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     * @param string $baseCell         Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     *
      * @return string Human readable formula
      */
     private function getFormulaFromStructure($formulaStructure, $baseCell = 'A1')
@@ -5161,11 +5173,12 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Take formula data and additional data for formula and return human readable formula
+     * Take formula data and additional data for formula and return human readable formula.
      *
-     * @param string $formulaData The binary data for the formula itself
+     * @param string $formulaData    The binary data for the formula itself
      * @param string $additionalData Additional binary data going with the formula
-     * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     * @param string $baseCell       Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     *
      * @return string Human readable formula
      */
     private function getFormulaFromData($formulaData, $additionalData = '', $baseCell = 'A1')
@@ -5187,11 +5200,12 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Take array of tokens together with additional data for formula and return human readable formula
+     * Take array of tokens together with additional data for formula and return human readable formula.
      *
-     * @param array $tokens
-     * @param array $additionalData Additional binary data going with the formula
-     * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     * @param array  $tokens
+     * @param array  $additionalData Additional binary data going with the formula
+     * @param string $baseCell       Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     *
      * @return string Human readable formula
      */
     private function createFormulaFromTokens($tokens, $additionalData)
@@ -5287,7 +5301,7 @@ class Excel5 extends BaseReader implements IReader
                             $ops[] = array_pop($formulaStrings);
                         }
                         $ops = array_reverse($ops);
-                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(".implode(',', $ops).")";
+                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(".implode(',', $ops).')';
                         unset($space0, $space1);
                     } else {
                         // add-in function
@@ -5297,7 +5311,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         $ops = array_reverse($ops);
                         $function = array_pop($formulaStrings);
-                        $formulaStrings[] = "$space1$space0$function(".implode(',', $ops).")";
+                        $formulaStrings[] = "$space1$space0$function(".implode(',', $ops).')';
                         unset($space0, $space1);
                     }
                     break;
@@ -5350,11 +5364,13 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Fetch next token from binary formula data
+     * Fetch next token from binary formula data.
      *
      * @param string Formula data
      * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     *
      * @return array
+     *
      * @throws Exception
      */
     private function getNextToken($formulaData, $baseCell = 'A1')
@@ -6638,9 +6654,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Reads a cell address in BIFF8 e.g. 'A2' or '$A$2'
-     * section 3.3.4
+     * section 3.3.4.
      *
      * @param string $cellAddressStructure
+     *
      * @return string
      */
     private function readBIFF8CellAddress($cellAddressStructure)
@@ -6667,10 +6684,11 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Reads a cell address in BIFF8 for shared formulas. Uses positive and negative values for row and column
      * to indicate offsets from a base cell
-     * section 3.3.4
+     * section 3.3.4.
      *
      * @param string $cellAddressStructure
-     * @param string $baseCell Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     * @param string $baseCell             Base cell, only needed when formula contains tRefN tokens, e.g. with shared formulas
+     *
      * @return string
      */
     private function readBIFF8CellAddressB($cellAddressStructure, $baseCell = 'A1')
@@ -6709,10 +6727,12 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Reads a cell range address in BIFF5 e.g. 'A2:B6' or 'A1'
      * always fixed range
-     * section 2.5.14
+     * section 2.5.14.
      *
      * @param string $subData
+     *
      * @return string
+     *
      * @throws Exception
      */
     private function readBIFF5CellRangeAddressFixed($subData)
@@ -6741,16 +6761,19 @@ class Excel5 extends BaseReader implements IReader
         if ($fr == $lr and $fc == $lc) {
             return "$fc$fr";
         }
+
         return "$fc$fr:$lc$lr";
     }
 
     /**
      * Reads a cell range address in BIFF8 e.g. 'A2:B6' or 'A1'
      * always fixed range
-     * section 2.5.14
+     * section 2.5.14.
      *
      * @param string $subData
+     *
      * @return string
+     *
      * @throws Exception
      */
     private function readBIFF8CellRangeAddressFixed($subData)
@@ -6779,15 +6802,17 @@ class Excel5 extends BaseReader implements IReader
         if ($fr == $lr and $fc == $lc) {
             return "$fc$fr";
         }
+
         return "$fc$fr:$lc$lr";
     }
 
     /**
      * Reads a cell range address in BIFF8 e.g. 'A2:B6' or '$A$2:$B$6'
      * there are flags indicating whether column/row index is relative
-     * section 3.3.4
+     * section 3.3.4.
      *
      * @param string $subData
+     *
      * @return string
      */
     private function readBIFF8CellRangeAddress($subData)
@@ -6834,10 +6859,11 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Reads a cell range address in BIFF8 for shared formulas. Uses positive and negative values for row and column
      * to indicate offsets from a base cell
-     * section 3.3.4
+     * section 3.3.4.
      *
      * @param string $subData
      * @param string $baseCell Base cell
+     *
      * @return string Cell range address
      */
     private function readBIFF8CellRangeAddressB($subData, $baseCell = 'A1')
@@ -6910,9 +6936,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Read BIFF8 cell range address list
-     * section 2.5.15
+     * section 2.5.15.
      *
      * @param string $subData
+     *
      * @return array
      */
     private function readBIFF8CellRangeAddressList($subData)
@@ -6937,9 +6964,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Read BIFF5 cell range address list
-     * section 2.5.15
+     * section 2.5.15.
      *
      * @param string $subData
+     *
      * @return array
      */
     private function readBIFF5CellRangeAddressList($subData)
@@ -6966,10 +6994,12 @@ class Excel5 extends BaseReader implements IReader
      * Get a sheet range like Sheet1:Sheet3 from REF index
      * Note: If there is only one sheet in the range, one gets e.g Sheet1
      * It can also happen that the REF structure uses the -1 (FFFF) code to indicate deleted sheets,
-     * in which case an Exception is thrown
+     * in which case an Exception is thrown.
      *
      * @param int $index
+     *
      * @return string|false
+     *
      * @throws Exception
      */
     private function readSheetRangeByRefIndex($index)
@@ -7014,15 +7044,17 @@ class Excel5 extends BaseReader implements IReader
                     break;
             }
         }
+
         return false;
     }
 
     /**
      * read BIFF8 constant value array from array data
      * returns e.g. array('value' => '{1,2;3,4}', 'size' => 40}
-     * section 2.5.8
+     * section 2.5.8.
      *
      * @param string $arrayData
+     *
      * @return array
      */
     private static function readBIFF8ConstantArray($arrayData)
@@ -7058,9 +7090,10 @@ class Excel5 extends BaseReader implements IReader
     /**
      * read BIFF8 constant value which may be 'Empty Value', 'Number', 'String Value', 'Boolean Value', 'Error Value'
      * section 2.5.7
-     * returns e.g. array('value' => '5', 'size' => 9)
+     * returns e.g. array('value' => '5', 'size' => 9).
      *
      * @param string $valueData
+     *
      * @return array
      */
     private static function readBIFF8Constant($valueData)
@@ -7099,6 +7132,7 @@ class Excel5 extends BaseReader implements IReader
                 $size = 9;
                 break;
         }
+
         return array(
             'value' => $value,
             'size' => $size,
@@ -7107,9 +7141,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Extract RGB color
-     * OpenOffice.org's Documentation of the Microsoft Excel File Format, section 2.5.4
+     * OpenOffice.org's Documentation of the Microsoft Excel File Format, section 2.5.4.
      *
      * @param string $rgb Encoded RGB value (4 bytes)
+     *
      * @return array
      */
     private static function readRGB($rgb)
@@ -7131,9 +7166,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Read byte string (8-bit string length)
-     * OpenOffice documentation: 2.5.2
+     * OpenOffice documentation: 2.5.2.
      *
      * @param string $subData
+     *
      * @return array
      */
     private function readByteStringShort($subData)
@@ -7152,9 +7188,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Read byte string (16-bit string length)
-     * OpenOffice documentation: 2.5.2
+     * OpenOffice documentation: 2.5.2.
      *
      * @param string $subData
+     *
      * @return array
      */
     private function readByteStringLong($subData)
@@ -7178,6 +7215,7 @@ class Excel5 extends BaseReader implements IReader
      * function will automatically find out where the Unicode string ends.
      *
      * @param string $subData
+     *
      * @return array
      */
     private static function readUnicodeStringShort($subData)
@@ -7198,9 +7236,10 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Extracts an Excel Unicode long string (16-bit string length)
      * OpenOffice documentation: 2.5.3
-     * this function is under construction, needs to support rich text, and Asian phonetic settings
+     * this function is under construction, needs to support rich text, and Asian phonetic settings.
      *
      * @param string $subData
+     *
      * @return array
      */
     private static function readUnicodeStringLong($subData)
@@ -7221,10 +7260,11 @@ class Excel5 extends BaseReader implements IReader
     /**
      * Read Unicode string with no string length field, but with known character count
      * this function is under construction, needs to support rich text, and Asian phonetic settings
-     * OpenOffice.org's Documentation of the Microsoft Excel File Format, section 2.5.3
+     * OpenOffice.org's Documentation of the Microsoft Excel File Format, section 2.5.3.
      *
      * @param string $subData
-     * @param int $characterCount
+     * @param int    $characterCount
+     *
      * @return array
      */
     private static function readUnicodeString($subData, $characterCount)
@@ -7254,9 +7294,10 @@ class Excel5 extends BaseReader implements IReader
 
     /**
      * Convert UTF-8 string to string surounded by double quotes. Used for explicit string tokens in formulas.
-     * Example:  hello"world  -->  "hello""world"
+     * Example:  hello"world  -->  "hello""world".
      *
      * @param string $value UTF-8 encoded string
+     *
      * @return string
      */
     private static function UTF8toExcelDoubleQuoted($value)
@@ -7265,9 +7306,10 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Reads first 8 bytes of a string and return IEEE 754 float
+     * Reads first 8 bytes of a string and return IEEE 754 float.
      *
      * @param string $data Binary string that is at least 8 bytes long
+     *
      * @return float
      */
     private static function extractNumber($data)
@@ -7315,14 +7357,16 @@ class Excel5 extends BaseReader implements IReader
         if (($rknum & 0x01) != 0) {
             $value /= 100;
         }
+
         return $value;
     }
 
     /**
-     * Get UTF-8 string from (compressed or uncompressed) UTF-16 string
+     * Get UTF-8 string from (compressed or uncompressed) UTF-16 string.
      *
      * @param string $string
-     * @param bool $compressed
+     * @param bool   $compressed
+     *
      * @return string
      */
     private static function encodeUTF16($string, $compressed = '')
@@ -7338,6 +7382,7 @@ class Excel5 extends BaseReader implements IReader
      * Convert UTF-16 string in compressed notation to uncompressed form. Only used for BIFF8.
      *
      * @param string $string
+     *
      * @return string
      */
     private static function uncompressByteString($string)
@@ -7355,6 +7400,7 @@ class Excel5 extends BaseReader implements IReader
      * Convert string to UTF-8. Only used for BIFF5.
      *
      * @param string $string
+     *
      * @return string
      */
     private function decodeCodepage($string)
@@ -7363,10 +7409,11 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read 16-bit unsigned integer
+     * Read 16-bit unsigned integer.
      *
      * @param string $data
-     * @param int $pos
+     * @param int    $pos
+     *
      * @return int
      */
     public static function getInt2d($data, $pos)
@@ -7375,10 +7422,11 @@ class Excel5 extends BaseReader implements IReader
     }
 
     /**
-     * Read 32-bit signed integer
+     * Read 32-bit signed integer.
      *
      * @param string $data
-     * @param int $pos
+     * @param int    $pos
+     *
      * @return int
      */
     public static function getInt4d($data, $pos)
@@ -7393,6 +7441,7 @@ class Excel5 extends BaseReader implements IReader
         } else {
             $_ord_24 = ($_or_24 & 127) << 24;
         }
+
         return ord($data[$pos]) | (ord($data[$pos + 1]) << 8) | (ord($data[$pos + 2]) << 16) | $_ord_24;
     }
 

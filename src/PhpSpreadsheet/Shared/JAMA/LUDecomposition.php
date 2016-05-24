@@ -3,55 +3,50 @@
 namespace PhpOffice\PhpExcel\Shared\JAMA;
 
 /**
- *    @package JAMA
- *
- *    For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n
- *    unit lower triangular matrix L, an n-by-n upper triangular matrix U,
- *    and a permutation vector piv of length m so that A(piv,:) = L*U.
- *    If m < n, then L is m-by-m and U is m-by-n.
- *
- *    The LU decompostion with pivoting always exists, even if the matrix is
- *    singular, so the constructor will never fail. The primary use of the
- *    LU decomposition is in the solution of square systems of simultaneous
- *    linear equations. This will fail if isNonsingular() returns false.
- *
  *    @author Paul Meagher
  *    @author Bartosz Matosiuk
  *    @author Michael Bommarito
+ *
  *    @version 1.1
+ *
  *    @license PHP v3.0
  */
 class LUDecomposition
 {
-    const MATRIX_SINGULAR_EXCEPTION    = "Can only perform operation on singular matrix.";
-    const MATRIX_SQUARE_EXCEPTION      = "Mismatched Row dimension";
+    const MATRIX_SINGULAR_EXCEPTION = 'Can only perform operation on singular matrix.';
+    const MATRIX_SQUARE_EXCEPTION = 'Mismatched Row dimension';
 
     /**
-     *    Decomposition storage
+     *    Decomposition storage.
+     *
      *    @var array
      */
     private $LU = array();
 
     /**
      *    Row dimension.
+     *
      *    @var int
      */
     private $m;
 
     /**
      *    Column dimension.
+     *
      *    @var int
      */
     private $n;
 
     /**
      *    Pivot sign.
+     *
      *    @var int
      */
     private $pivsign;
 
     /**
      *    Internal storage of pivot vector.
+     *
      *    @var array
      */
     private $piv = array();
@@ -60,6 +55,7 @@ class LUDecomposition
      *    LU Decomposition constructor.
      *
      *    @param $A Rectangular matrix
+     *
      *    @return Structure to access L, U and piv.
      */
     public function __construct($A)
@@ -67,8 +63,8 @@ class LUDecomposition
         if ($A instanceof Matrix) {
             // Use a "left-looking", dot-product, Crout/Doolittle algorithm.
             $this->LU = $A->getArray();
-            $this->m  = $A->getRowDimension();
-            $this->n  = $A->getColumnDimension();
+            $this->m = $A->getRowDimension();
+            $this->n = $A->getColumnDimension();
             for ($i = 0; $i < $this->m; ++$i) {
                 $this->piv[$i] = $i;
             }
@@ -94,7 +90,7 @@ class LUDecomposition
                 }
                 // Find pivot and exchange if necessary.
                 $p = $j;
-                for ($i = $j+1; $i < $this->m; ++$i) {
+                for ($i = $j + 1; $i < $this->m; ++$i) {
                     if (abs($LUcolj[$i]) > abs($LUcolj[$p])) {
                         $p = $i;
                     }
@@ -112,7 +108,7 @@ class LUDecomposition
                 }
                 // Compute multipliers.
                 if (($j < $this->m) && ($this->LU[$j][$j] != 0.0)) {
-                    for ($i = $j+1; $i < $this->m; ++$i) {
+                    for ($i = $j + 1; $i < $this->m; ++$i) {
                         $this->LU[$i][$j] /= $this->LU[$j][$j];
                     }
                 }
@@ -140,6 +136,7 @@ class LUDecomposition
                 }
             }
         }
+
         return new Matrix($L);
     }    //    function getL()
 
@@ -159,6 +156,7 @@ class LUDecomposition
                 }
             }
         }
+
         return new Matrix($U);
     }    //    function getU()
 
@@ -173,7 +171,7 @@ class LUDecomposition
     }    //    function getPivot()
 
     /**
-     *    Alias for getPivot
+     *    Alias for getPivot.
      *
      *    @see getPivot
      */
@@ -194,11 +192,12 @@ class LUDecomposition
                 return false;
             }
         }
+
         return true;
     }    //    function isNonsingular()
 
     /**
-     *    Count determinants
+     *    Count determinants.
      *
      *    @return array d matrix deterninat
      */
@@ -209,6 +208,7 @@ class LUDecomposition
             for ($j = 0; $j < $this->n; ++$j) {
                 $d *= $this->LU[$j][$j];
             }
+
             return $d;
         } else {
             throw new \PhpOffice\PhpExcel\Calculation\Exception(Matrix::MATRIX_DIMENSION_EXCEPTION);
@@ -216,9 +216,10 @@ class LUDecomposition
     }    //    function det()
 
     /**
-     *    Solve A*X = B
+     *    Solve A*X = B.
      *
      *    @param  $B  A Matrix with as many rows as A and any number of columns.
+     *
      *    @return  X so that L*U*X = B(piv,:)
      *    @PhpOffice\PhpExcel\Calculation\Exception  IllegalArgumentException Matrix row dimensions must agree.
      *    @PhpOffice\PhpExcel\Calculation\Exception  RuntimeException  Matrix is singular.
@@ -229,17 +230,17 @@ class LUDecomposition
             if ($this->isNonsingular()) {
                 // Copy right hand side with pivoting
                 $nx = $B->getColumnDimension();
-                $X  = $B->getMatrix($this->piv, 0, $nx-1);
+                $X = $B->getMatrix($this->piv, 0, $nx - 1);
                 // Solve L*Y = B(piv,:)
                 for ($k = 0; $k < $this->n; ++$k) {
-                    for ($i = $k+1; $i < $this->n; ++$i) {
+                    for ($i = $k + 1; $i < $this->n; ++$i) {
                         for ($j = 0; $j < $nx; ++$j) {
                             $X->A[$i][$j] -= $X->A[$k][$j] * $this->LU[$i][$k];
                         }
                     }
                 }
                 // Solve U*X = Y;
-                for ($k = $this->n-1; $k >= 0; --$k) {
+                for ($k = $this->n - 1; $k >= 0; --$k) {
                     for ($j = 0; $j < $nx; ++$j) {
                         $X->A[$k][$j] /= $this->LU[$k][$k];
                     }
@@ -249,6 +250,7 @@ class LUDecomposition
                         }
                     }
                 }
+
                 return $X;
             } else {
                 throw new \PhpOffice\PhpExcel\Calculation\Exception(self::MATRIX_SINGULAR_EXCEPTION);

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Helper;
 
 /**
- * PhpOffice\PhpExcel\Helper\HTML
+ * PhpOffice\PhpExcel\Helper\HTML.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Helper;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Helper
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class HTML
@@ -615,7 +616,7 @@ class HTML
         $this->initialise();
 
         //    Create a new DOM object
-        $dom = new \DOMDocument;
+        $dom = new \DOMDocument();
         //    Load the HTML file into the DOM object
         //  Note the use of error suppression, because typically this will be an html fragment, so not fully valid markup
         $loaded = @$dom->loadHTML($html);
@@ -634,7 +635,7 @@ class HTML
 
     protected function cleanWhitespace()
     {
-        foreach($this->richTextObject->getRichTextElements() as $key => $element) {
+        foreach ($this->richTextObject->getRichTextElements() as $key => $element) {
             $text = $element->getText();
             // Trim any leading spaces on the first run
             if ($key == 0) {
@@ -661,7 +662,7 @@ class HTML
             $richtextRun->getFont()->setSize($this->size);
         }
         if ($this->color) {
-            $richtextRun->getFont()->setColor(new \PhpOffice\PhpExcel\Style\Color('ff' . $this->color));
+            $richtextRun->getFont()->setColor(new \PhpOffice\PhpExcel\Style\Color('ff'.$this->color));
         }
         if ($this->bold) {
             $richtextRun->getFont()->setBold(true);
@@ -690,6 +691,7 @@ class HTML
         foreach ($values[0] as &$value) {
             $value = str_pad(dechex($value), 2, '0', STR_PAD_LEFT);
         }
+
         return implode($values[0]);
     }
 

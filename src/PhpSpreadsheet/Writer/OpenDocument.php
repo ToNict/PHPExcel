@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PhpOffice\PhpExcel\Writer\OpenDocument
+ * PhpOffice\PhpExcel\Writer\OpenDocument.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -20,29 +20,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class OpenDocument extends BaseWriter implements IWriter
 {
     /**
-     * Private writer parts
+     * Private writer parts.
      *
      * @var \PhpOffice\PhpExcel\Writer\OpenDocument_WriterPart[]
      */
     private $writerParts = array();
 
     /**
-     * Private PHPExcel
+     * Private PHPExcel.
      *
      * @var PHPExcel
      */
     private $spreadSheet;
 
     /**
-     * Create a new \PhpOffice\PhpExcel\Writer\OpenDocument
+     * Create a new \PhpOffice\PhpExcel\Writer\OpenDocument.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
      */
@@ -51,13 +52,13 @@ class OpenDocument extends BaseWriter implements IWriter
         $this->setPHPExcel($pPHPExcel);
 
         $writerPartsArray = array(
-            'content'    => 'PhpOffice\PhpExcel\Writer\OpenDocument_Content',
-            'meta'       => 'PhpOffice\PhpExcel\Writer\OpenDocument_Meta',
-            'meta_inf'   => 'PhpOffice\PhpExcel\Writer\OpenDocument_MetaInf',
-            'mimetype'   => 'PhpOffice\PhpExcel\Writer\OpenDocument_Mimetype',
-            'settings'   => 'PhpOffice\PhpExcel\Writer\OpenDocument_Settings',
-            'styles'     => 'PhpOffice\PhpExcel\Writer\OpenDocument_Styles',
-            'thumbnails' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Thumbnails'
+            'content' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Content',
+            'meta' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Meta',
+            'meta_inf' => 'PhpOffice\PhpExcel\Writer\OpenDocument_MetaInf',
+            'mimetype' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Mimetype',
+            'settings' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Settings',
+            'styles' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Styles',
+            'thumbnails' => 'PhpOffice\PhpExcel\Writer\OpenDocument_Thumbnails',
         );
 
         foreach ($writerPartsArray as $writer => $class) {
@@ -66,9 +67,10 @@ class OpenDocument extends BaseWriter implements IWriter
     }
 
     /**
-     * Get writer part
+     * Get writer part.
      *
-     * @param  string  $pPartName  Writer part name
+     * @param string $pPartName Writer part name
+     *
      * @return \PhpOffice\PhpExcel\Writer\Excel2007\WriterPart
      */
     public function getWriterPart($pPartName = '')
@@ -76,14 +78,15 @@ class OpenDocument extends BaseWriter implements IWriter
         if ($pPartName != '' && isset($this->writerParts[strtolower($pPartName)])) {
             return $this->writerParts[strtolower($pPartName)];
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Save PHPExcel to file
+     * Save PHPExcel to file.
      *
-     * @param  string  $pFilename
+     * @param string $pFilename
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function save($pFilename = null)
@@ -129,10 +132,12 @@ class OpenDocument extends BaseWriter implements IWriter
     }
 
     /**
-     * Create zip object
+     * Create zip object.
      *
      * @param string $pFilename
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
+     *
      * @return ZipArchive
      */
     private function createZip($pFilename)
@@ -161,9 +166,10 @@ class OpenDocument extends BaseWriter implements IWriter
     }
 
     /**
-     * Get PHPExcel object
+     * Get PHPExcel object.
      *
      * @return PHPExcel
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function getPHPExcel()
@@ -176,15 +182,18 @@ class OpenDocument extends BaseWriter implements IWriter
     }
 
     /**
-     * Set PHPExcel object
+     * Set PHPExcel object.
      *
-     * @param  PHPExcel  $pPHPExcel  PHPExcel object
+     * @param PHPExcel $pPHPExcel PHPExcel object
+     *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
+     *
      * @return \PhpOffice\PhpExcel\Writer\Excel2007
      */
     public function setPHPExcel(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {
         $this->spreadSheet = $pPHPExcel;
+
         return $this;
     }
 }

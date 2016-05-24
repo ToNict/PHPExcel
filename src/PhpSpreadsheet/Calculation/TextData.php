@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Calculation;
 
 /**
- * PhpOffice\PhpExcel\Calculation\TextData
+ * PhpOffice\PhpExcel\Calculation\TextData.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,14 +22,14 @@ namespace PhpOffice\PhpExcel\Calculation;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Calculation
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class TextData
 {
-
     private static $invalidChars;
 
     private static function unicodeToOrd($c)
@@ -50,14 +50,16 @@ class TextData
             // error
             return Functions::VALUE();
         }
+
         return 0;
     }
 
     /**
-     * CHARACTER
+     * CHARACTER.
      *
-     * @param    string    $character    Value
-     * @return    int
+     * @param string $character Value
+     *
+     * @return int
      */
     public static function CHARACTER($character)
     {
@@ -75,10 +77,11 @@ class TextData
     }
 
     /**
-     * TRIMNONPRINTABLE
+     * TRIMNONPRINTABLE.
      *
-     * @param    mixed    $stringValue    Value to check
-     * @return    string
+     * @param mixed $stringValue Value to check
+     *
+     * @return string
      */
     public static function TRIMNONPRINTABLE($stringValue = '')
     {
@@ -95,14 +98,16 @@ class TextData
         if (is_string($stringValue) || is_numeric($stringValue)) {
             return str_replace(self::$invalidChars, '', trim($stringValue, "\x00..\x1F"));
         }
-        return null;
+
+        return;
     }
 
     /**
-     * TRIMSPACES
+     * TRIMSPACES.
      *
-     * @param    mixed    $stringValue    Value to check
-     * @return    string
+     * @param mixed $stringValue Value to check
+     *
+     * @return string
      */
     public static function TRIMSPACES($stringValue = '')
     {
@@ -114,14 +119,16 @@ class TextData
         if (is_string($stringValue) || is_numeric($stringValue)) {
             return trim(preg_replace('/ +/', ' ', trim($stringValue, ' ')), ' ');
         }
-        return null;
+
+        return;
     }
 
     /**
-     * ASCIICODE
+     * ASCIICODE.
      *
-     * @param    string    $characters        Value
-     * @return    int
+     * @param string $characters Value
+     *
+     * @return int
      */
     public static function ASCIICODE($characters)
     {
@@ -142,19 +149,21 @@ class TextData
             if (mb_strlen($characters, 'UTF-8') > 1) {
                 $character = mb_substr($characters, 0, 1, 'UTF-8');
             }
+
             return self::unicodeToOrd($character);
         } else {
             if (strlen($characters) > 0) {
                 $character = substr($characters, 0, 1);
             }
+
             return ord($character);
         }
     }
 
     /**
-     * CONCATENATE
+     * CONCATENATE.
      *
-     * @return    string
+     * @return string
      */
     public static function CONCATENATE()
     {
@@ -177,16 +186,17 @@ class TextData
     }
 
     /**
-     * DOLLAR
+     * DOLLAR.
      *
      * This function converts a number to text using currency format, with the decimals rounded to the specified place.
      * The format used is $#,##0.00_);($#,##0.00)..
      *
-     * @param    float    $value            The value to format
-     * @param    int        $decimals        The number of digits to display to the right of the decimal point.
-     *                                    If decimals is negative, number is rounded to the left of the decimal point.
-     *                                    If you omit decimals, it is assumed to be 2
-     * @return    string
+     * @param float $value    The value to format
+     * @param int   $decimals The number of digits to display to the right of the decimal point.
+     *                        If decimals is negative, number is rounded to the left of the decimal point.
+     *                        If you omit decimals, it is assumed to be 2
+     *
+     * @return string
      */
     public static function DOLLAR($value = 0, $decimals = 2)
     {
@@ -214,12 +224,13 @@ class TextData
     }
 
     /**
-     * SEARCHSENSITIVE
+     * SEARCHSENSITIVE.
      *
-     * @param    string    $needle        The string to look for
-     * @param    string    $haystack    The string in which to look
-     * @param    int        $offset        Offset within $haystack
-     * @return    string
+     * @param string $needle   The string to look for
+     * @param string $haystack The string in which to look
+     * @param int    $offset   Offset within $haystack
+     *
+     * @return string
      */
     public static function SEARCHSENSITIVE($needle, $haystack, $offset = 1)
     {
@@ -246,16 +257,18 @@ class TextData
                 }
             }
         }
+
         return Functions::VALUE();
     }
 
     /**
-     * SEARCHINSENSITIVE
+     * SEARCHINSENSITIVE.
      *
-     * @param    string    $needle        The string to look for
-     * @param    string    $haystack    The string in which to look
-     * @param    int        $offset        Offset within $haystack
-     * @return    string
+     * @param string $needle   The string to look for
+     * @param string $haystack The string in which to look
+     * @param int    $offset   Offset within $haystack
+     *
+     * @return string
      */
     public static function SEARCHINSENSITIVE($needle, $haystack, $offset = 1)
     {
@@ -282,16 +295,18 @@ class TextData
                 }
             }
         }
+
         return Functions::VALUE();
     }
 
     /**
-     * FIXEDFORMAT
+     * FIXEDFORMAT.
      *
-     * @param    mixed        $value    Value to check
-     * @param    integer        $decimals
-     * @param    boolean        $no_commas
-     * @return    boolean
+     * @param mixed $value     Value to check
+     * @param int   $decimals
+     * @param bool  $no_commas
+     *
+     * @return bool
      */
     public static function FIXEDFORMAT($value, $decimals = 2, $no_commas = false)
     {
@@ -317,11 +332,12 @@ class TextData
     }
 
     /**
-     * LEFT
+     * LEFT.
      *
-     * @param    string    $value    Value
-     * @param    int        $chars    Number of characters
-     * @return    string
+     * @param string $value Value
+     * @param int    $chars Number of characters
+     *
+     * @return string
      */
     public static function LEFT($value = '', $chars = 1)
     {
@@ -344,12 +360,13 @@ class TextData
     }
 
     /**
-     * MID
+     * MID.
      *
-     * @param    string    $value    Value
-     * @param    int        $start    Start character
-     * @param    int        $chars    Number of characters
-     * @return    string
+     * @param string $value Value
+     * @param int    $start Start character
+     * @param int    $chars Number of characters
+     *
+     * @return string
      */
     public static function MID($value = '', $start = 1, $chars = null)
     {
@@ -373,11 +390,12 @@ class TextData
     }
 
     /**
-     * RIGHT
+     * RIGHT.
      *
-     * @param    string    $value    Value
-     * @param    int        $chars    Number of characters
-     * @return    string
+     * @param string $value Value
+     * @param int    $chars Number of characters
+     *
+     * @return string
      */
     public static function RIGHT($value = '', $chars = 1)
     {
@@ -400,10 +418,11 @@ class TextData
     }
 
     /**
-     * STRINGLENGTH
+     * STRINGLENGTH.
      *
-     * @param    string    $value    Value
-     * @return    string
+     * @param string $value Value
+     *
+     * @return string
      */
     public static function STRINGLENGTH($value = '')
     {
@@ -421,12 +440,13 @@ class TextData
     }
 
     /**
-     * LOWERCASE
+     * LOWERCASE.
      *
      * Converts a string value to upper case.
      *
-     * @param    string        $mixedCaseString
-     * @return    string
+     * @param string $mixedCaseString
+     *
+     * @return string
      */
     public static function LOWERCASE($mixedCaseString)
     {
@@ -440,12 +460,13 @@ class TextData
     }
 
     /**
-     * UPPERCASE
+     * UPPERCASE.
      *
      * Converts a string value to upper case.
      *
-     * @param    string        $mixedCaseString
-     * @return    string
+     * @param string $mixedCaseString
+     *
+     * @return string
      */
     public static function UPPERCASE($mixedCaseString)
     {
@@ -459,12 +480,13 @@ class TextData
     }
 
     /**
-     * PROPERCASE
+     * PROPERCASE.
      *
      * Converts a string value to upper case.
      *
-     * @param    string        $mixedCaseString
-     * @return    string
+     * @param string $mixedCaseString
+     *
+     * @return string
      */
     public static function PROPERCASE($mixedCaseString)
     {
@@ -478,13 +500,14 @@ class TextData
     }
 
     /**
-     * REPLACE
+     * REPLACE.
      *
-     * @param    string    $oldText    String to modify
-     * @param    int        $start        Start character
-     * @param    int        $chars        Number of characters
-     * @param    string    $newText    String to replace in defined position
-     * @return    string
+     * @param string $oldText String to modify
+     * @param int    $start   Start character
+     * @param int    $chars   Number of characters
+     * @param string $newText String to replace in defined position
+     *
+     * @return string
      */
     public static function REPLACE($oldText, $start, $chars, $newText)
     {
@@ -500,13 +523,14 @@ class TextData
     }
 
     /**
-     * SUBSTITUTE
+     * SUBSTITUTE.
      *
-     * @param    string    $text        Value
-     * @param    string    $fromText    From Value
-     * @param    string    $toText        To Value
-     * @param    integer    $instance    Instance Number
-     * @return    string
+     * @param string $text     Value
+     * @param string $fromText From Value
+     * @param string $toText   To Value
+     * @param int    $instance Instance Number
+     *
+     * @return string
      */
     public static function SUBSTITUTE($text = '', $fromText = '', $toText = '', $instance = 0)
     {
@@ -547,10 +571,11 @@ class TextData
     }
 
     /**
-     * RETURNSTRING
+     * RETURNSTRING.
      *
-     * @param    mixed    $testValue    Value to check
-     * @return    boolean
+     * @param mixed $testValue Value to check
+     *
+     * @return bool
      */
     public static function RETURNSTRING($testValue = '')
     {
@@ -559,15 +584,17 @@ class TextData
         if (is_string($testValue)) {
             return $testValue;
         }
-        return null;
+
+        return;
     }
 
     /**
-     * TEXTFORMAT
+     * TEXTFORMAT.
      *
-     * @param    mixed    $value    Value to check
-     * @param    string    $format    Format mask to use
-     * @return    boolean
+     * @param mixed  $value  Value to check
+     * @param string $format Format mask to use
+     *
+     * @return bool
      */
     public static function TEXTFORMAT($value, $format)
     {
@@ -582,10 +609,11 @@ class TextData
     }
 
     /**
-     * VALUE
+     * VALUE.
      *
-     * @param    mixed    $value    Value to check
-     * @return    boolean
+     * @param mixed $value Value to check
+     *
+     * @return bool
      */
     public static function VALUE($value = '')
     {
@@ -606,18 +634,21 @@ class TextData
                 $timeValue = DateTime::TIMEVALUE($value);
                 if ($timeValue !== Functions::VALUE()) {
                     Functions::setReturnDateType($dateSetting);
+
                     return $timeValue;
                 }
             }
             $dateValue = DateTime::DATEVALUE($value);
             if ($dateValue !== Functions::VALUE()) {
                 Functions::setReturnDateType($dateSetting);
+
                 return $dateValue;
             }
             Functions::setReturnDateType($dateSetting);
 
             return Functions::VALUE();
         }
+
         return (float) $value;
     }
 }

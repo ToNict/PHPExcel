@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\Dimension
+ * PhpOffice\PhpExcel\Worksheet\Dimension.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 abstract class Dimension
@@ -37,14 +38,14 @@ abstract class Dimension
     private $visible = true;
 
     /**
-     * Outline level
+     * Outline level.
      *
      * @var int
      */
     private $outlineLevel = 0;
 
     /**
-     * Collapsed
+     * Collapsed.
      *
      * @var bool
      */
@@ -58,7 +59,7 @@ abstract class Dimension
     private $xfIndex;
 
     /**
-     * Create a new Dimension
+     * Create a new Dimension.
      *
      * @param int $pIndex Numeric row index
      */
@@ -69,7 +70,7 @@ abstract class Dimension
     }
 
     /**
-     * Get Visible
+     * Get Visible.
      *
      * @return bool
      */
@@ -79,19 +80,21 @@ abstract class Dimension
     }
 
     /**
-     * Set Visible
+     * Set Visible.
      *
      * @param bool $pValue
+     *
      * @return Dimension
      */
     public function setVisible($pValue = true)
     {
         $this->visible = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Outline Level
+     * Get Outline Level.
      *
      * @return int
      */
@@ -101,26 +104,29 @@ abstract class Dimension
     }
 
     /**
-     * Set Outline Level
+     * Set Outline Level.
      *
      * Value must be between 0 and 7
      *
-     * @param  integer $pValue
+     * @param int $pValue
+     *
      * @throws \PhpOffice\PhpExcel\Exception
+     *
      * @return Dimension
      */
     public function setOutlineLevel($pValue)
     {
         if ($pValue < 0 || $pValue > 7) {
-            throw new \PhpOffice\PhpExcel\Exception("Outline level must range between 0 and 7.");
+            throw new \PhpOffice\PhpExcel\Exception('Outline level must range between 0 and 7.');
         }
 
         $this->outlineLevel = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Collapsed
+     * Get Collapsed.
      *
      * @return bool
      */
@@ -130,19 +136,21 @@ abstract class Dimension
     }
 
     /**
-     * Set Collapsed
+     * Set Collapsed.
      *
-     * @param  boolean  $pValue
+     * @param bool $pValue
+     *
      * @return Dimension
      */
     public function setCollapsed($pValue = true)
     {
         $this->collapsed = $pValue;
+
         return $this;
     }
 
     /**
-     * Get index to cellXf
+     * Get index to cellXf.
      *
      * @return int
      */
@@ -152,14 +160,16 @@ abstract class Dimension
     }
 
     /**
-     * Set index to cellXf
+     * Set index to cellXf.
      *
-     * @param  integer $pValue
+     * @param int $pValue
+     *
      * @return Dimension
      */
     public function setXfIndex($pValue = 0)
     {
         $this->xfIndex = $pValue;
+
         return $this;
     }
 

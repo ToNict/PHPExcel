@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel5;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel5\Workbook
+ * PhpOffice\PhpExcel\Writer\Excel5\Workbook.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Writer\Excel5;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel5
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 // Original file header of PEAR::Spreadsheet_Excel_Writer_Workbook (used as the base for this class):
@@ -63,9 +64,8 @@ namespace PhpOffice\PhpExcel\Writer\Excel5;
 // */
 class Workbook extends BIFFwriter
 {
-
     /**
-     * Formula parser
+     * Formula parser.
      *
      * @var \PhpOffice\PhpExcel\Writer\Excel5\Parser
      */
@@ -73,125 +73,132 @@ class Workbook extends BIFFwriter
 
     /**
      * The BIFF file size for the workbook.
-     * @var integer
+     *
+     * @var int
+     *
      * @see calcSheetOffsets()
      */
     private $biffSize;
 
     /**
-     * XF Writers
+     * XF Writers.
+     *
      * @var \PhpOffice\PhpExcel\Writer\Excel5\Xf[]
      */
     private $xfWriters = array();
 
     /**
-     * Array containing the colour palette
+     * Array containing the colour palette.
+     *
      * @var array
      */
     private $palette;
 
     /**
-     * The codepage indicates the text encoding used for strings
-     * @var integer
+     * The codepage indicates the text encoding used for strings.
+     *
+     * @var int
      */
     private $codepage;
 
     /**
-     * The country code used for localization
-     * @var integer
+     * The country code used for localization.
+     *
+     * @var int
      */
     private $countryCode;
 
     /**
-     * Workbook
+     * Workbook.
+     *
      * @var PHPExcel
      */
     private $phpExcel;
 
     /**
-     * Fonts writers
+     * Fonts writers.
      *
      * @var \PhpOffice\PhpExcel\Writer\Excel5\Font[]
      */
     private $fontWriters = array();
 
     /**
-     * Added fonts. Maps from font's hash => index in workbook
+     * Added fonts. Maps from font's hash => index in workbook.
      *
      * @var array
      */
     private $addedFonts = array();
 
     /**
-     * Shared number formats
+     * Shared number formats.
      *
      * @var array
      */
     private $numberFormats = array();
 
     /**
-     * Added number formats. Maps from numberFormat's hash => index in workbook
+     * Added number formats. Maps from numberFormat's hash => index in workbook.
      *
      * @var array
      */
     private $addedNumberFormats = array();
 
     /**
-     * Sizes of the binary worksheet streams
+     * Sizes of the binary worksheet streams.
      *
      * @var array
      */
     private $worksheetSizes = array();
 
     /**
-     * Offsets of the binary worksheet streams relative to the start of the global workbook stream
+     * Offsets of the binary worksheet streams relative to the start of the global workbook stream.
      *
      * @var array
      */
     private $worksheetOffsets = array();
 
     /**
-     * Total number of shared strings in workbook
+     * Total number of shared strings in workbook.
      *
      * @var int
      */
     private $stringTotal;
 
     /**
-     * Number of unique shared strings in workbook
+     * Number of unique shared strings in workbook.
      *
      * @var int
      */
     private $stringUnique;
 
     /**
-     * Array of unique shared strings in workbook
+     * Array of unique shared strings in workbook.
      *
      * @var array
      */
     private $stringTable;
 
     /**
-     * Color cache
+     * Color cache.
      */
     private $colors;
 
     /**
-     * Escher object corresponding to MSODRAWINGGROUP
+     * Escher object corresponding to MSODRAWINGGROUP.
      *
      * @var \PhpOffice\PhpExcel\Shared\Escher
      */
     private $escher;
 
     /**
-     * Class constructor
+     * Class constructor.
      *
-     * @param PHPExcel    $phpExcel        The Workbook
-     * @param int        &$str_total        Total number of strings
-     * @param int        &$str_unique    Total number of unique strings
-     * @param array        &$str_table        String Table
-     * @param array        &$colors        Colour Table
-     * @param mixed        $parser            The formula parser created for the Workbook
+     * @param PHPExcel $phpExcel    The Workbook
+     * @param int      &$str_total  Total number of strings
+     * @param int      &$str_unique Total number of unique strings
+     * @param array    &$str_table  String Table
+     * @param array    &$colors     Colour Table
+     * @param mixed    $parser      The formula parser created for the Workbook
      */
     public function __construct(\PhpOffice\PhpExcel\Spreadsheet $phpExcel, &$str_total, &$str_unique, &$str_table, &$colors, $parser)
     {
@@ -233,10 +240,11 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Add a new XF writer
+     * Add a new XF writer.
      *
      * @param \PhpOffice\PhpExcel\Style
-     * @param boolean Is it a style XF?
+     * @param bool Is it a style XF?
+     *
      * @return int Index to XF record
      */
     public function addXfWriter($style, $isStyleXf = false)
@@ -280,13 +288,15 @@ class Workbook extends BIFFwriter
         $this->xfWriters[] = $xfWriter;
 
         $xfIndex = count($this->xfWriters) - 1;
+
         return $xfIndex;
     }
 
     /**
-     * Add a font to added fonts
+     * Add a font to added fonts.
      *
      * @param \PhpOffice\PhpExcel\Style\Font $font
+     *
      * @return int Index to FONT record
      */
     public function addFont(\PhpOffice\PhpExcel\Style\Font $font)
@@ -304,13 +314,15 @@ class Workbook extends BIFFwriter
 
             $this->addedFonts[$fontHashCode] = $fontIndex;
         }
+
         return $fontIndex;
     }
 
     /**
-     * Alter color palette adding a custom color
+     * Alter color palette adding a custom color.
      *
      * @param string $rgb E.g. 'FF00AA'
+     *
      * @return int Color index
      */
     private function addColor($rgb)
@@ -323,7 +335,7 @@ class Workbook extends BIFFwriter
                         hexdec(substr($rgb, 0, 2)),
                         hexdec(substr($rgb, 2, 2)),
                         hexdec(substr($rgb, 4)),
-                        0
+                        0,
                 );
                 $this->colors[$rgb] = $colorIndex;
             } else {
@@ -340,8 +352,6 @@ class Workbook extends BIFFwriter
 
     /**
      * Sets the colour palette to the Excel 97+ default.
-     *
-     * @access private
      */
     private function setPaletteXl97()
     {
@@ -409,8 +419,9 @@ class Workbook extends BIFFwriter
      * Assemble worksheets into a workbook and send the BIFF data to an OLE
      * storage.
      *
-     * @param    array    $pWorksheetSizes    The sizes in bytes of the binary worksheet streams
-     * @return    string    Binary data for workbook stream
+     * @param array $pWorksheetSizes The sizes in bytes of the binary worksheet streams
+     *
+     * @return string Binary data for workbook stream
      */
     public function writeWorkbook($pWorksheetSizes = null)
     {
@@ -463,8 +474,6 @@ class Workbook extends BIFFwriter
 
     /**
      * Calculate offsets for Worksheet BOF records.
-     *
-     * @access private
      */
     private function calcSheetOffsets()
     {
@@ -497,7 +506,7 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Store user defined numerical formats i.e. FORMAT records
+     * Store user defined numerical formats i.e. FORMAT records.
      */
     private function writeAllNumberFormats()
     {
@@ -625,7 +634,7 @@ class Workbook extends BIFFwriter
 
     /**
      * Writes all the DEFINEDNAME records (BIFF8).
-     * So far this is only used for repeating rows/columns (print titles) and print areas
+     * So far this is only used for repeating rows/columns (print titles) and print areas.
      */
     private function writeAllDefinedNamesBiff8()
     {
@@ -638,7 +647,7 @@ class Workbook extends BIFFwriter
             foreach ($namedRanges as $namedRange) {
                 // Create absolute coordinate
                 $range = \PhpOffice\PhpExcel\Cell::splitRange($namedRange->getRange());
-                for ($i = 0; $i < count($range); $i++) {
+                for ($i = 0; $i < count($range); ++$i) {
                     $range[$i][0] = '\''.str_replace("'", "''", $namedRange->getWorksheet()->getTitle()).'\'!'.\PhpOffice\PhpExcel\Cell::absoluteCoordinate($range[$i][0]);
                     if (isset($range[$i][1])) {
                         $range[$i][1] = \PhpOffice\PhpExcel\Cell::absoluteCoordinate($range[$i][1]);
@@ -651,7 +660,7 @@ class Workbook extends BIFFwriter
                     $formulaData = $this->parser->toReversePolish();
 
                     // make sure tRef3d is of type tRef3dR (0x3A)
-                    if (isset($formulaData{0}) and ( $formulaData{0} == "\x7A" or $formulaData{0} == "\x5A")) {
+                    if (isset($formulaData{0}) and ($formulaData{0} == "\x7A" or $formulaData{0} == "\x5A")) {
                         $formulaData = "\x3A".substr($formulaData, 1);
                     }
 
@@ -772,13 +781,14 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Write a DEFINEDNAME record for BIFF8 using explicit binary formula data
+     * Write a DEFINEDNAME record for BIFF8 using explicit binary formula data.
      *
-     * @param    string        $name            The name in UTF-8
-     * @param    string        $formulaData    The binary formula data
-     * @param    string        $sheetIndex        1-based sheet index the defined name applies to. 0 = global
-     * @param    boolean        $isBuiltIn        Built-in name?
-     * @return    string    Complete binary record data
+     * @param string $name        The name in UTF-8
+     * @param string $formulaData The binary formula data
+     * @param string $sheetIndex  1-based sheet index the defined name applies to. 0 = global
+     * @param bool   $isBuiltIn   Built-in name?
+     *
+     * @return string Complete binary record data
      */
     private function writeDefinedNameBiff8($name, $formulaData, $sheetIndex = 0, $isBuiltIn = false)
     {
@@ -807,13 +817,14 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Write a short NAME record
+     * Write a short NAME record.
      *
-     * @param    string         $name
-     * @param    string         $sheetIndex        1-based sheet index the defined name applies to. 0 = global
-     * @param    integer[][]  $rangeBounds    range boundaries
-     * @param    boolean      $isHidden
-     * @return    string    Complete binary record data
+     * @param string      $name
+     * @param string      $sheetIndex  1-based sheet index the defined name applies to. 0 = global
+     * @param integer[][] $rangeBounds range boundaries
+     * @param bool        $isHidden
+     *
+     * @return string Complete binary record data
      * */
     private function writeShortNameBiff8($name, $sheetIndex, $rangeBounds, $isHidden = false)
     {
@@ -876,16 +887,16 @@ class Workbook extends BIFFwriter
         $itabFirst = 0;     // 1st displayed worksheet
         $itabCur = $this->phpExcel->getActiveSheetIndex();    // Active worksheet
 
-        $header = pack("vv", $record, $length);
-        $data = pack("vvvvvvvvv", $xWn, $yWn, $dxWn, $dyWn, $grbit, $itabCur, $itabFirst, $ctabsel, $wTabRatio);
+        $header = pack('vv', $record, $length);
+        $data = pack('vvvvvvvvv', $xWn, $yWn, $dxWn, $dyWn, $grbit, $itabCur, $itabFirst, $ctabsel, $wTabRatio);
         $this->append($header.$data);
     }
 
     /**
      * Writes Excel BIFF BOUNDSHEET record.
      *
-     * @param \PhpOffice\PhpExcel\Worksheet  $sheet Worksheet name
-     * @param integer $offset    Location of worksheet BOF
+     * @param \PhpOffice\PhpExcel\Worksheet $sheet  Worksheet name
+     * @param int                           $offset Location of worksheet BOF
      */
     private function writeBoundSheet($sheet, $offset)
     {
@@ -912,31 +923,31 @@ class Workbook extends BIFFwriter
 
         $grbit = 0x0000;                    // Visibility and sheet type
 
-        $data = pack("VCC", $offset, $ss, $st);
+        $data = pack('VCC', $offset, $ss, $st);
         $data .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeShort($sheetname);
 
         $length = strlen($data);
-        $header = pack("vv", $record, $length);
+        $header = pack('vv', $record, $length);
         $this->append($header.$data);
     }
 
     /**
-     * Write Internal SUPBOOK record
+     * Write Internal SUPBOOK record.
      */
     private function writeSupbookInternal()
     {
         $record = 0x01AE;   // Record identifier
         $length = 0x0004;   // Bytes to follow
 
-        $header = pack("vv", $record, $length);
-        $data = pack("vv", $this->phpExcel->getSheetCount(), 0x0401);
+        $header = pack('vv', $record, $length);
+        $data = pack('vv', $this->phpExcel->getSheetCount(), 0x0401);
+
         return $this->writeData($header.$data);
     }
 
     /**
      * Writes the Excel BIFF EXTERNSHEET record. These references are used by
      * formulas.
-     *
      */
     private function writeExternalsheetBiff8()
     {
@@ -945,11 +956,12 @@ class Workbook extends BIFFwriter
         $length = 2 + 6 * $totalReferences;  // Number of bytes to follow
 
         $supbook_index = 0;           // FIXME: only using internal SUPBOOK record
-        $header = pack("vv", $record, $length);
+        $header = pack('vv', $record, $length);
         $data = pack('v', $totalReferences);
         for ($i = 0; $i < $totalReferences; ++$i) {
             $data .= $this->parser->references[$i];
         }
+
         return $this->writeData($header.$data);
     }
 
@@ -965,16 +977,16 @@ class Workbook extends BIFFwriter
         $BuiltIn = 0x00;     // Built-in style
         $iLevel = 0xff;     // Outline style level
 
-        $header = pack("vv", $record, $length);
-        $data = pack("vCC", $ixfe, $BuiltIn, $iLevel);
+        $header = pack('vv', $record, $length);
+        $data = pack('vCC', $ixfe, $BuiltIn, $iLevel);
         $this->append($header.$data);
     }
 
     /**
      * Writes Excel FORMAT record for non "built-in" numerical formats.
      *
-     * @param string  $format Custom format string
-     * @param integer $ifmt   Format index code
+     * @param string $format Custom format string
+     * @param int    $ifmt   Format index code
      */
     private function writeNumberFormat($format, $ifmt)
     {
@@ -983,9 +995,8 @@ class Workbook extends BIFFwriter
         $numberFormatString = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($format);
         $length = 2 + strlen($numberFormatString);    // Number of bytes to follow
 
-
-        $header = pack("vv", $record, $length);
-        $data = pack("v", $ifmt).$numberFormatString;
+        $header = pack('vv', $record, $length);
+        $data = pack('v', $ifmt).$numberFormatString;
         $this->append($header.$data);
     }
 
@@ -999,8 +1010,8 @@ class Workbook extends BIFFwriter
 
         $f1904 = (\PhpOffice\PhpExcel\Shared\Date::getExcelCalendar() == \PhpOffice\PhpExcel\Shared\Date::CALENDAR_MAC_1904) ? 1 : 0;   // Flag for 1904 date system
 
-        $header = pack("vv", $record, $length);
-        $data = pack("v", $f1904);
+        $header = pack('vv', $record, $length);
+        $data = pack('v', $f1904);
         $this->append($header.$data);
     }
 
@@ -1014,15 +1025,15 @@ class Workbook extends BIFFwriter
      *
      * A similar method is used in Worksheet.php for a slightly different purpose.
      *
-     * @param integer $cxals Number of external references
+     * @param int $cxals Number of external references
      */
     private function writeExternalCount($cxals)
     {
         $record = 0x0016;   // Record identifier
         $length = 0x0002;   // Number of bytes to follow
 
-        $header = pack("vv", $record, $length);
-        $data = pack("v", $cxals);
+        $header = pack('vv', $record, $length);
+        $data = pack('v', $cxals);
         $this->append($header.$data);
     }
 
@@ -1043,8 +1054,8 @@ class Workbook extends BIFFwriter
         $cch = strlen($sheetname);         // Length of sheet name
         $rgch = 0x03;                       // Filename encoding
 
-        $header = pack("vv", $record, $length);
-        $data = pack("CC", $cch, $rgch);
+        $header = pack('vv', $record, $length);
+        $data = pack('CC', $cch, $rgch);
         $this->append($header.$data.$sheetname);
     }
 
@@ -1052,12 +1063,12 @@ class Workbook extends BIFFwriter
      * Store the NAME record in the short format that is used for storing the print
      * area, repeat rows only and repeat columns only.
      *
-     * @param integer $index  Sheet index
-     * @param integer $type   Built-in name type
-     * @param integer $rowmin Start row
-     * @param integer $rowmax End row
-     * @param integer $colmin Start colum
-     * @param integer $colmax End column
+     * @param int $index  Sheet index
+     * @param int $type   Built-in name type
+     * @param int $rowmin Start row
+     * @param int $rowmax End row
+     * @param int $colmin Start colum
+     * @param int $colmax End column
      */
     private function writeNameShort($index, $type, $rowmin, $rowmax, $colmin, $colmax)
     {
@@ -1083,30 +1094,30 @@ class Workbook extends BIFFwriter
         $unknown07 = 0x1087;
         $unknown08 = 0x8005;
 
-        $header = pack("vv", $record, $length);
-        $data = pack("v", $grbit);
-        $data .= pack("C", $chKey);
-        $data .= pack("C", $cch);
-        $data .= pack("v", $cce);
-        $data .= pack("v", $ixals);
-        $data .= pack("v", $itab);
-        $data .= pack("C", $cchCustMenu);
-        $data .= pack("C", $cchDescription);
-        $data .= pack("C", $cchHelptopic);
-        $data .= pack("C", $cchStatustext);
-        $data .= pack("C", $rgch);
-        $data .= pack("C", $unknown03);
-        $data .= pack("v", $unknown04);
-        $data .= pack("v", $unknown05);
-        $data .= pack("v", $unknown06);
-        $data .= pack("v", $unknown07);
-        $data .= pack("v", $unknown08);
-        $data .= pack("v", $index);
-        $data .= pack("v", $index);
-        $data .= pack("v", $rowmin);
-        $data .= pack("v", $rowmax);
-        $data .= pack("C", $colmin);
-        $data .= pack("C", $colmax);
+        $header = pack('vv', $record, $length);
+        $data = pack('v', $grbit);
+        $data .= pack('C', $chKey);
+        $data .= pack('C', $cch);
+        $data .= pack('v', $cce);
+        $data .= pack('v', $ixals);
+        $data .= pack('v', $itab);
+        $data .= pack('C', $cchCustMenu);
+        $data .= pack('C', $cchDescription);
+        $data .= pack('C', $cchHelptopic);
+        $data .= pack('C', $cchStatustext);
+        $data .= pack('C', $rgch);
+        $data .= pack('C', $unknown03);
+        $data .= pack('v', $unknown04);
+        $data .= pack('v', $unknown05);
+        $data .= pack('v', $unknown06);
+        $data .= pack('v', $unknown07);
+        $data .= pack('v', $unknown08);
+        $data .= pack('v', $index);
+        $data .= pack('v', $index);
+        $data .= pack('v', $rowmin);
+        $data .= pack('v', $rowmax);
+        $data .= pack('C', $colmin);
+        $data .= pack('C', $colmax);
         $this->append($header.$data);
     }
 
@@ -1114,14 +1125,14 @@ class Workbook extends BIFFwriter
      * Store the NAME record in the long format that is used for storing the repeat
      * rows and columns when both are specified. This shares a lot of code with
      * writeNameShort() but we use a separate method to keep the code clean.
-     * Code abstraction for reuse can be carried too far, and I should know. ;-)
+     * Code abstraction for reuse can be carried too far, and I should know. ;-).
      *
-     * @param integer $index Sheet index
-     * @param integer $type  Built-in name type
-     * @param integer $rowmin Start row
-     * @param integer $rowmax End row
-     * @param integer $colmin Start colum
-     * @param integer $colmax End column
+     * @param int $index  Sheet index
+     * @param int $type   Built-in name type
+     * @param int $rowmin Start row
+     * @param int $rowmax End row
+     * @param int $colmin Start colum
+     * @param int $colmax End column
      */
     private function writeNameLong($index, $type, $rowmin, $rowmax, $colmin, $colmax)
     {
@@ -1148,53 +1159,53 @@ class Workbook extends BIFFwriter
         $unknown07 = 0x1087;
         $unknown08 = 0x8008;
 
-        $header = pack("vv", $record, $length);
-        $data = pack("v", $grbit);
-        $data .= pack("C", $chKey);
-        $data .= pack("C", $cch);
-        $data .= pack("v", $cce);
-        $data .= pack("v", $ixals);
-        $data .= pack("v", $itab);
-        $data .= pack("C", $cchCustMenu);
-        $data .= pack("C", $cchDescription);
-        $data .= pack("C", $cchHelptopic);
-        $data .= pack("C", $cchStatustext);
-        $data .= pack("C", $rgch);
-        $data .= pack("C", $unknown01);
-        $data .= pack("v", $unknown02);
+        $header = pack('vv', $record, $length);
+        $data = pack('v', $grbit);
+        $data .= pack('C', $chKey);
+        $data .= pack('C', $cch);
+        $data .= pack('v', $cce);
+        $data .= pack('v', $ixals);
+        $data .= pack('v', $itab);
+        $data .= pack('C', $cchCustMenu);
+        $data .= pack('C', $cchDescription);
+        $data .= pack('C', $cchHelptopic);
+        $data .= pack('C', $cchStatustext);
+        $data .= pack('C', $rgch);
+        $data .= pack('C', $unknown01);
+        $data .= pack('v', $unknown02);
         // Column definition
-        $data .= pack("C", $unknown03);
-        $data .= pack("v", $unknown04);
-        $data .= pack("v", $unknown05);
-        $data .= pack("v", $unknown06);
-        $data .= pack("v", $unknown07);
-        $data .= pack("v", $unknown08);
-        $data .= pack("v", $index);
-        $data .= pack("v", $index);
-        $data .= pack("v", 0x0000);
-        $data .= pack("v", 0x3fff);
-        $data .= pack("C", $colmin);
-        $data .= pack("C", $colmax);
+        $data .= pack('C', $unknown03);
+        $data .= pack('v', $unknown04);
+        $data .= pack('v', $unknown05);
+        $data .= pack('v', $unknown06);
+        $data .= pack('v', $unknown07);
+        $data .= pack('v', $unknown08);
+        $data .= pack('v', $index);
+        $data .= pack('v', $index);
+        $data .= pack('v', 0x0000);
+        $data .= pack('v', 0x3fff);
+        $data .= pack('C', $colmin);
+        $data .= pack('C', $colmax);
         // Row definition
-        $data .= pack("C", $unknown03);
-        $data .= pack("v", $unknown04);
-        $data .= pack("v", $unknown05);
-        $data .= pack("v", $unknown06);
-        $data .= pack("v", $unknown07);
-        $data .= pack("v", $unknown08);
-        $data .= pack("v", $index);
-        $data .= pack("v", $index);
-        $data .= pack("v", $rowmin);
-        $data .= pack("v", $rowmax);
-        $data .= pack("C", 0x00);
-        $data .= pack("C", 0xff);
+        $data .= pack('C', $unknown03);
+        $data .= pack('v', $unknown04);
+        $data .= pack('v', $unknown05);
+        $data .= pack('v', $unknown06);
+        $data .= pack('v', $unknown07);
+        $data .= pack('v', $unknown08);
+        $data .= pack('v', $index);
+        $data .= pack('v', $index);
+        $data .= pack('v', $rowmin);
+        $data .= pack('v', $rowmax);
+        $data .= pack('C', 0x00);
+        $data .= pack('C', 0xff);
         // End of data
-        $data .= pack("C", 0x10);
+        $data .= pack('C', 0x10);
         $this->append($header.$data);
     }
 
     /**
-     * Stores the COUNTRY record for localization
+     * Stores the COUNTRY record for localization.
      *
      * @return string
      */
@@ -1211,7 +1222,7 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Write the RECALCID record
+     * Write the RECALCID record.
      *
      * @return string
      */
@@ -1242,11 +1253,11 @@ class Workbook extends BIFFwriter
         // Pack the RGB data
         foreach ($aref as $color) {
             foreach ($color as $byte) {
-                $data .= pack("C", $byte);
+                $data .= pack('C', $byte);
             }
         }
 
-        $header = pack("vvv", $record, $length, $ccv);
+        $header = pack('vvv', $record, $length, $ccv);
         $this->append($header.$data);
     }
 
@@ -1273,16 +1284,16 @@ class Workbook extends BIFFwriter
         $recordDatas = array();
 
         // start SST record data block with total number of strings, total number of unique strings
-        $recordData = pack("VV", $this->stringTotal, $this->stringUnique);
+        $recordData = pack('VV', $this->stringTotal, $this->stringUnique);
 
         // loop through all (unique) strings in shared strings table
         foreach (array_keys($this->stringTable) as $string) {
             // here $string is a BIFF8 encoded string
             // length = character count
-            $headerinfo = unpack("vlength/Cencoding", $string);
+            $headerinfo = unpack('vlength/Cencoding', $string);
 
             // currently, this is always 1 = uncompressed
-            $encoding = $headerinfo["encoding"];
+            $encoding = $headerinfo['encoding'];
 
             // initialize finished writing current $string
             $finished = false;
@@ -1363,7 +1374,7 @@ class Workbook extends BIFFwriter
             // first block should have the SST record header, remaing should have CONTINUE header
             $record = ($i == 0) ? 0x00FC : 0x003C;
 
-            $header = pack("vv", $record, strlen($recordData));
+            $header = pack('vv', $record, strlen($recordData));
             $data = $header.$recordData;
 
             $chunk .= $this->writeData($data);
@@ -1384,7 +1395,7 @@ class Workbook extends BIFFwriter
 
             $record = 0x00EB;
             $length = strlen($data);
-            $header = pack("vv", $record, $length);
+            $header = pack('vv', $record, $length);
 
             return $this->writeData($header.$data);
         } else {
@@ -1393,7 +1404,7 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Get Escher object
+     * Get Escher object.
      *
      * @return \PhpOffice\PhpExcel\Shared\Escher
      */
@@ -1403,7 +1414,7 @@ class Workbook extends BIFFwriter
     }
 
     /**
-     * Set Escher object
+     * Set Escher object.
      *
      * @param \PhpOffice\PhpExcel\Shared\Escher $pValue
      */

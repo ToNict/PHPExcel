@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\StringTable
+ * PhpOffice\PhpExcel\Writer\Excel2007\StringTable.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,20 +22,23 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class StringTable extends WriterPart
 {
     /**
-     * Create worksheet stringtable
+     * Create worksheet stringtable.
      *
-     * @param     \PhpOffice\PhpExcel\Worksheet     $pSheet                Worksheet
-     * @param     string[]                 $pExistingTable     Existing table to eventually merge with
-     * @return     string[]                 String table for worksheet
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Worksheet $pSheet         Worksheet
+     * @param string[]                      $pExistingTable Existing table to eventually merge with
+     *
+     * @return string[] String table for worksheet
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function createStringTable($pSheet = null, $pExistingTable = null)
     {
@@ -62,13 +65,13 @@ class StringTable extends WriterPart
                     $cellValue !== '' &&
                     !isset($aFlippedStringTable[$cellValue]) &&
                     ($cell->getDataType() == \PhpOffice\PhpExcel\Cell\DataType::TYPE_STRING || $cell->getDataType() == \PhpOffice\PhpExcel\Cell\DataType::TYPE_STRING2 || $cell->getDataType() == \PhpOffice\PhpExcel\Cell\DataType::TYPE_NULL)) {
-                        $aStringTable[] = $cellValue;
-                        $aFlippedStringTable[$cellValue] = true;
+                    $aStringTable[] = $cellValue;
+                    $aFlippedStringTable[$cellValue] = true;
                 } elseif ($cellValue instanceof \PhpOffice\PhpExcel\RichText &&
                           ($cellValue !== null) &&
                           !isset($aFlippedStringTable[$cellValue->getHashCode()])) {
-                                $aStringTable[] = $cellValue;
-                                $aFlippedStringTable[$cellValue->getHashCode()] = true;
+                    $aStringTable[] = $cellValue;
+                    $aFlippedStringTable[$cellValue->getHashCode()] = true;
                 }
             }
 
@@ -79,11 +82,13 @@ class StringTable extends WriterPart
     }
 
     /**
-     * Write string table to XML format
+     * Write string table to XML format.
      *
-     * @param     string[]     $pStringTable
-     * @return string  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param string[] $pStringTable
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeStringTable($pStringTable = null)
     {
@@ -108,7 +113,7 @@ class StringTable extends WriterPart
             foreach ($pStringTable as $textElement) {
                 $objWriter->startElement('si');
 
-                if (! $textElement instanceof \PhpOffice\PhpExcel\RichText) {
+                if (!$textElement instanceof \PhpOffice\PhpExcel\RichText) {
                     $textToWrite = \PhpOffice\PhpExcel\Shared\String::ControlCharacterPHP2OOXML($textElement);
                     $objWriter->startElement('t');
                     if ($textToWrite !== trim($textToWrite)) {
@@ -127,17 +132,18 @@ class StringTable extends WriterPart
 
             return $objWriter->getData();
         } else {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("Invalid string table array passed.");
+            throw new \PhpOffice\PhpExcel\Writer\Exception('Invalid string table array passed.');
         }
     }
 
     /**
-     * Write Rich Text
+     * Write Rich Text.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter    $objWriter         XML Writer
-     * @param     \PhpOffice\PhpExcel\RichText            $pRichText        Rich text
-     * @param     string                        $prefix            Optional Namespace prefix
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter XML Writer
+     * @param \PhpOffice\PhpExcel\RichText         $pRichText Rich text
+     * @param string                               $prefix    Optional Namespace prefix
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeRichText(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, \PhpOffice\PhpExcel\RichText $pRichText = null, $prefix = null)
     {
@@ -216,12 +222,13 @@ class StringTable extends WriterPart
     }
 
     /**
-     * Write Rich Text
+     * Write Rich Text.
      *
-     * @param     \PhpOffice\PhpExcel\Shared\XMLWriter    $objWriter         XML Writer
-     * @param     string|\PhpOffice\PhpExcel\RichText    $pRichText        text string or Rich text
-     * @param     string                        $prefix            Optional Namespace prefix
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     * @param \PhpOffice\PhpExcel\Shared\XMLWriter $objWriter XML Writer
+     * @param string|\PhpOffice\PhpExcel\RichText  $pRichText text string or Rich text
+     * @param string                               $prefix    Optional Namespace prefix
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeRichTextForCharts(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, $pRichText = null, $prefix = null)
     {
@@ -264,7 +271,7 @@ class StringTable extends WriterPart
 
             // rFont
             $objWriter->startElement($prefix.'latin');
-                $objWriter->writeAttribute('typeface', $element->getFont()->getName());
+            $objWriter->writeAttribute('typeface', $element->getFont()->getName());
             $objWriter->endElement();
 
                 // Superscript / subscript
@@ -291,10 +298,11 @@ class StringTable extends WriterPart
     }
 
     /**
-     * Flip string table (for index searching)
+     * Flip string table (for index searching).
      *
-     * @param     array    $stringTable    Stringtable
-     * @return     array
+     * @param array $stringTable Stringtable
+     *
+     * @return array
      */
     public function flipStringTable($stringTable = array())
     {
@@ -303,7 +311,7 @@ class StringTable extends WriterPart
 
         // Loop through stringtable and add flipped items to $returnValue
         foreach ($stringTable as $key => $value) {
-            if (! $value instanceof \PhpOffice\PhpExcel\RichText) {
+            if (!$value instanceof \PhpOffice\PhpExcel\RichText) {
                 $returnValue[$value] = $key;
             } elseif ($value instanceof \PhpOffice\PhpExcel\RichText) {
                 $returnValue[$value->getHashCode()] = $key;

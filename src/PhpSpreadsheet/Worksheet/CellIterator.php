@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\CellIterator
+ * PhpOffice\PhpExcel\Worksheet\CellIterator.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,36 +22,37 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 abstract class CellIterator
 {
     /**
-     * PhpOffice\PhpExcel\Worksheet to iterate
+     * PhpOffice\PhpExcel\Worksheet to iterate.
      *
      * @var \PhpOffice\PhpExcel\Worksheet
      */
     protected $subject;
 
     /**
-     * Current iterator position
+     * Current iterator position.
      *
      * @var mixed
      */
     protected $position = null;
 
     /**
-     * Iterate only existing cells
+     * Iterate only existing cells.
      *
-     * @var boolean
+     * @var bool
      */
     protected $onlyExistingCells = false;
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -59,9 +60,9 @@ abstract class CellIterator
     }
 
     /**
-     * Get loop only existing cells
+     * Get loop only existing cells.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIterateOnlyExistingCells()
     {
@@ -69,16 +70,17 @@ abstract class CellIterator
     }
 
     /**
-     * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary
+     * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary.
      *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     abstract protected function adjustForExistingOnlyRange();
 
     /**
-     * Set the iterator to loop only existing cells
+     * Set the iterator to loop only existing cells.
      *
-     * @param    boolean        $value
+     * @param bool $value
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public function setIterateOnlyExistingCells($value = true)

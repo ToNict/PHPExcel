@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Calculation;
 
 /**
- * PhpOffice\PhpExcel\Calculation\Exception
+ * PhpOffice\PhpExcel\Calculation\Exception.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,15 +22,16 @@ namespace PhpOffice\PhpExcel\Calculation;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Calculation
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Exception extends \PhpOffice\PhpExcel\Exception
 {
     /**
-     * Error handler callback
+     * Error handler callback.
      *
      * @param mixed $code
      * @param mixed $string

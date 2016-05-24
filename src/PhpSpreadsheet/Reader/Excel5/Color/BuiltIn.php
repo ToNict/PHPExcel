@@ -18,9 +18,10 @@ class BuiltIn
     );
 
     /**
-     * Map built-in color to RGB value
+     * Map built-in color to RGB value.
      *
      * @param int $color Indexed color
+     *
      * @return array
      */
     public static function lookup($color)
@@ -28,6 +29,7 @@ class BuiltIn
         if (isset(self::$map[$color])) {
             return array('rgb' => self::$map[$color]);
         }
+
         return array('rgb' => '000000');
     }
 }

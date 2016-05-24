@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\Date
+ * PhpOffice\PhpExcel\Shared\Date.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,14 +22,14 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Date
 {
-
     /** constants */
     const CALENDAR_WINDOWS_1900 = 1900;        //    Base date of 1st Jan 1900 = 1.0
     const CALENDAR_MAC_1904 = 1904;            //    Base date of 2nd Jan 1904 = 1.0
@@ -80,25 +80,28 @@ class Date
     protected static $excelBaseDate = self::CALENDAR_WINDOWS_1900;
 
     /**
-     * Set the Excel calendar (Windows 1900 or Mac 1904)
+     * Set the Excel calendar (Windows 1900 or Mac 1904).
      *
-     * @param     integer    $baseDate           Excel base date (1900 or 1904)
-     * @return    boolean                        Success or failure
+     * @param int $baseDate Excel base date (1900 or 1904)
+     *
+     * @return bool Success or failure
      */
     public static function setExcelCalendar($baseDate)
     {
         if (($baseDate == self::CALENDAR_WINDOWS_1900) ||
             ($baseDate == self::CALENDAR_MAC_1904)) {
             self::$excelBaseDate = $baseDate;
+
             return true;
         }
+
         return false;
     }
 
     /**
-     * Return the Excel calendar (Windows 1900 or Mac 1904)
+     * Return the Excel calendar (Windows 1900 or Mac 1904).
      *
-     * @return     integer    Excel base date (1900 or 1904)
+     * @return int Excel base date (1900 or 1904)
      */
     public static function getExcelCalendar()
     {
@@ -106,13 +109,14 @@ class Date
     }
 
     /**
-     *    Convert a date from Excel to PHP
+     *    Convert a date from Excel to PHP.
      *
-     *    @param        integer        $dateValue            Excel date/time value
-     *    @param        boolean        $adjustToTimezone    Flag indicating whether $dateValue should be treated as
+     *    @param        int        $dateValue            Excel date/time value
+     *    @param        bool        $adjustToTimezone    Flag indicating whether $dateValue should be treated as
      *                                                    a UST timestamp, or adjusted to UST
      *    @param        string         $timezone            The timezone for finding the adjustment from UST
-     *    @return       integer        PHP serialized date/time
+     *
+     *    @return       int        PHP serialized date/time
      */
     public static function excelToPHP($dateValue = 0, $adjustToTimezone = false, $timezone = null)
     {
@@ -148,10 +152,11 @@ class Date
     }
 
     /**
-     * Convert a date from Excel to a PHP Date/Time object
+     * Convert a date from Excel to a PHP Date/Time object.
      *
-     * @param    integer        $dateValue        Excel date/time value
-     * @return   \DateTime                    PHP date/time object
+     * @param int $dateValue Excel date/time value
+     *
+     * @return \DateTime PHP date/time object
      */
     public static function excelToPHPObject($dateValue = 0)
     {
@@ -169,12 +174,13 @@ class Date
     }
 
     /**
-     *    Convert a date from PHP to Excel
+     *    Convert a date from PHP to Excel.
      *
      *    @param    mixed        $dateValue            PHP serialized date/time or date object
-     *    @param    boolean        $adjustToTimezone    Flag indicating whether $dateValue should be treated as
+     *    @param    bool        $adjustToTimezone    Flag indicating whether $dateValue should be treated as
      *                                                    a UST timestamp, or adjusted to UST
      *    @param    string         $timezone            The timezone for finding the adjustment from UST
+     *
      *    @return    mixed        Excel date/time value
      *                            or boolean FALSE on failure
      */
@@ -203,15 +209,16 @@ class Date
     }
 
     /**
-     * formattedPHPToExcel
+     * formattedPHPToExcel.
      *
-     * @param    integer    $year
-     * @param    integer    $month
-     * @param    integer    $day
-     * @param    integer    $hours
-     * @param    integer    $minutes
-     * @param    integer    $seconds
-     * @return   integer    Excel date/time value
+     * @param int $year
+     * @param int $month
+     * @param int $day
+     * @param int $hours
+     * @param int $minutes
+     * @param int $seconds
+     *
+     * @return int Excel date/time value
      */
     public static function formattedPHPToExcel($year, $month, $day, $hours = 0, $minutes = 0, $seconds = 0)
     {
@@ -251,8 +258,9 @@ class Date
     /**
      * Is a given cell a date/time?
      *
-     * @param   \PhpOffice\PhpExcel\Cell    $pCell
-     * @return  boolean
+     * @param \PhpOffice\PhpExcel\Cell $pCell
+     *
+     * @return bool
      */
     public static function isDateTime(\PhpOffice\PhpExcel\Cell $pCell)
     {
@@ -266,8 +274,9 @@ class Date
     /**
      * Is a given number format a date/time?
      *
-     * @param   \PhpOffice\PhpExcel\Style\NumberFormat    $pFormat
-     * @return  boolean
+     * @param \PhpOffice\PhpExcel\Style\NumberFormat $pFormat
+     *
+     * @return bool
      */
     public static function isDateTimeFormat(\PhpOffice\PhpExcel\Style\NumberFormat $pFormat)
     {
@@ -279,8 +288,9 @@ class Date
     /**
      * Is a given number format code a date/time?
      *
-     * @param     string    $pFormatCode
-     * @return     boolean
+     * @param string $pFormatCode
+     *
+     * @return bool
      */
     public static function isDateTimeFormatCode($pFormatCode = '')
     {
@@ -338,8 +348,10 @@ class Date
                         return true;
                     }
                 }
+
                 return false;
             }
+
             return true;
         }
 
@@ -348,10 +360,11 @@ class Date
     }
 
     /**
-     * Convert a date/time string to Excel time
+     * Convert a date/time string to Excel time.
      *
-     * @param    string    $dateValue        Examples: '2009-12-31', '2009-12-31 15:59', '2009-12-31 15:59:10'
-     * @return    float|FALSE        Excel date/time serial value
+     * @param string $dateValue Examples: '2009-12-31', '2009-12-31 15:59', '2009-12-31 15:59:10'
+     *
+     * @return float|false Excel date/time serial value
      */
     public static function stringToExcel($dateValue = '')
     {
@@ -375,14 +388,16 @@ class Date
             }
             $dateValueNew += $timeValue;
         }
+
         return $dateValueNew;
     }
 
     /**
-     * Converts a month name (either a long or a short name) to a month number
+     * Converts a month name (either a long or a short name) to a month number.
      *
-     * @param     string    $month    Month name or abbreviation
-     * @return    integer|string     Month number (1 - 12), or the original string argument if it isn't a valid month name
+     * @param string $month Month name or abbreviation
+     *
+     * @return int|string Month number (1 - 12), or the original string argument if it isn't a valid month name
      */
     public static function monthStringToNumber($month)
     {
@@ -393,14 +408,16 @@ class Date
             }
             ++$monthIndex;
         }
+
         return $month;
     }
 
     /**
-     * Strips an ordinal froma numeric value
+     * Strips an ordinal froma numeric value.
      *
-     * @param     string    $day      Day number with an ordinal
-     * @return    integer|string      The integer value with any ordinal stripped, or the original string argument if it isn't a valid numeric
+     * @param string $day Day number with an ordinal
+     *
+     * @return int|string The integer value with any ordinal stripped, or the original string argument if it isn't a valid numeric
      */
     public static function dayStringToNumber($day)
     {
@@ -408,6 +425,7 @@ class Date
         if (is_numeric($strippedDayValue)) {
             return (integer) $strippedDayValue;
         }
+
         return $day;
     }
 }

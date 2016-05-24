@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Chart;
 
 /**
- * PhpOffice\PhpExcel\Chart\DataSeries
+ * PhpOffice\PhpExcel\Chart\DataSeries.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,113 +22,113 @@ namespace PhpOffice\PhpExcel\Chart;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category    PHPExcel
- * @package     PhpOffice\PhpExcel\Chart
+ *
  * @copyright    Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license        http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class DataSeries
 {
-    const TYPE_BARCHART        = 'barChart';
-    const TYPE_BARCHART_3D     = 'bar3DChart';
-    const TYPE_LINECHART       = 'lineChart';
-    const TYPE_LINECHART_3D    = 'line3DChart';
-    const TYPE_AREACHART       = 'areaChart';
-    const TYPE_AREACHART_3D    = 'area3DChart';
-    const TYPE_PIECHART        = 'pieChart';
-    const TYPE_PIECHART_3D     = 'pie3DChart';
-    const TYPE_DOUGHTNUTCHART  = 'doughnutChart';
-    const TYPE_DONUTCHART      = self::TYPE_DOUGHTNUTCHART;    //    Synonym
-    const TYPE_SCATTERCHART    = 'scatterChart';
-    const TYPE_SURFACECHART    = 'surfaceChart';
+    const TYPE_BARCHART = 'barChart';
+    const TYPE_BARCHART_3D = 'bar3DChart';
+    const TYPE_LINECHART = 'lineChart';
+    const TYPE_LINECHART_3D = 'line3DChart';
+    const TYPE_AREACHART = 'areaChart';
+    const TYPE_AREACHART_3D = 'area3DChart';
+    const TYPE_PIECHART = 'pieChart';
+    const TYPE_PIECHART_3D = 'pie3DChart';
+    const TYPE_DOUGHTNUTCHART = 'doughnutChart';
+    const TYPE_DONUTCHART = self::TYPE_DOUGHTNUTCHART;    //    Synonym
+    const TYPE_SCATTERCHART = 'scatterChart';
+    const TYPE_SURFACECHART = 'surfaceChart';
     const TYPE_SURFACECHART_3D = 'surface3DChart';
-    const TYPE_RADARCHART      = 'radarChart';
-    const TYPE_BUBBLECHART     = 'bubbleChart';
-    const TYPE_STOCKCHART      = 'stockChart';
-    const TYPE_CANDLECHART     = self::TYPE_STOCKCHART;       //    Synonym
+    const TYPE_RADARCHART = 'radarChart';
+    const TYPE_BUBBLECHART = 'bubbleChart';
+    const TYPE_STOCKCHART = 'stockChart';
+    const TYPE_CANDLECHART = self::TYPE_STOCKCHART;       //    Synonym
 
-    const GROUPING_CLUSTERED       = 'clustered';
-    const GROUPING_STACKED         = 'stacked';
+    const GROUPING_CLUSTERED = 'clustered';
+    const GROUPING_STACKED = 'stacked';
     const GROUPING_PERCENT_STACKED = 'percentStacked';
-    const GROUPING_STANDARD        = 'standard';
+    const GROUPING_STANDARD = 'standard';
 
-    const DIRECTION_BAR        = 'bar';
+    const DIRECTION_BAR = 'bar';
     const DIRECTION_HORIZONTAL = self::DIRECTION_BAR;
-    const DIRECTION_COL        = 'col';
-    const DIRECTION_COLUMN     = self::DIRECTION_COL;
-    const DIRECTION_VERTICAL   = self::DIRECTION_COL;
+    const DIRECTION_COL = 'col';
+    const DIRECTION_COLUMN = self::DIRECTION_COL;
+    const DIRECTION_VERTICAL = self::DIRECTION_COL;
 
-    const STYLE_LINEMARKER   = 'lineMarker';
+    const STYLE_LINEMARKER = 'lineMarker';
     const STYLE_SMOOTHMARKER = 'smoothMarker';
-    const STYLE_MARKER       = 'marker';
-    const STYLE_FILLED       = 'filled';
-
+    const STYLE_MARKER = 'marker';
+    const STYLE_FILLED = 'filled';
 
     /**
-     * Series Plot Type
+     * Series Plot Type.
      *
      * @var string
      */
     private $plotType;
 
     /**
-     * Plot Grouping Type
+     * Plot Grouping Type.
      *
-     * @var boolean
+     * @var bool
      */
     private $plotGrouping;
 
     /**
-     * Plot Direction
+     * Plot Direction.
      *
-     * @var boolean
+     * @var bool
      */
     private $plotDirection;
 
     /**
-     * Plot Style
+     * Plot Style.
      *
      * @var string
      */
     private $plotStyle;
 
     /**
-     * Order of plots in Series
+     * Order of plots in Series.
      *
      * @var array of integer
      */
     private $plotOrder = array();
 
     /**
-     * Plot Label
+     * Plot Label.
      *
      * @var array of DataSeriesValues
      */
     private $plotLabel = array();
 
     /**
-     * Plot Category
+     * Plot Category.
      *
      * @var array of DataSeriesValues
      */
     private $plotCategory = array();
 
     /**
-     * Smooth Line
+     * Smooth Line.
      *
      * @var string
      */
     private $smoothLine;
 
     /**
-     * Plot Values
+     * Plot Values.
      *
      * @var array of DataSeriesValues
      */
     private $plotValues = array();
 
     /**
-     * Create a new DataSeries
+     * Create a new DataSeries.
      */
     public function __construct($plotType = null, $plotGrouping = null, $plotOrder = array(), $plotLabel = array(), $plotCategory = array(), $plotValues = array(), $plotDirection = null, $smoothLine = null, $plotStyle = null)
     {
@@ -148,7 +148,7 @@ class DataSeries
         $this->plotCategory = $plotCategory;
         $this->smoothLine = $smoothLine;
         $this->plotStyle = $plotStyle;
-        
+
         if (is_null($plotDirection)) {
             $plotDirection = self::DIRECTION_COL;
         }
@@ -156,7 +156,7 @@ class DataSeries
     }
 
     /**
-     * Get Plot Type
+     * Get Plot Type.
      *
      * @return string
      */
@@ -166,19 +166,21 @@ class DataSeries
     }
 
     /**
-     * Set Plot Type
+     * Set Plot Type.
      *
      * @param string $plotType
+     *
      * @return DataSeries
      */
     public function setPlotType($plotType = '')
     {
         $this->plotType = $plotType;
+
         return $this;
     }
 
     /**
-     * Get Plot Grouping Type
+     * Get Plot Grouping Type.
      *
      * @return string
      */
@@ -188,19 +190,21 @@ class DataSeries
     }
 
     /**
-     * Set Plot Grouping Type
+     * Set Plot Grouping Type.
      *
      * @param string $groupingType
+     *
      * @return DataSeries
      */
     public function setPlotGrouping($groupingType = null)
     {
         $this->plotGrouping = $groupingType;
+
         return $this;
     }
 
     /**
-     * Get Plot Direction
+     * Get Plot Direction.
      *
      * @return string
      */
@@ -210,19 +214,21 @@ class DataSeries
     }
 
     /**
-     * Set Plot Direction
+     * Set Plot Direction.
      *
      * @param string $plotDirection
+     *
      * @return DataSeries
      */
     public function setPlotDirection($plotDirection = null)
     {
         $this->plotDirection = $plotDirection;
+
         return $this;
     }
 
     /**
-     * Get Plot Order
+     * Get Plot Order.
      *
      * @return string
      */
@@ -232,7 +238,7 @@ class DataSeries
     }
 
     /**
-     * Get Plot Labels
+     * Get Plot Labels.
      *
      * @return array of DataSeriesValues
      */
@@ -242,7 +248,7 @@ class DataSeries
     }
 
     /**
-     * Get Plot Label by Index
+     * Get Plot Label by Index.
      *
      * @return DataSeriesValues
      */
@@ -254,11 +260,12 @@ class DataSeries
         } elseif (isset($keys[$index])) {
             return $this->plotLabel[$keys[$index]];
         }
+
         return false;
     }
 
     /**
-     * Get Plot Categories
+     * Get Plot Categories.
      *
      * @return array of DataSeriesValues
      */
@@ -268,7 +275,7 @@ class DataSeries
     }
 
     /**
-     * Get Plot Category by Index
+     * Get Plot Category by Index.
      *
      * @return DataSeriesValues
      */
@@ -280,11 +287,12 @@ class DataSeries
         } elseif (isset($keys[$index])) {
             return $this->plotCategory[$keys[$index]];
         }
+
         return false;
     }
 
     /**
-     * Get Plot Style
+     * Get Plot Style.
      *
      * @return string
      */
@@ -294,19 +302,21 @@ class DataSeries
     }
 
     /**
-     * Set Plot Style
+     * Set Plot Style.
      *
      * @param string $plotStyle
+     *
      * @return DataSeries
      */
     public function setPlotStyle($plotStyle = null)
     {
         $this->plotStyle = $plotStyle;
+
         return $this;
     }
 
     /**
-     * Get Plot Values
+     * Get Plot Values.
      *
      * @return array of DataSeriesValues
      */
@@ -316,7 +326,7 @@ class DataSeries
     }
 
     /**
-     * Get Plot Values by Index
+     * Get Plot Values by Index.
      *
      * @return DataSeriesValues
      */
@@ -328,13 +338,14 @@ class DataSeries
         } elseif (isset($keys[$index])) {
             return $this->plotValues[$keys[$index]];
         }
+
         return false;
     }
 
     /**
-     * Get Number of Plot Series
+     * Get Number of Plot Series.
      *
-     * @return integer
+     * @return int
      */
     public function getPlotSeriesCount()
     {
@@ -342,9 +353,9 @@ class DataSeries
     }
 
     /**
-     * Get Smooth Line
+     * Get Smooth Line.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSmoothLine()
     {
@@ -352,14 +363,16 @@ class DataSeries
     }
 
     /**
-     * Set Smooth Line
+     * Set Smooth Line.
      *
-     * @param boolean $smoothLine
+     * @param bool $smoothLine
+     *
      * @return DataSeries
      */
     public function setSmoothLine($smoothLine = true)
     {
         $this->smoothLine = $smoothLine;
+
         return $this;
     }
 

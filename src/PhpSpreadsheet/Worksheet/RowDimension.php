@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\RowDimension
+ * PhpOffice\PhpExcel\Worksheet\RowDimension.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,30 +22,31 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class RowDimension extends Dimension
 {
     /**
-     * Row index
+     * Row index.
      *
      * @var int
      */
     private $rowIndex;
 
     /**
-     * Row height (in pt)
+     * Row height (in pt).
      *
      * When this is set to a negative value, the row height should be ignored by IWriter
      *
-     * @var double
+     * @var float
      */
     private $height = -1;
 
-     /**
+    /**
      * ZeroHeight for Row?
      *
      * @var bool
@@ -53,7 +54,7 @@ class RowDimension extends Dimension
     private $zeroHeight = false;
 
     /**
-     * Create a new RowDimension
+     * Create a new RowDimension.
      *
      * @param int $pIndex Numeric row index
      */
@@ -67,7 +68,7 @@ class RowDimension extends Dimension
     }
 
     /**
-     * Get Row Index
+     * Get Row Index.
      *
      * @return int
      */
@@ -77,21 +78,23 @@ class RowDimension extends Dimension
     }
 
     /**
-     * Set Row Index
+     * Set Row Index.
      *
      * @param int $pValue
+     *
      * @return RowDimension
      */
     public function setRowIndex($pValue)
     {
         $this->rowIndex = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Row Height
+     * Get Row Height.
      *
-     * @return double
+     * @return float
      */
     public function getRowHeight()
     {
@@ -99,19 +102,21 @@ class RowDimension extends Dimension
     }
 
     /**
-     * Set Row Height
+     * Set Row Height.
      *
-     * @param double $pValue
+     * @param float $pValue
+     *
      * @return RowDimension
      */
     public function setRowHeight($pValue = -1)
     {
         $this->height = $pValue;
+
         return $this;
     }
 
     /**
-     * Get ZeroHeight
+     * Get ZeroHeight.
      *
      * @return bool
      */
@@ -121,14 +126,16 @@ class RowDimension extends Dimension
     }
 
     /**
-     * Set ZeroHeight
+     * Set ZeroHeight.
      *
      * @param bool $pValue
+     *
      * @return RowDimension
      */
     public function setZeroHeight($pValue = false)
     {
         $this->zeroHeight = $pValue;
+
         return $this;
     }
 }

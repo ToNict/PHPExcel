@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\PasswordHasher
+ * PhpOffice\PhpExcel\Shared\PasswordHasher.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class PasswordHasher
@@ -36,19 +37,20 @@ class PasswordHasher
      * Daniel Rentz of OpenOffice and the PEAR package
      * Spreadsheet_Excel_Writer by Xavier Noguer <xnoguer@rezebra.com>.
      *
-     * @param     string    $pPassword    Password to hash
-     * @return     string                Hashed password
+     * @param string $pPassword Password to hash
+     *
+     * @return string Hashed password
      */
     public static function hashPassword($pPassword = '')
     {
-        $password   = 0x0000;
-        $charPos    = 1;       // char position
+        $password = 0x0000;
+        $charPos = 1;       // char position
 
         // split the plain text password in its component characters
         $chars = preg_split('//', $pPassword, -1, PREG_SPLIT_NO_EMPTY);
         foreach ($chars as $char) {
-            $value            = ord($char) << $charPos++;    // shifted ASCII value
-            $rotated_bits    = $value >> 15;                // rotated bits beyond bit 15
+            $value = ord($char) << $charPos++;    // shifted ASCII value
+            $rotated_bits = $value >> 15;                // rotated bits beyond bit 15
             $value            &= 0x7fff;                    // first 15 bits
             $password        ^= ($value | $rotated_bits);
         }
@@ -56,6 +58,6 @@ class PasswordHasher
         $password ^= strlen($pPassword);
         $password ^= 0xCE4B;
 
-        return(strtoupper(dechex($password)));
+        return strtoupper(dechex($password));
     }
 }

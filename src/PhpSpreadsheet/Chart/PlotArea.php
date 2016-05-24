@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Chart;
 
 /**
- * PhpOffice\PhpExcel\Chart\PlotArea
+ * PhpOffice\PhpExcel\Chart\PlotArea.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,29 +22,30 @@ namespace PhpOffice\PhpExcel\Chart;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category    PHPExcel
- * @package     PhpOffice\PhpExcel\Chart
+ *
  * @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class PlotArea
 {
     /**
-     * PlotArea Layout
+     * PlotArea Layout.
      *
      * @var Layout
      */
     private $layout = null;
 
     /**
-     * Plot Series
+     * Plot Series.
      *
      * @var array of DataSeries
      */
     private $plotSeries = array();
 
     /**
-     * Create a new PlotArea
+     * Create a new PlotArea.
      */
     public function __construct(Layout $layout = null, $plotSeries = array())
     {
@@ -53,7 +54,7 @@ class PlotArea
     }
 
     /**
-     * Get Layout
+     * Get Layout.
      *
      * @return Layout
      */
@@ -63,7 +64,7 @@ class PlotArea
     }
 
     /**
-     * Get Number of Plot Groups
+     * Get Number of Plot Groups.
      *
      * @return array of DataSeries
      */
@@ -73,9 +74,9 @@ class PlotArea
     }
 
     /**
-     * Get Number of Plot Series
+     * Get Number of Plot Series.
      *
-     * @return integer
+     * @return int
      */
     public function getPlotSeriesCount()
     {
@@ -83,11 +84,12 @@ class PlotArea
         foreach ($this->plotSeries as $plot) {
             $seriesCount += $plot->getPlotSeriesCount();
         }
+
         return $seriesCount;
     }
 
     /**
-     * Get Plot Series
+     * Get Plot Series.
      *
      * @return array of DataSeries
      */
@@ -97,7 +99,7 @@ class PlotArea
     }
 
     /**
-     * Get Plot Series by Index
+     * Get Plot Series by Index.
      *
      * @return DataSeries
      */
@@ -107,15 +109,16 @@ class PlotArea
     }
 
     /**
-     * Set Plot Series
+     * Set Plot Series.
      *
      * @param  DataSeries[]
+     *
      * @return PlotArea
      */
     public function setPlotSeries($plotSeries = array())
     {
         $this->plotSeries = $plotSeries;
-        
+
         return $this;
     }
 

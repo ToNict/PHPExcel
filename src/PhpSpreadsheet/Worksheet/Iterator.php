@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\Iterator
+ * PhpOffice\PhpExcel\Worksheet\Iterator.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,31 +22,32 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Iterator implements \Iterator
 {
     /**
-     * Spreadsheet to iterate
+     * Spreadsheet to iterate.
      *
      * @var \PhpOffice\PhpExcel\Spreadsheet
      */
     private $subject;
 
     /**
-     * Current iterator position
+     * Current iterator position.
      *
      * @var int
      */
     private $position = 0;
 
     /**
-     * Create a new worksheet iterator
+     * Create a new worksheet iterator.
      *
-     * @param \PhpOffice\PhpExcel\Spreadsheet    $subject
+     * @param \PhpOffice\PhpExcel\Spreadsheet $subject
      */
     public function __construct(\PhpOffice\PhpExcel\Spreadsheet $subject = null)
     {
@@ -55,7 +56,7 @@ class Iterator implements \Iterator
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -63,7 +64,7 @@ class Iterator implements \Iterator
     }
 
     /**
-     * Rewind iterator
+     * Rewind iterator.
      */
     public function rewind()
     {
@@ -71,7 +72,7 @@ class Iterator implements \Iterator
     }
 
     /**
-     * Current Worksheet
+     * Current Worksheet.
      *
      * @return \PhpOffice\PhpExcel\Worksheet
      */
@@ -81,7 +82,7 @@ class Iterator implements \Iterator
     }
 
     /**
-     * Current key
+     * Current key.
      *
      * @return int
      */
@@ -91,7 +92,7 @@ class Iterator implements \Iterator
     }
 
     /**
-     * Next value
+     * Next value.
      */
     public function next()
     {
@@ -101,7 +102,7 @@ class Iterator implements \Iterator
     /**
      * Are there more Worksheet instances available?
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

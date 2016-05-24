@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
 /**
- * PhpOffice\PhpExcel\Writer\Excel2007\RelsVBA
+ * PhpOffice\PhpExcel\Writer\Excel2007\RelsVBA.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,19 +22,22 @@ namespace PhpOffice\PhpExcel\Writer\Excel2007;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Writer\Excel2007
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class RelsVBA extends WriterPart
 {
     /**
-     * Write relationships for a signed VBA Project
+     * Write relationships for a signed VBA Project.
      *
      * @param \PhpOffice\PhpExcel\SpreadSheet $pPHPExcel
-     * @return string  XML Output
-     * @throws     \PhpOffice\PhpExcel\Writer\Exception
+     *
+     * @return string XML Output
+     *
+     * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
     public function writeVBARelationships(\PhpOffice\PhpExcel\SpreadSheet $pPHPExcel = null)
     {
@@ -60,6 +63,5 @@ class RelsVBA extends WriterPart
         $objWriter->endElement();
 
         return $objWriter->getData();
-
     }
 }

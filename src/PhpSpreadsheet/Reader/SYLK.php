@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\SYLK
+ * PhpOffice\PhpExcel\Reader\SYLK.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,43 +22,44 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class SYLK extends BaseReader implements IReader
 {
     /**
-     * Input encoding
+     * Input encoding.
      *
      * @var string
      */
     private $inputEncoding = 'ANSI';
 
     /**
-     * Sheet index to read
+     * Sheet index to read.
      *
      * @var int
      */
     private $sheetIndex = 0;
 
     /**
-     * Formats
+     * Formats.
      *
      * @var array
      */
     private $formats = array();
 
     /**
-     * Format Count
+     * Format Count.
      *
      * @var int
      */
     private $format = 0;
 
     /**
-     * Create a new SYLK Reader instance
+     * Create a new SYLK Reader instance.
      */
     public function __construct()
     {
@@ -66,9 +67,9 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Validate that the current file is a SYLK file
+     * Validate that the current file is a SYLK file.
      *
-     * @return boolean
+     * @return bool
      */
     protected function isValidFormat()
     {
@@ -91,18 +92,19 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Set input encoding
+     * Set input encoding.
      *
      * @param string $pValue Input encoding
      */
     public function setInputEncoding($pValue = 'ANSI')
     {
         $this->inputEncoding = $pValue;
+
         return $this;
     }
 
     /**
-     * Get input encoding
+     * Get input encoding.
      *
      * @return string
      */
@@ -112,10 +114,11 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
+     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
      *
-     * @param    string     $pFilename
-     * @throws   Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetInfo($pFilename)
     {
@@ -123,7 +126,7 @@ class SYLK extends BaseReader implements IReader
         $this->openFile($pFilename);
         if (!$this->isValidFormat()) {
             fclose($this->fileHandle);
-            throw new Exception($pFilename . " is an Invalid Spreadsheet file.");
+            throw new Exception($pFilename.' is an Invalid Spreadsheet file.');
         }
         $fileHandle = $this->fileHandle;
         rewind($fileHandle);
@@ -181,11 +184,13 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param     string         $pFilename
-     * @return     \PhpOffice\PhpExcel\Spreadsheet
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @return \PhpOffice\PhpExcel\Spreadsheet
+     *
+     * @throws Exception
      */
     public function load($pFilename)
     {
@@ -197,12 +202,14 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file into PHPExcel instance
+     * Loads PHPExcel from file into PHPExcel instance.
      *
-     * @param     string         $pFilename
-     * @param     \PhpOffice\PhpExcel\Spreadsheet    $objPHPExcel
-     * @return    \PhpOffice\PhpExcel\Spreadsheet
-     * @throws    Exception
+     * @param string                          $pFilename
+     * @param \PhpOffice\PhpExcel\Spreadsheet $objPHPExcel
+     *
+     * @return \PhpOffice\PhpExcel\Spreadsheet
+     *
+     * @throws Exception
      */
     public function loadIntoExisting($pFilename, \PhpOffice\PhpExcel\Spreadsheet $objPHPExcel)
     {
@@ -210,7 +217,7 @@ class SYLK extends BaseReader implements IReader
         $this->openFile($pFilename);
         if (!$this->isValidFormat()) {
             fclose($this->fileHandle);
-            throw new Exception($pFilename . " is an Invalid Spreadsheet file.");
+            throw new Exception($pFilename.' is an Invalid Spreadsheet file.');
         }
         $fileHandle = $this->fileHandle;
         rewind($fileHandle);
@@ -221,8 +228,8 @@ class SYLK extends BaseReader implements IReader
         }
         $objPHPExcel->setActiveSheetIndex($this->sheetIndex);
 
-        $fromFormats    = array('\-',    '\ ');
-        $toFormats        = array('-',    ' ');
+        $fromFormats = array('\-',    '\ ');
+        $toFormats = array('-',    ' ');
 
         // Loop through file
         $rowData = array();
@@ -255,7 +262,7 @@ class SYLK extends BaseReader implements IReader
                             break;
                         case 'S':
                             $styleSettings = substr($rowDatum, 1);
-                            for ($i=0; $i<strlen($styleSettings); ++$i) {
+                            for ($i = 0; $i < strlen($styleSettings); ++$i) {
                                 switch ($styleSettings{$i}) {
                                     case 'I':
                                         $formatArray['font']['italic'] = true;
@@ -306,7 +313,7 @@ class SYLK extends BaseReader implements IReader
                             foreach ($temp as &$value) {
                                 //    Only count/replace in alternate array entries
                                 if ($key = !$key) {
-                                    preg_match_all('/(R(\[?-?\d*\]?))(C(\[?-?\d*\]?))/', $value, $cellReferences, PREG_SET_ORDER+PREG_OFFSET_CAPTURE);
+                                    preg_match_all('/(R(\[?-?\d*\]?))(C(\[?-?\d*\]?))/', $value, $cellReferences, PREG_SET_ORDER + PREG_OFFSET_CAPTURE);
                                     //    Reverse the matches array, otherwise all our offsets will become incorrect if we modify our way
                                     //        through the formula from left to right. Reversing means that we work right to left.through
                                     //        the formula
@@ -332,7 +339,7 @@ class SYLK extends BaseReader implements IReader
                                         if ($columnReference{0} == '[') {
                                             $columnReference = $column + trim($columnReference, '[]');
                                         }
-                                        $A1CellReference = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($columnReference-1).$rowReference;
+                                        $A1CellReference = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($columnReference - 1).$rowReference;
 
                                         $value = substr_replace($value, $A1CellReference, $cellReference[0][1], strlen($cellReference[0][0]));
                                     }
@@ -345,7 +352,7 @@ class SYLK extends BaseReader implements IReader
                             break;
                     }
                 }
-                $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column-1);
+                $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column - 1);
                 $cellData = \PhpOffice\PhpExcel\Calculation::unwrapResult($cellData);
 
                 // Set cell value
@@ -376,7 +383,7 @@ class SYLK extends BaseReader implements IReader
                             break;
                         case 'S':
                             $styleSettings = substr($rowDatum, 1);
-                            for ($i=0; $i<strlen($styleSettings); ++$i) {
+                            for ($i = 0; $i < strlen($styleSettings); ++$i) {
                                 switch ($styleSettings{$i}) {
                                     case 'I':
                                         $styleData['font']['italic'] = true;
@@ -402,22 +409,22 @@ class SYLK extends BaseReader implements IReader
                     }
                 }
                 if (($formatStyle > '') && ($column > '') && ($row > '')) {
-                    $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column-1);
+                    $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column - 1);
                     if (isset($this->formats[$formatStyle])) {
                         $objPHPExcel->getActiveSheet()->getStyle($columnLetter.$row)->applyFromArray($this->formats[$formatStyle]);
                     }
                 }
                 if ((!empty($styleData)) && ($column > '') && ($row > '')) {
-                    $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column-1);
+                    $columnLetter = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($column - 1);
                     $objPHPExcel->getActiveSheet()->getStyle($columnLetter.$row)->applyFromArray($styleData);
                 }
                 if ($columnWidth > '') {
                     if ($startCol == $endCol) {
-                        $startCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($startCol-1);
+                        $startCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($startCol - 1);
                         $objPHPExcel->getActiveSheet()->getColumnDimension($startCol)->setWidth($columnWidth);
                     } else {
-                        $startCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($startCol-1);
-                        $endCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($endCol-1);
+                        $startCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($startCol - 1);
+                        $endCol = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($endCol - 1);
                         $objPHPExcel->getActiveSheet()->getColumnDimension($startCol)->setWidth($columnWidth);
                         do {
                             $objPHPExcel->getActiveSheet()->getColumnDimension(++$startCol)->setWidth($columnWidth);
@@ -448,7 +455,7 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Get sheet index
+     * Get sheet index.
      *
      * @return int
      */
@@ -458,14 +465,16 @@ class SYLK extends BaseReader implements IReader
     }
 
     /**
-     * Set sheet index
+     * Set sheet index.
      *
-     * @param    int        $pValue        Sheet index
+     * @param int $pValue Sheet index
+     *
      * @return SYLK
      */
     public function setSheetIndex($pValue = 0)
     {
         $this->sheetIndex = $pValue;
+
         return $this;
     }
 }

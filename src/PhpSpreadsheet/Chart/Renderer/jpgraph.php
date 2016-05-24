@@ -2,10 +2,10 @@
 
 namespace PhpOffice\PhpExcel\Chart\Renderer;
 
-require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'/jpgraph.php');
+require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'/jpgraph.php';
 
 /**
- * PhpOffice\PhpExcel\Chart\Renderer\jpgraph
+ * PhpOffice\PhpExcel\Chart\Renderer\jpgraph.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -24,37 +24,37 @@ require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'/jpgraph.php'
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category    PHPExcel
- * @package     PhpOffice\PhpExcel\Chart\Renderer
+ *
  * @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version     ##VERSION##, ##DATE##
  */
 class jpgraph
 {
-    private static $width    = 640;
+    private static $width = 640;
 
-    private static $height    = 480;
+    private static $height = 480;
 
     private static $colourSet = [
         'mediumpurple1',    'palegreen3',     'gold1',          'cadetblue1',
         'darkmagenta',      'coral',          'dodgerblue3',    'eggplant',
         'mediumblue',       'magenta',        'sandybrown',     'cyan',
         'firebrick1',       'forestgreen',    'deeppink4',      'darkolivegreen',
-        'goldenrod2'
+        'goldenrod2',
     ];
 
     private static $markSet = [
-        'diamond'  => MARK_DIAMOND,
-        'square'   => MARK_SQUARE,
+        'diamond' => MARK_DIAMOND,
+        'square' => MARK_SQUARE,
         'triangle' => MARK_UTRIANGLE,
-        'x'        => MARK_X,
-        'star'     => MARK_STAR,
-        'dot'      => MARK_FILLEDCIRCLE,
-        'dash'     => MARK_DTRIANGLE,
-        'circle'   => MARK_CIRCLE,
-        'plus'     => MARK_CROSS
+        'x' => MARK_X,
+        'star' => MARK_STAR,
+        'dot' => MARK_FILLEDCIRCLE,
+        'dash' => MARK_DTRIANGLE,
+        'circle' => MARK_CIRCLE,
+        'plus' => MARK_CROSS,
     ];
-
 
     private $chart;
 
@@ -63,7 +63,6 @@ class jpgraph
     private static $plotColour = 0;
 
     private static $plotMark = 0;
-
 
     private function formatPointMarker($seriesPlot, $markerID)
     {
@@ -92,7 +91,6 @@ class jpgraph
         return $seriesPlot;
     }
 
-
     private function formatDataSetLabels($groupID, $datasetLabels, $labelCount, $rotation = '')
     {
         $datasetLabelFormatCode = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotCategoryByIndex(0)->getFormatCode();
@@ -105,7 +103,7 @@ class jpgraph
         foreach ($datasetLabels as $i => $datasetLabel) {
             if (is_array($datasetLabel)) {
                 if ($rotation == 'bar') {
-                    $datasetLabels[$i] = implode(" ", $datasetLabel);
+                    $datasetLabels[$i] = implode(' ', $datasetLabel);
                 } else {
                     $datasetLabel = array_reverse($datasetLabel);
                     $datasetLabels[$i] = implode("\n", $datasetLabel);
@@ -121,7 +119,6 @@ class jpgraph
 
         return $datasetLabels;
     }
-
 
     private function percentageSumCalculation($groupID, $seriesCount)
     {
@@ -144,7 +141,6 @@ class jpgraph
         return $sumValues;
     }
 
-
     private function percentageAdjustValues($dataValues, $sumValues)
     {
         foreach ($dataValues as $k => $dataValue) {
@@ -153,7 +149,6 @@ class jpgraph
 
         return $dataValues;
     }
-
 
     private function getCaption($captionElement)
     {
@@ -167,9 +162,9 @@ class jpgraph
                 $caption = implode('', $caption);
             }
         }
+
         return $caption;
     }
-
 
     private function renderTitle()
     {
@@ -178,7 +173,6 @@ class jpgraph
             $this->graph->title->Set($title);
         }
     }
-
 
     private function renderLegend()
     {
@@ -210,7 +204,6 @@ class jpgraph
             $this->graph->legend->Hide();
         }
     }
-
 
     private function renderCartesianPlotArea($type = 'textlin')
     {
@@ -249,14 +242,12 @@ class jpgraph
         }
     }
 
-
     private function renderPiePlotArea($doughnut = false)
     {
         $this->graph = new PieGraph(self::$width, self::$height);
 
         $this->renderTitle();
     }
-
 
     private function renderRadarPlotArea()
     {
@@ -265,7 +256,6 @@ class jpgraph
 
         $this->renderTitle();
     }
-
 
     private function renderPlotLine($groupID, $filled = false, $combination = false, $dimensions = '2d')
     {
@@ -330,7 +320,6 @@ class jpgraph
         $this->graph->Add($groupPlot);
     }
 
-
     private function renderPlotBar($groupID, $dimensions = '2d')
     {
         $rotation = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotDirection();
@@ -353,7 +342,6 @@ class jpgraph
             }
             $this->graph->xaxis->SetTickLabels($datasetLabels);
         }
-
 
         $seriesCount = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotSeriesCount();
         $seriesPlots = array();
@@ -416,7 +404,6 @@ class jpgraph
         $this->graph->Add($groupPlot);
     }
 
-
     private function renderPlotScatter($groupID, $bubble)
     {
         $grouping = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotGrouping();
@@ -462,7 +449,6 @@ class jpgraph
         }
     }
 
-
     private function renderPlotRadar($groupID)
     {
         $radarStyle = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotStyle();
@@ -501,7 +487,6 @@ class jpgraph
         }
     }
 
-
     private function renderPlotContour($groupID)
     {
         $contourStyle = $this->chart->getPlotArea()->getPlotGroupByIndex($groupID)->getPlotStyle();
@@ -521,7 +506,6 @@ class jpgraph
 
         $this->graph->Add($seriesPlot);
     }
-
 
     private function renderPlotStock($groupID)
     {
@@ -562,10 +546,9 @@ class jpgraph
         $this->graph->Add($seriesPlot);
     }
 
-
     private function renderAreaChart($groupCount, $dimensions = '2d')
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php';
 
         $this->renderCartesianPlotArea();
 
@@ -574,10 +557,9 @@ class jpgraph
         }
     }
 
-
     private function renderLineChart($groupCount, $dimensions = '2d')
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php';
 
         $this->renderCartesianPlotArea();
 
@@ -586,10 +568,9 @@ class jpgraph
         }
     }
 
-
     private function renderBarChart($groupCount, $dimensions = '2d')
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_bar.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_bar.php';
 
         $this->renderCartesianPlotArea();
 
@@ -598,12 +579,11 @@ class jpgraph
         }
     }
 
-
     private function renderScatterChart($groupCount)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_regstat.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_regstat.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php';
 
         $this->renderCartesianPlotArea('linlin');
 
@@ -612,10 +592,9 @@ class jpgraph
         }
     }
 
-
     private function renderBubbleChart($groupCount)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php';
 
         $this->renderCartesianPlotArea('linlin');
 
@@ -624,12 +603,11 @@ class jpgraph
         }
     }
 
-
     private function renderPieChart($groupCount, $dimensions = '2d', $doughnut = false, $multiplePlots = false)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_pie.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_pie.php';
         if ($dimensions == '3d') {
-            require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_pie3d.php');
+            require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_pie3d.php';
         }
 
         $this->renderPiePlotArea($doughnut);
@@ -675,7 +653,7 @@ class jpgraph
                 }
 
                 if ($multiplePlots) {
-                    $seriesPlot->SetSize(($jLimit-$j) / ($jLimit * 4));
+                    $seriesPlot->SetSize(($jLimit - $j) / ($jLimit * 4));
                 }
 
                 if ($doughnut) {
@@ -701,10 +679,9 @@ class jpgraph
         }
     }
 
-
     private function renderRadarChart($groupCount)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_radar.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_radar.php';
 
         $this->renderRadarPlotArea();
 
@@ -713,10 +690,9 @@ class jpgraph
         }
     }
 
-
     private function renderStockChart($groupCount)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_stock.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_stock.php';
 
         $this->renderCartesianPlotArea('intint');
 
@@ -725,10 +701,9 @@ class jpgraph
         }
     }
 
-
     private function renderContourChart($groupCount, $dimensions)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_contour.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_contour.php';
 
         $this->renderCartesianPlotArea('intint');
 
@@ -737,14 +712,13 @@ class jpgraph
         }
     }
 
-
     private function renderCombinationChart($groupCount, $dimensions, $outputDestination)
     {
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_bar.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_regstat.php');
-        require_once(\PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php');
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_bar.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_scatter.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_regstat.php';
+        require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'jpgraph_line.php';
 
         $this->renderCartesianPlotArea();
 
@@ -778,6 +752,7 @@ class jpgraph
                     break;
                 default:
                     $this->graph = null;
+
                     return false;
             }
         }
@@ -785,9 +760,9 @@ class jpgraph
         $this->renderLegend();
 
         $this->graph->Stroke($outputDestination);
+
         return true;
     }
-
 
     public function render($outputDestination)
     {
@@ -808,6 +783,7 @@ class jpgraph
                 $chartType = array_pop($chartTypes);
             } elseif (count($chartTypes) == 0) {
                 echo 'Chart is not yet implemented<br />';
+
                 return false;
             } else {
                 return $this->renderCombinationChart($groupCount, $dimensions, $outputDestination);
@@ -865,21 +841,22 @@ class jpgraph
                 break;
             default:
                 echo $chartType.' is not yet implemented<br />';
+
                 return false;
         }
         $this->renderLegend();
 
         $this->graph->Stroke($outputDestination);
+
         return true;
     }
 
-
     /**
-     * Create a new jpgraph
+     * Create a new jpgraph.
      */
     public function __construct(\PhpOffice\PhpExcel\Chart $chart)
     {
-        $this->graph  = null;
-        $this->chart  = $chart;
+        $this->graph = null;
+        $this->chart = $chart;
     }
 }

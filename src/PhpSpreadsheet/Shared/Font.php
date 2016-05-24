@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 /**
- * PhpOffice\PhpExcel\Shared\Font
+ * PhpOffice\PhpExcel\Shared\Font.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,16 +22,17 @@ namespace PhpOffice\PhpExcel\Shared;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Font
 {
     /* Methods for resolving autosize value */
-    const AUTOSIZE_METHOD_APPROX    = 'approx';
-    const AUTOSIZE_METHOD_EXACT     = 'exact';
+    const AUTOSIZE_METHOD_APPROX = 'approx';
+    const AUTOSIZE_METHOD_EXACT = 'exact';
 
     private static $autoSizeMethods = array(
         self::AUTOSIZE_METHOD_APPROX,
@@ -39,97 +40,97 @@ class Font
     );
 
     /** Character set codes used by BIFF5-8 in Font records */
-    const CHARSET_ANSI_LATIN                = 0x00;
-    const CHARSET_SYSTEM_DEFAULT            = 0x01;
-    const CHARSET_SYMBOL                    = 0x02;
-    const CHARSET_APPLE_ROMAN               = 0x4D;
-    const CHARSET_ANSI_JAPANESE_SHIFTJIS    = 0x80;
-    const CHARSET_ANSI_KOREAN_HANGUL        = 0x81;
-    const CHARSET_ANSI_KOREAN_JOHAB         = 0x82;
-    const CHARSET_ANSI_CHINESE_SIMIPLIFIED  = 0x86;        //    gb2312
-    const CHARSET_ANSI_CHINESE_TRADITIONAL  = 0x88;        //    big5
-    const CHARSET_ANSI_GREEK                = 0xA1;
-    const CHARSET_ANSI_TURKISH              = 0xA2;
-    const CHARSET_ANSI_VIETNAMESE           = 0xA3;
-    const CHARSET_ANSI_HEBREW               = 0xB1;
-    const CHARSET_ANSI_ARABIC               = 0xB2;
-    const CHARSET_ANSI_BALTIC               = 0xBA;
-    const CHARSET_ANSI_CYRILLIC             = 0xCC;
-    const CHARSET_ANSI_THAI                 = 0xDD;
-    const CHARSET_ANSI_LATIN_II             = 0xEE;
-    const CHARSET_OEM_LATIN_I               = 0xFF;
+    const CHARSET_ANSI_LATIN = 0x00;
+    const CHARSET_SYSTEM_DEFAULT = 0x01;
+    const CHARSET_SYMBOL = 0x02;
+    const CHARSET_APPLE_ROMAN = 0x4D;
+    const CHARSET_ANSI_JAPANESE_SHIFTJIS = 0x80;
+    const CHARSET_ANSI_KOREAN_HANGUL = 0x81;
+    const CHARSET_ANSI_KOREAN_JOHAB = 0x82;
+    const CHARSET_ANSI_CHINESE_SIMIPLIFIED = 0x86;        //    gb2312
+    const CHARSET_ANSI_CHINESE_TRADITIONAL = 0x88;        //    big5
+    const CHARSET_ANSI_GREEK = 0xA1;
+    const CHARSET_ANSI_TURKISH = 0xA2;
+    const CHARSET_ANSI_VIETNAMESE = 0xA3;
+    const CHARSET_ANSI_HEBREW = 0xB1;
+    const CHARSET_ANSI_ARABIC = 0xB2;
+    const CHARSET_ANSI_BALTIC = 0xBA;
+    const CHARSET_ANSI_CYRILLIC = 0xCC;
+    const CHARSET_ANSI_THAI = 0xDD;
+    const CHARSET_ANSI_LATIN_II = 0xEE;
+    const CHARSET_OEM_LATIN_I = 0xFF;
 
     //  XXX: Constants created!
     /** Font filenames */
-    const ARIAL                             = 'arial.ttf';
-    const ARIAL_BOLD                        = 'arialbd.ttf';
-    const ARIAL_ITALIC                      = 'ariali.ttf';
-    const ARIAL_BOLD_ITALIC                 = 'arialbi.ttf';
+    const ARIAL = 'arial.ttf';
+    const ARIAL_BOLD = 'arialbd.ttf';
+    const ARIAL_ITALIC = 'ariali.ttf';
+    const ARIAL_BOLD_ITALIC = 'arialbi.ttf';
 
-    const CALIBRI                           = 'CALIBRI.TTF';
-    const CALIBRI_BOLD                      = 'CALIBRIB.TTF';
-    const CALIBRI_ITALIC                    = 'CALIBRII.TTF';
-    const CALIBRI_BOLD_ITALIC               = 'CALIBRIZ.TTF';
+    const CALIBRI = 'CALIBRI.TTF';
+    const CALIBRI_BOLD = 'CALIBRIB.TTF';
+    const CALIBRI_ITALIC = 'CALIBRII.TTF';
+    const CALIBRI_BOLD_ITALIC = 'CALIBRIZ.TTF';
 
-    const COMIC_SANS_MS                     = 'comic.ttf';
-    const COMIC_SANS_MS_BOLD                = 'comicbd.ttf';
+    const COMIC_SANS_MS = 'comic.ttf';
+    const COMIC_SANS_MS_BOLD = 'comicbd.ttf';
 
-    const COURIER_NEW                       = 'cour.ttf';
-    const COURIER_NEW_BOLD                  = 'courbd.ttf';
-    const COURIER_NEW_ITALIC                = 'couri.ttf';
-    const COURIER_NEW_BOLD_ITALIC           = 'courbi.ttf';
+    const COURIER_NEW = 'cour.ttf';
+    const COURIER_NEW_BOLD = 'courbd.ttf';
+    const COURIER_NEW_ITALIC = 'couri.ttf';
+    const COURIER_NEW_BOLD_ITALIC = 'courbi.ttf';
 
-    const GEORGIA                           = 'georgia.ttf';
-    const GEORGIA_BOLD                      = 'georgiab.ttf';
-    const GEORGIA_ITALIC                    = 'georgiai.ttf';
-    const GEORGIA_BOLD_ITALIC               = 'georgiaz.ttf';
+    const GEORGIA = 'georgia.ttf';
+    const GEORGIA_BOLD = 'georgiab.ttf';
+    const GEORGIA_ITALIC = 'georgiai.ttf';
+    const GEORGIA_BOLD_ITALIC = 'georgiaz.ttf';
 
-    const IMPACT                            = 'impact.ttf';
+    const IMPACT = 'impact.ttf';
 
-    const LIBERATION_SANS                   = 'LiberationSans-Regular.ttf';
-    const LIBERATION_SANS_BOLD              = 'LiberationSans-Bold.ttf';
-    const LIBERATION_SANS_ITALIC            = 'LiberationSans-Italic.ttf';
-    const LIBERATION_SANS_BOLD_ITALIC       = 'LiberationSans-BoldItalic.ttf';
+    const LIBERATION_SANS = 'LiberationSans-Regular.ttf';
+    const LIBERATION_SANS_BOLD = 'LiberationSans-Bold.ttf';
+    const LIBERATION_SANS_ITALIC = 'LiberationSans-Italic.ttf';
+    const LIBERATION_SANS_BOLD_ITALIC = 'LiberationSans-BoldItalic.ttf';
 
-    const LUCIDA_CONSOLE                    = 'lucon.ttf';
-    const LUCIDA_SANS_UNICODE               = 'l_10646.ttf';
+    const LUCIDA_CONSOLE = 'lucon.ttf';
+    const LUCIDA_SANS_UNICODE = 'l_10646.ttf';
 
-    const MICROSOFT_SANS_SERIF              = 'micross.ttf';
+    const MICROSOFT_SANS_SERIF = 'micross.ttf';
 
-    const PALATINO_LINOTYPE                 = 'pala.ttf';
-    const PALATINO_LINOTYPE_BOLD            = 'palab.ttf';
-    const PALATINO_LINOTYPE_ITALIC          = 'palai.ttf';
-    const PALATINO_LINOTYPE_BOLD_ITALIC     = 'palabi.ttf';
+    const PALATINO_LINOTYPE = 'pala.ttf';
+    const PALATINO_LINOTYPE_BOLD = 'palab.ttf';
+    const PALATINO_LINOTYPE_ITALIC = 'palai.ttf';
+    const PALATINO_LINOTYPE_BOLD_ITALIC = 'palabi.ttf';
 
-    const SYMBOL                            = 'symbol.ttf';
+    const SYMBOL = 'symbol.ttf';
 
-    const TAHOMA                            = 'tahoma.ttf';
-    const TAHOMA_BOLD                       = 'tahomabd.ttf';
+    const TAHOMA = 'tahoma.ttf';
+    const TAHOMA_BOLD = 'tahomabd.ttf';
 
-    const TIMES_NEW_ROMAN                   = 'times.ttf';
-    const TIMES_NEW_ROMAN_BOLD              = 'timesbd.ttf';
-    const TIMES_NEW_ROMAN_ITALIC            = 'timesi.ttf';
-    const TIMES_NEW_ROMAN_BOLD_ITALIC       = 'timesbi.ttf';
+    const TIMES_NEW_ROMAN = 'times.ttf';
+    const TIMES_NEW_ROMAN_BOLD = 'timesbd.ttf';
+    const TIMES_NEW_ROMAN_ITALIC = 'timesi.ttf';
+    const TIMES_NEW_ROMAN_BOLD_ITALIC = 'timesbi.ttf';
 
-    const TREBUCHET_MS                      = 'trebuc.ttf';
-    const TREBUCHET_MS_BOLD                 = 'trebucbd.ttf';
-    const TREBUCHET_MS_ITALIC               = 'trebucit.ttf';
-    const TREBUCHET_MS_BOLD_ITALIC          = 'trebucbi.ttf';
+    const TREBUCHET_MS = 'trebuc.ttf';
+    const TREBUCHET_MS_BOLD = 'trebucbd.ttf';
+    const TREBUCHET_MS_ITALIC = 'trebucit.ttf';
+    const TREBUCHET_MS_BOLD_ITALIC = 'trebucbi.ttf';
 
-    const VERDANA                           = 'verdana.ttf';
-    const VERDANA_BOLD                      = 'verdanab.ttf';
-    const VERDANA_ITALIC                    = 'verdanai.ttf';
-    const VERDANA_BOLD_ITALIC               = 'verdanaz.ttf';
+    const VERDANA = 'verdana.ttf';
+    const VERDANA_BOLD = 'verdanab.ttf';
+    const VERDANA_ITALIC = 'verdanai.ttf';
+    const VERDANA_BOLD_ITALIC = 'verdanaz.ttf';
 
     /**
-     * AutoSize method
+     * AutoSize method.
      *
      * @var string
      */
     private static $autoSizeMethod = self::AUTOSIZE_METHOD_APPROX;
 
     /**
-     * Path to folder containing TrueType font .ttf files
+     * Path to folder containing TrueType font .ttf files.
      *
      * @var string
      */
@@ -149,11 +150,11 @@ class Font
              3 => array('px' => 32, 'width' => 10.66406250),
              4 => array('px' => 32, 'width' => 10.66406250),
              5 => array('px' => 40, 'width' => 10.00000000),
-             6 => array('px' => 48, 'width' =>  9.59765625),
-             7 => array('px' => 48, 'width' =>  9.59765625),
-             8 => array('px' => 56, 'width' =>  9.33203125),
-             9 => array('px' => 64, 'width' =>  9.14062500),
-            10 => array('px' => 64, 'width' =>  9.14062500),
+             6 => array('px' => 48, 'width' => 9.59765625),
+             7 => array('px' => 48, 'width' => 9.59765625),
+             8 => array('px' => 56, 'width' => 9.33203125),
+             9 => array('px' => 64, 'width' => 9.14062500),
+            10 => array('px' => 64, 'width' => 9.14062500),
         ),
         'Calibri' => array(
              1 => array('px' => 24, 'width' => 12.00000000),
@@ -161,12 +162,12 @@ class Font
              3 => array('px' => 32, 'width' => 10.66406250),
              4 => array('px' => 32, 'width' => 10.66406250),
              5 => array('px' => 40, 'width' => 10.00000000),
-             6 => array('px' => 48, 'width' =>  9.59765625),
-             7 => array('px' => 48, 'width' =>  9.59765625),
-             8 => array('px' => 56, 'width' =>  9.33203125),
-             9 => array('px' => 56, 'width' =>  9.33203125),
-            10 => array('px' => 64, 'width' =>  9.14062500),
-            11 => array('px' => 64, 'width' =>  9.14062500),
+             6 => array('px' => 48, 'width' => 9.59765625),
+             7 => array('px' => 48, 'width' => 9.59765625),
+             8 => array('px' => 56, 'width' => 9.33203125),
+             9 => array('px' => 56, 'width' => 9.33203125),
+            10 => array('px' => 64, 'width' => 9.14062500),
+            11 => array('px' => 64, 'width' => 9.14062500),
         ),
         'Verdana' => array(
              1 => array('px' => 24, 'width' => 12.00000000),
@@ -174,19 +175,20 @@ class Font
              3 => array('px' => 32, 'width' => 10.66406250),
              4 => array('px' => 32, 'width' => 10.66406250),
              5 => array('px' => 40, 'width' => 10.00000000),
-             6 => array('px' => 48, 'width' =>  9.59765625),
-             7 => array('px' => 48, 'width' =>  9.59765625),
-             8 => array('px' => 64, 'width' =>  9.14062500),
-             9 => array('px' => 72, 'width' =>  9.00000000),
-            10 => array('px' => 72, 'width' =>  9.00000000),
+             6 => array('px' => 48, 'width' => 9.59765625),
+             7 => array('px' => 48, 'width' => 9.59765625),
+             8 => array('px' => 64, 'width' => 9.14062500),
+             9 => array('px' => 72, 'width' => 9.00000000),
+            10 => array('px' => 72, 'width' => 9.00000000),
         ),
     );
 
     /**
-     * Set autoSize method
+     * Set autoSize method.
      *
      * @param string $pValue
-     * @return     boolean                    Success or failure
+     *
+     * @return bool Success or failure
      */
     public static function setAutoSizeMethod($pValue = self::AUTOSIZE_METHOD_APPROX)
     {
@@ -199,7 +201,7 @@ class Font
     }
 
     /**
-     * Get autoSize method
+     * Get autoSize method.
      *
      * @return string
      */
@@ -215,7 +217,7 @@ class Font
      *        <li>C:/Windows/Fonts/</li>
      *        <li>/usr/share/fonts/truetype/</li>
      *        <li>~/.fonts/</li>
-     *    </ul>
+     *    </ul>.
      *
      * @param string $pValue
      */
@@ -235,13 +237,14 @@ class Font
     }
 
     /**
-     * Calculate an (approximate) OpenXML column width, based on font size and text contained
+     * Calculate an (approximate) OpenXML column width, based on font size and text contained.
      *
-     * @param     \PhpOffice\PhpExcel\Style\Font            $font            Font object
-     * @param     \PhpOffice\PhpExcel\RichText|string    $cellText        Text to calculate width
-     * @param     integer                        $rotation        Rotation angle
-     * @param     \PhpOffice\PhpExcel\Style\Font|NULL    $defaultFont    Font object
-     * @return     integer        Column width
+     * @param \PhpOffice\PhpExcel\Style\Font      $font        Font object
+     * @param \PhpOffice\PhpExcel\RichText|string $cellText    Text to calculate width
+     * @param int                                 $rotation    Rotation angle
+     * @param \PhpOffice\PhpExcel\Style\Font|null $defaultFont Font object
+     *
+     * @return int Column width
      */
     public static function calculateColumnWidth(\PhpOffice\PhpExcel\Style\Font $font, $cellText = '', $rotation = 0, \PhpOffice\PhpExcel\Style\Font $defaultFont = null)
     {
@@ -257,6 +260,7 @@ class Font
             foreach ($lineTexts as $lineText) {
                 $lineWidths[] = self::calculateColumnWidth($font, $lineText, $rotation = 0, $defaultFont);
             }
+
             return max($lineWidths); // width of longest line in cell
         }
 
@@ -288,12 +292,14 @@ class Font
     }
 
     /**
-     * Get GD text width in pixels for a string of text in a certain font at a certain rotation angle
+     * Get GD text width in pixels for a string of text in a certain font at a certain rotation angle.
      *
      * @param string $text
      * @param \PhpOffice\PhpExcel\Style\Font
      * @param int $rotation
+     *
      * @return int
+     *
      * @throws \PhpOffice\PhpExcel\Exception
      */
     public static function getTextWidthPixelsExact($text, \PhpOffice\PhpExcel\Style\Font $font, $rotation = 0)
@@ -308,13 +314,13 @@ class Font
         $textBox = imagettfbbox($font->getSize(), $rotation, $fontFile, $text);
 
         // Get corners positions
-        $lowerLeftCornerX  = $textBox[0];
+        $lowerLeftCornerX = $textBox[0];
 //        $lowerLeftCornerY  = $textBox[1];
         $lowerRightCornerX = $textBox[2];
 //        $lowerRightCornerY = $textBox[3];
         $upperRightCornerX = $textBox[4];
 //        $upperRightCornerY = $textBox[5];
-        $upperLeftCornerX  = $textBox[6];
+        $upperLeftCornerX = $textBox[6];
 //        $upperLeftCornerY  = $textBox[7];
 
         // Consider the rotation when calculating the width
@@ -324,11 +330,12 @@ class Font
     }
 
     /**
-     * Get approximate width in pixels for a string of text in a certain font at a certain rotation angle
+     * Get approximate width in pixels for a string of text in a certain font at a certain rotation angle.
      *
-     * @param string $columnText
+     * @param string                         $columnText
      * @param \PhpOffice\PhpExcel\Style\Font $font
-     * @param int $rotation
+     * @param int                            $rotation
+     *
      * @return int Text width in pixels (no padding added)
      */
     public static function getTextWidthPixelsApprox($columnText, \PhpOffice\PhpExcel\Style\Font $font = null, $rotation = 0)
@@ -382,10 +389,11 @@ class Font
     }
 
     /**
-     * Calculate an (approximate) pixel size, based on a font points size
+     * Calculate an (approximate) pixel size, based on a font points size.
      *
-     * @param     int        $fontSizeInPoints    Font size (in points)
-     * @return     int        Font size (in pixels)
+     * @param int $fontSizeInPoints Font size (in points)
+     *
+     * @return int Font size (in pixels)
      */
     public static function fontSizeToPixels($fontSizeInPoints = 11)
     {
@@ -393,31 +401,34 @@ class Font
     }
 
     /**
-     * Calculate an (approximate) pixel size, based on inch size
+     * Calculate an (approximate) pixel size, based on inch size.
      *
-     * @param     int        $sizeInInch    Font size (in inch)
-     * @return     int        Size (in pixels)
+     * @param int $sizeInInch Font size (in inch)
+     *
+     * @return int Size (in pixels)
      */
     public static function inchSizeToPixels($sizeInInch = 1)
     {
-        return ($sizeInInch * 96);
+        return $sizeInInch * 96;
     }
 
     /**
-     * Calculate an (approximate) pixel size, based on centimeter size
+     * Calculate an (approximate) pixel size, based on centimeter size.
      *
-     * @param     int        $sizeInCm    Font size (in centimeters)
-     * @return     int        Size (in pixels)
+     * @param int $sizeInCm Font size (in centimeters)
+     *
+     * @return int Size (in pixels)
      */
     public static function centimeterSizeToPixels($sizeInCm = 1)
     {
-        return ($sizeInCm * 37.795275591);
+        return $sizeInCm * 37.795275591;
     }
 
     /**
-     * Returns the font path given the font
+     * Returns the font path given the font.
      *
      * @param \PhpOffice\PhpExcel\Style\Font
+     *
      * @return string Path to TrueType font file
      */
     public static function getTrueTypeFontFileFromFont($font)
@@ -426,8 +437,8 @@ class Font
             throw new \PhpOffice\PhpExcel\Exception('Valid directory to TrueType Font files not specified');
         }
 
-        $name   = $font->getName();
-        $bold   = $font->getBold();
+        $name = $font->getName();
+        $bold = $font->getBold();
         $italic = $font->getItalic();
 
         // Check if we can map font to true type font file
@@ -512,11 +523,11 @@ class Font
                 );
                 break;
             default:
-                throw new \PhpOffice\PhpExcel\Exception('Unknown font name "'. $name .'". Cannot map to TrueType font file');
+                throw new \PhpOffice\PhpExcel\Exception('Unknown font name "'.$name.'". Cannot map to TrueType font file');
                 break;
         }
 
-        $fontFile = self::$trueTypeFontPath . $fontFile;
+        $fontFile = self::$trueTypeFontPath.$fontFile;
 
         // Check if file actually exists
         if (!file_exists($fontFile)) {
@@ -530,6 +541,7 @@ class Font
      * Returns the associated charset for the font name.
      *
      * @param string $name Font name
+     *
      * @return int Character set code
      */
     public static function getCharsetFromFontName($name)
@@ -551,10 +563,11 @@ class Font
 
     /**
      * Get the effective column width for columns without a column dimension or column with width -1
-     * For example, for Calibri 11 this is 9.140625 (64 px)
+     * For example, for Calibri 11 this is 9.140625 (64 px).
      *
-     * @param \PhpOffice\PhpExcel\Style\Font $font The workbooks default font
-     * @param boolean $pPixels true = return column width in pixels, false = return in OOXML units
+     * @param \PhpOffice\PhpExcel\Style\Font $font    The workbooks default font
+     * @param bool                           $pPixels true = return column width in pixels, false = return in OOXML units
+     *
      * @return mixed Column width
      */
     public static function getDefaultColumnWidthByFont(\PhpOffice\PhpExcel\Style\Font $font, $pPixels = false)
@@ -564,7 +577,6 @@ class Font
             $columnWidth = $pPixels ?
                 self::$defaultColumnWidths[$font->getName()][$font->getSize()]['px']
                     : self::$defaultColumnWidths[$font->getName()][$font->getSize()]['width'];
-
         } else {
             // We don't have data for this particular font and size, use approximation by
             // extrapolating from Calibri 11
@@ -584,9 +596,10 @@ class Font
 
     /**
      * Get the effective row height for rows without a row dimension or rows with height -1
-     * For example, for Calibri 11 this is 15 points
+     * For example, for Calibri 11 this is 15 points.
      *
      * @param \PhpOffice\PhpExcel\Style\Font $font The workbooks default font
+     *
      * @return float Row height in points
      */
     public static function getDefaultRowHeightByFont(\PhpOffice\PhpExcel\Style\Font $font)

@@ -1,15 +1,5 @@
 <?php
 /**
- *    @package JAMA
- *
- *    Pythagorean Theorem:
- *
- *    a = 3
- *    b = 4
- *    r = sqrt(square(a) + square(b))
- *    r = 5
- *
- *    r = sqrt(a^2 + b^2) without under/overflow.
  */
 function hypo($a, $b)
 {
@@ -22,11 +12,11 @@ function hypo($a, $b)
     } else {
         $r = 0.0;
     }
+
     return $r;
 }    //    function hypo()
 
-
-/**
+/*
  *    Mike Bommarito's version.
  *    Compute n-dimensional hyotheneuse.
  *

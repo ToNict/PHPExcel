@@ -2,8 +2,8 @@
 
 namespace PhpOffice\PhpExcel\Writer\PDF;
 
-/**  Require tcPDF library */
-$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath() . '/tcpdf.php';
+/*  Require tcPDF library */
+$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath().'/tcpdf.php';
 if (file_exists($pdfRendererClassFile)) {
     $k_path_url = \PhpOffice\PhpExcel\Settings::getPdfRendererPath();
     require_once $pdfRendererClassFile;
@@ -12,7 +12,7 @@ if (file_exists($pdfRendererClassFile)) {
 }
 
 /**
- *  \PhpOffice\PhpExcel\Writer\PDF\tcPDF
+ *  \PhpOffice\PhpExcel\Writer\PDF\tcPDF.
  *
  *  Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -31,15 +31,16 @@ if (file_exists($pdfRendererClassFile)) {
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  *  @category    PHPExcel
- *  @package     PhpOffice\PhpExcel\Writer\PDF
+ *
  *  @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  *  @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  *  @version     ##VERSION##, ##DATE##
  */
 class tcPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 {
     /**
-     *  Create a new tcPDF Writer instance
+     *  Create a new tcPDF Writer instance.
      *
      *  @param  \PhpOffice\PhpExcel\Spreadsheet  $phpExcel  Spreadsheet object
      */
@@ -49,9 +50,10 @@ class tcPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
     }
 
     /**
-     *  Save Spreadsheet to file
+     *  Save Spreadsheet to file.
      *
      *  @param     string     $pFilename   Name of the file to save as
+     *
      *  @throws    \PhpOffice\PhpExcel\Writer\Exception
      */
     public function save($pFilename = null)
@@ -89,9 +91,8 @@ class tcPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
             $paperSize = self::$paperSizes[$printPaperSize];
         }
 
-
         //  Create PDF
-        $pdf = new TCPDF($orientation, 'pt', $paperSize);
+        $pdf = new self($orientation, 'pt', $paperSize);
         $pdf->setFontSubsetting(false);
         //    Set margins, converting inches to points (using 72 dpi)
         $pdf->SetMargins($printMargins->getLeft() * 72, $printMargins->getTop() * 72, $printMargins->getRight() * 72);
@@ -105,8 +106,8 @@ class tcPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
         //  Set the appropriate font
         $pdf->SetFont($this->getFont());
         $pdf->writeHTML(
-            $this->generateHTMLHeader(false) .
-            $this->generateSheetData() .
+            $this->generateHTMLHeader(false).
+            $this->generateSheetData().
             $this->generateHTMLFooter()
         );
 

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\OOCalc
+ * PhpOffice\PhpExcel\Reader\OOCalc.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,23 +22,23 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class OOCalc extends BaseReader implements IReader
 {
-
     /**
-     * Formats
+     * Formats.
      *
      * @var array
      */
     private $styles = array();
 
     /**
-     * Create a new OOCalc Reader instance
+     * Create a new OOCalc Reader instance.
      */
     public function __construct()
     {
@@ -48,15 +48,17 @@ class OOCalc extends BaseReader implements IReader
     /**
      * Can the current IReader read the file?
      *
-     * @param     string         $pFilename
-     * @return     boolean
+     * @param string $pFilename
+     *
+     * @return bool
+     *
      * @throws Exception
      */
     public function canRead($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $zipClass = \PhpOffice\PhpExcel\Settings::getZipClass();
@@ -68,7 +70,7 @@ class OOCalc extends BaseReader implements IReader
 
         $mimeType = 'UNKNOWN';
         // Load file
-        $zip = new $zipClass;
+        $zip = new $zipClass();
         if ($zip->open($pFilename) === true) {
             // check if it is an OOXML archive
             $stat = $zip->statName('mimetype');
@@ -93,30 +95,31 @@ class OOCalc extends BaseReader implements IReader
 
             $zip->close();
 
-            return ($mimeType === 'application/vnd.oasis.opendocument.spreadsheet');
+            return $mimeType === 'application/vnd.oasis.opendocument.spreadsheet';
         }
 
         return false;
     }
 
     /**
-     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object
+     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object.
      *
-     * @param     string         $pFilename
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetNames($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $zipClass = \PhpOffice\PhpExcel\Settings::getZipClass();
 
-        $zip = new $zipClass;
+        $zip = new $zipClass();
         if (!$zip->open($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! Error opening file.");
+            throw new Exception('Could not open '.$pFilename.' for reading! Error opening file.');
         }
 
         $worksheetNames = array();
@@ -154,25 +157,26 @@ class OOCalc extends BaseReader implements IReader
     }
 
     /**
-     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
+     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
      *
-     * @param   string     $pFilename
-     * @throws   Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetInfo($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $worksheetInfo = array();
 
         $zipClass = \PhpOffice\PhpExcel\Settings::getZipClass();
 
-        $zip = new $zipClass;
+        $zip = new $zipClass();
         if (!$zip->open($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! Error opening file.");
+            throw new Exception('Could not open '.$pFilename.' for reading! Error opening file.');
         }
 
         $xml = new XMLReader();
@@ -220,7 +224,7 @@ class OOCalc extends BaseReader implements IReader
                             do {
                                 if ($xml->name == 'table:table-cell' && $xml->nodeType == XMLReader::ELEMENT) {
                                     if (!$xml->isEmptyElement) {
-                                        $currCells++;
+                                        ++$currCells;
                                         $xml->next();
                                     } else {
                                         $xml->read();
@@ -281,11 +285,13 @@ class OOCalc extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param     string         $pFilename
-     * @return     \PhpOffice\PhpExcel\Spreadsheet
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @return \PhpOffice\PhpExcel\Spreadsheet
+     *
+     * @throws Exception
      */
     public function load($pFilename)
     {
@@ -302,25 +308,29 @@ class OOCalc extends BaseReader implements IReader
         foreach ($styleList as $style) {
             if ($styleAttributeValue == strtolower($style)) {
                 $styleAttributeValue = $style;
+
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * Loads PHPExcel from file into PHPExcel instance
+     * Loads PHPExcel from file into PHPExcel instance.
      *
-     * @param     string         $pFilename
-     * @param    \PhpOffice\PhpExcel\Spreadsheet    $objPHPExcel
-     * @return     \PhpOffice\PhpExcel\Spreadsheet
-     * @throws     Exception
+     * @param string                          $pFilename
+     * @param \PhpOffice\PhpExcel\Spreadsheet $objPHPExcel
+     *
+     * @return \PhpOffice\PhpExcel\Spreadsheet
+     *
+     * @throws Exception
      */
     public function loadIntoExisting($pFilename, PHPExcel $objPHPExcel)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $timezoneObj = new DateTimeZone('Europe/London');
@@ -328,14 +338,14 @@ class OOCalc extends BaseReader implements IReader
 
         $zipClass = \PhpOffice\PhpExcel\Settings::getZipClass();
 
-        $zip = new $zipClass;
+        $zip = new $zipClass();
         if (!$zip->open($pFilename)) {
-            throw new Exception("Could not open ".$pFilename." for reading! Error opening file.");
+            throw new Exception('Could not open '.$pFilename.' for reading! Error opening file.');
         }
 
 //        echo '<h1>Meta Information</h1>';
         $xml = simplexml_load_string(
-            $this->securityScan($zip->getFromName("meta.xml")), 'SimpleXMLElement', \PhpOffice\PhpExcel\Settings::getLibXmlLoaderOptions()
+            $this->securityScan($zip->getFromName('meta.xml')), 'SimpleXMLElement', \PhpOffice\PhpExcel\Settings::getLibXmlLoaderOptions()
         );
         $namespacesMeta = $xml->getNamespaces(true);
 //        echo '<pre>';
@@ -420,10 +430,9 @@ class OOCalc extends BaseReader implements IReader
             }
         }
 
-
 //        echo '<h1>Workbook Content</h1>';
         $xml = simplexml_load_string(
-            $this->securityScan($zip->getFromName("content.xml")), 'SimpleXMLElement', \PhpOffice\PhpExcel\Settings::getLibXmlLoaderOptions()
+            $this->securityScan($zip->getFromName('content.xml')), 'SimpleXMLElement', \PhpOffice\PhpExcel\Settings::getLibXmlLoaderOptions()
         );
         $namespacesContent = $xml->getNamespaces(true);
 //        echo '<pre>';
@@ -460,7 +469,7 @@ class OOCalc extends BaseReader implements IReader
 
                 $rowID = 1;
                 foreach ($worksheetData as $key => $rowData) {
-//                    echo '<b>'.$key.'</b><br />';
+                    //                    echo '<b>'.$key.'</b><br />';
                     switch ($key) {
                         case 'table-header-rows':
                             foreach ($rowData as $keyRowData => $cellData) {
@@ -502,7 +511,7 @@ class OOCalc extends BaseReader implements IReader
                                 }
 
                                 if (isset($cellDataOffice->annotation)) {
-//                                    echo 'Cell has comment<br />';
+                                    //                                    echo 'Cell has comment<br />';
                                     $annotationText = $cellDataOffice->annotation->children($namespacesContent['text']);
                                     $textArray = array();
                                     foreach ($annotationText as $t) {
@@ -530,7 +539,7 @@ class OOCalc extends BaseReader implements IReader
                                     foreach ($cellDataText->p as $pData) {
                                         if (isset($pData->span)) {
                                             // span sections do not newline, so we just create one large string here
-                                            $spanSection = "";
+                                            $spanSection = '';
                                             foreach ($pData->span as $spanData) {
                                                 $spanSection .= $spanData;
                                             }
@@ -643,7 +652,7 @@ class OOCalc extends BaseReader implements IReader
                                                 $rID = $rowID + $rowAdjust;
                                                 $objPHPExcel->getActiveSheet()->getCell($columnID.$rID)->setValueExplicit((($hasCalculatedValue) ? $cellDataFormula : $dataValue), $type);
                                                 if ($hasCalculatedValue) {
-//                                                    echo 'Forumla result is '.$dataValue.'<br />';
+                                                    //                                                    echo 'Forumla result is '.$dataValue.'<br />';
                                                     $objPHPExcel->getActiveSheet()->getCell($columnID.$rID)->setCalculatedValue($dataValue);
                                                 }
                                                 if ($formatting !== null) {

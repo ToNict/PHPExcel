@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Shared\Escher;
 
 /**
- * PhpOffice\PhpExcel\Shared\Escher\DgContainer
+ * PhpOffice\PhpExcel\Shared\Escher\DgContainer.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Shared\Escher;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Shared\Escher
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class DgContainer
@@ -37,7 +38,7 @@ class DgContainer
     private $dgId;
 
     /**
-     * Last shape index in this drawing
+     * Last shape index in this drawing.
      *
      * @var int
      */

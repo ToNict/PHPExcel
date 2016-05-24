@@ -2,8 +2,8 @@
 
 namespace PhpOffice\PhpExcel\Writer\PDF;
 
-/**  Require DomPDF library */
-$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath() . '/dompdf_config.inc.php';
+/*  Require DomPDF library */
+$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath().'/dompdf_config.inc.php';
 if (file_exists($pdfRendererClassFile)) {
     require_once $pdfRendererClassFile;
 } else {
@@ -11,7 +11,7 @@ if (file_exists($pdfRendererClassFile)) {
 }
 
 /**
- *  \PhpOffice\PhpExcel\Writer\PDF\DomPDF
+ *  \PhpOffice\PhpExcel\Writer\PDF\DomPDF.
  *
  *  Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -30,15 +30,16 @@ if (file_exists($pdfRendererClassFile)) {
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  *  @category    PHPExcel
- *  @package     PhpOffice\PhpExcel\Writer\PDF
+ *
  *  @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  *  @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  *  @version     ##VERSION##, ##DATE##
  */
 class DomPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 {
     /**
-     *  Create a new DomPDF Writer instance
+     *  Create a new DomPDF Writer instance.
      *
      *  @param   \PhpOffice\PhpExcel\Spreadsheet    $phpExcel    Spreadsheet object
      */
@@ -48,9 +49,10 @@ class DomPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
     }
 
     /**
-     *  Save Spreadsheet to file
+     *  Save Spreadsheet to file.
      *
      *  @param   string     $pFilename   Name of the file to save as
+     *
      *  @throws  \PhpOffice\PhpExcel\Writer\Exception
      */
     public function save($pFilename = null)
@@ -90,14 +92,13 @@ class DomPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
             $paperSize = self::$paperSizes[$printPaperSize];
         }
 
-
         //  Create PDF
-        $pdf = new DOMPDF();
+        $pdf = new self();
         $pdf->set_paper(strtolower($paperSize), $orientation);
 
         $pdf->load_html(
-            $this->generateHTMLHeader(false) .
-            $this->generateSheetData() .
+            $this->generateHTMLHeader(false).
+            $this->generateSheetData().
             $this->generateHTMLFooter()
         );
         $pdf->render();

@@ -2,7 +2,7 @@
 
 namespace PhpOffice\PhpExcel\Reader\Excel5\Style;
 
-use \PhpOffice\PhpExcel\Style\Border As StyleBorder;
+use PhpOffice\PhpExcel\Style\Border as StyleBorder;
 
 class Border
 {
@@ -25,9 +25,10 @@ class Border
 
     /**
      * Map border style
-     * OpenOffice documentation: 2.5.11
+     * OpenOffice documentation: 2.5.11.
      *
      * @param int $index
+     *
      * @return string
      */
     public static function lookup($index)
@@ -35,6 +36,7 @@ class Border
         if (isset(self::$map[$index])) {
             return self::$map[$index];
         }
+
         return StyleBorder::BORDER_NONE;
     }
 }

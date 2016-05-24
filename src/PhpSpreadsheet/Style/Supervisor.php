@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Style;
 
 /**
- * PhpOffice\PhpExcel\Style\Supervisor
+ * PhpOffice\PhpExcel\Style\Supervisor.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Style;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Style
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 abstract class Supervisor
@@ -32,23 +33,23 @@ abstract class Supervisor
     /**
      * Supervisor?
      *
-     * @var boolean
+     * @var bool
      */
     protected $isSupervisor;
 
     /**
-     * Parent. Only used for supervisor
+     * Parent. Only used for supervisor.
      *
      * @var \PhpOffice\PhpExcel\Style
      */
     protected $parent;
 
     /**
-     * Create a new Supervisor
+     * Create a new Supervisor.
      *
-     * @param    boolean    $isSupervisor    Flag indicating if this is a supervisor or not
-     *                                    Leave this value at default unless you understand exactly what
-     *                                        its ramifications are
+     * @param bool $isSupervisor Flag indicating if this is a supervisor or not
+     *                           Leave this value at default unless you understand exactly what
+     *                           its ramifications are
      */
     public function __construct($isSupervisor = false)
     {
@@ -57,21 +58,23 @@ abstract class Supervisor
     }
 
     /**
-     * Bind parent. Only used for supervisor
+     * Bind parent. Only used for supervisor.
      *
      * @param PHPExcel $parent
+     *
      * @return Supervisor
      */
     public function bindParent($parent, $parentPropertyName = null)
     {
         $this->parent = $parent;
+
         return $this;
     }
 
     /**
      * Is this a supervisor or a cell style component?
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsSupervisor()
     {
@@ -79,7 +82,7 @@ abstract class Supervisor
     }
 
     /**
-     * Get the currently active sheet. Only used for supervisor
+     * Get the currently active sheet. Only used for supervisor.
      *
      * @return \PhpOffice\PhpExcel\Worksheet
      */
@@ -90,7 +93,7 @@ abstract class Supervisor
 
     /**
      * Get the currently active cell coordinate in currently active sheet.
-     * Only used for supervisor
+     * Only used for supervisor.
      *
      * @return string E.g. 'A1'
      */
@@ -101,7 +104,7 @@ abstract class Supervisor
 
     /**
      * Get the currently active cell coordinate in currently active sheet.
-     * Only used for supervisor
+     * Only used for supervisor.
      *
      * @return string E.g. 'A1'
      */

@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\IReadFilter
+ * PhpOffice\PhpExcel\Reader\IReadFilter.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,9 +22,10 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 interface IReadFilter
@@ -32,10 +33,11 @@ interface IReadFilter
     /**
      * Should this cell be read?
      *
-     * @param    $column           Column address (as a string value like "A", or "IV")
-     * @param    $row              Row number
-     * @param    $worksheetName    Optional worksheet name
-     * @return   boolean
+     * @param   $column        Column address (as a string value like "A", or "IV")
+     * @param   $row           Row number
+     * @param   $worksheetName Optional worksheet name
+     *
+     * @return bool
      */
     public function readCell($column, $row, $worksheetName = '');
 }

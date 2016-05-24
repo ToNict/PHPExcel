@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Worksheet;
 
 /**
- * PhpOffice\PhpExcel\Worksheet\ColumnDimension
+ * PhpOffice\PhpExcel\Worksheet\ColumnDimension.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,26 +22,27 @@ namespace PhpOffice\PhpExcel\Worksheet;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Worksheet
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class ColumnDimension extends Dimension
 {
     /**
-     * Column index
+     * Column index.
      *
      * @var int
      */
     private $columnIndex;
 
     /**
-     * Column width
+     * Column width.
      *
      * When this is set to a negative value, the column width should be ignored by IWriter
      *
-     * @var double
+     * @var float
      */
     private $width = -1;
 
@@ -53,7 +54,7 @@ class ColumnDimension extends Dimension
     private $autoSize = false;
 
     /**
-     * Create a new ColumnDimension
+     * Create a new ColumnDimension.
      *
      * @param string $pIndex Character column index
      */
@@ -67,7 +68,7 @@ class ColumnDimension extends Dimension
     }
 
     /**
-     * Get ColumnIndex
+     * Get ColumnIndex.
      *
      * @return string
      */
@@ -77,21 +78,23 @@ class ColumnDimension extends Dimension
     }
 
     /**
-     * Set ColumnIndex
+     * Set ColumnIndex.
      *
      * @param string $pValue
+     *
      * @return ColumnDimension
      */
     public function setColumnIndex($pValue)
     {
         $this->columnIndex = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Width
+     * Get Width.
      *
-     * @return double
+     * @return float
      */
     public function getWidth()
     {
@@ -99,19 +102,21 @@ class ColumnDimension extends Dimension
     }
 
     /**
-     * Set Width
+     * Set Width.
      *
-     * @param double $pValue
+     * @param float $pValue
+     *
      * @return ColumnDimension
      */
     public function setWidth($pValue = -1)
     {
         $this->width = $pValue;
+
         return $this;
     }
 
     /**
-     * Get Auto Size
+     * Get Auto Size.
      *
      * @return bool
      */
@@ -121,14 +126,16 @@ class ColumnDimension extends Dimension
     }
 
     /**
-     * Set Auto Size
+     * Set Auto Size.
      *
      * @param bool $pValue
+     *
      * @return ColumnDimension
      */
     public function setAutoSize($pValue = false)
     {
         $this->autoSize = $pValue;
+
         return $this;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace PhpOffice\PhpExcel\Writer\PDF;
 
-/**  Require mPDF library */
-$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath() . '/mpdf.php';
+/*  Require mPDF library */
+$pdfRendererClassFile = \PhpOffice\PhpExcel\Settings::getPdfRendererPath().'/mpdf.php';
 if (file_exists($pdfRendererClassFile)) {
     require_once $pdfRendererClassFile;
 } else {
@@ -11,7 +11,7 @@ if (file_exists($pdfRendererClassFile)) {
 }
 
 /**
- *  \PhpOffice\PhpExcel\Writer\PDF\mPDF
+ *  \PhpOffice\PhpExcel\Writer\PDF\mPDF.
  *
  *  Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -30,15 +30,16 @@ if (file_exists($pdfRendererClassFile)) {
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  *  @category    PHPExcel
- *  @package     PhpOffice\PhpExcel\Writer\PDF
+ *
  *  @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  *  @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  *  @version     ##VERSION##, ##DATE##
  */
 class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 {
     /**
-     *  Create a mPDF Writer instance
+     *  Create a mPDF Writer instance.
      *
      *  @param  \PhpOffice\PhpExcel\Spreadsheet  $phpExcel  Spreadsheet object
      */
@@ -48,9 +49,10 @@ class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
     }
 
     /**
-     *  Save Spreadsheet to file
+     *  Save Spreadsheet to file.
      *
      *  @param     string     $pFilename   Name of the file to save as
+     *
      *  @throws    \PhpOffice\PhpExcel\Writer\Exception
      */
     public function save($pFilename = null)
@@ -91,9 +93,8 @@ class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
             $paperSize = self::$paperSizes[$printPaperSize];
         }
 
-
         //  Create PDF
-        $pdf = new mpdf();
+        $pdf = new self();
         $ortmp = $orientation;
         $pdf->_setPageSize(strtoupper($paperSize), $ortmp);
         $pdf->DefOrientation = $orientation;
@@ -107,8 +108,8 @@ class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
         $pdf->SetCreator($this->phpExcel->getProperties()->getCreator());
 
         $pdf->WriteHTML(
-            $this->generateHTMLHeader(false) .
-            $this->generateSheetData() .
+            $this->generateHTMLHeader(false).
+            $this->generateSheetData().
             $this->generateHTMLFooter()
         );
 

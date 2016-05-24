@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel;
 
 /**
- * PhpOffice\PhpExcel\NamedRange
+ * PhpOffice\PhpExcel\NamedRange.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,56 +22,58 @@ namespace PhpOffice\PhpExcel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class NamedRange
 {
     /**
-     * Range name
+     * Range name.
      *
      * @var string
      */
     private $name;
 
     /**
-     * Worksheet on which the named range can be resolved
+     * Worksheet on which the named range can be resolved.
      *
      * @var Worksheet
      */
     private $worksheet;
 
     /**
-     * Range of the referenced cells
+     * Range of the referenced cells.
      *
      * @var string
      */
     private $range;
 
     /**
-     * Is the named range local? (i.e. can only be used on $this->worksheet)
+     * Is the named range local? (i.e. can only be used on $this->worksheet).
      *
      * @var bool
      */
     private $localOnly;
 
     /**
-     * Scope
+     * Scope.
      *
      * @var Worksheet
      */
     private $scope;
 
     /**
-     * Create a new NamedRange
+     * Create a new NamedRange.
      *
-     * @param string $pName
-     * @param Worksheet $pWorksheet
-     * @param string $pRange
-     * @param bool $pLocalOnly
-     * @param Worksheet|null $pScope    Scope. Only applies when $pLocalOnly = true. Null for global scope.
+     * @param string         $pName
+     * @param Worksheet      $pWorksheet
+     * @param string         $pRange
+     * @param bool           $pLocalOnly
+     * @param Worksheet|null $pScope     Scope. Only applies when $pLocalOnly = true. Null for global scope.
+     *
      * @throws Exception
      */
     public function __construct($pName, Worksheet $pWorksheet, $pRange = 'A1', $pLocalOnly = false, $pScope = null)
@@ -82,15 +84,15 @@ class NamedRange
         }
 
         // Set local members
-        $this->name       = $pName;
-        $this->worksheet  = $pWorksheet;
-        $this->range      = $pRange;
-        $this->localOnly  = $pLocalOnly;
-        $this->scope      = ($pLocalOnly == true) ? (($pScope == null) ? $pWorksheet : $pScope) : null;
+        $this->name = $pName;
+        $this->worksheet = $pWorksheet;
+        $this->range = $pRange;
+        $this->localOnly = $pLocalOnly;
+        $this->scope = ($pLocalOnly == true) ? (($pScope == null) ? $pWorksheet : $pScope) : null;
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -100,9 +102,10 @@ class NamedRange
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $value
+     *
      * @return NamedRange
      */
     public function setName($value = null)
@@ -125,11 +128,12 @@ class NamedRange
             $newTitle = $this->name;
             ReferenceHelper::getInstance()->updateNamedFormulas($this->worksheet->getParent(), $oldTitle, $newTitle);
         }
+
         return $this;
     }
 
     /**
-     * Get worksheet
+     * Get worksheet.
      *
      * @return Worksheet
      */
@@ -139,9 +143,10 @@ class NamedRange
     }
 
     /**
-     * Set worksheet
+     * Set worksheet.
      *
      * @param Worksheet $value
+     *
      * @return NamedRange
      */
     public function setWorksheet(Worksheet $value = null)
@@ -149,11 +154,12 @@ class NamedRange
         if ($value !== null) {
             $this->worksheet = $value;
         }
+
         return $this;
     }
 
     /**
-     * Get range
+     * Get range.
      *
      * @return string
      */
@@ -163,9 +169,10 @@ class NamedRange
     }
 
     /**
-     * Set range
+     * Set range.
      *
      * @param string $value
+     *
      * @return NamedRange
      */
     public function setRange($value = null)
@@ -173,11 +180,12 @@ class NamedRange
         if ($value !== null) {
             $this->range = $value;
         }
+
         return $this;
     }
 
     /**
-     * Get localOnly
+     * Get localOnly.
      *
      * @return bool
      */
@@ -187,20 +195,22 @@ class NamedRange
     }
 
     /**
-     * Set localOnly
+     * Set localOnly.
      *
      * @param bool $value
+     *
      * @return NamedRange
      */
     public function setLocalOnly($value = false)
     {
         $this->localOnly = $value;
         $this->scope = $value ? $this->worksheet : null;
+
         return $this;
     }
 
     /**
-     * Get scope
+     * Get scope.
      *
      * @return Worksheet|null
      */
@@ -210,23 +220,26 @@ class NamedRange
     }
 
     /**
-     * Set scope
+     * Set scope.
      *
      * @param Worksheet|null $value
+     *
      * @return NamedRange
      */
     public function setScope(Worksheet $value = null)
     {
         $this->scope = $value;
         $this->localOnly = ($value == null) ? false : true;
+
         return $this;
     }
 
     /**
-     * Resolve a named range to a regular cell range
+     * Resolve a named range to a regular cell range.
      *
-     * @param string $pNamedRange Named range
-     * @param Worksheet|null $pSheet Scope. Use null for global scope
+     * @param string         $pNamedRange Named range
+     * @param Worksheet|null $pSheet      Scope. Use null for global scope
+     *
      * @return NamedRange
      */
     public static function resolveRange($pNamedRange, Worksheet $pSheet)

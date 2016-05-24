@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\CachedObjectStorage;
 
 /**
- * PhpOffice\PhpExcel\CachedObjectStorage\ICache
+ * PhpOffice\PhpExcel\CachedObjectStorage\ICache.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,83 +22,92 @@ namespace PhpOffice\PhpExcel\CachedObjectStorage;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\CachedObjectStorage
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 interface ICache
 {
     /**
-     * Add or Update a cell in cache identified by coordinate address
+     * Add or Update a cell in cache identified by coordinate address.
      *
-     * @param    string            $pCoord        Coordinate address of the cell to update
-     * @param    \PhpOffice\PhpExcel\Cell    $cell        Cell to update
-     * @return   \PhpOffice\PhpExcel\Cell
-     * @throws   \PhpOffice\PhpExcel\Exception
+     * @param string                   $pCoord Coordinate address of the cell to update
+     * @param \PhpOffice\PhpExcel\Cell $cell   Cell to update
+     *
+     * @return \PhpOffice\PhpExcel\Cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function addCacheData($pCoord, \PhpOffice\PhpExcel\Cell $cell);
 
     /**
-     * Add or Update a cell in cache
+     * Add or Update a cell in cache.
      *
-     * @param    \PhpOffice\PhpExcel\Cell    $cell        Cell to update
-     * @return   \PhpOffice\PhpExcel\Cell
-     * @throws   \PhpOffice\PhpExcel\Exception
+     * @param \PhpOffice\PhpExcel\Cell $cell Cell to update
+     *
+     * @return \PhpOffice\PhpExcel\Cell
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function updateCacheData(\PhpOffice\PhpExcel\Cell $cell);
 
     /**
-     * Fetch a cell from cache identified by coordinate address
+     * Fetch a cell from cache identified by coordinate address.
      *
-     * @param   string            $pCoord        Coordinate address of the cell to retrieve
-     * @return  \PhpOffice\PhpExcel\Cell     Cell that was found, or null if not found
-     * @throws  \PhpOffice\PhpExcel\Exception
+     * @param string $pCoord Coordinate address of the cell to retrieve
+     *
+     * @return \PhpOffice\PhpExcel\Cell Cell that was found, or null if not found
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function getCacheData($pCoord);
 
     /**
-     * Delete a cell in cache identified by coordinate address
+     * Delete a cell in cache identified by coordinate address.
      *
-     * @param    string            $pCoord        Coordinate address of the cell to delete
-     * @throws   \PhpOffice\PhpExcel\Exception
+     * @param string $pCoord Coordinate address of the cell to delete
+     *
+     * @throws \PhpOffice\PhpExcel\Exception
      */
     public function deleteCacheData($pCoord);
 
     /**
      * Is a value set in the current \PhpOffice\PhpExcel\CachedObjectStorage\ICache for an indexed cell?
      *
-     * @param    string        $pCoord        Coordinate address of the cell to check
-     * @return    boolean
+     * @param string $pCoord Coordinate address of the cell to check
+     *
+     * @return bool
      */
     public function isDataSet($pCoord);
 
     /**
-     * Get a list of all cell addresses currently held in cache
+     * Get a list of all cell addresses currently held in cache.
      *
-     * @return    string[]
+     * @return string[]
      */
     public function getCellList();
 
     /**
-     * Get the list of all cell addresses currently held in cache sorted by column and row
+     * Get the list of all cell addresses currently held in cache sorted by column and row.
      *
-     * @return    string[]
+     * @return string[]
      */
     public function getSortedCellList();
 
     /**
-     * Clone the cell collection
+     * Clone the cell collection.
      *
-     * @param  \PhpOffice\PhpExcel\Worksheet    $parent        The new worksheet that we're copying to
+     * @param \PhpOffice\PhpExcel\Worksheet $parent The new worksheet that we're copying to
      */
     public function copyCellCollection(\PhpOffice\PhpExcel\Worksheet $parent);
 
     /**
      * Identify whether the caching method is currently available
-     * Some methods are dependent on the availability of certain extensions being enabled in the PHP build
+     * Some methods are dependent on the availability of certain extensions being enabled in the PHP build.
      *
-     * @return    boolean
+     * @return bool
      */
     public static function cacheMethodIsAvailable();
 }

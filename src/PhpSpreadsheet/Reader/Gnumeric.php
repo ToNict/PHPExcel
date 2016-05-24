@@ -3,7 +3,7 @@
 namespace PhpOffice\PhpExcel\Reader;
 
 /**
- * PhpOffice\PhpExcel\Reader\Gnumeric
+ * PhpOffice\PhpExcel\Reader\Gnumeric.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -22,22 +22,23 @@ namespace PhpOffice\PhpExcel\Reader;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PhpOffice\PhpExcel\Reader
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 class Gnumeric extends BaseReader implements IReader
 {
     /**
-     * Formats
+     * Formats.
      *
      * @var array
      */
     private $styles = array();
 
     /**
-     * Shared Expressions
+     * Shared Expressions.
      *
      * @var array
      */
@@ -46,31 +47,33 @@ class Gnumeric extends BaseReader implements IReader
     private $referenceHelper = null;
 
     /**
-     * Create a new Gnumeric
+     * Create a new Gnumeric.
      */
     public function __construct()
     {
-        $this->readFilter     = new DefaultReadFilter();
+        $this->readFilter = new DefaultReadFilter();
         $this->referenceHelper = \PhpOffice\PhpExcel\ReferenceHelper::getInstance();
     }
 
     /**
      * Can the current IReader read the file?
      *
-     * @param     string         $pFilename
-     * @return     boolean
+     * @param string $pFilename
+     *
+     * @return bool
+     *
      * @throws Exception
      */
     public function canRead($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         // Check if gzlib functions are available
         if (!function_exists('gzread')) {
-            throw new Exception("gzlib library is not enabled");
+            throw new Exception('gzlib library is not enabled');
         }
 
         // Read signature data (first 3 bytes)
@@ -86,16 +89,17 @@ class Gnumeric extends BaseReader implements IReader
     }
 
     /**
-     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object
+     * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object.
      *
-     * @param   string         $pFilename
-     * @throws  Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetNames($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $xml = new XMLReader();
@@ -117,16 +121,17 @@ class Gnumeric extends BaseReader implements IReader
     }
 
     /**
-     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
+     * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns).
      *
-     * @param   string     $pFilename
-     * @throws   Exception
+     * @param string $pFilename
+     *
+     * @throws Exception
      */
     public function listWorksheetInfo($pFilename)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $xml = new XMLReader();
@@ -176,15 +181,18 @@ class Gnumeric extends BaseReader implements IReader
             }
             gzclose($file);
         }
+
         return $data;
     }
 
     /**
-     * Loads PHPExcel from file
+     * Loads PHPExcel from file.
      *
-     * @param     string         $pFilename
-     * @return     PHPExcel
-     * @throws     Exception
+     * @param string $pFilename
+     *
+     * @return PHPExcel
+     *
+     * @throws Exception
      */
     public function load($pFilename)
     {
@@ -196,18 +204,20 @@ class Gnumeric extends BaseReader implements IReader
     }
 
     /**
-     * Loads PHPExcel from file into PHPExcel instance
+     * Loads PHPExcel from file into PHPExcel instance.
      *
-     * @param     string         $pFilename
-     * @param    PHPExcel    $objPHPExcel
-     * @return     PHPExcel
-     * @throws     Exception
+     * @param string   $pFilename
+     * @param PHPExcel $objPHPExcel
+     *
+     * @return PHPExcel
+     *
+     * @throws Exception
      */
     public function loadIntoExisting($pFilename, PHPExcel $objPHPExcel)
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception('Could not open '.$pFilename.' for reading! File does not exist.');
         }
 
         $timezoneObj = new DateTimeZone('Europe/London');
@@ -411,9 +421,9 @@ class Gnumeric extends BaseReader implements IReader
                 if ($ExprID > '') {
                     if (((string) $cell) > '') {
                         $this->expressions[$ExprID] = array(
-                            'column'    => $cellAttributes->Col,
-                            'row'        => $cellAttributes->Row,
-                            'formula'    => (string) $cell
+                            'column' => $cellAttributes->Col,
+                            'row' => $cellAttributes->Row,
+                            'formula' => (string) $cell,
                         );
 //                        echo 'NEW EXPRESSION ', $ExprID,'<br />';
                     } else {
@@ -437,7 +447,7 @@ class Gnumeric extends BaseReader implements IReader
                             break;
                         case '20':        //    Boolean
                             $type = \PhpOffice\PhpExcel\Cell\DataType::TYPE_BOOL;
-                            $cell = ($cell == 'TRUE') ? true: false;
+                            $cell = ($cell == 'TRUE') ? true : false;
                             break;
                         case '30':        //    Integer
                             $cell = intval($cell);
@@ -463,7 +473,7 @@ class Gnumeric extends BaseReader implements IReader
                     $commentAttributes = $comment->attributes();
                     //    Only comment objects are handled at the moment
                     if ($commentAttributes->Text) {
-                        $objPHPExcel->getActiveSheet()->getComment((string)$commentAttributes->ObjectBound)->setAuthor((string)$commentAttributes->Author)->setText($this->parseRichText((string)$commentAttributes->Text));
+                        $objPHPExcel->getActiveSheet()->getComment((string) $commentAttributes->ObjectBound)->setAuthor((string) $commentAttributes->Author)->setText($this->parseRichText((string) $commentAttributes->Text));
                     }
                 }
             }
@@ -533,15 +543,15 @@ class Gnumeric extends BaseReader implements IReader
 
                             $styleArray['alignment']['wrap'] = ($styleAttributes['WrapText'] == '1') ? true : false;
                             $styleArray['alignment']['shrinkToFit'] = ($styleAttributes['ShrinkToFit'] == '1') ? true : false;
-                            $styleArray['alignment']['indent'] = (intval($styleAttributes["Indent"]) > 0) ? $styleAttributes["indent"] : 0;
+                            $styleArray['alignment']['indent'] = (intval($styleAttributes['Indent']) > 0) ? $styleAttributes['indent'] : 0;
 
-                            $RGB = self::parseGnumericColour($styleAttributes["Fore"]);
+                            $RGB = self::parseGnumericColour($styleAttributes['Fore']);
                             $styleArray['font']['color']['rgb'] = $RGB;
-                            $RGB = self::parseGnumericColour($styleAttributes["Back"]);
-                            $shade = $styleAttributes["Shade"];
+                            $RGB = self::parseGnumericColour($styleAttributes['Back']);
+                            $shade = $styleAttributes['Shade'];
                             if (($RGB != '000000') || ($shade != '0')) {
                                 $styleArray['fill']['color']['rgb'] = $styleArray['fill']['startcolor']['rgb'] = $RGB;
-                                $RGB2 = self::parseGnumericColour($styleAttributes["PatternColor"]);
+                                $RGB2 = self::parseGnumericColour($styleAttributes['PatternColor']);
                                 $styleArray['fill']['endcolor']['rgb'] = $RGB2;
                                 switch ($shade) {
                                     case '1':
@@ -692,7 +702,7 @@ class Gnumeric extends BaseReader implements IReader
                         $objPHPExcel->getActiveSheet()->getColumnDimension(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c))->setWidth($defaultWidth);
                         ++$c;
                     }
-                    while (($c < ($column+$columnCount)) && ($c <= $maxCol)) {
+                    while (($c < ($column + $columnCount)) && ($c <= $maxCol)) {
                         $objPHPExcel->getActiveSheet()->getColumnDimension(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c))->setWidth($columnWidth);
                         if ($hidden) {
                             $objPHPExcel->getActiveSheet()->getColumnDimension(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($c))->setVisible(false);
@@ -722,7 +732,7 @@ class Gnumeric extends BaseReader implements IReader
                         ++$r;
                         $objPHPExcel->getActiveSheet()->getRowDimension($r)->setRowHeight($defaultHeight);
                     }
-                    while (($r < ($row+$rowCount)) && ($r < $maxRow)) {
+                    while (($r < ($row + $rowCount)) && ($r < $maxRow)) {
                         ++$r;
                         $objPHPExcel->getActiveSheet()->getRowDimension($r)->setRowHeight($rowHeight);
                         if ($hidden) {
@@ -745,7 +755,7 @@ class Gnumeric extends BaseReader implements IReader
                 }
             }
 
-            $worksheetID++;
+            ++$worksheetID;
         }
 
         //    Loop through definedNames (global named ranges)
@@ -773,11 +783,11 @@ class Gnumeric extends BaseReader implements IReader
     private static function parseBorderAttributes($borderAttributes)
     {
         $styleArray = array();
-        if (isset($borderAttributes["Color"])) {
-            $styleArray['color']['rgb'] = self::parseGnumericColour($borderAttributes["Color"]);
+        if (isset($borderAttributes['Color'])) {
+            $styleArray['color']['rgb'] = self::parseGnumericColour($borderAttributes['Color']);
         }
 
-        switch ($borderAttributes["Style"]) {
+        switch ($borderAttributes['Style']) {
             case '0':
                 $styleArray['style'] = \PhpOffice\PhpExcel\Style\Border::BORDER_NONE;
                 break;
@@ -821,6 +831,7 @@ class Gnumeric extends BaseReader implements IReader
                 $styleArray['style'] = \PhpOffice\PhpExcel\Style\Border::BORDER_MEDIUMDASHDOTDOT;
                 break;
         }
+
         return $styleArray;
     }
 
@@ -838,6 +849,7 @@ class Gnumeric extends BaseReader implements IReader
         $gnmR = substr(str_pad($gnmR, 4, '0', STR_PAD_RIGHT), 0, 2);
         $gnmG = substr(str_pad($gnmG, 4, '0', STR_PAD_RIGHT), 0, 2);
         $gnmB = substr(str_pad($gnmB, 4, '0', STR_PAD_RIGHT), 0, 2);
-        return $gnmR . $gnmG . $gnmB;
+
+        return $gnmR.$gnmG.$gnmB;
     }
 }
