@@ -3,9 +3,9 @@
 namespace PhpOffice\PhpExcel\Shared;
 
 if (!defined('PCLZIP_TEMPORARY_DIR')) {
-    define('PCLZIP_TEMPORARY_DIR', File::sys_get_temp_dir() . DIRECTORY_SEPARATOR);
+    define('PCLZIP_TEMPORARY_DIR', File::sysGetTempDir().DIRECTORY_SEPARATOR);
 }
-require_once 'PCLZip/pclzip.lib.php';
+use PHPExcel\Shared\PCLZip\PclZip;
 
 /**
  * PhpOffice\PhpExcel\Shared\ZipArchive
@@ -37,8 +37,7 @@ class ZipArchive
 
     /**    constants */
     const OVERWRITE = 'OVERWRITE';
-    const CREATE    = 'CREATE';
-
+    const CREATE = 'CREATE';
 
     /**
      * Temporary storage directory
@@ -54,7 +53,6 @@ class ZipArchive
      */
     private $zip;
 
-
     /**
      * Open a new zip archive
      *
@@ -63,12 +61,11 @@ class ZipArchive
      */
     public function open($fileName)
     {
-        $this->tempDir = File::sys_get_temp_dir();
+        $this->tempDir = File::sysGetTempDir();
         $this->zip = new \PclZip($fileName);
 
         return true;
     }
-
 
     /**
      * Close this zip archive
@@ -76,8 +73,8 @@ class ZipArchive
      */
     public function close()
     {
-    }
 
+    }
 
     /**
      * Add a new file to the zip archive from a string of raw data.
@@ -96,7 +93,7 @@ class ZipArchive
 
         $res = $this->zip->add($this->tempDir.'/'.$filenameParts["basename"], PCLZIP_OPT_REMOVE_PATH, $this->tempDir, PCLZIP_OPT_ADD_PATH, $filenameParts["dirname"]);
         if ($res == 0) {
-            throw new \PhpOffice\PhpExcel\Writer\Exception("Error zipping files : " . $this->zip->errorInfo(true));
+            throw new \PhpOffice\PhpExcel\Writer\Exception("Error zipping files : ".$this->zip->errorInfo(true));
         }
 
         unlink($this->tempDir.'/'.$filenameParts["basename"]);
@@ -154,11 +151,12 @@ class ZipArchive
         return $contents;
     }
 
-    public function getFromIndex($index) {
+    public function getFromIndex($index)
+    {
         $extracted = $this->zip->extractByIndex($index, PCLZIP_OPT_EXTRACT_AS_STRING);
         $contents = '';
         if ((is_array($extracted)) && ($extracted != 0)) {
-             $contents = $extracted[0]["content"];
+            $contents = $extracted[0]["content"];
         }
     }
 }

@@ -13,13 +13,15 @@ namespace PhpOffice\PhpExcel\Shared\JAMA;
  *    @license PHP v3.0
  *    @see http://math.nist.gov/javanumerics/jama/
  */
+
 class Matrix
 {
+
     const POLYMORPHIC_ARGUMENT_EXCEPTION = "Invalid argument pattern for polymorphic function.";
-    const ARGUMENT_TYPE_EXCEPTION        = "Invalid argument type.";
-    const ARGUMENT_BOUNDS_EXCEPTION      = "Invalid argument range.";
-    const MATRIX_DIMENSION_EXCEPTION     = "Matrix dimensions are not equal.";
-    const ARRAY_LENGTH_EXCEPTION         = "Array length must be a multiple of m.";
+    const ARGUMENT_TYPE_EXCEPTION = "Invalid argument type.";
+    const ARGUMENT_BOUNDS_EXCEPTION = "Invalid argument range.";
+    const MATRIX_DIMENSION_EXCEPTION = "Matrix dimensions are not equal.";
+    const ARRAY_LENGTH_EXCEPTION = "Array length must be a multiple of m.";
 
     /**
      *    Matrix storage
@@ -196,7 +198,7 @@ class Matrix
                     } else {
                         throw new \PhpOffice\PhpExcel\Calculation\Exception(self::ARGUMENT_BOUNDS_EXCEPTION);
                     }
-                    $R = new Matrix($m+1, $n+1);
+                    $R = new Matrix($m + 1, $n + 1);
                     for ($i = $i0; $i <= $iF; ++$i) {
                         for ($j = $j0; $j <= $jF; ++$j) {
                             $R->set($i - $i0, $j - $j0, $this->A[$i][$j]);
@@ -280,7 +282,7 @@ class Matrix
                     } else {
                         throw new \PhpOffice\PhpExcel\Calculation\Exception(self::ARGUMENT_BOUNDS_EXCEPTION);
                     }
-                    $R = new Matrix($m, $n+1);
+                    $R = new Matrix($m, $n + 1);
                     for ($i = 0; $i < $m; ++$i) {
                         for ($j = $j0; $j <= $jF; ++$j) {
                             $R->set($i, $j - $j0, $this->A[$RL[$i]][$j]);
@@ -315,7 +317,8 @@ class Matrix
         } else {
             throw new \PhpOffice\PhpExcel\Calculation\Exception(self::ARGUMENT_TYPE_EXCEPTION);
         }
-    }    //    function checkMatrixDimensions()
+    }
+//    function checkMatrixDimensions()
 
     /**
      *    set
@@ -330,7 +333,8 @@ class Matrix
     {
         // Optimized set version just has this
         $this->A[$i][$j] = $c;
-    }    //    function set()
+    }
+//    function set()
 
     /**
      *    identity
@@ -420,7 +424,8 @@ class Matrix
             }
         }
         return $R;
-    }    //    function transpose()
+    }
+//    function transpose()
 
     /**
      *    trace
@@ -446,6 +451,7 @@ class Matrix
      */
     public function uminus()
     {
+
     }
 
     /**
@@ -792,7 +798,6 @@ class Matrix
         }
     }
 
-
     /**
      *    arrayRightDivideEquals
      *
@@ -833,7 +838,6 @@ class Matrix
             throw new \PhpOffice\PhpExcel\Calculation\Exception(self::POLYMORPHIC_ARGUMENT_EXCEPTION);
         }
     }
-
 
     /**
      *    arrayLeftDivide
@@ -876,7 +880,6 @@ class Matrix
         }
     }
 
-
     /**
      *    arrayLeftDivideEquals
      *
@@ -918,7 +921,6 @@ class Matrix
         }
     }
 
-
     /**
      *    times
      *
@@ -929,7 +931,7 @@ class Matrix
     public function times()
     {
         if (func_num_args() > 0) {
-            $args  = func_get_args();
+            $args = func_get_args();
             $match = implode(",", array_map('gettype', $args));
 
             switch ($match) {
@@ -1088,6 +1090,7 @@ class Matrix
                     } else {
                         throw new \PhpOffice\PhpExcel\Calculation\Exception(self::ARGUMENT_TYPE_EXCEPTION);
                     }
+                    break;
                 case 'array':
                     $M = new Matrix($args[0]);
                     break;

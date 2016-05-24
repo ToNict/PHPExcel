@@ -77,7 +77,7 @@ foreach($years as $year) {
 		foreach($countries as $country) {
 			$endDays = date('t',mktime(0,0,0,$period,1,$year));
 			for($i = 1; $i <= $endDays; ++$i) {
-				$eDate = \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel(
+				$eDate = \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(
 					$year,
 					$period,
 					$i

@@ -1,8 +1,10 @@
 <?php
 
+namespace PhpSpreadhsheet\unitTests\custom;
+
 include_once dirname(__FILE__).'/Complex.php';
 
-class complexAssert
+class ComplexAssert
 {
     private $_errorMessage    = '';
 

@@ -27,7 +27,6 @@ namespace PhpOffice\PhpExcel\Reader;
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  * @version    ##VERSION##, ##DATE##
  */
-
 // Original file header of ParseXL (used as the base for this class):
 // --------------------------------------------------------------------------------
 // Adapted from Excel_Spreadsheet_Reader developed by users bizon153,
@@ -50,7 +49,6 @@ namespace PhpOffice\PhpExcel\Reader;
 //     General code cleanup and rigor, including <80 column width
 //     Included a testcase Excel file and PHP example calls
 //     Code works for PHP 5.x
-
 // Primary changes made by canyoncasa (dvc) for ParseXL 1.10 ...
 // http://sourceforge.net/tracker/index.php?func=detail&aid=1466964&group_id=99160&atid=623334
 //     Decoding of formula conditions, results, and tokens.
@@ -60,95 +58,93 @@ namespace PhpOffice\PhpExcel\Reader;
 //         external sheet reference structure
 class Excel5 extends BaseReader implements IReader
 {
+
     // ParseXL definitions
-    const XLS_BIFF8                     = 0x0600;
-    const XLS_BIFF7                     = 0x0500;
-    const XLS_WorkbookGlobals           = 0x0005;
-    const XLS_Worksheet                 = 0x0010;
-
+    const XLS_BIFF8 = 0x0600;
+    const XLS_BIFF7 = 0x0500;
+    const XLS_WORKBOOKGLOBALS = 0x0005;
+    const XLS_WORKSHEET = 0x0010;
     // record identifiers
-    const XLS_TYPE_FORMULA              = 0x0006;
-    const XLS_TYPE_EOF                  = 0x000a;
-    const XLS_TYPE_PROTECT              = 0x0012;
-    const XLS_TYPE_OBJECTPROTECT        = 0x0063;
-    const XLS_TYPE_SCENPROTECT          = 0x00dd;
-    const XLS_TYPE_PASSWORD             = 0x0013;
-    const XLS_TYPE_HEADER               = 0x0014;
-    const XLS_TYPE_FOOTER               = 0x0015;
-    const XLS_TYPE_EXTERNSHEET          = 0x0017;
-    const XLS_TYPE_DEFINEDNAME          = 0x0018;
-    const XLS_TYPE_VERTICALPAGEBREAKS   = 0x001a;
+    const XLS_TYPE_FORMULA = 0x0006;
+    const XLS_TYPE_EOF = 0x000a;
+    const XLS_TYPE_PROTECT = 0x0012;
+    const XLS_TYPE_OBJECTPROTECT = 0x0063;
+    const XLS_TYPE_SCENPROTECT = 0x00dd;
+    const XLS_TYPE_PASSWORD = 0x0013;
+    const XLS_TYPE_HEADER = 0x0014;
+    const XLS_TYPE_FOOTER = 0x0015;
+    const XLS_TYPE_EXTERNSHEET = 0x0017;
+    const XLS_TYPE_DEFINEDNAME = 0x0018;
+    const XLS_TYPE_VERTICALPAGEBREAKS = 0x001a;
     const XLS_TYPE_HORIZONTALPAGEBREAKS = 0x001b;
-    const XLS_TYPE_NOTE                 = 0x001c;
-    const XLS_TYPE_SELECTION            = 0x001d;
-    const XLS_TYPE_DATEMODE             = 0x0022;
-    const XLS_TYPE_EXTERNNAME           = 0x0023;
-    const XLS_TYPE_LEFTMARGIN           = 0x0026;
-    const XLS_TYPE_RIGHTMARGIN          = 0x0027;
-    const XLS_TYPE_TOPMARGIN            = 0x0028;
-    const XLS_TYPE_BOTTOMMARGIN         = 0x0029;
-    const XLS_TYPE_PRINTGRIDLINES       = 0x002b;
-    const XLS_TYPE_FILEPASS             = 0x002f;
-    const XLS_TYPE_FONT                 = 0x0031;
-    const XLS_TYPE_CONTINUE             = 0x003c;
-    const XLS_TYPE_PANE                 = 0x0041;
-    const XLS_TYPE_CODEPAGE             = 0x0042;
-    const XLS_TYPE_DEFCOLWIDTH          = 0x0055;
-    const XLS_TYPE_OBJ                  = 0x005d;
-    const XLS_TYPE_COLINFO              = 0x007d;
-    const XLS_TYPE_IMDATA               = 0x007f;
-    const XLS_TYPE_SHEETPR              = 0x0081;
-    const XLS_TYPE_HCENTER              = 0x0083;
-    const XLS_TYPE_VCENTER              = 0x0084;
-    const XLS_TYPE_SHEET                = 0x0085;
-    const XLS_TYPE_PALETTE              = 0x0092;
-    const XLS_TYPE_SCL                  = 0x00a0;
-    const XLS_TYPE_PAGESETUP            = 0x00a1;
-    const XLS_TYPE_MULRK                = 0x00bd;
-    const XLS_TYPE_MULBLANK             = 0x00be;
-    const XLS_TYPE_DBCELL               = 0x00d7;
-    const XLS_TYPE_XF                   = 0x00e0;
-    const XLS_TYPE_MERGEDCELLS          = 0x00e5;
-    const XLS_TYPE_MSODRAWINGGROUP      = 0x00eb;
-    const XLS_TYPE_MSODRAWING           = 0x00ec;
-    const XLS_TYPE_SST                  = 0x00fc;
-    const XLS_TYPE_LABELSST             = 0x00fd;
-    const XLS_TYPE_EXTSST               = 0x00ff;
-    const XLS_TYPE_EXTERNALBOOK         = 0x01ae;
-    const XLS_TYPE_DATAVALIDATIONS      = 0x01b2;
-    const XLS_TYPE_TXO                  = 0x01b6;
-    const XLS_TYPE_HYPERLINK            = 0x01b8;
-    const XLS_TYPE_DATAVALIDATION       = 0x01be;
-    const XLS_TYPE_DIMENSION            = 0x0200;
-    const XLS_TYPE_BLANK                = 0x0201;
-    const XLS_TYPE_NUMBER               = 0x0203;
-    const XLS_TYPE_LABEL                = 0x0204;
-    const XLS_TYPE_BOOLERR              = 0x0205;
-    const XLS_TYPE_STRING               = 0x0207;
-    const XLS_TYPE_ROW                  = 0x0208;
-    const XLS_TYPE_INDEX                = 0x020b;
-    const XLS_TYPE_ARRAY                = 0x0221;
-    const XLS_TYPE_DEFAULTROWHEIGHT     = 0x0225;
-    const XLS_TYPE_WINDOW2              = 0x023e;
-    const XLS_TYPE_RK                   = 0x027e;
-    const XLS_TYPE_STYLE                = 0x0293;
-    const XLS_TYPE_FORMAT               = 0x041e;
-    const XLS_TYPE_SHAREDFMLA           = 0x04bc;
-    const XLS_TYPE_BOF                  = 0x0809;
-    const XLS_TYPE_SHEETPROTECTION      = 0x0867;
-    const XLS_TYPE_RANGEPROTECTION      = 0x0868;
-    const XLS_TYPE_SHEETLAYOUT          = 0x0862;
-    const XLS_TYPE_XFEXT                = 0x087d;
-    const XLS_TYPE_PAGELAYOUTVIEW       = 0x088b;
-    const XLS_TYPE_UNKNOWN              = 0xffff;
-
+    const XLS_TYPE_NOTE = 0x001c;
+    const XLS_TYPE_SELECTION = 0x001d;
+    const XLS_TYPE_DATEMODE = 0x0022;
+    const XLS_TYPE_EXTERNNAME = 0x0023;
+    const XLS_TYPE_LEFTMARGIN = 0x0026;
+    const XLS_TYPE_RIGHTMARGIN = 0x0027;
+    const XLS_TYPE_TOPMARGIN = 0x0028;
+    const XLS_TYPE_BOTTOMMARGIN = 0x0029;
+    const XLS_TYPE_PRINTGRIDLINES = 0x002b;
+    const XLS_TYPE_FILEPASS = 0x002f;
+    const XLS_TYPE_FONT = 0x0031;
+    const XLS_TYPE_CONTINUE = 0x003c;
+    const XLS_TYPE_PANE = 0x0041;
+    const XLS_TYPE_CODEPAGE = 0x0042;
+    const XLS_TYPE_DEFCOLWIDTH = 0x0055;
+    const XLS_TYPE_OBJ = 0x005d;
+    const XLS_TYPE_COLINFO = 0x007d;
+    const XLS_TYPE_IMDATA = 0x007f;
+    const XLS_TYPE_SHEETPR = 0x0081;
+    const XLS_TYPE_HCENTER = 0x0083;
+    const XLS_TYPE_VCENTER = 0x0084;
+    const XLS_TYPE_SHEET = 0x0085;
+    const XLS_TYPE_PALETTE = 0x0092;
+    const XLS_TYPE_SCL = 0x00a0;
+    const XLS_TYPE_PAGESETUP = 0x00a1;
+    const XLS_TYPE_MULRK = 0x00bd;
+    const XLS_TYPE_MULBLANK = 0x00be;
+    const XLS_TYPE_DBCELL = 0x00d7;
+    const XLS_TYPE_XF = 0x00e0;
+    const XLS_TYPE_MERGEDCELLS = 0x00e5;
+    const XLS_TYPE_MSODRAWINGGROUP = 0x00eb;
+    const XLS_TYPE_MSODRAWING = 0x00ec;
+    const XLS_TYPE_SST = 0x00fc;
+    const XLS_TYPE_LABELSST = 0x00fd;
+    const XLS_TYPE_EXTSST = 0x00ff;
+    const XLS_TYPE_EXTERNALBOOK = 0x01ae;
+    const XLS_TYPE_DATAVALIDATIONS = 0x01b2;
+    const XLS_TYPE_TXO = 0x01b6;
+    const XLS_TYPE_HYPERLINK = 0x01b8;
+    const XLS_TYPE_DATAVALIDATION = 0x01be;
+    const XLS_TYPE_DIMENSION = 0x0200;
+    const XLS_TYPE_BLANK = 0x0201;
+    const XLS_TYPE_NUMBER = 0x0203;
+    const XLS_TYPE_LABEL = 0x0204;
+    const XLS_TYPE_BOOLERR = 0x0205;
+    const XLS_TYPE_STRING = 0x0207;
+    const XLS_TYPE_ROW = 0x0208;
+    const XLS_TYPE_INDEX = 0x020b;
+    const XLS_TYPE_ARRAY = 0x0221;
+    const XLS_TYPE_DEFAULTROWHEIGHT = 0x0225;
+    const XLS_TYPE_WINDOW2 = 0x023e;
+    const XLS_TYPE_RK = 0x027e;
+    const XLS_TYPE_STYLE = 0x0293;
+    const XLS_TYPE_FORMAT = 0x041e;
+    const XLS_TYPE_SHAREDFMLA = 0x04bc;
+    const XLS_TYPE_BOF = 0x0809;
+    const XLS_TYPE_SHEETPROTECTION = 0x0867;
+    const XLS_TYPE_RANGEPROTECTION = 0x0868;
+    const XLS_TYPE_SHEETLAYOUT = 0x0862;
+    const XLS_TYPE_XFEXT = 0x087d;
+    const XLS_TYPE_PAGELAYOUTVIEW = 0x088b;
+    const XLS_TYPE_UNKNOWN = 0xffff;
     // Encryption type
-    const MS_BIFF_CRYPTO_NONE           = 0;
-    const MS_BIFF_CRYPTO_XOR            = 1;
-    const MS_BIFF_CRYPTO_RC4            = 2;
-
+    const MS_BIFF_CRYPTO_NONE = 0;
+    const MS_BIFF_CRYPTO_XOR = 1;
+    const MS_BIFF_CRYPTO_RC4 = 2;
     // Size of stream blocks when using RC4 encryption
-    const REKEY_BLOCK                   = 0x400;
+    const REKEY_BLOCK = 0x400;
 
     /**
      * Summary Information stream data.
@@ -423,7 +419,7 @@ class Excel5 extends BaseReader implements IReader
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
         }
 
         try {
@@ -448,7 +444,7 @@ class Excel5 extends BaseReader implements IReader
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
         }
 
         $worksheetNames = array();
@@ -459,8 +455,8 @@ class Excel5 extends BaseReader implements IReader
         // total byte size of Excel data (workbook global substream + sheet substreams)
         $this->dataSize = strlen($this->data);
 
-        $this->pos        = 0;
-        $this->sheets    = array();
+        $this->pos = 0;
+        $this->sheets = array();
 
         // Parse Workbook Global Substream
         while ($this->pos < $this->dataSize) {
@@ -494,7 +490,6 @@ class Excel5 extends BaseReader implements IReader
         return $worksheetNames;
     }
 
-
     /**
      * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
      *
@@ -505,7 +500,7 @@ class Excel5 extends BaseReader implements IReader
     {
         // Check if file exists
         if (!file_exists($pFilename)) {
-            throw new Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+            throw new Exception("Could not open ".$pFilename." for reading! File does not exist.");
         }
 
         $worksheetInfo = array();
@@ -517,7 +512,7 @@ class Excel5 extends BaseReader implements IReader
         $this->dataSize = strlen($this->data);
 
         // initialize
-        $this->pos    = 0;
+        $this->pos = 0;
         $this->sheets = array();
 
         // Parse Workbook Global Substream
@@ -601,7 +596,6 @@ class Excel5 extends BaseReader implements IReader
         return $worksheetInfo;
     }
 
-
     /**
      * Loads PHPExcel from file
      *
@@ -632,19 +626,19 @@ class Excel5 extends BaseReader implements IReader
         $this->dataSize = strlen($this->data);
 
         // initialize
-        $this->pos                 = 0;
-        $this->codepage            = 'CP1252';
-        $this->formats             = array();
-        $this->objFonts            = array();
-        $this->palette             = array();
-        $this->sheets              = array();
-        $this->externalBooks       = array();
-        $this->ref                 = array();
-        $this->definedname         = array();
-        $this->sst                 = array();
-        $this->drawingGroupData    = '';
-        $this->xfIndex             = '';
-        $this->mapCellXfIndex      = array();
+        $this->pos = 0;
+        $this->codepage = 'CP1252';
+        $this->formats = array();
+        $this->objFonts = array();
+        $this->palette = array();
+        $this->sheets = array();
+        $this->externalBooks = array();
+        $this->ref = array();
+        $this->definedname = array();
+        $this->sst = array();
+        $this->drawingGroupData = '';
+        $this->xfIndex = '';
+        $this->mapCellXfIndex = array();
         $this->mapCellStyleXfIndex = array();
 
         // Parse Workbook Global Substream
@@ -736,10 +730,10 @@ class Excel5 extends BaseReader implements IReader
                 }
 
                 // border colors
-                $top      = $objStyle->getBorders()->getTop();
-                $right    = $objStyle->getBorders()->getRight();
-                $bottom   = $objStyle->getBorders()->getBottom();
-                $left     = $objStyle->getBorders()->getLeft();
+                $top = $objStyle->getBorders()->getTop();
+                $right = $objStyle->getBorders()->getRight();
+                $bottom = $objStyle->getBorders()->getBottom();
+                $left = $objStyle->getBorders()->getLeft();
                 $diagonal = $objStyle->getBorders()->getDiagonal();
 
                 if (isset($top->colorIndex)) {
@@ -981,7 +975,6 @@ class Excel5 extends BaseReader implements IReader
                         $this->readDefault();
                         break;
                 }
-
             }
 
             // treat MSODRAWING records, sheet-level Escher
@@ -999,7 +992,6 @@ class Excel5 extends BaseReader implements IReader
 //                echo '<hr /><b>Object</b> reference is ', $n,'<br />';
 //                var_dump($obj);
 //                echo '<br />';
-
                 // the first shape container never has a corresponding OBJ record, hence $n + 1
                 if (isset($allSpContainers[$n + 1]) && is_object($allSpContainers[$n + 1])) {
                     $spContainer = $allSpContainers[$n + 1];
@@ -1089,7 +1081,7 @@ class Excel5 extends BaseReader implements IReader
                     list($column, $row) = \PhpOffice\PhpExcel\Cell::coordinateFromString($cell);
                     if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($column, $row, $this->phpSheet->getTitle())) {
                         $formula = $this->getFormulaFromStructure($this->sharedFormulas[$baseCell], $cell);
-                        $this->phpSheet->getCell($cell)->setValueExplicit('=' . $formula, \PhpOffice\PhpExcel\Cell\DataType::TYPE_FORMULA);
+                        $this->phpSheet->getCell($cell)->setValueExplicit('='.$formula, \PhpOffice\PhpExcel\Cell\DataType::TYPE_FORMULA);
                     }
                 }
             }
@@ -1131,7 +1123,7 @@ class Excel5 extends BaseReader implements IReader
                             $sheetName = trim($explodes[0], "'");
                             if (count($explodes) == 2) {
                                 if (strpos($explodes[1], ':') === false) {
-                                    $explodes[1] = $explodes[1] . ':' . $explodes[1];
+                                    $explodes[1] = $explodes[1].':'.$explodes[1];
                                 }
                                 $extractedRanges[] = str_replace('$', '', $explodes[1]); // C7:J66
                             }
@@ -1283,7 +1275,6 @@ class Excel5 extends BaseReader implements IReader
 //        $this->userDefinedProperties = $ole->getUserDefinedProperties();
     }
 
-
     /**
      * Read summary information
      */
@@ -1310,7 +1301,7 @@ class Excel5 extends BaseReader implements IReader
         $secLength = self::getInt4d($this->summaryInformation, $secOffset);
 
         // offset: $secOffset+4; size: 4; property count
-        $countProperties = self::getInt4d($this->summaryInformation, $secOffset+4);
+        $countProperties = self::getInt4d($this->summaryInformation, $secOffset + 4);
 
         // initialize code page (used to resolve string values)
         $codePage = 'CP1252';
@@ -1319,11 +1310,11 @@ class Excel5 extends BaseReader implements IReader
         // loop through property decarations and properties
         for ($i = 0; $i < $countProperties; ++$i) {
             // offset: ($secOffset+8) + (8 * $i); size: 4; property ID
-            $id = self::getInt4d($this->summaryInformation, ($secOffset+8) + (8 * $i));
+            $id = self::getInt4d($this->summaryInformation, ($secOffset + 8) + (8 * $i));
 
             // Use value of property id as appropriate
             // offset: ($secOffset+12) + (8 * $i); size: 4; offset from beginning of section (48)
-            $offset = self::getInt4d($this->summaryInformation, ($secOffset+12) + (8 * $i));
+            $offset = self::getInt4d($this->summaryInformation, ($secOffset + 12) + (8 * $i));
 
             $type = self::getInt4d($this->summaryInformation, $secOffset + $offset);
 
@@ -1358,7 +1349,7 @@ class Excel5 extends BaseReader implements IReader
 
             switch ($id) {
                 case 0x01:    //    Code Page
-                    $codePage = \PhpOffice\PhpExcel\Shared\CodePage::NumberToName($value);
+                    $codePage = \PhpOffice\PhpExcel\Shared\CodePage::numberToName($value);
                     break;
                 case 0x02:    //    Title
                     $this->phpExcel->getProperties()->setTitle($value);
@@ -1418,7 +1409,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read additional document summary information
      */
@@ -1436,21 +1426,17 @@ class Excel5 extends BaseReader implements IReader
         //    offset: 24;    size: 4;    section count
         $secCount = self::getInt4d($this->documentSummaryInformation, 24);
 //        echo '$secCount = ', $secCount,'<br />';
-
         // offset: 28;    size: 16;    first section's class id: 02 d5 cd d5 9c 2e 1b 10 93 97 08 00 2b 2c f9 ae
         // offset: 44;    size: 4;    first section offset
         $secOffset = self::getInt4d($this->documentSummaryInformation, 44);
 //        echo '$secOffset = ', $secOffset,'<br />';
-
         //    section header
         //    offset: $secOffset;    size: 4;    section length
         $secLength = self::getInt4d($this->documentSummaryInformation, $secOffset);
 //        echo '$secLength = ', $secLength,'<br />';
-
         //    offset: $secOffset+4;    size: 4;    property count
-        $countProperties = self::getInt4d($this->documentSummaryInformation, $secOffset+4);
+        $countProperties = self::getInt4d($this->documentSummaryInformation, $secOffset + 4);
 //        echo '$countProperties = ', $countProperties,'<br />';
-
         // initialize code page (used to resolve string values)
         $codePage = 'CP1252';
 
@@ -1459,16 +1445,14 @@ class Excel5 extends BaseReader implements IReader
         for ($i = 0; $i < $countProperties; ++$i) {
 //            echo 'Property ', $i,'<br />';
             //    offset: ($secOffset+8) + (8 * $i);    size: 4;    property ID
-            $id = self::getInt4d($this->documentSummaryInformation, ($secOffset+8) + (8 * $i));
+            $id = self::getInt4d($this->documentSummaryInformation, ($secOffset + 8) + (8 * $i));
 //            echo 'ID is ', $id,'<br />';
-
             // Use value of property id as appropriate
             // offset: 60 + 8 * $i;    size: 4;    offset from beginning of section (48)
-            $offset = self::getInt4d($this->documentSummaryInformation, ($secOffset+12) + (8 * $i));
+            $offset = self::getInt4d($this->documentSummaryInformation, ($secOffset + 12) + (8 * $i));
 
             $type = self::getInt4d($this->documentSummaryInformation, $secOffset + $offset);
 //            echo 'Type is ', $type,', ';
-
             // initialize property value
             $value = null;
 
@@ -1504,7 +1488,7 @@ class Excel5 extends BaseReader implements IReader
 
             switch ($id) {
                 case 0x01:    //    Code Page
-                    $codePage = \PhpOffice\PhpExcel\Shared\CodePage::NumberToName($value);
+                    $codePage = \PhpOffice\PhpExcel\Shared\CodePage::numberToName($value);
                     break;
                 case 0x02:    //    Category
                     $this->phpExcel->getProperties()->setCategory($value);
@@ -1555,7 +1539,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Reads a general type of BIFF record. Does nothing except for moving stream pointer forward to next record.
      */
@@ -1563,11 +1546,9 @@ class Excel5 extends BaseReader implements IReader
     {
         $length = self::getInt2d($this->data, $this->pos + 2);
 //        $recordData = $this->readRecordData($this->data, $this->pos + 4, $length);
-
         // move stream pointer to next record
         $this->pos += 4 + $length;
     }
-
 
     /**
      *    The NOTE record specifies a comment associated with a particular cell. In Excel 95 (BIFF7) and earlier versions,
@@ -1596,9 +1577,9 @@ class Excel5 extends BaseReader implements IReader
 //            echo 'Note Author=', $noteAuthor,'<hr />';
 //
             $this->cellNotes[$noteObjID] = array(
-                'cellRef'   => $cellAddress,
-                'objectID'  => $noteObjID,
-                'author'    => $noteAuthor
+                'cellRef' => $cellAddress,
+                'objectID' => $noteObjID,
+                'author' => $noteAuthor
             );
         } else {
             $extension = false;
@@ -1629,9 +1610,7 @@ class Excel5 extends BaseReader implements IReader
 //                                                    ->setAuthor($author)
             }
         }
-
     }
-
 
     /**
      *    The TEXT Object record contains the text associated with a cell annotation.
@@ -1654,24 +1633,23 @@ class Excel5 extends BaseReader implements IReader
         //    cchText: 2 bytes; length of the text (in the first continue record)
         //    cbRuns: 2 bytes; length of the formatting (in the second continue record)
         // followed by the continuation records containing the actual text and formatting
-        $grbitOpts  = self::getInt2d($recordData, 0);
-        $rot        = self::getInt2d($recordData, 2);
-        $cchText    = self::getInt2d($recordData, 10);
-        $cbRuns     = self::getInt2d($recordData, 12);
-        $text       = $this->getSplicedRecordData();
+        $grbitOpts = self::getInt2d($recordData, 0);
+        $rot = self::getInt2d($recordData, 2);
+        $cchText = self::getInt2d($recordData, 10);
+        $cbRuns = self::getInt2d($recordData, 12);
+        $text = $this->getSplicedRecordData();
 
         $this->textObjects[$this->textObjRef] = array(
-            'text'      => substr($text["recordData"], $text["spliceOffsets"][0]+1, $cchText),
-            'format'    => substr($text["recordData"], $text["spliceOffsets"][1], $cbRuns),
+            'text' => substr($text["recordData"], $text["spliceOffsets"][0] + 1, $cchText),
+            'format' => substr($text["recordData"], $text["spliceOffsets"][1], $cbRuns),
             'alignment' => $grbitOpts,
-            'rotation'  => $rot
+            'rotation' => $rot
         );
 
 //        echo '<b>_readTextObject()</b><br />';
 //        var_dump($this->textObjects[$this->textObjRef]);
 //        echo '<br />';
     }
-
 
     /**
      * Read BOF
@@ -1688,14 +1666,14 @@ class Excel5 extends BaseReader implements IReader
         $substreamType = self::getInt2d($recordData, 2);
 
         switch ($substreamType) {
-            case self::XLS_WorkbookGlobals:
+            case self::XLS_WORKBOOKGLOBALS:
                 $version = self::getInt2d($recordData, 0);
                 if (($version != self::XLS_BIFF8) && ($version != self::XLS_BIFF7)) {
                     throw new Exception('Cannot read this Excel file. Version is too old.');
                 }
                 $this->version = $version;
                 break;
-            case self::XLS_Worksheet:
+            case self::XLS_WORKSHEET:
                 // do not use this version information for anything
                 // it is unreliable (OpenOffice doc, 5.8), use only version information from the global stream
                 break;
@@ -1709,7 +1687,6 @@ class Excel5 extends BaseReader implements IReader
                 break;
         }
     }
-
 
     /**
      * FILEPASS
@@ -1854,7 +1831,7 @@ class Excel5 extends BaseReader implements IReader
         $salt = $key->RC4($salt_data);
         $hashedsalt = $key->RC4($hashedsalt_data);
 
-        $salt .= "\x80" . str_repeat("\0", 47);
+        $salt .= "\x80".str_repeat("\0", 47);
         $salt[56] = "\x80";
 
         $md5->reset();
@@ -1884,9 +1861,8 @@ class Excel5 extends BaseReader implements IReader
         // offset: 0; size: 2; code page identifier
         $codepage = self::getInt2d($recordData, 0);
 
-        $this->codepage = \PhpOffice\PhpExcel\Shared\CodePage::NumberToName($codepage);
+        $this->codepage = \PhpOffice\PhpExcel\Shared\CodePage::numberToName($codepage);
     }
-
 
     /**
      * DATEMODE
@@ -1914,7 +1890,6 @@ class Excel5 extends BaseReader implements IReader
             \PhpOffice\PhpExcel\Shared\Date::setExcelCalendar(\PhpOffice\PhpExcel\Shared\Date::CALENDAR_MAC_1904);
         }
     }
-
 
     /**
      * Read a FONT record
@@ -2006,7 +1981,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * FORMAT
      *
@@ -2043,7 +2017,6 @@ class Excel5 extends BaseReader implements IReader
             $this->formats[$indexCode] = $formatString;
         }
     }
-
 
     /**
      * XF - Extended Format
@@ -2191,7 +2164,6 @@ class Excel5 extends BaseReader implements IReader
                 }
 
                 // offset:  9; size: 1; Flags used for attribute groups
-
                 // offset: 10; size: 4; Cell border lines and background area
                 // bit: 3-0; mask: 0x0000000F; left style
                 if ($bordersLeftStyle = Excel5\Style\Border::lookup((0x0000000F & self::getInt4d($recordData, 10)) >> 0)) {
@@ -2258,7 +2230,6 @@ class Excel5 extends BaseReader implements IReader
                 $objStyle->getFill()->endcolorIndex = (0x3F80 & self::getInt2d($recordData, 18)) >> 7;
             } else {
                 // BIFF5
-
                 // offset: 7; size: 1; Text orientation and flags
                 $orientationAndFlags = ord($recordData{7});
 
@@ -2337,7 +2308,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      *
      */
@@ -2351,18 +2321,13 @@ class Excel5 extends BaseReader implements IReader
 
         if (!$this->readDataOnly) {
             // offset: 0; size: 2; 0x087D = repeated header
-
             // offset: 2; size: 2
-
             // offset: 4; size: 8; not used
-
             // offset: 12; size: 2; record version
-
             // offset: 14; size: 2; index to XF record which this record modifies
             $ixfe = self::getInt2d($recordData, 14);
 
             // offset: 16; size: 2; not used
-
             // offset: 18; size: 2; number of extension properties that follow
             $cexts = self::getInt2d($recordData, 18);
 
@@ -2380,7 +2345,7 @@ class Excel5 extends BaseReader implements IReader
 
                 switch ($extType) {
                     case 4:        // fill start color
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2395,7 +2360,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 5:        // fill end color
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2410,7 +2375,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 7:        // border color top
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2425,7 +2390,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 8:        // border color bottom
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2440,7 +2405,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 9:        // border color left
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2455,7 +2420,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 10:        // border color right
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2470,7 +2435,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 11:        // border color diagonal
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2485,7 +2450,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         break;
                     case 13:    // font color
-                        $xclfType  = self::getInt2d($extData, 0); // color type
+                        $xclfType = self::getInt2d($extData, 0); // color type
                         $xclrValue = substr($extData, 4, 4); // color value (value based on color type)
 
                         if ($xclfType == 2) {
@@ -2504,9 +2469,7 @@ class Excel5 extends BaseReader implements IReader
                 $offset += $cb;
             }
         }
-
     }
-
 
     /**
      * Read STYLE record
@@ -2546,7 +2509,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read PALETTE record
      */
@@ -2569,7 +2531,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * SHEET
@@ -2630,7 +2591,6 @@ class Excel5 extends BaseReader implements IReader
             'sheetType' => $sheetType,
         );
     }
-
 
     /**
      * Read EXTERNALBOOK record
@@ -2694,7 +2654,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read EXTERNNAME record.
      */
@@ -2712,9 +2671,7 @@ class Excel5 extends BaseReader implements IReader
             $options = self::getInt2d($recordData, 0);
 
             // offset: 2; size: 2;
-
             // offset: 4; size: 2; not used
-
             // offset: 6; size: var
             $nameString = self::readUnicodeStringShort(substr($recordData, 6));
 
@@ -2728,7 +2685,6 @@ class Excel5 extends BaseReader implements IReader
             );
         }
     }
-
 
     /**
      * Read EXTERNSHEET record
@@ -2758,7 +2714,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * DEFINEDNAME
      *
@@ -2780,7 +2735,6 @@ class Excel5 extends BaseReader implements IReader
 
         if ($this->version == self::XLS_BIFF8) {
             // retrieves named cells
-
             // offset: 0; size: 2; option flags
             $opts = self::getInt2d($recordData, 0);
 
@@ -2788,7 +2742,6 @@ class Excel5 extends BaseReader implements IReader
             $isBuiltInName = (0x0020 & $opts) >> 5;
 
             // offset: 2; size: 1; keyboard shortcut
-
             // offset: 3; size: 1; length of the name (character count)
             $nlen = ord($recordData{3});
 
@@ -2804,7 +2757,7 @@ class Excel5 extends BaseReader implements IReader
 
             // offset: var; size: $flen; formula data
             $offset = 14 + $string['size'];
-            $formulaStructure = pack('v', $flen) . substr($recordData, $offset);
+            $formulaStructure = pack('v', $flen).substr($recordData, $offset);
 
             try {
                 $formula = $this->getFormulaFromStructure($formulaStructure);
@@ -2821,7 +2774,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read MSODRAWINGGROUP record
      */
@@ -2836,7 +2788,6 @@ class Excel5 extends BaseReader implements IReader
         $this->drawingGroupData .= $recordData;
     }
 
-
     /**
      * SST - Shared String Table
      *
@@ -2847,7 +2798,7 @@ class Excel5 extends BaseReader implements IReader
      *
      * --    "OpenOffice.org's Documentation of the Microsoft
      *         Excel File Format"
-     **/
+     * */
     private function readSst()
     {
         // offset within (spliced) record data
@@ -2877,7 +2828,7 @@ class Excel5 extends BaseReader implements IReader
             ++$pos;
 
             // bit: 0; mask: 0x01; 0 = compressed; 1 = uncompressed
-            $isCompressed = (($optionFlags & 0x01) == 0) ;
+            $isCompressed = (($optionFlags & 0x01) == 0);
 
             // bit: 2; mask: 0x02; 0 = ordinary; 1 = Asian phonetic
             $hasAsian = (($optionFlags & 0x04) != 0);
@@ -2917,7 +2868,6 @@ class Excel5 extends BaseReader implements IReader
                 $pos += $len;
             } else {
                 // character array is split between records
-
                 // first part of character array
                 $retstr = substr($recordData, $pos, $limitpos - $pos);
 
@@ -2962,7 +2912,7 @@ class Excel5 extends BaseReader implements IReader
                         // this fragment compressed
                         $len = min($charsLeft, $limitpos - $pos);
                         for ($j = 0; $j < $len; ++$j) {
-                            $retstr .= $recordData{$pos + $j} . chr(0);
+                            $retstr .= $recordData{$pos + $j}.chr(0);
                         }
                         $charsLeft -= $len;
                         $isCompressed = false;
@@ -2971,7 +2921,7 @@ class Excel5 extends BaseReader implements IReader
                         // this fragment uncompressed
                         $newstr = '';
                         for ($j = 0; $j < strlen($retstr); ++$j) {
-                            $newstr .= $retstr[$j] . chr(0);
+                            $newstr .= $retstr[$j].chr(0);
                         }
                         $retstr = $newstr;
                         $len = min($charsLeft * 2, $limitpos - $pos);
@@ -3022,7 +2972,6 @@ class Excel5 extends BaseReader implements IReader
         // getSplicedRecordData() takes care of moving current position in data stream
     }
 
-
     /**
      * Read PRINTGRIDLINES record
      */
@@ -3041,7 +2990,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read DEFAULTROWHEIGHT record
      */
@@ -3059,7 +3007,6 @@ class Excel5 extends BaseReader implements IReader
         $this->phpSheet->getDefaultRowDimension()->setRowHeight($height / 20);
     }
 
-
     /**
      * Read SHEETPR record
      */
@@ -3072,7 +3019,6 @@ class Excel5 extends BaseReader implements IReader
         $this->pos += 4 + $length;
 
         // offset: 0; size: 2
-
         // bit: 6; mask: 0x0040; 0 = outline buttons above outline group
         $isSummaryBelow = (0x0040 & self::getInt2d($recordData, 0)) >> 6;
         $this->phpSheet->setShowSummaryBelow($isSummaryBelow);
@@ -3085,7 +3031,6 @@ class Excel5 extends BaseReader implements IReader
         // this corresponds to radio button setting in page setup dialog in Excel
         $this->isFitToPages = (bool) ((0x0100 & self::getInt2d($recordData, 0)) >> 8);
     }
-
 
     /**
      * Read HORIZONTALPAGEBREAKS record
@@ -3114,7 +3059,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read VERTICALPAGEBREAKS record
      */
@@ -3141,7 +3085,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * Read HEADER record
@@ -3170,7 +3113,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read FOOTER record
      */
@@ -3197,7 +3139,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read HCENTER record
      */
@@ -3216,7 +3157,6 @@ class Excel5 extends BaseReader implements IReader
             $this->phpSheet->getPageSetup()->setHorizontalCentered($isHorizontalCentered);
         }
     }
-
 
     /**
      * Read VCENTER record
@@ -3237,7 +3177,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read LEFTMARGIN record
      */
@@ -3254,7 +3193,6 @@ class Excel5 extends BaseReader implements IReader
             $this->phpSheet->getPageMargins()->setLeft(self::extractNumber($recordData));
         }
     }
-
 
     /**
      * Read RIGHTMARGIN record
@@ -3273,7 +3211,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read TOPMARGIN record
      */
@@ -3291,7 +3228,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read BOTTOMMARGIN record
      */
@@ -3308,7 +3244,6 @@ class Excel5 extends BaseReader implements IReader
             $this->phpSheet->getPageMargins()->setBottom(self::extractNumber($recordData));
         }
     }
-
 
     /**
      * Read PAGESETUP record
@@ -3335,7 +3270,6 @@ class Excel5 extends BaseReader implements IReader
             $fitToHeight = self::getInt2d($recordData, 8);
 
             // offset: 10; size: 2; option flags
-
             // bit: 1; mask: 0x0002; 0=landscape, 1=portrait
             $isPortrait = (0x0002 & self::getInt2d($recordData, 10)) >> 1;
 
@@ -3370,7 +3304,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * PROTECT - Sheet protection (BIFF2 through BIFF8)
      *   if this record is omitted, then it also means no sheet protection
@@ -3388,12 +3321,10 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 0; size: 2;
-
         // bit 0, mask 0x01; 1 = sheet is protected
         $bool = (0x01 & self::getInt2d($recordData, 0)) >> 0;
-        $this->phpSheet->getProtection()->setSheet((bool)$bool);
+        $this->phpSheet->getProtection()->setSheet((bool) $bool);
     }
-
 
     /**
      * SCENPROTECT
@@ -3411,13 +3342,11 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 0; size: 2;
-
         // bit: 0, mask 0x01; 1 = scenarios are protected
         $bool = (0x01 & self::getInt2d($recordData, 0)) >> 0;
 
-        $this->phpSheet->getProtection()->setScenarios((bool)$bool);
+        $this->phpSheet->getProtection()->setScenarios((bool) $bool);
     }
-
 
     /**
      * OBJECTPROTECT
@@ -3435,13 +3364,11 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 0; size: 2;
-
         // bit: 0, mask 0x01; 1 = objects are protected
         $bool = (0x01 & self::getInt2d($recordData, 0)) >> 0;
 
-        $this->phpSheet->getProtection()->setObjects((bool)$bool);
+        $this->phpSheet->getProtection()->setObjects((bool) $bool);
     }
-
 
     /**
      * PASSWORD - Sheet protection (hashed) password (BIFF2 through BIFF8)
@@ -3461,7 +3388,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read DEFCOLWIDTH record
      */
@@ -3480,7 +3406,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read COLINFO record
      */
@@ -3495,10 +3420,8 @@ class Excel5 extends BaseReader implements IReader
         if (!$this->readDataOnly) {
             // offset: 0; size: 2; index to first column in range
             $fc = self::getInt2d($recordData, 0); // first column index
-
             // offset: 2; size: 2; index to last column in range
             $lc = self::getInt2d($recordData, 2); // first column index
-
             // offset: 4; size: 2; width of the column in 1/256 of the width of the zero character
             $width = self::getInt2d($recordData, 4);
 
@@ -3531,7 +3454,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * ROW
      *
@@ -3555,11 +3477,8 @@ class Excel5 extends BaseReader implements IReader
             $r = self::getInt2d($recordData, 0);
 
             // offset: 2; size: 2; index to column of the first cell which is described by a cell record
-
             // offset: 4; size: 2; index to column of the last cell which is described by a cell record, increased by 1
-
             // offset: 6; size: 2;
-
             // bit: 14-0; mask: 0x7FFF; height of the row, in twips = 1/20 of a point
             $height = (0x7FFF & self::getInt2d($recordData, 6)) >> 0;
 
@@ -3571,11 +3490,8 @@ class Excel5 extends BaseReader implements IReader
             }
 
             // offset: 8; size: 2; not used
-
             // offset: 10; size: 2; not used in BIFF5-BIFF8
-
             // offset: 12; size: 4; option flags and default row formatting
-
             // bit: 2-0: mask: 0x00000007; outline level of the row
             $level = (0x00000007 & self::getInt4d($recordData, 12)) >> 0;
             $this->phpSheet->getRowDimension($r + 1)->setOutlineLevel($level);
@@ -3599,7 +3515,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * Read RK record
@@ -3636,7 +3551,7 @@ class Excel5 extends BaseReader implements IReader
             $rknum = self::getInt4d($recordData, 6);
             $numValue = self::getIEEE754($rknum);
 
-            $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+            $cell = $this->phpSheet->getCell($columnString.($row + 1));
             if (!$this->readDataOnly) {
                 // add style information
                 $cell->setXfIndex($this->mapCellXfIndex[$xfIndex]);
@@ -3646,7 +3561,6 @@ class Excel5 extends BaseReader implements IReader
             $cell->setValueExplicit($numValue, \PhpOffice\PhpExcel\Cell\DataType::TYPE_NUMERIC);
         }
     }
-
 
     /**
      * Read LABELSST record
@@ -3714,13 +3628,13 @@ class Excel5 extends BaseReader implements IReader
                     }
                 }
                 if ($this->readEmptyCells || trim($richText->getPlainText()) !== '') {
-                    $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+                    $cell = $this->phpSheet->getCell($columnString.($row + 1));
                     $cell->setValueExplicit($richText, \PhpOffice\PhpExcel\Cell\DataType::TYPE_STRING);
                     $emptyCell = false;
                 }
             } else {
                 if ($this->readEmptyCells || trim($this->sst[$index]['value']) !== '') {
-                    $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+                    $cell = $this->phpSheet->getCell($columnString.($row + 1));
                     $cell->setValueExplicit($this->sst[$index]['value'], \PhpOffice\PhpExcel\Cell\DataType::TYPE_STRING);
                     $emptyCell = false;
                 }
@@ -3732,7 +3646,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * Read MULRK record
@@ -3773,7 +3686,7 @@ class Excel5 extends BaseReader implements IReader
 
                 // offset: var; size: 4; RK value
                 $numValue = self::getIEEE754(self::getInt4d($recordData, $offset + 2));
-                $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+                $cell = $this->phpSheet->getCell($columnString.($row + 1));
                 if (!$this->readDataOnly) {
                     // add style
                     $cell->setXfIndex($this->mapCellXfIndex[$xfIndex]);
@@ -3786,7 +3699,6 @@ class Excel5 extends BaseReader implements IReader
             $offset += 6;
         }
     }
-
 
     /**
      * Read NUMBER record
@@ -3818,7 +3730,7 @@ class Excel5 extends BaseReader implements IReader
 
             $numValue = self::extractNumber(substr($recordData, 6, 8));
 
-            $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+            $cell = $this->phpSheet->getCell($columnString.($row + 1));
             if (!$this->readDataOnly) {
                 // add cell style
                 $cell->setXfIndex($this->mapCellXfIndex[$xfIndex]);
@@ -3828,7 +3740,6 @@ class Excel5 extends BaseReader implements IReader
             $cell->setValueExplicit($numValue, \PhpOffice\PhpExcel\Cell\DataType::TYPE_NUMERIC);
         }
     }
-
 
     /**
      * Read FORMULA record + perhaps a following STRING record if formula result is a string
@@ -3875,18 +3786,17 @@ class Excel5 extends BaseReader implements IReader
             // get the base cell, grab tExp token
             $baseRow = self::getInt2d($formulaStructure, 3);
             $baseCol = self::getInt2d($formulaStructure, 5);
-            $this->_baseCell = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($baseCol). ($baseRow + 1);
+            $this->_baseCell = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($baseCol).($baseRow + 1);
         }
 
         // Read cell?
         if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
             if ($isPartOfSharedFormula) {
                 // formula is added to this cell after the sheet has been read
-                $this->sharedFormulaParts[$columnString . ($row + 1)] = $this->_baseCell;
+                $this->sharedFormulaParts[$columnString.($row + 1)] = $this->_baseCell;
             }
 
             // offset: 16: size: 4; not used
-
             // offset: 4; size: 2; XF index
             $xfIndex = self::getInt2d($recordData, 4);
 
@@ -3903,21 +3813,15 @@ class Excel5 extends BaseReader implements IReader
 
                 // read STRING record
                 $value = $this->readString();
-            } elseif ((ord($recordData{6}) == 1)
-                && (ord($recordData{12}) == 255)
-                && (ord($recordData{13}) == 255)) {
+            } elseif ((ord($recordData{6}) == 1) && (ord($recordData{12}) == 255) && (ord($recordData{13}) == 255)) {
                 // Boolean formula. Result is in +2; 0=false, 1=true
                 $dataType = \PhpOffice\PhpExcel\Cell\DataType::TYPE_BOOL;
                 $value = (bool) ord($recordData{8});
-            } elseif ((ord($recordData{6}) == 2)
-                && (ord($recordData{12}) == 255)
-                && (ord($recordData{13}) == 255)) {
+            } elseif ((ord($recordData{6}) == 2) && (ord($recordData{12}) == 255) && (ord($recordData{13}) == 255)) {
                 // Error formula. Error code is in +2
                 $dataType = \PhpOffice\PhpExcel\Cell\DataType::TYPE_ERROR;
                 $value = Excel5\ErrorCode::lookup(ord($recordData{8}));
-            } elseif ((ord($recordData{6}) == 3)
-                && (ord($recordData{12}) == 255)
-                && (ord($recordData{13}) == 255)) {
+            } elseif ((ord($recordData{6}) == 3) && (ord($recordData{12}) == 255) && (ord($recordData{13}) == 255)) {
                 // Formula result is a null string
                 $dataType = \PhpOffice\PhpExcel\Cell\DataType::TYPE_NULL;
                 $value = '';
@@ -3927,7 +3831,7 @@ class Excel5 extends BaseReader implements IReader
                 $value = self::extractNumber(substr($recordData, 6, 8));
             }
 
-            $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+            $cell = $this->phpSheet->getCell($columnString.($row + 1));
             if (!$this->readDataOnly) {
                 // add cell style
                 $cell->setXfIndex($this->mapCellXfIndex[$xfIndex]);
@@ -3942,8 +3846,7 @@ class Excel5 extends BaseReader implements IReader
                         throw new Exception('Not BIFF8. Can only read BIFF8 formulas');
                     }
                     $formula = $this->getFormulaFromStructure($formulaStructure); // get formula in human language
-                    $cell->setValueExplicit('=' . $formula, \PhpOffice\PhpExcel\Cell\DataType::TYPE_FORMULA);
-
+                    $cell->setValueExplicit('='.$formula, \PhpOffice\PhpExcel\Cell\DataType::TYPE_FORMULA);
                 } catch (\PhpOffice\PhpExcel\Exception $e) {
                     $cell->setValueExplicit($value, $dataType);
                 }
@@ -3959,7 +3862,6 @@ class Excel5 extends BaseReader implements IReader
             $cell->setCalculatedValue($value);
         }
     }
-
 
     /**
      * Read a SHAREDFMLA record. This function just stores the binary shared formula in the reader,
@@ -3977,9 +3879,7 @@ class Excel5 extends BaseReader implements IReader
         // offset: 0, size: 6; cell range address of the area used by the shared formula, not used for anything
         $cellRange = substr($recordData, 0, 6);
         $cellRange = $this->readBIFF5CellRangeAddressFixed($cellRange); // note: even BIFF8 uses BIFF5 syntax
-
         // offset: 6, size: 1; not used
-
         // offset: 7, size: 1; number of existing FORMULA records for this shared formula
         $no = ord($recordData{7});
 
@@ -3989,7 +3889,6 @@ class Excel5 extends BaseReader implements IReader
         // at this point we only store the shared formula for later use
         $this->sharedFormulas[$this->_baseCell] = $formula;
     }
-
 
     /**
      * Read a STRING record from current stream position and advance the stream pointer to next record
@@ -4016,7 +3915,6 @@ class Excel5 extends BaseReader implements IReader
 
         return $value;
     }
-
 
     /**
      * Read BOOLERR record
@@ -4052,7 +3950,7 @@ class Excel5 extends BaseReader implements IReader
             // offset: 7; size: 1; 0=boolean; 1=error
             $isError = ord($recordData{7});
 
-            $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+            $cell = $this->phpSheet->getCell($columnString.($row + 1));
             switch ($isError) {
                 case 0: // boolean
                     $value = (bool) $boolErr;
@@ -4074,7 +3972,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * Read MULBLANK record
@@ -4107,14 +4004,13 @@ class Excel5 extends BaseReader implements IReader
                 // Read cell?
                 if (($this->getReadFilter() !== null) && $this->getReadFilter()->readCell($columnString, $row + 1, $this->phpSheet->getTitle())) {
                     $xfIndex = self::getInt2d($recordData, 4 + 2 * $i);
-                    $this->phpSheet->getCell($columnString . ($row + 1))->setXfIndex($this->mapCellXfIndex[$xfIndex]);
+                    $this->phpSheet->getCell($columnString.($row + 1))->setXfIndex($this->mapCellXfIndex[$xfIndex]);
                 }
             }
         }
 
         // offset: 6; size 2; index to last column (not needed)
     }
-
 
     /**
      * Read LABEL record
@@ -4156,7 +4052,7 @@ class Excel5 extends BaseReader implements IReader
                 $value = $string['value'];
             }
             if ($this->readEmptyCells || trim($value) !== '') {
-                $cell = $this->phpSheet->getCell($columnString . ($row + 1));
+                $cell = $this->phpSheet->getCell($columnString.($row + 1));
                 $cell->setValueExplicit($value, \PhpOffice\PhpExcel\Cell\DataType::TYPE_STRING);
 
                 if (!$this->readDataOnly) {
@@ -4166,7 +4062,6 @@ class Excel5 extends BaseReader implements IReader
             }
         }
     }
-
 
     /**
      * Read BLANK record
@@ -4193,11 +4088,10 @@ class Excel5 extends BaseReader implements IReader
 
             // add style information
             if (!$this->readDataOnly && $this->readEmptyCells) {
-                $this->phpSheet->getCell($columnString . ($row + 1))->setXfIndex($this->mapCellXfIndex[$xfIndex]);
+                $this->phpSheet->getCell($columnString.($row + 1))->setXfIndex($this->mapCellXfIndex[$xfIndex]);
             }
         }
     }
-
 
     /**
      * Read MSODRAWING record
@@ -4212,7 +4106,6 @@ class Excel5 extends BaseReader implements IReader
 
         $this->drawingData .= $recordData;
     }
-
 
     /**
      * Read OBJ record
@@ -4236,19 +4129,18 @@ class Excel5 extends BaseReader implements IReader
         //    id: 2 bytes; Object id number
         //    grbit: 2 bytes; Option Flags
         //    data: var; subrecord data
-
         // for now, we are just interested in the second subrecord containing the object type
-        $ftCmoType  = self::getInt2d($recordData, 0);
-        $cbCmoSize  = self::getInt2d($recordData, 2);
-        $otObjType  = self::getInt2d($recordData, 4);
-        $idObjID    = self::getInt2d($recordData, 6);
-        $grbitOpts  = self::getInt2d($recordData, 6);
+        $ftCmoType = self::getInt2d($recordData, 0);
+        $cbCmoSize = self::getInt2d($recordData, 2);
+        $otObjType = self::getInt2d($recordData, 4);
+        $idObjID = self::getInt2d($recordData, 6);
+        $grbitOpts = self::getInt2d($recordData, 6);
 
         $this->objs[] = array(
             'ftCmoType' => $ftCmoType,
             'cbCmoSize' => $cbCmoSize,
             'otObjType' => $otObjType,
-            'idObjID'   => $idObjID,
+            'idObjID' => $idObjID,
             'grbitOpts' => $grbitOpts
         );
         $this->textObjRef = $idObjID;
@@ -4257,7 +4149,6 @@ class Excel5 extends BaseReader implements IReader
 //        var_dump(end($this->objs));
 //        echo '<br />';
     }
-
 
     /**
      * Read WINDOW2 record
@@ -4305,7 +4196,7 @@ class Excel5 extends BaseReader implements IReader
         $this->frozen = (bool) ((0x0008 & $options) >> 3);
 
         // bit: 6; mask: 0x0040; 0 = columns from left to right, 1 = columns from right to left
-        $this->phpSheet->setRightToLeft((bool)((0x0040 & $options) >> 6));
+        $this->phpSheet->setRightToLeft((bool) ((0x0040 & $options) >> 6));
 
         // bit: 10; mask: 0x0400; 0 = sheet not active, 1 = sheet active
         $isActive = (bool) ((0x0400 & $options) >> 10);
@@ -4342,7 +4233,6 @@ class Excel5 extends BaseReader implements IReader
         $this->pos += 4 + $length;
 
         //var_dump(unpack("vrt/vgrbitFrt/V2reserved/vwScalePLV/vgrbit", $recordData));
-
         // offset: 0; size: 2; rt
         //->ignore
         $rt = self::getInt2d($recordData, 0);
@@ -4351,15 +4241,14 @@ class Excel5 extends BaseReader implements IReader
         $grbitFrt = self::getInt2d($recordData, 2);
         // offset: 4; size: 8; reserved
         //->ignore
-
         // offset: 12; size 2; zoom scale
         $wScalePLV = self::getInt2d($recordData, 12);
         // offset: 14; size 2; grbit
         $grbit = self::getInt2d($recordData, 14);
 
         // decomprise grbit
-        $fPageLayoutView   = $grbit & 0x01;
-        $fRulerVisible     = ($grbit >> 1) & 0x01; //no support
+        $fPageLayoutView = $grbit & 0x01;
+        $fRulerVisible = ($grbit >> 1) & 0x01; //no support
         $fWhitespaceHidden = ($grbit >> 3) & 0x01; //no support
 
         if ($fPageLayoutView === 1) {
@@ -4390,7 +4279,6 @@ class Excel5 extends BaseReader implements IReader
         $this->phpSheet->getSheetView()->setZoomScale($numerator * 100 / $denumerator);
     }
 
-
     /**
      * Read PANE record
      */
@@ -4411,13 +4299,12 @@ class Excel5 extends BaseReader implements IReader
 
             if ($this->frozen) {
                 // frozen panes
-                $this->phpSheet->freezePane(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($px) . ($py + 1));
+                $this->phpSheet->freezePane(\PhpOffice\PhpExcel\Cell::stringFromColumnIndex($px).($py + 1));
             } else {
                 // unfrozen panes; split windows; not supported by PHPExcel core
             }
         }
     }
-
 
     /**
      * Read SELECTION record. There is one such record for each pane in the sheet.
@@ -4469,14 +4356,13 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     private function includeCellRangeFiltered($cellRangeAddress)
     {
         $includeCellRange = true;
         if ($this->getReadFilter() !== null) {
             $includeCellRange = false;
             $rangeBoundaries = \PhpOffice\PhpExcel\Cell::getRangeBoundaries($cellRangeAddress);
-            $rangeBoundaries[1][0]++;
+            $rangeBoundaries[1][0] ++;
             for ($row = $rangeBoundaries[0][1]; $row <= $rangeBoundaries[1][1]; $row++) {
                 for ($column = $rangeBoundaries[0][0]; $column != $rangeBoundaries[1][0]; $column++) {
                     if ($this->getReadFilter()->readCell($column, $row, $this->phpSheet->getTitle())) {
@@ -4488,7 +4374,6 @@ class Excel5 extends BaseReader implements IReader
         }
         return $includeCellRange;
     }
-
 
     /**
      * MERGEDCELLS
@@ -4518,7 +4403,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read HYPERLINK record
      */
@@ -4539,9 +4423,7 @@ class Excel5 extends BaseReader implements IReader
             }
 
             // offset: 8, size: 16; GUID of StdLink
-
             // offset: 24, size: 4; unknown value
-
             // offset: 28, size: 4; option flags
             // bit: 0; mask: 0x00000001; 0 = no link or extant, 1 = file link or URL
             $isFileLinkOrUrl = (0x00000001 & self::getInt2d($recordData, 28)) >> 0;
@@ -4593,7 +4475,6 @@ class Excel5 extends BaseReader implements IReader
                 case 'URL':
                     // section 5.58.2: Hyperlink containing a URL
                     // e.g. http://example.org/index.php
-
                     // offset: var; size: 16; GUID of URL Moniker
                     $offset += 16;
                     // offset: var; size: 4; size (in bytes) of character array of the URL including trailing zero word
@@ -4613,7 +4494,6 @@ class Excel5 extends BaseReader implements IReader
                     // examples:
                     //   mydoc.txt
                     //   ../../somedoc.xls#Sheet!A1
-
                     // offset: var; size: 16; GUI of File Moniker
                     $offset += 16;
 
@@ -4690,7 +4570,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read DATAVALIDATIONS record
      */
@@ -4702,7 +4581,6 @@ class Excel5 extends BaseReader implements IReader
         // move stream pointer forward to next record
         $this->pos += 4 + $length;
     }
-
 
     /**
      * Read DATAVALIDATION record
@@ -4840,7 +4718,7 @@ class Excel5 extends BaseReader implements IReader
 
         // offset: var; size: $sz1; formula data for first condition (without size field)
         $formula1 = substr($recordData, $offset, $sz1);
-        $formula1 = pack('v', $sz1) . $formula1; // prepend the length
+        $formula1 = pack('v', $sz1).$formula1; // prepend the length
         try {
             $formula1 = $this->getFormulaFromStructure($formula1);
 
@@ -4862,7 +4740,7 @@ class Excel5 extends BaseReader implements IReader
 
         // offset: var; size: $sz2; formula data for second condition (without size field)
         $formula2 = substr($recordData, $offset, $sz2);
-        $formula2 = pack('v', $sz2) . $formula2; // prepend the length
+        $formula2 = pack('v', $sz2).$formula2; // prepend the length
         try {
             $formula2 = $this->getFormulaFromStructure($formula2);
         } catch (\PhpOffice\PhpExcel\Exception $e) {
@@ -4880,9 +4758,9 @@ class Excel5 extends BaseReader implements IReader
                 $objValidation = $this->phpSheet->getCell($coordinate)->getDataValidation();
                 $objValidation->setType($type);
                 $objValidation->setErrorStyle($errorStyle);
-                $objValidation->setAllowBlank((bool)$allowBlank);
-                $objValidation->setShowInputMessage((bool)$showInputMessage);
-                $objValidation->setShowErrorMessage((bool)$showErrorMessage);
+                $objValidation->setAllowBlank((bool) $allowBlank);
+                $objValidation->setShowInputMessage((bool) $showInputMessage);
+                $objValidation->setShowErrorMessage((bool) $showErrorMessage);
                 $objValidation->setShowDropDown(!$suppressDropDown);
                 $objValidation->setOperator($operator);
                 $objValidation->setErrorTitle($errorTitle);
@@ -4911,9 +4789,7 @@ class Excel5 extends BaseReader implements IReader
 
         if (!$this->readDataOnly) {
             // offset: 0; size: 2; repeated record identifier 0x0862
-
             // offset: 2; size: 10; not used
-
             // offset: 12; size: 4; size of record data
             // Excel 2003 uses size of 0x14 (documented), Excel 2007 uses size of 0x28 (not documented?)
             $sz = self::getInt4d($recordData, 12);
@@ -4933,7 +4809,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read SHEETPROTECTION record (FEATHEADR)
      */
@@ -4950,11 +4825,8 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 0; size: 2; repeated record header
-
         // offset: 2; size: 2; FRT cell reference flag (=0 currently)
-
         // offset: 4; size: 8; Currently not used and set to 0
-
         // offset: 12; size: 2; Shared feature type index (2=Enhanced Protetion, 4=SmartTag)
         $isf = self::getInt2d($recordData, 12);
         if ($isf != 2) {
@@ -4962,9 +4834,7 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 14; size: 1; =1 since this is a feat header
-
         // offset: 15; size: 4; size of rgbHdrSData
-
         // rgbHdrSData, assume "Enhanced Protection"
         // offset: 19; size: 2; option flags
         $options = self::getInt2d($recordData, 19);
@@ -5032,7 +4902,6 @@ class Excel5 extends BaseReader implements IReader
         // offset: 21; size: 2; not used
     }
 
-
     /**
      * Read RANGEPROTECTION record
      * Reading of this record is based on Microsoft Office Excel 97-2000 Binary File Format Specification,
@@ -5095,7 +4964,6 @@ class Excel5 extends BaseReader implements IReader
         }
     }
 
-
     /**
      * Read IMDATA record
      */
@@ -5108,7 +4976,6 @@ class Excel5 extends BaseReader implements IReader
         $recordData = $splicedRecordData['recordData'];
 
         // UNDER CONSTRUCTION
-
         // offset: 0; size: 2; image format
         $cf = self::getInt2d($recordData, 0);
 
@@ -5127,22 +4994,19 @@ class Excel5 extends BaseReader implements IReader
                 // 1. BITMAPCOREHEADER
                 // offset: 0; size: 4; bcSize, Specifies the number of bytes required by the structure
                 $bcSize = self::getInt4d($iData, 0);
-    //            var_dump($bcSize);
-
+                //            var_dump($bcSize);
                 // offset: 4; size: 2; bcWidth, specifies the width of the bitmap, in pixels
                 $bcWidth = self::getInt2d($iData, 4);
-    //            var_dump($bcWidth);
-
+                //            var_dump($bcWidth);
                 // offset: 6; size: 2; bcHeight, specifies the height of the bitmap, in pixels.
                 $bcHeight = self::getInt2d($iData, 6);
-    //            var_dump($bcHeight);
+                //            var_dump($bcHeight);
                 $ih = imagecreatetruecolor($bcWidth, $bcHeight);
 
                 // offset: 8; size: 2; bcPlanes, specifies the number of planes for the target device. This value must be 1
-
                 // offset: 10; size: 2; bcBitCount specifies the number of bits-per-pixel. This value must be 1, 4, 8, or 24
                 $bcBitCount = self::getInt2d($iData, 10);
-    //            var_dump($bcBitCount);
+                //            var_dump($bcBitCount);
 
                 $rgbString = substr($iData, 12);
                 $rgbTriples = array();
@@ -5172,7 +5036,6 @@ class Excel5 extends BaseReader implements IReader
 
         // getSplicedRecordData() takes care of moving current position in data stream
     }
-
 
     /**
      * Read a free CONTINUE record. Free CONTINUE record may be a camouflaged MSODRAWING record
@@ -5222,7 +5085,6 @@ class Excel5 extends BaseReader implements IReader
         $this->pos += 4 + $length;
     }
 
-
     /**
      * Reads a record from current position in data stream and continues reading data as long as CONTINUE
      * records are found. Splices the record data pieces and returns the combined string as if record data
@@ -5260,9 +5122,7 @@ class Excel5 extends BaseReader implements IReader
         );
 
         return $splicedData;
-
     }
-
 
     /**
      * Convert formula structure into human readable Excel formula like 'A3+A5*5'
@@ -5285,7 +5145,6 @@ class Excel5 extends BaseReader implements IReader
         //echo 'the entire formula data: ';
         //Debug::dump($formulaData);
         //echo "\n----\n";
-
         // offset: 2 + sz; size: variable (optional)
         if (strlen($formulaStructure) > 2 + $sz) {
             $additionalData = substr($formulaStructure, 2 + $sz);
@@ -5300,7 +5159,6 @@ class Excel5 extends BaseReader implements IReader
 
         return $this->getFormulaFromData($formulaData, $additionalData, $baseCell);
     }
-
 
     /**
      * Take formula data and additional data for formula and return human readable formula
@@ -5327,7 +5185,6 @@ class Excel5 extends BaseReader implements IReader
 
         return $formulaString;
     }
-
 
     /**
      * Take array of tokens together with additional data for formula and return human readable formula
@@ -5430,7 +5287,7 @@ class Excel5 extends BaseReader implements IReader
                             $ops[] = array_pop($formulaStrings);
                         }
                         $ops = array_reverse($ops);
-                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(" . implode(',', $ops) . ")";
+                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(".implode(',', $ops).")";
                         unset($space0, $space1);
                     } else {
                         // add-in function
@@ -5440,7 +5297,7 @@ class Excel5 extends BaseReader implements IReader
                         }
                         $ops = array_reverse($ops);
                         $function = array_pop($formulaStrings);
-                        $formulaStrings[] = "$space1$space0$function(" . implode(',', $ops) . ")";
+                        $formulaStrings[] = "$space1$space0$function(".implode(',', $ops).")";
                         unset($space0, $space1);
                     }
                     break;
@@ -5451,7 +5308,7 @@ class Excel5 extends BaseReader implements IReader
                     break;
                 case 'tArray': // array constant
                     $constantArray = self::_readBIFF8ConstantArray($additionalData);
-                    $formulaStrings[] = $space1 . $space0 . $constantArray['value'];
+                    $formulaStrings[] = $space1.$space0.$constantArray['value'];
                     $additionalData = substr($additionalData, $constantArray['size']); // bite of chunk of additional data
                     unset($space0, $space1);
                     break;
@@ -5491,7 +5348,6 @@ class Excel5 extends BaseReader implements IReader
 
         return $formulaString;
     }
-
 
     /**
      * Fetch next token from binary formula data
@@ -5599,8 +5455,8 @@ class Excel5 extends BaseReader implements IReader
                 $data = '%';
                 break;
             case 0x15:    //    parenthesis
-                $name  = 'tParen';
-                $size  = 1;
+                $name = 'tParen';
+                $size = 1;
                 $data = null;
                 break;
             case 0x16:    //    missing argument
@@ -5708,7 +5564,7 @@ class Excel5 extends BaseReader implements IReader
                 $name = 'tNum';
                 $size = 9;
                 $data = self::extractNumber(substr($formulaData, 1));
-                $data = str_replace(',', '.', (string)$data); // in case non-English locale
+                $data = str_replace(',', '.', (string) $data); // in case non-English locale
                 break;
             case 0x20:    //    array constant
             case 0x40:
@@ -6768,7 +6624,7 @@ class Excel5 extends BaseReader implements IReader
                 break;
             // Unknown cases    // don't know how to deal with
             default:
-                throw new Exception('Unrecognized token ' . sprintf('%02X', $id) . ' in formula');
+                throw new Exception('Unrecognized token '.sprintf('%02X', $id).' in formula');
                 break;
         }
 
@@ -6779,7 +6635,6 @@ class Excel5 extends BaseReader implements IReader
             'data' => $data,
         );
     }
-
 
     /**
      * Reads a cell address in BIFF8 e.g. 'A2' or '$A$2'
@@ -6799,16 +6654,15 @@ class Excel5 extends BaseReader implements IReader
 
         // bit: 14; mask 0x4000; (1 = relative column index, 0 = absolute column index)
         if (!(0x4000 & self::getInt2d($cellAddressStructure, 2))) {
-            $column = '$' . $column;
+            $column = '$'.$column;
         }
         // bit: 15; mask 0x8000; (1 = relative row index, 0 = absolute row index)
         if (!(0x8000 & self::getInt2d($cellAddressStructure, 2))) {
-            $row = '$' . $row;
+            $row = '$'.$row;
         }
 
-        return $column . $row;
+        return $column.$row;
     }
-
 
     /**
      * Reads a cell address in BIFF8 for shared formulas. Uses positive and negative values for row and column
@@ -6835,7 +6689,7 @@ class Excel5 extends BaseReader implements IReader
         // bit: 14; mask 0x4000; (1 = relative column index, 0 = absolute column index)
         if (!(0x4000 & self::getInt2d($cellAddressStructure, 2))) {
             $column = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($colIndex);
-            $column = '$' . $column;
+            $column = '$'.$column;
         } else {
             $colIndex = ($colIndex <= 127) ? $colIndex : $colIndex - 256;
             $column = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($baseCol + $colIndex);
@@ -6843,15 +6697,14 @@ class Excel5 extends BaseReader implements IReader
 
         // bit: 15; mask 0x8000; (1 = relative row index, 0 = absolute row index)
         if (!(0x8000 & self::getInt2d($cellAddressStructure, 2))) {
-            $row = '$' . $row;
+            $row = '$'.$row;
         } else {
             $rowIndex = ($rowIndex <= 32767) ? $rowIndex : $rowIndex - 65536;
             $row = $baseRow + $rowIndex;
         }
 
-        return $column . $row;
+        return $column.$row;
     }
-
 
     /**
      * Reads a cell range address in BIFF5 e.g. 'A2:B6' or 'A1'
@@ -6891,7 +6744,6 @@ class Excel5 extends BaseReader implements IReader
         return "$fc$fr:$lc$lr";
     }
 
-
     /**
      * Reads a cell range address in BIFF8 e.g. 'A2:B6' or 'A1'
      * always fixed range
@@ -6930,7 +6782,6 @@ class Excel5 extends BaseReader implements IReader
         return "$fc$fr:$lc$lr";
     }
 
-
     /**
      * Reads a cell range address in BIFF8 e.g. 'A2:B6' or '$A$2:$B$6'
      * there are flags indicating whether column/row index is relative
@@ -6943,46 +6794,42 @@ class Excel5 extends BaseReader implements IReader
     {
         // todo: if cell range is just a single cell, should this funciton
         // not just return e.g. 'A1' and not 'A1:A1' ?
-
         // offset: 0; size: 2; index to first row (0... 65535) (or offset (-32768... 32767))
-            $fr = self::getInt2d($subData, 0) + 1;
+        $fr = self::getInt2d($subData, 0) + 1;
 
         // offset: 2; size: 2; index to last row (0... 65535) (or offset (-32768... 32767))
-            $lr = self::getInt2d($subData, 2) + 1;
+        $lr = self::getInt2d($subData, 2) + 1;
 
         // offset: 4; size: 2; index to first column or column offset + relative flags
-
         // bit: 7-0; mask 0x00FF; column index
         $fc = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex(0x00FF & self::getInt2d($subData, 4));
 
         // bit: 14; mask 0x4000; (1 = relative column index, 0 = absolute column index)
         if (!(0x4000 & self::getInt2d($subData, 4))) {
-            $fc = '$' . $fc;
+            $fc = '$'.$fc;
         }
 
         // bit: 15; mask 0x8000; (1 = relative row index, 0 = absolute row index)
         if (!(0x8000 & self::getInt2d($subData, 4))) {
-            $fr = '$' . $fr;
+            $fr = '$'.$fr;
         }
 
         // offset: 6; size: 2; index to last column or column offset + relative flags
-
         // bit: 7-0; mask 0x00FF; column index
         $lc = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex(0x00FF & self::getInt2d($subData, 6));
 
         // bit: 14; mask 0x4000; (1 = relative column index, 0 = absolute column index)
         if (!(0x4000 & self::getInt2d($subData, 6))) {
-            $lc = '$' . $lc;
+            $lc = '$'.$lc;
         }
 
         // bit: 15; mask 0x8000; (1 = relative row index, 0 = absolute row index)
         if (!(0x8000 & self::getInt2d($subData, 6))) {
-            $lr = '$' . $lr;
+            $lr = '$'.$lr;
         }
 
         return "$fc$fr:$lc$lr";
     }
-
 
     /**
      * Reads a cell range address in BIFF8 for shared formulas. Uses positive and negative values for row and column
@@ -7000,15 +6847,11 @@ class Excel5 extends BaseReader implements IReader
 
         // TODO: if cell range is just a single cell, should this funciton
         // not just return e.g. 'A1' and not 'A1:A1' ?
-
         // offset: 0; size: 2; first row
         $frIndex = self::getInt2d($subData, 0); // adjust below
-
         // offset: 2; size: 2; relative index to first row (0... 65535) should be treated as offset (-32768... 32767)
         $lrIndex = self::getInt2d($subData, 2); // adjust below
-
         // offset: 4; size: 2; first column with relative/absolute flags
-
         // bit: 7-0; mask 0x00FF; column index
         $fcIndex = 0x00FF & self::getInt2d($subData, 4);
 
@@ -7016,7 +6859,7 @@ class Excel5 extends BaseReader implements IReader
         if (!(0x4000 & self::getInt2d($subData, 4))) {
             // absolute column index
             $fc = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($fcIndex);
-            $fc = '$' . $fc;
+            $fc = '$'.$fc;
         } else {
             // column offset
             $fcIndex = ($fcIndex <= 127) ? $fcIndex : $fcIndex - 256;
@@ -7027,7 +6870,7 @@ class Excel5 extends BaseReader implements IReader
         if (!(0x8000 & self::getInt2d($subData, 4))) {
             // absolute row index
             $fr = $frIndex + 1;
-            $fr = '$' . $fr;
+            $fr = '$'.$fr;
         } else {
             // row offset
             $frIndex = ($frIndex <= 32767) ? $frIndex : $frIndex - 65536;
@@ -7035,7 +6878,6 @@ class Excel5 extends BaseReader implements IReader
         }
 
         // offset: 6; size: 2; last column with relative/absolute flags
-
         // bit: 7-0; mask 0x00FF; column index
         $lcIndex = 0x00FF & self::getInt2d($subData, 6);
         $lcIndex = ($lcIndex <= 127) ? $lcIndex : $lcIndex - 256;
@@ -7045,7 +6887,7 @@ class Excel5 extends BaseReader implements IReader
         if (!(0x4000 & self::getInt2d($subData, 6))) {
             // absolute column index
             $lc = \PhpOffice\PhpExcel\Cell::stringFromColumnIndex($lcIndex);
-            $lc = '$' . $lc;
+            $lc = '$'.$lc;
         } else {
             // column offset
             $lcIndex = ($lcIndex <= 127) ? $lcIndex : $lcIndex - 256;
@@ -7056,7 +6898,7 @@ class Excel5 extends BaseReader implements IReader
         if (!(0x8000 & self::getInt2d($subData, 6))) {
             // absolute row index
             $lr = $lrIndex + 1;
-            $lr = '$' . $lr;
+            $lr = '$'.$lr;
         } else {
             // row offset
             $lrIndex = ($lrIndex <= 32767) ? $lrIndex : $lrIndex - 65536;
@@ -7065,7 +6907,6 @@ class Excel5 extends BaseReader implements IReader
 
         return "$fc$fr:$lc$lr";
     }
-
 
     /**
      * Read BIFF8 cell range address list
@@ -7094,7 +6935,6 @@ class Excel5 extends BaseReader implements IReader
         );
     }
 
-
     /**
      * Read BIFF5 cell range address list
      * section 2.5.15
@@ -7121,7 +6961,6 @@ class Excel5 extends BaseReader implements IReader
             'cellRangeAddresses' => $cellRangeAddresses,
         );
     }
-
 
     /**
      * Get a sheet range like Sheet1:Sheet3 from REF index
@@ -7178,7 +7017,6 @@ class Excel5 extends BaseReader implements IReader
         return false;
     }
 
-
     /**
      * read BIFF8 constant value array from array data
      * returns e.g. array('value' => '{1,2;3,4}', 'size' => 40}
@@ -7209,14 +7047,13 @@ class Excel5 extends BaseReader implements IReader
             }
             $matrixChunks[] = implode(',', $items); // looks like e.g. '1,"hello"'
         }
-        $matrix = '{' . implode(';', $matrixChunks) . '}';
+        $matrix = '{'.implode(';', $matrixChunks).'}';
 
         return array(
             'value' => $matrix,
             'size' => $size,
         );
     }
-
 
     /**
      * read BIFF8 constant value which may be 'Empty Value', 'Number', 'String Value', 'Boolean Value', 'Error Value'
@@ -7244,7 +7081,7 @@ class Excel5 extends BaseReader implements IReader
             case 0x02: // string value
                 // offset: 1; size: var; Unicode string, 16-bit string length
                 $string = self::readUnicodeStringLong(substr($valueData, 1));
-                $value = '"' . $string['value'] . '"';
+                $value = '"'.$string['value'].'"';
                 $size = 1 + $string['size'];
                 break;
             case 0x04: // boolean
@@ -7267,7 +7104,6 @@ class Excel5 extends BaseReader implements IReader
             'size' => $size,
         );
     }
-
 
     /**
      * Extract RGB color
@@ -7293,7 +7129,6 @@ class Excel5 extends BaseReader implements IReader
         return array('rgb' => $rgb);
     }
 
-
     /**
      * Read byte string (8-bit string length)
      * OpenOffice documentation: 2.5.2
@@ -7314,7 +7149,6 @@ class Excel5 extends BaseReader implements IReader
             'size' => 1 + $ln, // size in bytes of data structure
         );
     }
-
 
     /**
      * Read byte string (16-bit string length)
@@ -7337,7 +7171,6 @@ class Excel5 extends BaseReader implements IReader
             'size' => 2 + $ln, // size in bytes of data structure
         );
     }
-
 
     /**
      * Extracts an Excel Unicode short string (8-bit string length)
@@ -7362,7 +7195,6 @@ class Excel5 extends BaseReader implements IReader
         return $string;
     }
 
-
     /**
      * Extracts an Excel Unicode long string (16-bit string length)
      * OpenOffice documentation: 2.5.3
@@ -7385,7 +7217,6 @@ class Excel5 extends BaseReader implements IReader
 
         return $string;
     }
-
 
     /**
      * Read Unicode string with no string length field, but with known character count
@@ -7421,7 +7252,6 @@ class Excel5 extends BaseReader implements IReader
         );
     }
 
-
     /**
      * Convert UTF-8 string to string surounded by double quotes. Used for explicit string tokens in formulas.
      * Example:  hello"world  -->  "hello""world"
@@ -7431,9 +7261,8 @@ class Excel5 extends BaseReader implements IReader
      */
     private static function UTF8toExcelDoubleQuoted($value)
     {
-        return '"' . str_replace('"', '""', $value) . '"';
+        return '"'.str_replace('"', '""', $value).'"';
     }
-
 
     /**
      * Reads first 8 bytes of a string and return IEEE 754 float
@@ -7464,7 +7293,6 @@ class Excel5 extends BaseReader implements IReader
         return $value;
     }
 
-
     private static function getIEEE754($rknum)
     {
         if (($rknum & 0x02) != 0) {
@@ -7478,7 +7306,7 @@ class Excel5 extends BaseReader implements IReader
             $sign = ($rknum & 0x80000000) >> 31;
             $exp = ($rknum & 0x7ff00000) >> 20;
             $mantissa = (0x100000 | ($rknum & 0x000ffffc));
-            $value = $mantissa / pow(2, (20- ($exp - 1023)));
+            $value = $mantissa / pow(2, (20 - ($exp - 1023)));
             if ($sign) {
                 $value = -1 * $value;
             }
@@ -7489,7 +7317,6 @@ class Excel5 extends BaseReader implements IReader
         }
         return $value;
     }
-
 
     /**
      * Get UTF-8 string from (compressed or uncompressed) UTF-16 string
@@ -7507,7 +7334,6 @@ class Excel5 extends BaseReader implements IReader
         return \PhpOffice\PhpExcel\Shared\String::ConvertEncoding($string, 'UTF-8', 'UTF-16LE');
     }
 
-
     /**
      * Convert UTF-16 string in compressed notation to uncompressed form. Only used for BIFF8.
      *
@@ -7519,12 +7345,11 @@ class Excel5 extends BaseReader implements IReader
         $uncompressedString = '';
         $strLen = strlen($string);
         for ($i = 0; $i < $strLen; ++$i) {
-            $uncompressedString .= $string[$i] . "\0";
+            $uncompressedString .= $string[$i]."\0";
         }
 
         return $uncompressedString;
     }
-
 
     /**
      * Convert string to UTF-8. Only used for BIFF5.
@@ -7537,7 +7362,6 @@ class Excel5 extends BaseReader implements IReader
         return \PhpOffice\PhpExcel\Shared\String::ConvertEncoding($string, 'UTF-8', $this->codepage);
     }
 
-
     /**
      * Read 16-bit unsigned integer
      *
@@ -7547,9 +7371,8 @@ class Excel5 extends BaseReader implements IReader
      */
     public static function getInt2d($data, $pos)
     {
-        return ord($data[$pos]) | (ord($data[$pos+1]) << 8);
+        return ord($data[$pos]) | (ord($data[$pos + 1]) << 8);
     }
-
 
     /**
      * Read 32-bit signed integer
@@ -7570,9 +7393,8 @@ class Excel5 extends BaseReader implements IReader
         } else {
             $_ord_24 = ($_or_24 & 127) << 24;
         }
-        return ord($data[$pos]) | (ord($data[$pos+1]) << 8) | (ord($data[$pos+2]) << 16) | $_ord_24;
+        return ord($data[$pos]) | (ord($data[$pos + 1]) << 8) | (ord($data[$pos + 2]) << 16) | $_ord_24;
     }
-
 
     private function parseRichText($is = '')
     {

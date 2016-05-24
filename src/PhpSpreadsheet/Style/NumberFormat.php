@@ -485,7 +485,7 @@ class NumberFormat extends Supervisor implements \PhpOffice\PhpExcel\IComparable
         // escape any quoted characters so that DateTime format() will render them correctly
         $format = preg_replace_callback('/"(.*)"/U', ['self', 'escapeQuotesCallback'], $format);
 
-        $dateObj = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($value);
+        $dateObj = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($value);
         $value = $dateObj->format($format);
     }
 

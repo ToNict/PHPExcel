@@ -66,7 +66,7 @@ class File
       * @param     string    $pFilename    Filename
       * @return bool
       */
-    public static function file_exists($pFilename)
+    public static function fileExists($pFilename)
     {
         // Sick construction, but it seems that
         // file_exists returns strange values when
@@ -130,7 +130,7 @@ class File
      *
      * @return string
      */
-    public static function sys_get_temp_dir()
+    public static function sysGetTempDir()
     {
         if (self::$useUploadTempDirectory) {
             //  use upload-directory when defined to allow running on environments having very restricted
@@ -144,9 +144,9 @@ class File
             }
         }
 
-        // sys_get_temp_dir is only available since PHP 5.2.1
+        // sysGetTempDir is only available since PHP 5.2.1
         // http://php.net/manual/en/function.sys-get-temp-dir.php#94119
-        if (!function_exists('sys_get_temp_dir')) {
+        if (!function_exists('sysGetTempDir')) {
             if ($temp = getenv('TMP')) {
                 if ((!empty($temp)) && (file_exists($temp))) {
                     return realpath($temp);
@@ -177,6 +177,6 @@ class File
         // use ordinary built-in PHP function
         //    There should be no problem with the 5.2.4 Suhosin realpath() bug, because this line should only
         //        be called if we're running 5.2.1 or earlier
-        return realpath(sys_get_temp_dir());
+        return realpath(sysGetTempDir());
     }
 }

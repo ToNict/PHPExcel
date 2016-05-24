@@ -32,7 +32,7 @@ class HTML extends BaseWriter implements IWriter
     /**
      * PHPExcel object
      *
-     * @var PHPExcel
+     * @var Spreadsheet
      */
     protected $phpExcel;
 
@@ -697,7 +697,7 @@ class HTML extends BaseWriter implements IWriter
             if ($chart instanceof \PhpOffice\PhpExcel\Chart) {
                 $chartCoordinates = $chart->getTopLeftPosition();
                 if ($chartCoordinates['cell'] == $coordinates) {
-                    $chartFileName = \PhpOffice\PhpExcel\Shared\File::sys_get_temp_dir().'/'.uniqid().'.png';
+                    $chartFileName = \PhpOffice\PhpExcel\Shared\File::sysGetTempDir().'/'.uniqid().'.png';
                     if (!$chart->render($chartFileName)) {
                         return;
                     }

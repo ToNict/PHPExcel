@@ -179,7 +179,7 @@ class Excel2007 extends BaseWriter implements IWriter
             // If $pFilename is php://output or php://stdout, make it a temporary file...
             $originalFilename = $pFilename;
             if (strtolower($pFilename) == 'php://output' || strtolower($pFilename) == 'php://stdout') {
-                $pFilename = @tempnam(\PhpOffice\PhpExcel\Shared\File::sys_get_temp_dir(), 'phpxltmp');
+                $pFilename = @tempnam(\PhpOffice\PhpExcel\Shared\File::sysGetTempDir(), 'phpxltmp');
                 if ($pFilename == '') {
                     $pFilename = $originalFilename;
                 }

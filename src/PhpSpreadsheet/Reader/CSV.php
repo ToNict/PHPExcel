@@ -29,6 +29,7 @@ namespace PhpOffice\PhpExcel\Reader;
  */
 class CSV extends BaseReader implements IReader
 {
+
     /**
      * Input encoding
      *
@@ -75,7 +76,6 @@ class CSV extends BaseReader implements IReader
      * @var    int
      */
     private $contiguousRow = -1;
-
 
     /**
      * Create a new CSV Reader instance
@@ -127,23 +127,23 @@ class CSV extends BaseReader implements IReader
         switch ($this->inputEncoding) {
             case 'UTF-8':
                 fgets($this->fileHandle, 4) == "\xEF\xBB\xBF" ?
-                    fseek($this->fileHandle, 3) : fseek($this->fileHandle, 0);
+                        fseek($this->fileHandle, 3) : fseek($this->fileHandle, 0);
                 break;
             case 'UTF-16LE':
                 fgets($this->fileHandle, 3) == "\xFF\xFE" ?
-                    fseek($this->fileHandle, 2) : fseek($this->fileHandle, 0);
+                        fseek($this->fileHandle, 2) : fseek($this->fileHandle, 0);
                 break;
             case 'UTF-16BE':
                 fgets($this->fileHandle, 3) == "\xFE\xFF" ?
-                    fseek($this->fileHandle, 2) : fseek($this->fileHandle, 0);
+                        fseek($this->fileHandle, 2) : fseek($this->fileHandle, 0);
                 break;
             case 'UTF-32LE':
                 fgets($this->fileHandle, 5) == "\xFF\xFE\x00\x00" ?
-                    fseek($this->fileHandle, 4) : fseek($this->fileHandle, 0);
+                        fseek($this->fileHandle, 4) : fseek($this->fileHandle, 0);
                 break;
             case 'UTF-32BE':
                 fgets($this->fileHandle, 5) == "\x00\x00\xFE\xFF" ?
-                    fseek($this->fileHandle, 4) : fseek($this->fileHandle, 0);
+                        fseek($this->fileHandle, 4) : fseek($this->fileHandle, 0);
                 break;
             default:
                 break;
@@ -161,10 +161,11 @@ class CSV extends BaseReader implements IReader
             return;
         }
 
-        if ((strlen(trim($line)) == 5) && (strpos($line, 'sep=') !== 0)) {
-            return $this->skipBOM();
+        if ((strlen(trim($line, "\r\n")) == 5) && (stripos($line, 'sep=') === 0)) {
+            $this->delimiter = substr($line, 4, 1);
+            return;
         }
-        $this->delimiter = substr($line, 4, 1);
+        return $this->skipBOM();
     }
 
     /**
@@ -179,7 +180,7 @@ class CSV extends BaseReader implements IReader
         $this->openFile($pFilename);
         if (!$this->isValidFormat()) {
             fclose($this->fileHandle);
-            throw new Exception($pFilename . " is an Invalid Spreadsheet file.");
+            throw new Exception($pFilename." is an Invalid Spreadsheet file.");
         }
         $fileHandle = $this->fileHandle;
 
@@ -187,7 +188,7 @@ class CSV extends BaseReader implements IReader
         $this->skipBOM();
         $this->checkSeparator();
 
-        $escapeEnclosures = array( "\\" . $this->enclosure, $this->enclosure . $this->enclosure );
+        $escapeEnclosures = array("\\".$this->enclosure, $this->enclosure.$this->enclosure);
 
         $worksheetInfo = array();
         $worksheetInfo[0]['worksheetName'] = 'Worksheet';
@@ -198,7 +199,7 @@ class CSV extends BaseReader implements IReader
 
         // Loop through each line of the file in turn
         while (($rowData = fgetcsv($fileHandle, 0, $this->delimiter, $this->enclosure)) !== false) {
-            $worksheetInfo[0]['totalRows']++;
+            $worksheetInfo[0]['totalRows'] ++;
             $worksheetInfo[0]['lastColumnIndex'] = max($worksheetInfo[0]['lastColumnIndex'], count($rowData) - 1);
         }
 
@@ -244,7 +245,7 @@ class CSV extends BaseReader implements IReader
         $this->openFile($pFilename);
         if (!$this->isValidFormat()) {
             fclose($this->fileHandle);
-            throw new Exception($pFilename . " is an Invalid Spreadsheet file.");
+            throw new Exception($pFilename." is an Invalid Spreadsheet file.");
         }
         $fileHandle = $this->fileHandle;
 
@@ -258,14 +259,14 @@ class CSV extends BaseReader implements IReader
         }
         $sheet = $objPHPExcel->setActiveSheetIndex($this->sheetIndex);
 
-        $escapeEnclosures = array( "\\" . $this->enclosure,
-                                   $this->enclosure . $this->enclosure
-                                 );
+        $escapeEnclosures = array("\\".$this->enclosure,
+            $this->enclosure.$this->enclosure
+        );
 
         // Set our starting row based on whether we're in contiguous mode or not
         $currentRow = 1;
         if ($this->contiguous) {
-            $currentRow = ($this->contiguousRow == -1) ? $sheet->getHighestRow(): $this->contiguousRow;
+            $currentRow = ($this->contiguousRow == -1) ? $sheet->getHighestRow() : $this->contiguousRow;
         }
 
         // Loop through each line of the file in turn
@@ -282,7 +283,7 @@ class CSV extends BaseReader implements IReader
                     }
 
                     // Set cell value
-                    $sheet->getCell($columnLetter . $currentRow)->setValue($rowDatum);
+                    $sheet->getCell($columnLetter.$currentRow)->setValue($rowDatum);
                 }
                 ++$columnLetter;
             }

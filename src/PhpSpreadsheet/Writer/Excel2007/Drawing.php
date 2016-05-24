@@ -38,7 +38,7 @@ class Drawing extends WriterPart
      * @return string          XML Output
      * @throws     \PhpOffice\PhpExcel\Writer\Exception
      */
-    public function writeDrawings(\PhpOffice\PhpExcel\Worksheet $pWorksheet = null, &$chartRef, $includeCharts = false)
+    public function writeDrawings(\PhpOffice\PhpExcel\Worksheet $pWorksheet, &$chartRef, $includeCharts = false)
     {
         // Create XML writer
         $objWriter = null;

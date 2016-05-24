@@ -67,7 +67,7 @@ class Financial
     {
         $months = 12 / $frequency;
 
-        $result = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($maturity);
+        $result = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($maturity);
         $eom = self::isLastDayOfMonth($result);
 
         while ($settlement < \PhpOffice\PhpExcel\Shared\Date::PHPToExcel($result)) {

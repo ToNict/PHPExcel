@@ -29,6 +29,7 @@ namespace PhpOffice\PhpExcel\Shared;
  */
 class Date
 {
+
     /** constants */
     const CALENDAR_WINDOWS_1900 = 1900;        //    Base date of 1st Jan 1900 = 1.0
     const CALENDAR_MAC_1904 = 1904;            //    Base date of 2nd Jan 1904 = 1.0
@@ -40,6 +41,7 @@ class Date
      * @public
      * @var    string[]
      */
+
     public static $monthNames = [
         'Jan' => 'January',
         'Feb' => 'February',
@@ -93,7 +95,6 @@ class Date
         return false;
     }
 
-
     /**
      * Return the Excel calendar (Windows 1900 or Mac 1904)
      *
@@ -104,7 +105,6 @@ class Date
         return self::$excelBaseDate;
     }
 
-
     /**
      *    Convert a date from Excel to PHP
      *
@@ -114,7 +114,7 @@ class Date
      *    @param        string         $timezone            The timezone for finding the adjustment from UST
      *    @return       integer        PHP serialized date/time
      */
-    public static function ExcelToPHP($dateValue = 0, $adjustToTimezone = false, $timezone = null)
+    public static function excelToPHP($dateValue = 0, $adjustToTimezone = false, $timezone = null)
     {
         if (self::$excelBaseDate == self::CALENDAR_WINDOWS_1900) {
             $myexcelBaseDate = 25569;
@@ -147,16 +147,15 @@ class Date
         return $returnValue + $timezoneAdjustment;
     }
 
-
     /**
      * Convert a date from Excel to a PHP Date/Time object
      *
      * @param    integer        $dateValue        Excel date/time value
      * @return   \DateTime                    PHP date/time object
      */
-    public static function ExcelToPHPObject($dateValue = 0)
+    public static function excelToPHPObject($dateValue = 0)
     {
-        $dateTime = self::ExcelToPHP($dateValue);
+        $dateTime = self::excelToPHP($dateValue);
         $days = floor($dateTime / 86400);
         $time = round((($dateTime / 86400) - $days) * 86400);
         $hours = round($time / 3600);
@@ -168,7 +167,6 @@ class Date
 
         return $dateObj;
     }
-
 
     /**
      *    Convert a date from PHP to Excel
@@ -184,11 +182,18 @@ class Date
     {
         $saveTimeZone = date_default_timezone_get();
         date_default_timezone_set('UTC');
+
+        $timezoneAdjustment = ($adjustToTimezone) ?
+            PHPExcel_Shared_TimeZone::getTimezoneAdjustment($timezone ? $timezone : $saveTimeZone, $dateValue) :
+            0;
+
         $retValue = false;
         if ((is_object($dateValue)) && ($dateValue instanceof \DateTime)) {
-            $retValue = self::FormattedPHPToExcel($dateValue->format('Y'), $dateValue->format('m'), $dateValue->format('d'), $dateValue->format('H'), $dateValue->format('i'), $dateValue->format('s'));
+            $dateValue->add(new DateInterval('PT'.$timezoneAdjustment.'S'));
+            $retValue = self::formattedPHPToExcel($dateValue->format('Y'), $dateValue->format('m'), $dateValue->format('d'), $dateValue->format('H'), $dateValue->format('i'), $dateValue->format('s'));
         } elseif (is_numeric($dateValue)) {
-            $retValue = self::FormattedPHPToExcel(date('Y', $dateValue), date('m', $dateValue), date('d', $dateValue), date('H', $dateValue), date('i', $dateValue), date('s', $dateValue));
+            $dateValue += $timezoneAdjustment;
+            $retValue = self::formattedPHPToExcel(date('Y', $dateValue), date('m', $dateValue), date('d', $dateValue), date('H', $dateValue), date('i', $dateValue), date('s', $dateValue));
         } elseif (is_string($dateValue)) {
             $retValue = self::stringToExcel($dateValue);
         }
@@ -197,9 +202,8 @@ class Date
         return $retValue;
     }
 
-
     /**
-     * FormattedPHPToExcel
+     * formattedPHPToExcel
      *
      * @param    integer    $year
      * @param    integer    $month
@@ -209,7 +213,7 @@ class Date
      * @param    integer    $seconds
      * @return   integer    Excel date/time value
      */
-    public static function FormattedPHPToExcel($year, $month, $day, $hours = 0, $minutes = 0, $seconds = 0)
+    public static function formattedPHPToExcel($year, $month, $day, $hours = 0, $minutes = 0, $seconds = 0)
     {
         if (self::$excelBaseDate == self::CALENDAR_WINDOWS_1900) {
             //
@@ -244,7 +248,6 @@ class Date
         return (float) $excelDate + $excelTime;
     }
 
-
     /**
      * Is a given cell a date/time?
      *
@@ -254,12 +257,11 @@ class Date
     public static function isDateTime(\PhpOffice\PhpExcel\Cell $pCell)
     {
         return self::isDateTimeFormat(
-            $pCell->getWorksheet()->getStyle(
-                $pCell->getCoordinate()
-            )->getNumberFormat()
+                $pCell->getWorksheet()->getStyle(
+                    $pCell->getCoordinate()
+                )->getNumberFormat()
         );
     }
-
 
     /**
      * Is a given number format a date/time?
@@ -271,7 +273,6 @@ class Date
     {
         return self::isDateTimeFormatCode($pFormat->getFormatCode());
     }
-
 
     private static $possibleDateFormatCharacters = 'eymdHs';
 
@@ -345,7 +346,6 @@ class Date
         // No date...
         return false;
     }
-
 
     /**
      * Convert a date/time string to Excel time

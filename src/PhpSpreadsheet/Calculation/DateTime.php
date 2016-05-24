@@ -29,6 +29,7 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class DateTime
 {
+
     /**
      * Identify if a year is a leap year or not
      *
@@ -39,7 +40,6 @@ class DateTime
     {
         return ((($year % 4) == 0) && (($year % 100) != 0) || (($year % 400) == 0));
     }
-
 
     /**
      * Return the number of days between two dates based on a 360 day calendar
@@ -77,7 +77,6 @@ class DateTime
         return $endDay + $endMonth * 30 + $endYear * 360 - $startDay - $startMonth * 30 - $startYear * 360;
     }
 
-
     /**
      * getDateValue
      *
@@ -103,7 +102,6 @@ class DateTime
         return $dateValue;
     }
 
-
     /**
      * getTimeValue
      *
@@ -119,11 +117,10 @@ class DateTime
         return $timeValue;
     }
 
-
     private static function adjustDateByMonths($dateValue = 0, $adjustmentMonths = 0)
     {
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
         $oMonth = (int) $PHPDateObject->format('m');
         $oYear = (int) $PHPDateObject->format('Y');
 
@@ -145,7 +142,6 @@ class DateTime
         }
         return $PHPDateObject;
     }
-
 
     /**
      * DATETIMENOW
@@ -187,7 +183,6 @@ class DateTime
         return $retValue;
     }
 
-
     /**
      * DATENOW
      *
@@ -218,17 +213,16 @@ class DateTime
                 $retValue = (float) $excelDateTime;
                 break;
             case Functions::RETURNDATE_PHP_NUMERIC:
-                $retValue = (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($excelDateTime);
+                $retValue = (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP($excelDateTime);
                 break;
             case Functions::RETURNDATE_PHP_OBJECT:
-                $retValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($excelDateTime);
+                $retValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($excelDateTime);
                 break;
         }
         date_default_timezone_set($saveTimeZone);
 
         return $retValue;
     }
-
 
     /**
      * DATE
@@ -282,9 +276,9 @@ class DateTime
      */
     public static function DATE($year = 0, $month = 1, $day = 1)
     {
-        $year  = Functions::flattenSingleValue($year);
+        $year = Functions::flattenSingleValue($year);
         $month = Functions::flattenSingleValue($month);
-        $day   = Functions::flattenSingleValue($day);
+        $day = Functions::flattenSingleValue($day);
 
         if (($month !== null) && (!is_numeric($month))) {
             $month = \PhpOffice\PhpExcel\Shared\Date::monthStringToNumber($month);
@@ -294,28 +288,28 @@ class DateTime
             $day = \PhpOffice\PhpExcel\Shared\Date::dayStringToNumber($day);
         }
 
-        $year = ($year !== null) ? \PhpOffice\PhpExcel\Shared\String::testStringAsNumeric($year) : 0;
-        $month = ($month !== null) ? \PhpOffice\PhpExcel\Shared\String::testStringAsNumeric($month) : 0;
-        $day = ($day !== null) ? \PhpOffice\PhpExcel\Shared\String::testStringAsNumeric($day) : 0;
+        $year = ($year !== null) ? \PhpOffice\PhpExcel\Shared\StringHelper::testStringAsNumeric($year) : 0;
+        $month = ($month !== null) ? \PhpOffice\PhpExcel\Shared\StringHelper::testStringAsNumeric($month) : 0;
+        $day = ($day !== null) ? \PhpOffice\PhpExcel\Shared\StringHelper::testStringAsNumeric($day) : 0;
         if ((!is_numeric($year)) ||
             (!is_numeric($month)) ||
             (!is_numeric($day))) {
             return Functions::VALUE();
         }
-        $year    = (integer) $year;
-        $month    = (integer) $month;
-        $day    = (integer) $day;
+        $year = (integer) $year;
+        $month = (integer) $month;
+        $day = (integer) $day;
 
         $baseYear = \PhpOffice\PhpExcel\Shared\Date::getExcelCalendar();
         // Validate parameters
-        if ($year < ($baseYear-1900)) {
+        if ($year < ($baseYear - 1900)) {
             return Functions::NaN();
         }
-        if ((($baseYear-1900) != 0) && ($year < $baseYear) && ($year >= 1900)) {
+        if ((($baseYear - 1900) != 0) && ($year < $baseYear) && ($year >= 1900)) {
             return Functions::NaN();
         }
 
-        if (($year < $baseYear) && ($year >= ($baseYear-1900))) {
+        if (($year < $baseYear) && ($year >= ($baseYear - 1900))) {
             $year += 1900;
         }
 
@@ -336,17 +330,16 @@ class DateTime
         }
 
         // Execute function
-        $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel($year, $month, $day);
+        $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel($year, $month, $day);
         switch (Functions::getReturnDateType()) {
             case Functions::RETURNDATE_EXCEL:
                 return (float) $excelDateValue;
             case Functions::RETURNDATE_PHP_NUMERIC:
-                return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($excelDateValue);
+                return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP($excelDateValue);
             case Functions::RETURNDATE_PHP_OBJECT:
-                return \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($excelDateValue);
+                return \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($excelDateValue);
         }
     }
-
 
     /**
      * TIME
@@ -433,9 +426,9 @@ class DateTime
                 if ($calendar != \PhpOffice\PhpExcel\Shared\Date::CALENDAR_WINDOWS_1900) {
                     $date = 1;
                 }
-                return (float) \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel($calendar, 1, $date, $hour, $minute, $second);
+                return (float) \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel($calendar, 1, $date, $hour, $minute, $second);
             case Functions::RETURNDATE_PHP_NUMERIC:
-                return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP(\PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel(1970, 1, 1, $hour, $minute, $second));    // -2147468400; //    -2147472000 + 3600
+                return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP(\PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(1970, 1, 1, $hour, $minute, $second));    // -2147468400; //    -2147472000 + 3600
             case Functions::RETURNDATE_PHP_OBJECT:
                 $dayAdjust = 0;
                 if ($hour < 0) {
@@ -455,7 +448,6 @@ class DateTime
                 return $phpDateObject;
         }
     }
-
 
     /**
      * DATEVALUE
@@ -489,7 +481,7 @@ class DateTime
         //    Strip any ordinals because they're allowed in Excel (English only)
         $dateValue = preg_replace('/(\d)(st|nd|rd|th)([ -\/])/Ui', '$1$3', $dateValue);
         //    Convert separators (/ . or space) to hyphens (should also handle dot used for ordinals in some countries, e.g. Denmark, Germany)
-        $dateValue    = str_replace(array('/', '.', '-', '  '), array(' ', ' ', ' ', ' '), $dateValue);
+        $dateValue = str_replace(array('/', '.', '-', '  '), array(' ', ' ', ' ', ' '), $dateValue);
 
         $yearFound = false;
         $t1 = explode(' ', $dateValue);
@@ -559,13 +551,8 @@ class DateTime
                 $PHPDateArray['day'] = strftime('%d');
             }
             $excelDateValue = floor(
-                \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel(
-                    $PHPDateArray['year'],
-                    $PHPDateArray['month'],
-                    $PHPDateArray['day'],
-                    $PHPDateArray['hour'],
-                    $PHPDateArray['minute'],
-                    $PHPDateArray['second']
+                \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(
+                    $PHPDateArray['year'], $PHPDateArray['month'], $PHPDateArray['day'], $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']
                 )
             );
 
@@ -573,14 +560,13 @@ class DateTime
                 case Functions::RETURNDATE_EXCEL:
                     return (float) $excelDateValue;
                 case Functions::RETURNDATE_PHP_NUMERIC:
-                    return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($excelDateValue);
+                    return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP($excelDateValue);
                 case Functions::RETURNDATE_PHP_OBJECT:
                     return new \DateTime($PHPDateArray['year'].'-'.$PHPDateArray['month'].'-'.$PHPDateArray['day'].' 00:00:00');
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * TIMEVALUE
@@ -612,30 +598,24 @@ class DateTime
         $PHPDateArray = date_parse($timeValue);
         if (($PHPDateArray !== false) && ($PHPDateArray['error_count'] == 0)) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_OPENOFFICE) {
-                $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel(
-                    $PHPDateArray['year'],
-                    $PHPDateArray['month'],
-                    $PHPDateArray['day'],
-                    $PHPDateArray['hour'],
-                    $PHPDateArray['minute'],
-                    $PHPDateArray['second']
+                $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(
+                        $PHPDateArray['year'], $PHPDateArray['month'], $PHPDateArray['day'], $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']
                 );
             } else {
-                $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::FormattedPHPToExcel(1900, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']) - 1;
+                $excelDateValue = \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(1900, 1, 1, $PHPDateArray['hour'], $PHPDateArray['minute'], $PHPDateArray['second']) - 1;
             }
 
             switch (Functions::getReturnDateType()) {
                 case Functions::RETURNDATE_EXCEL:
                     return (float) $excelDateValue;
                 case Functions::RETURNDATE_PHP_NUMERIC:
-                    return (integer) $phpDateValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($excelDateValue+25569) - 3600;
+                    return (integer) $phpDateValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHP($excelDateValue + 25569) - 3600;
                 case Functions::RETURNDATE_PHP_OBJECT:
                     return new \DateTime('1900-01-01 '.$PHPDateArray['hour'].':'.$PHPDateArray['minute'].':'.$PHPDateArray['second']);
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * DATEDIF
@@ -650,8 +630,8 @@ class DateTime
     public static function DATEDIF($startDate = 0, $endDate = 0, $unit = 'D')
     {
         $startDate = Functions::flattenSingleValue($startDate);
-        $endDate   = Functions::flattenSingleValue($endDate);
-        $unit      = strtoupper(Functions::flattenSingleValue($unit));
+        $endDate = Functions::flattenSingleValue($endDate);
+        $unit = strtoupper(Functions::flattenSingleValue($unit));
 
         if (is_string($startDate = self::getDateValue($startDate))) {
             return Functions::VALUE();
@@ -668,12 +648,12 @@ class DateTime
         // Execute function
         $difference = $endDate - $startDate;
 
-        $PHPStartDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($startDate);
+        $PHPStartDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($startDate);
         $startDays = $PHPStartDateObject->format('j');
         $startMonths = $PHPStartDateObject->format('n');
         $startYears = $PHPStartDateObject->format('Y');
 
-        $PHPEndDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($endDate);
+        $PHPEndDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($endDate);
         $endDays = $PHPEndDateObject->format('j');
         $endMonths = $PHPEndDateObject->format('n');
         $endYears = $PHPEndDateObject->format('Y');
@@ -740,7 +720,6 @@ class DateTime
         return $retVal;
     }
 
-
     /**
      * DAYS360
      *
@@ -772,8 +751,8 @@ class DateTime
      */
     public static function DAYS360($startDate = 0, $endDate = 0, $method = false)
     {
-        $startDate    = Functions::flattenSingleValue($startDate);
-        $endDate    = Functions::flattenSingleValue($endDate);
+        $startDate = Functions::flattenSingleValue($startDate);
+        $endDate = Functions::flattenSingleValue($endDate);
 
         if (is_string($startDate = self::getDateValue($startDate))) {
             return Functions::VALUE();
@@ -787,19 +766,18 @@ class DateTime
         }
 
         // Execute function
-        $PHPStartDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($startDate);
+        $PHPStartDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($startDate);
         $startDay = $PHPStartDateObject->format('j');
         $startMonth = $PHPStartDateObject->format('n');
         $startYear = $PHPStartDateObject->format('Y');
 
-        $PHPEndDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($endDate);
+        $PHPEndDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($endDate);
         $endDay = $PHPEndDateObject->format('j');
         $endMonth = $PHPEndDateObject->format('n');
         $endYear = $PHPEndDateObject->format('Y');
 
         return self::dateDiff360($startDay, $startMonth, $startYear, $endDay, $endMonth, $endYear, !$method);
     }
-
 
     /**
      * YEARFRAC
@@ -828,9 +806,9 @@ class DateTime
      */
     public static function YEARFRAC($startDate = 0, $endDate = 0, $method = 0)
     {
-        $startDate    = Functions::flattenSingleValue($startDate);
-        $endDate    = Functions::flattenSingleValue($endDate);
-        $method        = Functions::flattenSingleValue($method);
+        $startDate = Functions::flattenSingleValue($startDate);
+        $endDate = Functions::flattenSingleValue($endDate);
+        $method = Functions::flattenSingleValue($method);
 
         if (is_string($startDate = self::getDateValue($startDate))) {
             return Functions::VALUE();
@@ -856,7 +834,7 @@ class DateTime
                             $endDay = self::DAYOFMONTH($endDate);
                             if (($startMonth < 3) ||
                                 (($endMonth * 100 + $endDay) >= (2 * 100 + 29))) {
-                                 $leapDays += 1;
+                                $leapDays += 1;
                             }
                         }
                     } else {
@@ -898,7 +876,6 @@ class DateTime
         return Functions::VALUE();
     }
 
-
     /**
      * NETWORKDAYS
      *
@@ -925,8 +902,8 @@ class DateTime
     public static function NETWORKDAYS($startDate, $endDate)
     {
         //    Retrieve the mandatory start and end date that are referenced in the function definition
-        $startDate    = Functions::flattenSingleValue($startDate);
-        $endDate    = Functions::flattenSingleValue($endDate);
+        $startDate = Functions::flattenSingleValue($startDate);
+        $endDate = Functions::flattenSingleValue($endDate);
         //    Flush the mandatory start and end date that are referenced in the function definition, and get the optional days
         $dateArgs = Functions::flattenArray(func_get_args());
         array_shift($dateArgs);
@@ -983,7 +960,6 @@ class DateTime
         return $wholeWeekDays + $partWeekDays;
     }
 
-
     /**
      * WORKDAY
      *
@@ -1012,8 +988,8 @@ class DateTime
     public static function WORKDAY($startDate, $endDays)
     {
         //    Retrieve the mandatory start date and days that are referenced in the function definition
-        $startDate    = Functions::flattenSingleValue($startDate);
-        $endDays    = Functions::flattenSingleValue($endDays);
+        $startDate = Functions::flattenSingleValue($startDate);
+        $endDays = Functions::flattenSingleValue($endDays);
         //    Flush the mandatory start date and days that are referenced in the function definition, and get the optional days
         $dateArgs = Functions::flattenArray(func_get_args());
         array_shift($dateArgs);
@@ -1035,7 +1011,7 @@ class DateTime
 
         $startDoW = self::DAYOFWEEK($startDate, 3);
         if (self::DAYOFWEEK($startDate, 3) >= 5) {
-            $startDate += ($decrementing) ? -$startDoW + 4: 7 - $startDoW;
+            $startDate += ($decrementing) ? -$startDoW + 4 : 7 - $startDoW;
             ($decrementing) ? $endDays++ : $endDays--;
         }
 
@@ -1045,7 +1021,7 @@ class DateTime
         //    Adjust the calculated end date if it falls over a weekend
         $endDoW = self::DAYOFWEEK($endDate, 3);
         if ($endDoW >= 5) {
-            $endDate += ($decrementing) ? -$endDoW + 4: 7 - $endDoW;
+            $endDate += ($decrementing) ? -$endDoW + 4 : 7 - $endDoW;
         }
 
         //    Test any extra holiday parameters
@@ -1094,12 +1070,11 @@ class DateTime
             case Functions::RETURNDATE_EXCEL:
                 return (float) $endDate;
             case Functions::RETURNDATE_PHP_NUMERIC:
-                return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($endDate);
+                return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP($endDate);
             case Functions::RETURNDATE_PHP_OBJECT:
-                return \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($endDate);
+                return \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($endDate);
         }
     }
-
 
     /**
      * DAYOFMONTH
@@ -1116,7 +1091,7 @@ class DateTime
      */
     public static function DAYOFMONTH($dateValue = 1)
     {
-        $dateValue    = Functions::flattenSingleValue($dateValue);
+        $dateValue = Functions::flattenSingleValue($dateValue);
 
         if ($dateValue === null) {
             $dateValue = 1;
@@ -1129,11 +1104,10 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('j');
     }
-
 
     /**
      * DAYOFWEEK
@@ -1154,8 +1128,8 @@ class DateTime
      */
     public static function DAYOFWEEK($dateValue = 1, $style = 1)
     {
-        $dateValue    = Functions::flattenSingleValue($dateValue);
-        $style        = Functions::flattenSingleValue($style);
+        $dateValue = Functions::flattenSingleValue($dateValue);
+        $style = Functions::flattenSingleValue($style);
 
         if (!is_numeric($style)) {
             return Functions::VALUE();
@@ -1173,7 +1147,7 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
         $DoW = $PHPDateObject->format('w');
 
         $firstDay = 1;
@@ -1207,7 +1181,6 @@ class DateTime
         return (int) $DoW;
     }
 
-
     /**
      * WEEKOFYEAR
      *
@@ -1230,8 +1203,8 @@ class DateTime
      */
     public static function WEEKOFYEAR($dateValue = 1, $method = 1)
     {
-        $dateValue    = Functions::flattenSingleValue($dateValue);
-        $method        = Functions::flattenSingleValue($method);
+        $dateValue = Functions::flattenSingleValue($dateValue);
+        $method = Functions::flattenSingleValue($method);
 
         if (!is_numeric($method)) {
             return Functions::VALUE();
@@ -1249,10 +1222,10 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
         $dayOfYear = $PHPDateObject->format('z');
         $dow = $PHPDateObject->format('w');
-        $PHPDateObject->modify('-' . $dayOfYear . ' days');
+        $PHPDateObject->modify('-'.$dayOfYear.' days');
         $dow = $PHPDateObject->format('w');
         $daysInFirstWeek = 7 - (($dow + (2 - $method)) % 7);
         $dayOfYear -= $daysInFirstWeek;
@@ -1260,7 +1233,6 @@ class DateTime
 
         return (int) $weekOfYear;
     }
-
 
     /**
      * MONTHOFYEAR
@@ -1277,7 +1249,7 @@ class DateTime
      */
     public static function MONTHOFYEAR($dateValue = 1)
     {
-        $dateValue    = Functions::flattenSingleValue($dateValue);
+        $dateValue = Functions::flattenSingleValue($dateValue);
 
         if ($dateValue === null) {
             $dateValue = 1;
@@ -1288,11 +1260,10 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('n');
     }
-
 
     /**
      * YEAR
@@ -1309,7 +1280,7 @@ class DateTime
      */
     public static function YEAR($dateValue = 1)
     {
-        $dateValue    = Functions::flattenSingleValue($dateValue);
+        $dateValue = Functions::flattenSingleValue($dateValue);
 
         if ($dateValue === null) {
             $dateValue = 1;
@@ -1320,11 +1291,10 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHPObject($dateValue);
+        $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('Y');
     }
-
 
     /**
      * HOUROFDAY
@@ -1341,7 +1311,7 @@ class DateTime
      */
     public static function HOUROFDAY($timeValue = 0)
     {
-        $timeValue    = Functions::flattenSingleValue($timeValue);
+        $timeValue = Functions::flattenSingleValue($timeValue);
 
         if (!is_numeric($timeValue)) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
@@ -1361,11 +1331,10 @@ class DateTime
         } elseif ($timeValue < 0.0) {
             return Functions::NaN();
         }
-        $timeValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($timeValue);
+        $timeValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHP($timeValue);
 
         return (int) gmdate('G', $timeValue);
     }
-
 
     /**
      * MINUTEOFHOUR
@@ -1382,7 +1351,7 @@ class DateTime
      */
     public static function MINUTEOFHOUR($timeValue = 0)
     {
-        $timeValue = $timeTester    = Functions::flattenSingleValue($timeValue);
+        $timeValue = $timeTester = Functions::flattenSingleValue($timeValue);
 
         if (!is_numeric($timeValue)) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
@@ -1402,11 +1371,10 @@ class DateTime
         } elseif ($timeValue < 0.0) {
             return Functions::NaN();
         }
-        $timeValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($timeValue);
+        $timeValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHP($timeValue);
 
         return (int) gmdate('i', $timeValue);
     }
-
 
     /**
      * SECONDOFMINUTE
@@ -1423,7 +1391,7 @@ class DateTime
      */
     public static function SECONDOFMINUTE($timeValue = 0)
     {
-        $timeValue    = Functions::flattenSingleValue($timeValue);
+        $timeValue = Functions::flattenSingleValue($timeValue);
 
         if (!is_numeric($timeValue)) {
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
@@ -1443,11 +1411,10 @@ class DateTime
         } elseif ($timeValue < 0.0) {
             return Functions::NaN();
         }
-        $timeValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($timeValue);
+        $timeValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHP($timeValue);
 
         return (int) gmdate('s', $timeValue);
     }
-
 
     /**
      * EDATE
@@ -1470,8 +1437,8 @@ class DateTime
      */
     public static function EDATE($dateValue = 1, $adjustmentMonths = 0)
     {
-        $dateValue            = Functions::flattenSingleValue($dateValue);
-        $adjustmentMonths    = Functions::flattenSingleValue($adjustmentMonths);
+        $dateValue = Functions::flattenSingleValue($dateValue);
+        $adjustmentMonths = Functions::flattenSingleValue($adjustmentMonths);
 
         if (!is_numeric($adjustmentMonths)) {
             return Functions::VALUE();
@@ -1489,12 +1456,11 @@ class DateTime
             case Functions::RETURNDATE_EXCEL:
                 return (float) \PhpOffice\PhpExcel\Shared\Date::PHPToExcel($PHPDateObject);
             case Functions::RETURNDATE_PHP_NUMERIC:
-                return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP(PHPExcel\Shared\Date::PHPToExcel($PHPDateObject));
+                return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP(PHPExcel\Shared\Date::PHPToExcel($PHPDateObject));
             case Functions::RETURNDATE_PHP_OBJECT:
                 return $PHPDateObject;
         }
     }
-
 
     /**
      * EOMONTH
@@ -1516,8 +1482,8 @@ class DateTime
      */
     public static function EOMONTH($dateValue = 1, $adjustmentMonths = 0)
     {
-        $dateValue            = Functions::flattenSingleValue($dateValue);
-        $adjustmentMonths    = Functions::flattenSingleValue($adjustmentMonths);
+        $dateValue = Functions::flattenSingleValue($dateValue);
+        $adjustmentMonths = Functions::flattenSingleValue($adjustmentMonths);
 
         if (!is_numeric($adjustmentMonths)) {
             return Functions::VALUE();
@@ -1529,16 +1495,16 @@ class DateTime
         }
 
         // Execute function
-        $PHPDateObject = self::adjustDateByMonths($dateValue, $adjustmentMonths+1);
+        $PHPDateObject = self::adjustDateByMonths($dateValue, $adjustmentMonths + 1);
         $adjustDays = (int) $PHPDateObject->format('d');
-        $adjustDaysString = '-' . $adjustDays . ' days';
+        $adjustDaysString = '-'.$adjustDays.' days';
         $PHPDateObject->modify($adjustDaysString);
 
         switch (Functions::getReturnDateType()) {
             case Functions::RETURNDATE_EXCEL:
                 return (float) \PhpOffice\PhpExcel\Shared\Date::PHPToExcel($PHPDateObject);
             case Functions::RETURNDATE_PHP_NUMERIC:
-                return (integer) \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP(\PhpOffice\PhpExcel\Shared\Date::PHPToExcel($PHPDateObject));
+                return (integer) \PhpOffice\PhpExcel\Shared\Date::excelToPHP(\PhpOffice\PhpExcel\Shared\Date::PHPToExcel($PHPDateObject));
             case Functions::RETURNDATE_PHP_OBJECT:
                 return $PHPDateObject;
         }

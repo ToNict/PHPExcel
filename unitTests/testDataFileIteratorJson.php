@@ -1,6 +1,8 @@
 <?php
 
-class testDataFileIteratorJson implements Iterator
+namespace PhpSpreadhsheet\unitTests;
+
+class TestDataFileIteratorJson implements \Iterator
 {
     protected $file;
     protected $key = 0;

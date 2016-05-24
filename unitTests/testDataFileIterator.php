@@ -1,6 +1,8 @@
 <?php
 
-class testDataFileIterator implements Iterator
+namespace PhpSpreadhsheet\unitTests;
+
+class TestDataFileIterator implements \Iterator
 {
     protected $file;
     protected $key = 0;

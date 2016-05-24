@@ -64,7 +64,7 @@ class Drawing
      * @param    \PhpOffice\PhpExcel\Style\Font $pDefaultFont    Default font of the workbook
      * @return   int            Value in cell dimension
      */
-    public static function pixelsToCellDimension($pValue = 0, \PhpOffice\PhpExcel\Style\Font $pDefaultFont)
+    public static function pixelsToCellDimension($pValue, \PhpOffice\PhpExcel\Style\Font $pDefaultFont)
     {
         // Font name and size
         $name = $pDefaultFont->getName();
@@ -89,7 +89,7 @@ class Drawing
      * @param   \PhpOffice\PhpExcel\Style\Font $pDefaultFont    Default font of the workbook
      * @return  int        Value in pixels
      */
-    public static function cellDimensionToPixels($pValue = 0, \PhpOffice\PhpExcel\Style\Font $pDefaultFont)
+    public static function cellDimensionToPixels($pValue, \PhpOffice\PhpExcel\Style\Font $pDefaultFont)
     {
         // Font name and size
         $name = $pDefaultFont->getName();

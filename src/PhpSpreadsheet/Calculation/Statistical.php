@@ -2,9 +2,6 @@
 
 namespace PhpOffice\PhpExcel\Calculation;
 
-//require_once PHPEXCEL_ROOT . 'PHPExcel/Shared/trend/trendClass.php';
-
-
 /** LOG_GAMMA_X_MAX_VALUE */
 define('LOG_GAMMA_X_MAX_VALUE', 2.55e305);
 
@@ -44,6 +41,7 @@ define('SQRT2PI', 2.5066282746310005024157652848110452530069867406099);
  */
 class Statistical
 {
+
     private static function checkTrendArrays(&$array1, &$array2)
     {
         if (!is_array($array1)) {
@@ -73,7 +71,6 @@ class Statistical
         return true;
     }
 
-
     /**
      * Beta function.
      *
@@ -91,7 +88,6 @@ class Statistical
             return exp(self::logBeta($p, $q));
         }
     }
-
 
     /**
      * Incomplete beta function
@@ -122,10 +118,9 @@ class Statistical
         }
     }
 
-
     // Function cache for logBeta function
-    private static $logBetaCacheP      = 0.0;
-    private static $logBetaCacheQ      = 0.0;
+    private static $logBetaCacheP = 0.0;
+    private static $logBetaCacheQ = 0.0;
     private static $logBetaCacheResult = 0.0;
 
     /**
@@ -150,7 +145,6 @@ class Statistical
         return self::$logBetaCacheResult;
     }
 
-
     /**
      * Evaluates of continued fraction part of incomplete beta function.
      * Based on an idea from Numerical Recipes (W.H. Press et al, 1992).
@@ -168,9 +162,9 @@ class Statistical
         }
         $h = 1.0 / $h;
         $frac = $h;
-        $m     = 1;
+        $m = 1;
         $delta = 0.0;
-        while ($m <= MAX_ITERATIONS && abs($delta-1.0) > PRECISION) {
+        while ($m <= MAX_ITERATIONS && abs($delta - 1.0) > PRECISION) {
             $m2 = 2 * $m;
             // even index for d
             $d = $m * ($q - $m) * $x / ( ($p_minus + $m2) * ($p + $m2));
@@ -201,7 +195,6 @@ class Statistical
         }
         return $frac;
     }
-
 
     /**
      * logGamma function
@@ -245,10 +238,9 @@ class Statistical
      * </p>
      * @return MAX_VALUE for x < 0.0 or when overflow would occur, i.e. x > 2.55E305
      */
-
     // Function cache for logGamma
     private static $logGammaCacheResult = 0.0;
-    private static $logGammaCacheX      = 0.0;
+    private static $logGammaCacheX = 0.0;
 
     private static function logGamma($x)
     {
@@ -317,7 +309,7 @@ class Statistical
             341747634550.7377132798597,
             446315818741.9713286462081
         );
-        static $lg_c  = array(
+        static $lg_c = array(
             -0.001910444077728,
             8.4171387781295e-4,
             -5.952379913043012e-4,
@@ -329,7 +321,7 @@ class Statistical
 
         // Rough estimate of the fourth root of logGamma_xBig
         static $lg_frtbig = 2.25e76;
-        static $pnt68     = 0.6796875;
+        static $pnt68 = 0.6796875;
 
 
         if ($x == self::$logGammaCacheX) {
@@ -423,7 +415,6 @@ class Statistical
         return $res;
     }
 
-
     //
     //    Private implementation of the incomplete Gamma function
     //
@@ -431,16 +422,15 @@ class Statistical
     {
         static $max = 32;
         $summer = 0;
-        for ($n=0; $n<=$max; ++$n) {
+        for ($n = 0; $n <= $max; ++$n) {
             $divisor = $a;
-            for ($i=1; $i<=$n; ++$i) {
+            for ($i = 1; $i <= $n; ++$i) {
                 $divisor *= ($a + $i);
             }
             $summer += (pow($x, $n) / $divisor);
         }
-        return pow($x, $a) * exp(0-$x) * $summer;
+        return pow($x, $a) * exp(0 - $x) * $summer;
     }
-
 
     //
     //    Private implementation of the Gamma function
@@ -466,21 +456,20 @@ class Statistical
         $tmp -= ($x + 0.5) * log($tmp);
 
         $summer = $p0;
-        for ($j=1; $j<=6; ++$j) {
+        for ($j = 1; $j <= 6; ++$j) {
             $summer += ($p[$j] / ++$y);
         }
         return exp(0 - $tmp + log(SQRT2PI * $summer / $x));
     }
-
-
-    /***************************************************************************
+    /*     * *************************************************************************
      *                                inverse_ncdf.php
      *                            -------------------
      *    begin                : Friday, January 16, 2004
      *    copyright            : (C) 2004 Michael Nickerson
      *    email                : nickersonm@yahoo.com
      *
-     ***************************************************************************/
+     * ************************************************************************* */
+
     private static function inverseNcdf($p)
     {
         //    Inverse ncdf approximation by Peter J. Acklam, implementation adapted to
@@ -488,13 +477,10 @@ class Statistical
         //    a guide. http://home.online.no/~pjacklam/notes/invnorm/index.html
         //    I have not checked the accuracy of this implementation. Be aware that PHP
         //    will truncate the coeficcients to 14 digits.
-
         //    You have permission to use and distribute this function freely for
         //    whatever purpose you want, but please show common courtesy and give credit
         //    where credit is due.
-
         //    Input paramater is $p - probability - where 0 < p < 1.
-
         //    Coefficients in rational approximations
         static $a = array(
             1 => -3.969683028665376e+01,
@@ -537,23 +523,22 @@ class Statistical
             //    Rational approximation for lower region.
             $q = sqrt(-2 * log($p));
             return ((((($c[1] * $q + $c[2]) * $q + $c[3]) * $q + $c[4]) * $q + $c[5]) * $q + $c[6]) /
-                    (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
+                (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
         } elseif ($p_low <= $p && $p <= $p_high) {
             //    Rational approximation for central region.
             $q = $p - 0.5;
             $r = $q * $q;
             return ((((($a[1] * $r + $a[2]) * $r + $a[3]) * $r + $a[4]) * $r + $a[5]) * $r + $a[6]) * $q /
-                   ((((($b[1] * $r + $b[2]) * $r + $b[3]) * $r + $b[4]) * $r + $b[5]) * $r + 1);
+                ((((($b[1] * $r + $b[2]) * $r + $b[3]) * $r + $b[4]) * $r + $b[5]) * $r + 1);
         } elseif ($p_high < $p && $p < 1) {
             //    Rational approximation for upper region.
             $q = sqrt(-2 * log(1 - $p));
             return -((((($c[1] * $q + $c[2]) * $q + $c[3]) * $q + $c[4]) * $q + $c[5]) * $q + $c[6]) /
-                     (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
+                (((($d[1] * $q + $d[2]) * $q + $d[3]) * $q + $d[4]) * $q + 1);
         }
         //    If 0 < p < 1, return a null value
         return Functions::NULL();
     }
-
 
     private static function inverseNcdf2($prob)
     {
@@ -596,8 +581,8 @@ class Statistical
             }
         }
         return $z;
-    }    //    function inverseNcdf2()
-
+    }
+//    function inverseNcdf2()
 
     private static function inverseNcdf3($p)
     {
@@ -672,7 +657,7 @@ class Statistical
         if (abs($q) <= split1) {
             $R = $const1 - $q * $q;
             $z = $q * ((((((($a7 * $R + $a6) * $R + $a5) * $R + $a4) * $R + $a3) * $R + $a2) * $R + $a1) * $R + $a0) /
-                      ((((((($b7 * $R + $b6) * $R + $b5) * $R + $b4) * $R + $b3) * $R + $b2) * $R + $b1) * $R + 1);
+                ((((((($b7 * $R + $b6) * $R + $b5) * $R + $b4) * $R + $b3) * $R + $b2) * $R + $b1) * $R + 1);
         } else {
             if ($q < 0) {
                 $R = $p;
@@ -685,12 +670,12 @@ class Statistical
             if ($R <= $split2) {
                 $R = $R - $const2;
                 $z = ((((((($c7 * $R + $c6) * $R + $c5) * $R + $c4) * $R + $c3) * $R + $c2) * $R + $c1) * $R + $c0) /
-                     ((((((($d7 * $R + $d6) * $R + $d5) * $R + $d4) * $R + $d3) * $R + $d2) * $R + $d1) * $R + 1);
+                    ((((((($d7 * $R + $d6) * $R + $d5) * $R + $d4) * $R + $d3) * $R + $d2) * $R + $d1) * $R + 1);
             } else {
-            //    computation for p near 0 or 1.
+                //    computation for p near 0 or 1.
                 $R = $R - $split2;
                 $z = ((((((($e7 * $R + $e6) * $R + $e5) * $R + $e4) * $R + $e3) * $R + $e2) * $R + $e1) * $R + $e0) /
-                     ((((((($f7 * $R + $f6) * $R + $f5) * $R + $f4) * $R + $f3) * $R + $f2) * $R + $f1) * $R + 1);
+                    ((((((($f7 * $R + $f6) * $R + $f5) * $R + $f4) * $R + $f3) * $R + $f2) * $R + $f1) * $R + 1);
             }
             if ($q < 0) {
                 $z = -$z;
@@ -698,7 +683,6 @@ class Statistical
         }
         return $z;
     }
-
 
     /**
      * AVEDEV
@@ -749,7 +733,6 @@ class Statistical
         return Functions::NaN();
     }
 
-
     /**
      * AVERAGE
      *
@@ -792,7 +775,6 @@ class Statistical
         }
     }
 
-
     /**
      * AVERAGEA
      *
@@ -815,6 +797,7 @@ class Statistical
         foreach (Functions::flattenArrayIndexed(func_get_args()) as $k => $arg) {
             if ((is_bool($arg)) &&
                 (!Functions::isMatrixValue($k))) {
+
             } else {
                 if ((is_numeric($arg)) || (is_bool($arg)) || ((is_string($arg) && ($arg != '')))) {
                     if (is_bool($arg)) {
@@ -838,7 +821,6 @@ class Statistical
             return Functions::DIV0();
         }
     }
-
 
     /**
      * AVERAGEIF
@@ -886,7 +868,6 @@ class Statistical
         return Functions::DIV0();
     }
 
-
     /**
      * BETADIST
      *
@@ -903,9 +884,9 @@ class Statistical
     {
         $value = Functions::flattenSingleValue($value);
         $alpha = Functions::flattenSingleValue($alpha);
-        $beta  = Functions::flattenSingleValue($beta);
-        $rMin  = Functions::flattenSingleValue($rMin);
-        $rMax  = Functions::flattenSingleValue($rMax);
+        $beta = Functions::flattenSingleValue($beta);
+        $rMin = Functions::flattenSingleValue($rMin);
+        $rMax = Functions::flattenSingleValue($rMax);
 
         if ((is_numeric($value)) && (is_numeric($alpha)) && (is_numeric($beta)) && (is_numeric($rMin)) && (is_numeric($rMax))) {
             if (($value < $rMin) || ($value > $rMax) || ($alpha <= 0) || ($beta <= 0) || ($rMin == $rMax)) {
@@ -922,7 +903,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * BETAINV
@@ -941,10 +921,10 @@ class Statistical
     public static function BETAINV($probability, $alpha, $beta, $rMin = 0, $rMax = 1)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $alpha       = Functions::flattenSingleValue($alpha);
-        $beta        = Functions::flattenSingleValue($beta);
-        $rMin        = Functions::flattenSingleValue($rMin);
-        $rMax        = Functions::flattenSingleValue($rMax);
+        $alpha = Functions::flattenSingleValue($alpha);
+        $beta = Functions::flattenSingleValue($beta);
+        $rMin = Functions::flattenSingleValue($rMin);
+        $rMax = Functions::flattenSingleValue($rMax);
 
         if ((is_numeric($probability)) && (is_numeric($alpha)) && (is_numeric($beta)) && (is_numeric($rMin)) && (is_numeric($rMax))) {
             if (($alpha <= 0) || ($beta <= 0) || ($rMin == $rMax) || ($probability <= 0) || ($probability > 1)) {
@@ -978,7 +958,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * BINOMDIST
      *
@@ -999,8 +978,8 @@ class Statistical
      */
     public static function BINOMDIST($value, $trials, $probability, $cumulative)
     {
-        $value       = floor(Functions::flattenSingleValue($value));
-        $trials      = floor(Functions::flattenSingleValue($trials));
+        $value = floor(Functions::flattenSingleValue($value));
+        $trials = floor(Functions::flattenSingleValue($trials));
         $probability = Functions::flattenSingleValue($probability);
 
         if ((is_numeric($value)) && (is_numeric($trials)) && (is_numeric($probability))) {
@@ -1018,13 +997,12 @@ class Statistical
                     }
                     return $summer;
                 } else {
-                    return MathTrig::COMBIN($trials, $value) * pow($probability, $value) * pow(1 - $probability, $trials - $value) ;
+                    return MathTrig::COMBIN($trials, $value) * pow($probability, $value) * pow(1 - $probability, $trials - $value);
                 }
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * CHIDIST
@@ -1037,7 +1015,7 @@ class Statistical
      */
     public static function CHIDIST($value, $degrees)
     {
-        $value   = Functions::flattenSingleValue($value);
+        $value = Functions::flattenSingleValue($value);
         $degrees = floor(Functions::flattenSingleValue($degrees));
 
         if ((is_numeric($value)) && (is_numeric($degrees))) {
@@ -1050,11 +1028,10 @@ class Statistical
                 }
                 return Functions::NaN();
             }
-            return 1 - (self::incompleteGamma($degrees/2, $value/2) / self::gamma($degrees/2));
+            return 1 - (self::incompleteGamma($degrees / 2, $value / 2) / self::gamma($degrees / 2));
         }
         return Functions::VALUE();
     }
-
 
     /**
      * CHIINV
@@ -1068,14 +1045,14 @@ class Statistical
     public static function CHIINV($probability, $degrees)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $degrees     = floor(Functions::flattenSingleValue($degrees));
+        $degrees = floor(Functions::flattenSingleValue($degrees));
 
         if ((is_numeric($probability)) && (is_numeric($degrees))) {
             $xLo = 100;
             $xHi = 0;
 
             $x = $xNew = 1;
-            $dx    = 1;
+            $dx = 1;
             $i = 0;
 
             while ((abs($dx) > PRECISION) && ($i++ < MAX_ITERATIONS)) {
@@ -1111,7 +1088,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * CONFIDENCE
      *
@@ -1125,9 +1101,9 @@ class Statistical
      */
     public static function CONFIDENCE($alpha, $stdDev, $size)
     {
-        $alpha  = Functions::flattenSingleValue($alpha);
+        $alpha = Functions::flattenSingleValue($alpha);
         $stdDev = Functions::flattenSingleValue($stdDev);
-        $size   = floor(Functions::flattenSingleValue($size));
+        $size = floor(Functions::flattenSingleValue($size));
 
         if ((is_numeric($alpha)) && (is_numeric($stdDev)) && (is_numeric($size))) {
             if (($alpha <= 0) || ($alpha >= 1)) {
@@ -1140,7 +1116,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * CORREL
@@ -1168,10 +1143,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getCorrelation();
     }
-
 
     /**
      * COUNT
@@ -1206,7 +1180,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * COUNTA
      *
@@ -1236,7 +1209,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * COUNTBLANK
      *
@@ -1265,7 +1237,6 @@ class Statistical
 
         return $returnValue;
     }
-
 
     /**
      * COUNTIF
@@ -1302,7 +1273,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * COVAR
      *
@@ -1326,10 +1296,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getCovariance();
     }
-
 
     /**
      * CRITBINOM
@@ -1352,9 +1321,9 @@ class Statistical
      */
     public static function CRITBINOM($trials, $probability, $alpha)
     {
-        $trials      = floor(Functions::flattenSingleValue($trials));
+        $trials = floor(Functions::flattenSingleValue($trials));
         $probability = Functions::flattenSingleValue($probability);
-        $alpha       = Functions::flattenSingleValue($alpha);
+        $alpha = Functions::flattenSingleValue($alpha);
 
         if ((is_numeric($trials)) && (is_numeric($probability)) && (is_numeric($alpha))) {
             if ($trials < 0) {
@@ -1454,7 +1423,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * DEVSQ
      *
@@ -1505,7 +1473,6 @@ class Statistical
         return self::NA();
     }
 
-
     /**
      * EXPONDIST
      *
@@ -1520,9 +1487,9 @@ class Statistical
      */
     public static function EXPONDIST($value, $lambda, $cumulative)
     {
-        $value    = Functions::flattenSingleValue($value);
-        $lambda    = Functions::flattenSingleValue($lambda);
-        $cumulative    = Functions::flattenSingleValue($cumulative);
+        $value = Functions::flattenSingleValue($value);
+        $lambda = Functions::flattenSingleValue($lambda);
+        $cumulative = Functions::flattenSingleValue($cumulative);
 
         if ((is_numeric($value)) && (is_numeric($lambda))) {
             if (($value < 0) || ($lambda < 0)) {
@@ -1530,15 +1497,14 @@ class Statistical
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
-                    return 1 - exp(0-$value*$lambda);
+                    return 1 - exp(0 - $value * $lambda);
                 } else {
-                    return $lambda * exp(0-$value*$lambda);
+                    return $lambda * exp(0 - $value * $lambda);
                 }
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * FISHER
@@ -1552,17 +1518,16 @@ class Statistical
      */
     public static function FISHER($value)
     {
-        $value    = Functions::flattenSingleValue($value);
+        $value = Functions::flattenSingleValue($value);
 
         if (is_numeric($value)) {
             if (($value <= -1) || ($value >= 1)) {
                 return Functions::NaN();
             }
-            return 0.5 * log((1+$value)/(1-$value));
+            return 0.5 * log((1 + $value) / (1 - $value));
         }
         return Functions::VALUE();
     }
-
 
     /**
      * FISHERINV
@@ -1576,14 +1541,13 @@ class Statistical
      */
     public static function FISHERINV($value)
     {
-        $value    = Functions::flattenSingleValue($value);
+        $value = Functions::flattenSingleValue($value);
 
         if (is_numeric($value)) {
             return (exp(2 * $value) - 1) / (exp(2 * $value) + 1);
         }
         return Functions::VALUE();
     }
-
 
     /**
      * FORECAST
@@ -1597,7 +1561,7 @@ class Statistical
      */
     public static function FORECAST($xValue, $yValues, $xValues)
     {
-        $xValue    = Functions::flattenSingleValue($xValue);
+        $xValue = Functions::flattenSingleValue($xValue);
         if (!is_numeric($xValue)) {
             return Functions::VALUE();
         } elseif (!self::checkTrendArrays($yValues, $xValues)) {
@@ -1612,10 +1576,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getValueOfYForX($xValue);
     }
-
 
     /**
      * GAMMADIST
@@ -1632,8 +1595,8 @@ class Statistical
     public static function GAMMADIST($value, $a, $b, $cumulative)
     {
         $value = Functions::flattenSingleValue($value);
-        $a     = Functions::flattenSingleValue($a);
-        $b     = Functions::flattenSingleValue($b);
+        $a = Functions::flattenSingleValue($a);
+        $b = Functions::flattenSingleValue($b);
 
         if ((is_numeric($value)) && (is_numeric($a)) && (is_numeric($b))) {
             if (($value < 0) || ($a <= 0) || ($b <= 0)) {
@@ -1643,13 +1606,12 @@ class Statistical
                 if ($cumulative) {
                     return self::incompleteGamma($a, $value / $b) / self::gamma($a);
                 } else {
-                    return (1 / (pow($b, $a) * self::gamma($a))) * pow($value, $a-1) * exp(0-($value / $b));
+                    return (1 / (pow($b, $a) * self::gamma($a))) * pow($value, $a - 1) * exp(0 - ($value / $b));
                 }
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * GAMMAINV
@@ -1665,8 +1627,8 @@ class Statistical
     public static function GAMMAINV($probability, $alpha, $beta)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $alpha       = Functions::flattenSingleValue($alpha);
-        $beta        = Functions::flattenSingleValue($beta);
+        $alpha = Functions::flattenSingleValue($alpha);
+        $beta = Functions::flattenSingleValue($beta);
 
         if ((is_numeric($probability)) && (is_numeric($alpha)) && (is_numeric($beta))) {
             if (($alpha <= 0) || ($beta <= 0) || ($probability < 0) || ($probability > 1)) {
@@ -1678,7 +1640,7 @@ class Statistical
 
             $x = $xNew = 1;
             $error = $pdf = 0;
-            $dx    = 1024;
+            $dx = 1024;
             $i = 0;
 
             while ((abs($dx) > PRECISION) && ($i++ < MAX_ITERATIONS)) {
@@ -1712,7 +1674,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * GAMMALN
      *
@@ -1723,7 +1684,7 @@ class Statistical
      */
     public static function GAMMALN($value)
     {
-        $value    = Functions::flattenSingleValue($value);
+        $value = Functions::flattenSingleValue($value);
 
         if (is_numeric($value)) {
             if ($value <= 0) {
@@ -1733,7 +1694,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * GEOMEAN
@@ -1756,7 +1716,7 @@ class Statistical
 
         $aMean = MathTrig::PRODUCT($aArgs);
         if (is_numeric($aMean) && ($aMean > 0)) {
-            $aCount = self::COUNT($aArgs) ;
+            $aCount = self::COUNT($aArgs);
             if (self::MIN($aArgs) > 0) {
                 return pow($aMean, (1 / $aCount));
             }
@@ -1764,11 +1724,10 @@ class Statistical
         return Functions::NaN();
     }
 
-
     /**
      * GROWTH
      *
-     * Returns values along a predicted emponential trend
+     * Returns values along a predicted emponential Trend
      *
      * @param    array of mixed        Data Series Y
      * @param    array of mixed        Data Series X
@@ -1783,7 +1742,7 @@ class Statistical
         $newValues = Functions::flattenArray($newValues);
         $const = (is_null($const)) ? true : (boolean) Functions::flattenSingleValue($const);
 
-        $bestFitExponential = trendClass::calculate(trendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
+        $bestFitExponential = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_EXPONENTIAL, $yValues, $xValues, $const);
         if (empty($newValues)) {
             $newValues = $bestFitExponential->getXValues();
         }
@@ -1795,7 +1754,6 @@ class Statistical
 
         return $returnArray;
     }
-
 
     /**
      * HARMEAN
@@ -1845,7 +1803,6 @@ class Statistical
         }
     }
 
-
     /**
      * HYPGEOMDIST
      *
@@ -1861,10 +1818,10 @@ class Statistical
      */
     public static function HYPGEOMDIST($sampleSuccesses, $sampleNumber, $populationSuccesses, $populationNumber)
     {
-        $sampleSuccesses     = floor(Functions::flattenSingleValue($sampleSuccesses));
-        $sampleNumber        = floor(Functions::flattenSingleValue($sampleNumber));
+        $sampleSuccesses = floor(Functions::flattenSingleValue($sampleSuccesses));
+        $sampleNumber = floor(Functions::flattenSingleValue($sampleNumber));
         $populationSuccesses = floor(Functions::flattenSingleValue($populationSuccesses));
-        $populationNumber    = floor(Functions::flattenSingleValue($populationNumber));
+        $populationNumber = floor(Functions::flattenSingleValue($populationNumber));
 
         if ((is_numeric($sampleSuccesses)) && (is_numeric($sampleNumber)) && (is_numeric($populationSuccesses)) && (is_numeric($populationNumber))) {
             if (($sampleSuccesses < 0) || ($sampleSuccesses > $sampleNumber) || ($sampleSuccesses > $populationSuccesses)) {
@@ -1877,12 +1834,11 @@ class Statistical
                 return Functions::NaN();
             }
             return MathTrig::COMBIN($populationSuccesses, $sampleSuccesses) *
-                   MathTrig::COMBIN($populationNumber - $populationSuccesses, $sampleNumber - $sampleSuccesses) /
-                   MathTrig::COMBIN($populationNumber, $sampleNumber);
+                MathTrig::COMBIN($populationNumber - $populationSuccesses, $sampleNumber - $sampleSuccesses) /
+                MathTrig::COMBIN($populationNumber, $sampleNumber);
         }
         return Functions::VALUE();
     }
-
 
     /**
      * INTERCEPT
@@ -1907,10 +1863,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getIntersect();
     }
-
 
     /**
      * KURT
@@ -1935,6 +1890,7 @@ class Statistical
             foreach ($aArgs as $k => $arg) {
                 if ((is_bool($arg)) &&
                     (!Functions::isMatrixValue($k))) {
+
                 } else {
                     // Is it a numeric value?
                     if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -1946,12 +1902,11 @@ class Statistical
 
             // Return
             if ($count > 3) {
-                return $summer * ($count * ($count+1) / (($count-1) * ($count-2) * ($count-3))) - (3 * pow($count-1, 2) / (($count-2) * ($count-3)));
+                return $summer * ($count * ($count + 1) / (($count - 1) * ($count - 2) * ($count - 3))) - (3 * pow($count - 1, 2) / (($count - 2) * ($count - 3)));
             }
         }
         return Functions::DIV0();
     }
-
 
     /**
      * LARGE
@@ -1985,7 +1940,7 @@ class Statistical
                 }
             }
             $count = self::COUNT($mArgs);
-            $entry = floor(--$entry);
+            $entry = floor( --$entry);
             if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
                 return Functions::NaN();
             }
@@ -1994,7 +1949,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * LINEST
@@ -2029,7 +1983,7 @@ class Statistical
             return 0;
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues, $const);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues, $const);
         if ($stats) {
             return array(
                 array(
@@ -2054,7 +2008,6 @@ class Statistical
             );
         }
     }
-
 
     /**
      * LOGEST
@@ -2095,7 +2048,7 @@ class Statistical
             return 1;
         }
 
-        $bestFitExponential = trendClass::calculate(trendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
+        $bestFitExponential = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_EXPONENTIAL, $yValues, $xValues, $const);
         if ($stats) {
             return array(
                 array(
@@ -2121,7 +2074,6 @@ class Statistical
         }
     }
 
-
     /**
      * LOGINV
      *
@@ -2139,8 +2091,8 @@ class Statistical
     public static function LOGINV($probability, $mean, $stdDev)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $mean        = Functions::flattenSingleValue($mean);
-        $stdDev      = Functions::flattenSingleValue($stdDev);
+        $mean = Functions::flattenSingleValue($mean);
+        $stdDev = Functions::flattenSingleValue($stdDev);
 
         if ((is_numeric($probability)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if (($probability < 0) || ($probability > 1) || ($stdDev <= 0)) {
@@ -2150,7 +2102,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * LOGNORMDIST
@@ -2165,8 +2116,8 @@ class Statistical
      */
     public static function LOGNORMDIST($value, $mean, $stdDev)
     {
-        $value  = Functions::flattenSingleValue($value);
-        $mean   = Functions::flattenSingleValue($mean);
+        $value = Functions::flattenSingleValue($value);
+        $mean = Functions::flattenSingleValue($mean);
         $stdDev = Functions::flattenSingleValue($stdDev);
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
@@ -2177,7 +2128,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * MAX
@@ -2213,7 +2163,6 @@ class Statistical
         }
         return $returnValue;
     }
-
 
     /**
      * MAXA
@@ -2253,7 +2202,6 @@ class Statistical
         }
         return $returnValue;
     }
-
 
     /**
      * MAXIF
@@ -2337,7 +2285,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * MIN
      *
@@ -2372,7 +2319,6 @@ class Statistical
         }
         return $returnValue;
     }
-
 
     /**
      * MINA
@@ -2412,7 +2358,6 @@ class Statistical
         }
         return $returnValue;
     }
-
 
     /**
      * MINIF
@@ -2454,7 +2399,6 @@ class Statistical
         return $returnValue;
     }
 
-
     //
     //    Special variant of array_count_values that isn't limited to strings and integers,
     //        but can work with floating point numbers as values
@@ -2473,7 +2417,7 @@ class Statistical
             }
             if (!$found) {
                 $frequencyArray[] = array(
-                    'value'     => $datum,
+                    'value' => $datum,
                     'frequency' => 1
                 );
             }
@@ -2490,7 +2434,6 @@ class Statistical
         }
         return $frequencyArray[0]['value'];
     }
-
 
     /**
      * MODE
@@ -2527,7 +2470,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * NEGBINOMDIST
      *
@@ -2545,8 +2487,8 @@ class Statistical
      */
     public static function NEGBINOMDIST($failures, $successes, $probability)
     {
-        $failures    = floor(Functions::flattenSingleValue($failures));
-        $successes   = floor(Functions::flattenSingleValue($successes));
+        $failures = floor(Functions::flattenSingleValue($failures));
+        $successes = floor(Functions::flattenSingleValue($successes));
         $probability = Functions::flattenSingleValue($probability);
 
         if ((is_numeric($failures)) && (is_numeric($successes)) && (is_numeric($probability))) {
@@ -2565,7 +2507,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * NORMDIST
      *
@@ -2582,8 +2523,8 @@ class Statistical
      */
     public static function NORMDIST($value, $mean, $stdDev, $cumulative)
     {
-        $value  = Functions::flattenSingleValue($value);
-        $mean   = Functions::flattenSingleValue($mean);
+        $value = Functions::flattenSingleValue($value);
+        $mean = Functions::flattenSingleValue($mean);
         $stdDev = Functions::flattenSingleValue($stdDev);
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
@@ -2601,7 +2542,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * NORMINV
      *
@@ -2616,8 +2556,8 @@ class Statistical
     public static function NORMINV($probability, $mean, $stdDev)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $mean        = Functions::flattenSingleValue($mean);
-        $stdDev      = Functions::flattenSingleValue($stdDev);
+        $mean = Functions::flattenSingleValue($mean);
+        $stdDev = Functions::flattenSingleValue($stdDev);
 
         if ((is_numeric($probability)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if (($probability < 0) || ($probability > 1)) {
@@ -2630,7 +2570,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * NORMSDIST
@@ -2649,7 +2588,6 @@ class Statistical
         return self::NORMDIST($value, 0, 1, true);
     }
 
-
     /**
      * NORMSINV
      *
@@ -2662,7 +2600,6 @@ class Statistical
     {
         return self::NORMINV($value, 0, 1);
     }
-
 
     /**
      * PERCENTILE
@@ -2700,20 +2637,19 @@ class Statistical
             if ($mValueCount > 0) {
                 sort($mArgs);
                 $count = self::COUNT($mArgs);
-                $index = $entry * ($count-1);
+                $index = $entry * ($count - 1);
                 $iBase = floor($index);
                 if ($index == $iBase) {
                     return $mArgs[$index];
                 } else {
                     $iNext = $iBase + 1;
                     $iProportion = $index - $iBase;
-                    return $mArgs[$iBase] + (($mArgs[$iNext] - $mArgs[$iBase]) * $iProportion) ;
+                    return $mArgs[$iBase] + (($mArgs[$iNext] - $mArgs[$iBase]) * $iProportion);
                 }
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * PERCENTRANK
@@ -2727,8 +2663,8 @@ class Statistical
      */
     public static function PERCENTRANK($valueSet, $value, $significance = 3)
     {
-        $valueSet     = Functions::flattenArray($valueSet);
-        $value        = Functions::flattenSingleValue($value);
+        $valueSet = Functions::flattenArray($valueSet);
+        $value = Functions::flattenSingleValue($value);
         $significance = (is_null($significance)) ? 3 : (integer) Functions::flattenSingleValue($significance);
 
         foreach ($valueSet as $key => $valueEntry) {
@@ -2761,7 +2697,6 @@ class Statistical
         return round($pos / $valueAdjustor, $significance);
     }
 
-
     /**
      * PERMUT
      *
@@ -2777,7 +2712,7 @@ class Statistical
      */
     public static function PERMUT($numObjs, $numInSet)
     {
-        $numObjs  = Functions::flattenSingleValue($numObjs);
+        $numObjs = Functions::flattenSingleValue($numObjs);
         $numInSet = Functions::flattenSingleValue($numInSet);
 
         if ((is_numeric($numObjs)) && (is_numeric($numInSet))) {
@@ -2789,7 +2724,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * POISSON
@@ -2807,7 +2741,7 @@ class Statistical
     public static function POISSON($value, $mean, $cumulative)
     {
         $value = Functions::flattenSingleValue($value);
-        $mean  = Functions::flattenSingleValue($mean);
+        $mean = Functions::flattenSingleValue($mean);
 
         if ((is_numeric($value)) && (is_numeric($mean))) {
             if (($value < 0) || ($mean <= 0)) {
@@ -2819,15 +2753,14 @@ class Statistical
                     for ($i = 0; $i <= floor($value); ++$i) {
                         $summer += pow($mean, $i) / MathTrig::FACT($i);
                     }
-                    return exp(0-$mean) * $summer;
+                    return exp(0 - $mean) * $summer;
                 } else {
-                    return (exp(0-$mean) * pow($mean, $value)) / MathTrig::FACT($value);
+                    return (exp(0 - $mean) * pow($mean, $value)) / MathTrig::FACT($value);
                 }
             }
         }
         return Functions::VALUE();
     }
-
 
     /**
      * QUARTILE
@@ -2859,7 +2792,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * RANK
@@ -2896,7 +2828,6 @@ class Statistical
         return ++$pos;
     }
 
-
     /**
      * RSQ
      *
@@ -2920,10 +2851,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getGoodnessOfFit();
     }
-
 
     /**
      * SKEW
@@ -2947,6 +2877,7 @@ class Statistical
         foreach ($aArgs as $k => $arg) {
             if ((is_bool($arg)) &&
                 (!Functions::isMatrixValue($k))) {
+
             } else {
                 // Is it a numeric value?
                 if ((is_numeric($arg)) && (!is_string($arg))) {
@@ -2957,11 +2888,10 @@ class Statistical
         }
 
         if ($count > 2) {
-            return $summer * ($count / (($count-1) * ($count-2)));
+            return $summer * ($count / (($count - 1) * ($count - 2)));
         }
         return Functions::DIV0();
     }
-
 
     /**
      * SLOPE
@@ -2986,10 +2916,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getSlope();
     }
-
 
     /**
      * SMALL
@@ -3022,7 +2951,7 @@ class Statistical
                 }
             }
             $count = self::COUNT($mArgs);
-            $entry = floor(--$entry);
+            $entry = floor( --$entry);
             if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
                 return Functions::NaN();
             }
@@ -3031,7 +2960,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * STANDARDIZE
@@ -3045,19 +2973,18 @@ class Statistical
      */
     public static function STANDARDIZE($value, $mean, $stdDev)
     {
-        $value  = Functions::flattenSingleValue($value);
-        $mean   = Functions::flattenSingleValue($mean);
+        $value = Functions::flattenSingleValue($value);
+        $mean = Functions::flattenSingleValue($mean);
         $stdDev = Functions::flattenSingleValue($stdDev);
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if ($stdDev <= 0) {
                 return Functions::NaN();
             }
-            return ($value - $mean) / $stdDev ;
+            return ($value - $mean) / $stdDev;
         }
         return Functions::VALUE();
     }
-
 
     /**
      * STDEV
@@ -3107,7 +3034,6 @@ class Statistical
         return Functions::DIV0();
     }
 
-
     /**
      * STDEVA
      *
@@ -3133,6 +3059,7 @@ class Statistical
             foreach ($aArgs as $k => $arg) {
                 if ((is_bool($arg)) &&
                     (!Functions::isMatrixValue($k))) {
+
                 } else {
                     // Is it a numeric value?
                     if ((is_numeric($arg)) || (is_bool($arg)) || ((is_string($arg) & ($arg != '')))) {
@@ -3157,7 +3084,6 @@ class Statistical
         }
         return Functions::DIV0();
     }
-
 
     /**
      * STDEVP
@@ -3204,7 +3130,6 @@ class Statistical
         return Functions::DIV0();
     }
 
-
     /**
      * STDEVPA
      *
@@ -3230,6 +3155,7 @@ class Statistical
             foreach ($aArgs as $k => $arg) {
                 if ((is_bool($arg)) &&
                     (!Functions::isMatrixValue($k))) {
+
                 } else {
                     // Is it a numeric value?
                     if ((is_numeric($arg)) || (is_bool($arg)) || ((is_string($arg) & ($arg != '')))) {
@@ -3255,7 +3181,6 @@ class Statistical
         return Functions::DIV0();
     }
 
-
     /**
      * STEYX
      *
@@ -3279,10 +3204,9 @@ class Statistical
             return Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getStdevOfResiduals();
     }
-
 
     /**
      * TDIST
@@ -3296,9 +3220,9 @@ class Statistical
      */
     public static function TDIST($value, $degrees, $tails)
     {
-        $value        = Functions::flattenSingleValue($value);
-        $degrees    = floor(Functions::flattenSingleValue($degrees));
-        $tails        = floor(Functions::flattenSingleValue($tails));
+        $value = Functions::flattenSingleValue($value);
+        $degrees = floor(Functions::flattenSingleValue($degrees));
+        $tails = floor(Functions::flattenSingleValue($tails));
 
         if ((is_numeric($value)) && (is_numeric($degrees)) && (is_numeric($tails))) {
             if (($value < 0) || ($degrees < 1) || ($tails < 1) || ($tails > 2)) {
@@ -3347,7 +3271,6 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * TINV
      *
@@ -3360,14 +3283,14 @@ class Statistical
     public static function TINV($probability, $degrees)
     {
         $probability = Functions::flattenSingleValue($probability);
-        $degrees     = floor(Functions::flattenSingleValue($degrees));
+        $degrees = floor(Functions::flattenSingleValue($degrees));
 
         if ((is_numeric($probability)) && (is_numeric($degrees))) {
             $xLo = 100;
             $xHi = 0;
 
             $x = $xNew = 1;
-            $dx    = 1;
+            $dx = 1;
             $i = 0;
 
             while ((abs($dx) > PRECISION) && ($i++ < MAX_ITERATIONS)) {
@@ -3403,11 +3326,10 @@ class Statistical
         return Functions::VALUE();
     }
 
-
     /**
      * TREND
      *
-     * Returns values along a linear trend
+     * Returns values along a linear Trend
      *
      * @param    array of mixed        Data Series Y
      * @param    array of mixed        Data Series X
@@ -3422,7 +3344,7 @@ class Statistical
         $newValues = Functions::flattenArray($newValues);
         $const = (is_null($const)) ? true : (boolean) Functions::flattenSingleValue($const);
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues, $const);
+        $bestFitLinear = \PhpOffice\PhpExcel\Shared\trend\trend::calculate(\PhpOffice\PhpExcel\Shared\trend\trend::TREND_LINEAR, $yValues, $xValues, $const);
         if (empty($newValues)) {
             $newValues = $bestFitLinear->getXValues();
         }
@@ -3434,7 +3356,6 @@ class Statistical
 
         return $returnArray;
     }
-
 
     /**
      * TRIMMEAN
@@ -3472,7 +3393,7 @@ class Statistical
             }
             $discard = floor(self::COUNT($mArgs) * $percent / 2);
             sort($mArgs);
-            for ($i=0; $i < $discard; ++$i) {
+            for ($i = 0; $i < $discard; ++$i) {
                 array_pop($mArgs);
                 array_shift($mArgs);
             }
@@ -3480,7 +3401,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * VARFunc
@@ -3524,7 +3444,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * VARA
      *
@@ -3553,6 +3472,7 @@ class Statistical
                 return Functions::VALUE();
             } elseif ((is_string($arg)) &&
                 (!Functions::isMatrixValue($k))) {
+
             } else {
                 // Is it a numeric value?
                 if ((is_numeric($arg)) || (is_bool($arg)) || ((is_string($arg) & ($arg != '')))) {
@@ -3575,7 +3495,6 @@ class Statistical
         }
         return $returnValue;
     }
-
 
     /**
      * VARP
@@ -3620,7 +3539,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * VARPA
      *
@@ -3649,6 +3567,7 @@ class Statistical
                 return Functions::VALUE();
             } elseif ((is_string($arg)) &&
                 (!Functions::isMatrixValue($k))) {
+
             } else {
                 // Is it a numeric value?
                 if ((is_numeric($arg)) || (is_bool($arg)) || ((is_string($arg) & ($arg != '')))) {
@@ -3672,7 +3591,6 @@ class Statistical
         return $returnValue;
     }
 
-
     /**
      * WEIBULL
      *
@@ -3690,7 +3608,7 @@ class Statistical
     {
         $value = Functions::flattenSingleValue($value);
         $alpha = Functions::flattenSingleValue($alpha);
-        $beta  = Functions::flattenSingleValue($beta);
+        $beta = Functions::flattenSingleValue($beta);
 
         if ((is_numeric($value)) && (is_numeric($alpha)) && (is_numeric($beta))) {
             if (($value < 0) || ($alpha <= 0) || ($beta <= 0)) {
@@ -3706,7 +3624,6 @@ class Statistical
         }
         return Functions::VALUE();
     }
-
 
     /**
      * ZTEST
@@ -3724,8 +3641,8 @@ class Statistical
     public static function ZTEST($dataSet, $m0, $sigma = null)
     {
         $dataSet = Functions::flattenArrayIndexed($dataSet);
-        $m0      = Functions::flattenSingleValue($m0);
-        $sigma   = Functions::flattenSingleValue($sigma);
+        $m0 = Functions::flattenSingleValue($m0);
+        $sigma = Functions::flattenSingleValue($sigma);
 
         if (is_null($sigma)) {
             $sigma = self::STDEV($dataSet);

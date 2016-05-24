@@ -327,7 +327,7 @@ class AutoFilter
         }
 
         if (is_numeric($cellValue)) {
-            $dateValue = \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($cellValue);
+            $dateValue = \PhpOffice\PhpExcel\Shared\Date::excelToPHP($cellValue);
             if ($cellValue < 1) {
                 //    Just the time part
                 $dtVal = date('His', $dateValue);
@@ -444,7 +444,7 @@ class AutoFilter
         }
 
         if (is_numeric($cellValue)) {
-            $dateValue = date('m', \PhpOffice\PhpExcel\Shared\Date::ExcelToPHP($cellValue));
+            $dateValue = date('m', \PhpOffice\PhpExcel\Shared\Date::excelToPHP($cellValue));
             if (in_array($dateValue, $monthSet)) {
                 return true;
             }
