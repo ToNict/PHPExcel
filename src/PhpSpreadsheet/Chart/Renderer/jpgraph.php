@@ -5,9 +5,9 @@ namespace PhpOffice\PhpExcel\Chart\Renderer;
 require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'/jpgraph.php';
 
 /**
- * PhpOffice\PhpExcel\Chart\Renderer\jpgraph.
+ * PHPExcel_Chart_Renderer_jpgraph.
  *
- * Copyright (c) 2006 - 2016 PHPExcel
+ * Copyright (c) 2006 - 2015 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,25 +25,22 @@ require_once \PhpOffice\PhpExcel\Settings::getChartRendererPath().'/jpgraph.php'
  *
  * @category    PHPExcel
  *
- * @copyright   Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
- * @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
+ * @copyright    Copyright (c) 2006 - 2015 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @license        http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  *
- * @version     ##VERSION##, ##DATE##
+ * @version        ##VERSION##, ##DATE##
  */
-class jpgraph
+class JpGraph
 {
     private static $width = 640;
-
     private static $height = 480;
-
     private static $colourSet = [
-        'mediumpurple1',    'palegreen3',     'gold1',          'cadetblue1',
-        'darkmagenta',      'coral',          'dodgerblue3',    'eggplant',
-        'mediumblue',       'magenta',        'sandybrown',     'cyan',
-        'firebrick1',       'forestgreen',    'deeppink4',      'darkolivegreen',
+        'mediumpurple1', 'palegreen3', 'gold1', 'cadetblue1',
+        'darkmagenta', 'coral', 'dodgerblue3', 'eggplant',
+        'mediumblue', 'magenta', 'sandybrown', 'cyan',
+        'firebrick1', 'forestgreen', 'deeppink4', 'darkolivegreen',
         'goldenrod2',
     ];
-
     private static $markSet = [
         'diamond' => MARK_DIAMOND,
         'square' => MARK_SQUARE,
@@ -55,13 +52,9 @@ class jpgraph
         'circle' => MARK_CIRCLE,
         'plus' => MARK_CROSS,
     ];
-
     private $chart;
-
     private $graph;
-
     private static $plotColour = 0;
-
     private static $plotMark = 0;
 
     private function formatPointMarker($seriesPlot, $markerID)
@@ -728,19 +721,19 @@ class jpgraph
             switch ($chartType) {
                 case 'area3DChart':
                     $dimensions = '3d';
-                    // no break
+                // no break
                 case 'areaChart':
                     $this->renderPlotLine($i, true, true, $dimensions);
                     break;
                 case 'bar3DChart':
                     $dimensions = '3d';
-                    // no break
+                // no break
                 case 'barChart':
                     $this->renderPlotBar($i, $dimensions);
                     break;
                 case 'line3DChart':
                     $dimensions = '3d';
-                    // no break
+                // no break
                 case 'lineChart':
                     $this->renderPlotLine($i, false, true, $dimensions);
                     break;
@@ -793,31 +786,31 @@ class jpgraph
         switch ($chartType) {
             case 'area3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'areaChart':
                 $this->renderAreaChart($groupCount, $dimensions);
                 break;
             case 'bar3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'barChart':
                 $this->renderBarChart($groupCount, $dimensions);
                 break;
             case 'line3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'lineChart':
                 $this->renderLineChart($groupCount, $dimensions);
                 break;
             case 'pie3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'pieChart':
                 $this->renderPieChart($groupCount, $dimensions, false, false);
                 break;
             case 'doughnut3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'doughnutChart':
                 $this->renderPieChart($groupCount, $dimensions, true, true);
                 break;
@@ -832,7 +825,7 @@ class jpgraph
                 break;
             case 'surface3DChart':
                 $dimensions = '3d';
-                // no break
+            // no break
             case 'surfaceChart':
                 $this->renderContourChart($groupCount, $dimensions);
                 break;

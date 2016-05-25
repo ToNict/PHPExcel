@@ -36,7 +36,7 @@ if (file_exists($pdfRendererClassFile)) {
  *
  *  @version     ##VERSION##, ##DATE##
  */
-class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
+class MPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 {
     /**
      *  Create a mPDF Writer instance.
@@ -61,16 +61,13 @@ class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 
         //  Default PDF paper size
         $paperSize = 'LETTER';    //    Letter    (8.5 in. by 11 in.)
-
         //  Check for paper size and page orientation
         if (is_null($this->getSheetIndex())) {
-            $orientation = ($this->phpExcel->getSheet(0)->getPageSetup()->getOrientation()
-                == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_LANDSCAPE) ? 'L' : 'P';
+            $orientation = ($this->phpExcel->getSheet(0)->getPageSetup()->getOrientation() == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_LANDSCAPE) ? 'L' : 'P';
             $printPaperSize = $this->phpExcel->getSheet(0)->getPageSetup()->getPaperSize();
             $printMargins = $this->phpExcel->getSheet(0)->getPageMargins();
         } else {
-            $orientation = ($this->phpExcel->getSheet($this->getSheetIndex())->getPageSetup()->getOrientation()
-                == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_LANDSCAPE) ? 'L' : 'P';
+            $orientation = ($this->phpExcel->getSheet($this->getSheetIndex())->getPageSetup()->getOrientation() == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_LANDSCAPE) ? 'L' : 'P';
             $printPaperSize = $this->phpExcel->getSheet($this->getSheetIndex())->getPageSetup()->getPaperSize();
             $printMargins = $this->phpExcel->getSheet($this->getSheetIndex())->getPageMargins();
         }
@@ -78,9 +75,7 @@ class mPDF extends Core implements \PhpOffice\PhpExcel\Writer\IWriter
 
         //  Override Page Orientation
         if (!is_null($this->getOrientation())) {
-            $orientation = ($this->getOrientation() == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_DEFAULT)
-                ? \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_PORTRAIT
-                : $this->getOrientation();
+            $orientation = ($this->getOrientation() == \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_DEFAULT) ? \PhpOffice\PhpExcel\Worksheet\PageSetup::ORIENTATION_PORTRAIT : $this->getOrientation();
         }
         $orientation = strtoupper($orientation);
 
