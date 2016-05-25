@@ -324,7 +324,7 @@ class Database
         // Return
         $colData = self::getFilteredColumn($database, $field, $criteria);
         if (count($colData) > 1) {
-            return Functions::NaN();
+            return Functions::NAN();
         }
 
         return $colData[0];

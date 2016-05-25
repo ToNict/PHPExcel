@@ -557,16 +557,16 @@ class Matrix
                     $value = $M->get($i, $j);
                     if ((is_string($this->A[$i][$j])) && (strlen($this->A[$i][$j]) > 0) && (!is_numeric($this->A[$i][$j]))) {
                         $this->A[$i][$j] = trim($this->A[$i][$j], '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($this->A[$i][$j]);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($this->A[$i][$j]);
                     }
                     if ((is_string($value)) && (strlen($value) > 0) && (!is_numeric($value))) {
                         $value = trim($value, '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($value);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($value);
                     }
                     if ($validValues) {
                         $this->A[$i][$j] += $value;
                     } else {
-                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NaN();
+                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NAN();
                     }
                 }
             }
@@ -657,16 +657,16 @@ class Matrix
                     $value = $M->get($i, $j);
                     if ((is_string($this->A[$i][$j])) && (strlen($this->A[$i][$j]) > 0) && (!is_numeric($this->A[$i][$j]))) {
                         $this->A[$i][$j] = trim($this->A[$i][$j], '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($this->A[$i][$j]);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($this->A[$i][$j]);
                     }
                     if ((is_string($value)) && (strlen($value) > 0) && (!is_numeric($value))) {
                         $value = trim($value, '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($value);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($value);
                     }
                     if ($validValues) {
                         $this->A[$i][$j] -= $value;
                     } else {
-                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NaN();
+                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NAN();
                     }
                 }
             }
@@ -759,16 +759,16 @@ class Matrix
                     $value = $M->get($i, $j);
                     if ((is_string($this->A[$i][$j])) && (strlen($this->A[$i][$j]) > 0) && (!is_numeric($this->A[$i][$j]))) {
                         $this->A[$i][$j] = trim($this->A[$i][$j], '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($this->A[$i][$j]);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($this->A[$i][$j]);
                     }
                     if ((is_string($value)) && (strlen($value) > 0) && (!is_numeric($value))) {
                         $value = trim($value, '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($value);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($value);
                     }
                     if ($validValues) {
                         $this->A[$i][$j] *= $value;
                     } else {
-                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NaN();
+                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NAN();
                     }
                 }
             }
@@ -817,11 +817,11 @@ class Matrix
                     $value = $M->get($i, $j);
                     if ((is_string($this->A[$i][$j])) && (strlen($this->A[$i][$j]) > 0) && (!is_numeric($this->A[$i][$j]))) {
                         $this->A[$i][$j] = trim($this->A[$i][$j], '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($this->A[$i][$j]);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($this->A[$i][$j]);
                     }
                     if ((is_string($value)) && (strlen($value) > 0) && (!is_numeric($value))) {
                         $value = trim($value, '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($value);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($value);
                     }
                     if ($validValues) {
                         if ($value == 0) {
@@ -831,7 +831,7 @@ class Matrix
                             $M->set($i, $j, $this->A[$i][$j] / $value);
                         }
                     } else {
-                        $M->set($i, $j, \PhpOffice\PhpExcel\Calculation\Functions::NaN());
+                        $M->set($i, $j, \PhpOffice\PhpExcel\Calculation\Functions::NAN());
                     }
                 }
             }
@@ -1114,16 +1114,16 @@ class Matrix
                     $value = $M->get($i, $j);
                     if ((is_string($this->A[$i][$j])) && (strlen($this->A[$i][$j]) > 0) && (!is_numeric($this->A[$i][$j]))) {
                         $this->A[$i][$j] = trim($this->A[$i][$j], '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($this->A[$i][$j]);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($this->A[$i][$j]);
                     }
                     if ((is_string($value)) && (strlen($value) > 0) && (!is_numeric($value))) {
                         $value = trim($value, '"');
-                        $validValues &= \PhpOffice\PhpExcel\Shared\String::convertToNumberIfFraction($value);
+                        $validValues &= \PhpOffice\PhpExcel\Shared\StringHelper::convertToNumberIfFraction($value);
                     }
                     if ($validValues) {
                         $this->A[$i][$j] = pow($this->A[$i][$j], $value);
                     } else {
-                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NaN();
+                        $this->A[$i][$j] = \PhpOffice\PhpExcel\Calculation\Functions::NAN();
                     }
                 }
             }

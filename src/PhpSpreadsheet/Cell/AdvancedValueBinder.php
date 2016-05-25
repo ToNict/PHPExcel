@@ -42,7 +42,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
     {
         // sanitize UTF-8 strings
         if (is_string($value)) {
-            $value = \PhpOffice\PhpExcel\Shared\String::SanitizeUTF8($value);
+            $value = \PhpOffice\PhpExcel\Shared\StringHelper::sanitizeUTF8($value);
         }
 
         // Find out data type
@@ -108,9 +108,9 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
             }
 
             // Check for currency
-            $currencyCode = \PhpOffice\PhpExcel\Shared\String::getCurrencyCode();
-            $decimalSeparator = \PhpOffice\PhpExcel\Shared\String::getDecimalSeparator();
-            $thousandsSeparator = \PhpOffice\PhpExcel\Shared\String::getThousandsSeparator();
+            $currencyCode = \PhpOffice\PhpExcel\Shared\StringHelper::getCurrencyCode();
+            $decimalSeparator = \PhpOffice\PhpExcel\Shared\StringHelper::getDecimalSeparator();
+            $thousandsSeparator = \PhpOffice\PhpExcel\Shared\StringHelper::getThousandsSeparator();
             if (preg_match('/^'.preg_quote($currencyCode).' *(\d{1,3}('.preg_quote($thousandsSeparator).'\d{3})*|(\d+))('.preg_quote($decimalSeparator).'\d{2})?$/', $value)) {
                 // Convert value to number
                 $value = (float) trim(str_replace(array($currencyCode, $thousandsSeparator, $decimalSeparator), array('', '', '.'), $value));
@@ -178,7 +178,7 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
 
             // Check for newline character "\n"
             if (strpos($value, "\n") !== false) {
-                $value = \PhpOffice\PhpExcel\Shared\String::SanitizeUTF8($value);
+                $value = \PhpOffice\PhpExcel\Shared\StringHelper::sanitizeUTF8($value);
                 $cell->setValueExplicit($value, DataType::TYPE_STRING);
                 // Set style
                 $cell->getWorksheet()->getStyle($cell->getCoordinate())

@@ -2,6 +2,11 @@
 
 namespace PhpOffice\PhpExcel\Writer;
 
+use PhpOffice\PhpExcel\Calculation;
+use PhpOffice\PhpExcel\Shared\Font;
+use PhpOffice\PhpExcel\Shared\StringHelper;
+use PhpOffice\PhpExcel\Spreadsheet;
+
 /**
  * PhpOffice\PhpExcel\Writer\HTML.
  *
@@ -133,7 +138,7 @@ class HTML extends BaseWriter implements IWriter
      *
      * @param PHPExcel $phpExcel PHPExcel object
      */
-    public function __construct(\PhpOffice\PhpExcel\Spreadsheet $phpExcel)
+    public function __construct(Spreadsheet $phpExcel)
     {
         $this->phpExcel = $phpExcel;
         $this->defaultFont = $this->phpExcel->getDefaultStyle()->getFont();
@@ -151,10 +156,10 @@ class HTML extends BaseWriter implements IWriter
         // garbage collect
         $this->phpExcel->garbageCollect();
 
-        $saveDebugLog = \PhpOffice\PhpExcel\Calculation::getInstance($this->phpExcel)->getDebugLog()->getWriteDebugLog();
-        \PhpOffice\PhpExcel\Calculation::getInstance($this->phpExcel)->getDebugLog()->setWriteDebugLog(false);
-        $saveArrayReturnType = \PhpOffice\PhpExcel\Calculation::getArrayReturnType();
-        \PhpOffice\PhpExcel\Calculation::setArrayReturnType(\PhpOffice\PhpExcel\Calculation::RETURN_ARRAY_AS_VALUE);
+        $saveDebugLog = Calculation::getInstance($this->phpExcel)->getDebugLog()->getWriteDebugLog();
+        Calculation::getInstance($this->phpExcel)->getDebugLog()->setWriteDebugLog(false);
+        $saveArrayReturnType = Calculation::getArrayReturnType();
+        Calculation::setArrayReturnType(Calculation::RETURN_ARRAY_AS_VALUE);
 
         // Build CSS
         $this->buildCSS(!$this->useInlineCss);
@@ -182,8 +187,8 @@ class HTML extends BaseWriter implements IWriter
         // Close file
         fclose($fileHandle);
 
-        \PhpOffice\PhpExcel\Calculation::setArrayReturnType($saveArrayReturnType);
-        \PhpOffice\PhpExcel\Calculation::getInstance($this->phpExcel)->getDebugLog()->setWriteDebugLog($saveDebugLog);
+        Calculation::setArrayReturnType($saveArrayReturnType);
+        Calculation::getInstance($this->phpExcel)->getDebugLog()->setWriteDebugLog($saveDebugLog);
     }
 
     /**
@@ -906,7 +911,7 @@ class HTML extends BaseWriter implements IWriter
             $css['table.sheet'.$sheetIndex.' tr'] = array();
 
             if ($rowDimension->getRowHeight() == -1) {
-                $pt_height = \PhpOffice\PhpExcel\Shared\Font::getDefaultRowHeightByFont($this->phpExcel->getDefaultStyle()->getFont());
+                $pt_height = Font::getDefaultRowHeightByFont($this->phpExcel->getDefaultStyle()->getFont());
             } else {
                 $pt_height = $rowDimension->getRowHeight();
             }
@@ -924,7 +929,7 @@ class HTML extends BaseWriter implements IWriter
                 $css['table.sheet'.$sheetIndex.' tr.row'.$row] = array();
 
                 if ($rowDimension->getRowHeight() == -1) {
-                    $pt_height = \PhpOffice\PhpExcel\Shared\Font::getDefaultRowHeightByFont($this->phpExcel->getDefaultStyle()->getFont());
+                    $pt_height = Font::getDefaultRowHeightByFont($this->phpExcel->getDefaultStyle()->getFont());
                 } else {
                     $pt_height = $rowDimension->getRowHeight();
                 }
@@ -1631,16 +1636,16 @@ class HTML extends BaseWriter implements IWriter
         $htmlPage = '@page { ';
         $htmlBody = 'body { ';
 
-        $left = \PhpOffice\PhpExcel\Shared\String::FormatNumber($pSheet->getPageMargins()->getLeft()).'in; ';
+        $left = StringHelper::formatNumber($pSheet->getPageMargins()->getLeft()).'in; ';
         $htmlPage .= 'margin-left: '.$left;
         $htmlBody .= 'margin-left: '.$left;
-        $right = \PhpOffice\PhpExcel\Shared\String::FormatNumber($pSheet->getPageMargins()->getRight()).'in; ';
+        $right = StringHelper::formatNumber($pSheet->getPageMargins()->getRight()).'in; ';
         $htmlPage .= 'margin-right: '.$right;
         $htmlBody .= 'margin-right: '.$right;
-        $top = \PhpOffice\PhpExcel\Shared\String::FormatNumber($pSheet->getPageMargins()->getTop()).'in; ';
+        $top = StringHelper::formatNumber($pSheet->getPageMargins()->getTop()).'in; ';
         $htmlPage .= 'margin-top: '.$top;
         $htmlBody .= 'margin-top: '.$top;
-        $bottom = \PhpOffice\PhpExcel\Shared\String::FormatNumber($pSheet->getPageMargins()->getBottom()).'in; ';
+        $bottom = StringHelper::formatNumber($pSheet->getPageMargins()->getBottom()).'in; ';
         $htmlPage .= 'margin-bottom: '.$bottom;
         $htmlBody .= 'margin-bottom: '.$bottom;
 

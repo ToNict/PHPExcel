@@ -418,7 +418,7 @@ class Worksheet extends BIFFwriter
             if ($cVal instanceof \PhpOffice\PhpExcel\RichText) {
                 // $this->writeString($row, $column, $cVal->getPlainText(), $xfIndex);
                 $arrcRun = array();
-                $str_len = \PhpOffice\PhpExcel\Shared\String::CountCharacters($cVal->getPlainText(), 'UTF-8');
+                $str_len = \PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($cVal->getPlainText(), 'UTF-8');
                 $str_pos = 0;
                 $elements = $cVal->getRichTextElements();
                 foreach ($elements as $element) {
@@ -430,7 +430,7 @@ class Worksheet extends BIFFwriter
                     }
                     $arrcRun[] = array('strlen' => $str_pos, 'fontidx' => $str_fontidx);
                     // Position FROM
-                    $str_pos += \PhpOffice\PhpExcel\Shared\String::CountCharacters($element->getText(), 'UTF-8');
+                    $str_pos += \PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($element->getText(), 'UTF-8');
                 }
                 $this->writeRichTextString($row, $column, $cVal->getPlainText(), $xfIndex, $arrcRun);
             } else {
@@ -679,7 +679,7 @@ class Worksheet extends BIFFwriter
     {
         $record = 0x00FD;                   // Record identifier
         $length = 0x000A;                   // Bytes to follow
-        $str = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeShort($str, $arrcRun);
+        $str = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeShort($str, $arrcRun);
 
         /* check if string is already present */
         if (!isset($this->stringTable[$str])) {
@@ -749,7 +749,7 @@ class Worksheet extends BIFFwriter
         $record = 0x00FD;                   // Record identifier
         $length = 0x000A;                   // Bytes to follow
 
-        $str = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($str);
+        $str = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($str);
 
         /* check if string is already present */
         if (!isset($this->stringTable[$str])) {
@@ -943,7 +943,7 @@ class Worksheet extends BIFFwriter
     private function writeStringRecord($stringValue)
     {
         $record = 0x0207;     // Record identifier
-        $data = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($stringValue);
+        $data = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($stringValue);
 
         $length = strlen($data);
         $header = pack('vv', $record, $length);
@@ -1087,10 +1087,10 @@ class Worksheet extends BIFFwriter
         $url .= "\0";
 
         // character count
-        $url_len = \PhpOffice\PhpExcel\Shared\String::CountCharacters($url);
+        $url_len = \PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($url);
         $url_len = pack('V', $url_len);
 
-        $url = \PhpOffice\PhpExcel\Shared\String::ConvertEncoding($url, 'UTF-16LE', 'UTF-8');
+        $url = \PhpOffice\PhpExcel\Shared\StringHelper::convertEncoding($url, 'UTF-16LE', 'UTF-8');
 
         // Calculate the data length
         $length = 0x24 + strlen($url);
@@ -1651,7 +1651,7 @@ class Worksheet extends BIFFwriter
                 hexdec($password)
             );
 
-            $recordData .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong('p'.md5($recordData));
+            $recordData .= \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong('p'.md5($recordData));
 
             $length = strlen($recordData);
 
@@ -1873,7 +1873,7 @@ class Worksheet extends BIFFwriter
         }
         */
 
-        $recordData = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($this->phpSheet->getHeaderFooter()->getOddHeader());
+        $recordData = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($this->phpSheet->getHeaderFooter()->getOddHeader());
         $length = strlen($recordData);
 
         $header = pack('vv', $record, $length);
@@ -1897,7 +1897,7 @@ class Worksheet extends BIFFwriter
         }
         */
 
-        $recordData = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($this->phpSheet->getHeaderFooter()->getOddFooter());
+        $recordData = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($this->phpSheet->getHeaderFooter()->getOddFooter());
         $length = strlen($recordData);
 
         $header = pack('vv', $record, $length);
@@ -2915,22 +2915,22 @@ class Worksheet extends BIFFwriter
                 // prompt title
                 $promptTitle = $dataValidation->getPromptTitle() !== '' ?
                     $dataValidation->getPromptTitle() : chr(0);
-                $data .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($promptTitle);
+                $data .= \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($promptTitle);
 
                 // error title
                 $errorTitle = $dataValidation->getErrorTitle() !== '' ?
                     $dataValidation->getErrorTitle() : chr(0);
-                $data .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($errorTitle);
+                $data .= \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($errorTitle);
 
                 // prompt text
                 $prompt = $dataValidation->getPrompt() !== '' ?
                     $dataValidation->getPrompt() : chr(0);
-                $data .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($prompt);
+                $data .= \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($prompt);
 
                 // error text
                 $error = $dataValidation->getError() !== '' ?
                     $dataValidation->getError() : chr(0);
-                $data .= \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($error);
+                $data .= \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($error);
 
                 // formula 1
                 try {
@@ -3208,7 +3208,7 @@ class Worksheet extends BIFFwriter
                 $dataBlockFont = pack('VVVVVVVV', 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000);
                 $dataBlockFont .= pack('VVVVVVVV', 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000);
             } else {
-                $dataBlockFont = \PhpOffice\PhpExcel\Shared\String::UTF8toBIFF8UnicodeLong($conditional->getStyle()->getFont()->getName());
+                $dataBlockFont = \PhpOffice\PhpExcel\Shared\StringHelper::UTF8toBIFF8UnicodeLong($conditional->getStyle()->getFont()->getName());
             }
             // Font Size
             if ($conditional->getStyle()->getFont()->getSize() == null) {

@@ -2,6 +2,8 @@
 
 namespace PhpOffice\PhpExcel\Writer\Excel2007;
 
+use PhpOffice\PhpExcel\Chart;
+
 /**
  * PhpOffice\PhpExcel\Writer\Excel2007\Drawing.
  *
@@ -94,7 +96,7 @@ class Drawing extends WriterPart
      *
      * @throws \PhpOffice\PhpExcel\Writer\Exception
      */
-    public function writeChart(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, \PhpOffice\PhpExcel\Chart $pChart = null, $pRelationId = -1)
+    public function writeChart(\PhpOffice\PhpExcel\Shared\XMLWriter $objWriter = null, Chart $pChart = null, $pRelationId = -1)
     {
         $tl = $pChart->getTopLeftPosition();
         $tl['colRow'] = \PhpOffice\PhpExcel\Cell::coordinateFromString($tl['cell']);
@@ -250,44 +252,40 @@ class Drawing extends WriterPart
 
 //                        // a:solidFill
 //                        $objWriter->startElement('a:solidFill');
-
 //                            // a:srgbClr
 //                            $objWriter->startElement('a:srgbClr');
 //                            $objWriter->writeAttribute('val', 'FFFFFF');
-
 ///* SHADE
 //                                // a:shade
 //                                $objWriter->startElement('a:shade');
 //                                $objWriter->writeAttribute('val', '85000');
 //                                $objWriter->endElement();
 //*/
-
 //                            $objWriter->endElement();
-
 //                        $objWriter->endElement();
-/*
-            // a:ln
-            $objWriter->startElement('a:ln');
-            $objWriter->writeAttribute('w', '88900');
-            $objWriter->writeAttribute('cap', 'sq');
+            /*
+              // a:ln
+              $objWriter->startElement('a:ln');
+              $objWriter->writeAttribute('w', '88900');
+              $objWriter->writeAttribute('cap', 'sq');
 
-                // a:solidFill
-                $objWriter->startElement('a:solidFill');
+              // a:solidFill
+              $objWriter->startElement('a:solidFill');
 
-                    // a:srgbClr
-                    $objWriter->startElement('a:srgbClr');
-                    $objWriter->writeAttribute('val', 'FFFFFF');
-                    $objWriter->endElement();
+              // a:srgbClr
+              $objWriter->startElement('a:srgbClr');
+              $objWriter->writeAttribute('val', 'FFFFFF');
+              $objWriter->endElement();
 
-                $objWriter->endElement();
+              $objWriter->endElement();
 
-                // a:miter
-                $objWriter->startElement('a:miter');
-                $objWriter->writeAttribute('lim', '800000');
-                $objWriter->endElement();
+              // a:miter
+              $objWriter->startElement('a:miter');
+              $objWriter->writeAttribute('lim', '800000');
+              $objWriter->endElement();
 
-            $objWriter->endElement();
-*/
+              $objWriter->endElement();
+             */
 
             if ($pDrawing->getShadow()->getVisible()) {
                 // a:effectLst
@@ -316,54 +314,54 @@ class Drawing extends WriterPart
 
                 $objWriter->endElement();
             }
-/*
+            /*
 
-                // a:scene3d
-                $objWriter->startElement('a:scene3d');
+              // a:scene3d
+              $objWriter->startElement('a:scene3d');
 
-                    // a:camera
-                    $objWriter->startElement('a:camera');
-                    $objWriter->writeAttribute('prst', 'orthographicFront');
-                    $objWriter->endElement();
+              // a:camera
+              $objWriter->startElement('a:camera');
+              $objWriter->writeAttribute('prst', 'orthographicFront');
+              $objWriter->endElement();
 
-                    // a:lightRig
-                    $objWriter->startElement('a:lightRig');
-                    $objWriter->writeAttribute('rig', 'twoPt');
-                    $objWriter->writeAttribute('dir', 't');
+              // a:lightRig
+              $objWriter->startElement('a:lightRig');
+              $objWriter->writeAttribute('rig', 'twoPt');
+              $objWriter->writeAttribute('dir', 't');
 
-                        // a:rot
-                        $objWriter->startElement('a:rot');
-                        $objWriter->writeAttribute('lat', '0');
-                        $objWriter->writeAttribute('lon', '0');
-                        $objWriter->writeAttribute('rev', '0');
-                        $objWriter->endElement();
+              // a:rot
+              $objWriter->startElement('a:rot');
+              $objWriter->writeAttribute('lat', '0');
+              $objWriter->writeAttribute('lon', '0');
+              $objWriter->writeAttribute('rev', '0');
+              $objWriter->endElement();
 
-                    $objWriter->endElement();
+              $objWriter->endElement();
 
-                $objWriter->endElement();
-*/
-/*
-                // a:sp3d
-                $objWriter->startElement('a:sp3d');
+              $objWriter->endElement();
+             */
+            /*
+              // a:sp3d
+              $objWriter->startElement('a:sp3d');
 
-                    // a:bevelT
-                    $objWriter->startElement('a:bevelT');
-                    $objWriter->writeAttribute('w', '25400');
-                    $objWriter->writeAttribute('h', '19050');
-                    $objWriter->endElement();
+              // a:bevelT
+              $objWriter->startElement('a:bevelT');
+              $objWriter->writeAttribute('w', '25400');
+              $objWriter->writeAttribute('h', '19050');
+              $objWriter->endElement();
 
-                    // a:contourClr
-                    $objWriter->startElement('a:contourClr');
+              // a:contourClr
+              $objWriter->startElement('a:contourClr');
 
-                        // a:srgbClr
-                        $objWriter->startElement('a:srgbClr');
-                        $objWriter->writeAttribute('val', 'FFFFFF');
-                        $objWriter->endElement();
+              // a:srgbClr
+              $objWriter->startElement('a:srgbClr');
+              $objWriter->writeAttribute('val', 'FFFFFF');
+              $objWriter->endElement();
 
-                    $objWriter->endElement();
+              $objWriter->endElement();
 
-                $objWriter->endElement();
-*/
+              $objWriter->endElement();
+             */
             $objWriter->endElement();
 
             $objWriter->endElement();

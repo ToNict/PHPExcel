@@ -750,7 +750,7 @@ class Statistical
             return $returnValue / $aCount;
         }
 
-        return Functions::NaN();
+        return Functions::NAN();
     }
 
     /**
@@ -913,7 +913,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($alpha)) && (is_numeric($beta)) && (is_numeric($rMin)) && (is_numeric($rMax))) {
             if (($value < $rMin) || ($value > $rMax) || ($alpha <= 0) || ($beta <= 0) || ($rMin == $rMax)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ($rMin > $rMax) {
                 $tmp = $rMin;
@@ -953,7 +953,7 @@ class Statistical
 
         if ((is_numeric($probability)) && (is_numeric($alpha)) && (is_numeric($beta)) && (is_numeric($rMin)) && (is_numeric($rMax))) {
             if (($alpha <= 0) || ($beta <= 0) || ($rMin == $rMax) || ($probability <= 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ($rMin > $rMax) {
                 $tmp = $rMin;
@@ -1011,10 +1011,10 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($trials)) && (is_numeric($probability))) {
             if (($value < 0) || ($value > $trials)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if (($probability < 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
@@ -1050,14 +1050,14 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($degrees))) {
             if ($degrees < 1) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ($value < 0) {
                 if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
                     return 1;
                 }
 
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return 1 - (self::incompleteGamma($degrees / 2, $value / 2) / self::gamma($degrees / 2));
@@ -1143,10 +1143,10 @@ class Statistical
 
         if ((is_numeric($alpha)) && (is_numeric($stdDev)) && (is_numeric($size))) {
             if (($alpha <= 0) || ($alpha >= 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if (($stdDev <= 0) || ($size < 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return self::NORMSINV(1 - $alpha / 2) * $stdDev / sqrt($size);
@@ -1373,11 +1373,11 @@ class Statistical
 
         if ((is_numeric($trials)) && (is_numeric($probability)) && (is_numeric($alpha))) {
             if ($trials < 0) {
-                return Functions::NaN();
+                return Functions::NAN();
             } elseif (($probability < 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             } elseif (($alpha < 0) || ($alpha > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             } elseif ($alpha <= 0.5) {
                 $t = sqrt(log(1 / ($alpha * $alpha)));
                 $trialsApprox = 0 - ($t + (2.515517 + 0.802853 * $t + 0.010328 * $t * $t) / (1 + 1.432788 * $t + 0.189269 * $t * $t + 0.001308 * $t * $t * $t));
@@ -1513,7 +1513,7 @@ class Statistical
 
             // Return
             if (is_null($returnValue)) {
-                return Functions::NaN();
+                return Functions::NAN();
             } else {
                 return $returnValue;
             }
@@ -1543,7 +1543,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($lambda))) {
             if (($value < 0) || ($lambda < 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
@@ -1574,7 +1574,7 @@ class Statistical
 
         if (is_numeric($value)) {
             if (($value <= -1) || ($value >= 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return 0.5 * log((1 + $value) / (1 - $value));
@@ -1658,7 +1658,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($a)) && (is_numeric($b))) {
             if (($value < 0) || ($a <= 0) || ($b <= 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
@@ -1691,7 +1691,7 @@ class Statistical
 
         if ((is_numeric($probability)) && (is_numeric($alpha)) && (is_numeric($beta))) {
             if (($alpha <= 0) || ($beta <= 0) || ($probability < 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             $xLo = 0;
@@ -1750,7 +1750,7 @@ class Statistical
 
         if (is_numeric($value)) {
             if ($value <= 0) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return log(self::gamma($value));
@@ -1787,7 +1787,7 @@ class Statistical
             }
         }
 
-        return Functions::NaN();
+        return Functions::NAN();
     }
 
     /**
@@ -1845,14 +1845,14 @@ class Statistical
         // Loop through arguments
         $aArgs = Functions::flattenArray(func_get_args());
         if (self::MIN($aArgs) < 0) {
-            return Functions::NaN();
+            return Functions::NAN();
         }
         $aCount = 0;
         foreach ($aArgs as $arg) {
             // Is it a numeric value?
             if ((is_numeric($arg)) && (!is_string($arg))) {
                 if ($arg <= 0) {
-                    return Functions::NaN();
+                    return Functions::NAN();
                 }
                 if (is_null($returnValue)) {
                     $returnValue = (1 / $arg);
@@ -1893,13 +1893,13 @@ class Statistical
 
         if ((is_numeric($sampleSuccesses)) && (is_numeric($sampleNumber)) && (is_numeric($populationSuccesses)) && (is_numeric($populationNumber))) {
             if (($sampleSuccesses < 0) || ($sampleSuccesses > $sampleNumber) || ($sampleSuccesses > $populationSuccesses)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if (($sampleNumber <= 0) || ($sampleNumber > $populationNumber)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if (($populationSuccesses <= 0) || ($populationSuccesses > $populationNumber)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return MathTrig::COMBIN($populationSuccesses, $sampleSuccesses) *
@@ -2015,7 +2015,7 @@ class Statistical
             $count = self::COUNT($mArgs);
             $entry = floor(--$entry);
             if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             rsort($mArgs);
 
@@ -2113,7 +2113,7 @@ class Statistical
 
         foreach ($yValues as $value) {
             if ($value <= 0.0) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
         }
 
@@ -2172,7 +2172,7 @@ class Statistical
 
         if ((is_numeric($probability)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if (($probability < 0) || ($probability > 1) || ($stdDev <= 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return exp($mean + $stdDev * self::NORMSINV($probability));
@@ -2201,7 +2201,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if (($value <= 0) || ($stdDev <= 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return self::NORMSDIST((log($value) - $mean) / $stdDev);
@@ -2345,7 +2345,7 @@ class Statistical
      */
     public static function MEDIAN()
     {
-        $returnValue = Functions::NaN();
+        $returnValue = Functions::NAN();
 
         $mArgs = array();
         // Loop through arguments
@@ -2587,13 +2587,13 @@ class Statistical
 
         if ((is_numeric($failures)) && (is_numeric($successes)) && (is_numeric($probability))) {
             if (($failures < 0) || ($successes < 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             } elseif (($probability < 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if (Functions::getCompatibilityMode() == Functions::COMPATIBILITY_GNUMERIC) {
                 if (($failures + $successes - 1) <= 0) {
-                    return Functions::NaN();
+                    return Functions::NAN();
                 }
             }
 
@@ -2625,7 +2625,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if ($stdDev < 0) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
@@ -2658,10 +2658,10 @@ class Statistical
 
         if ((is_numeric($probability)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if (($probability < 0) || ($probability > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ($stdDev < 0) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return (self::inverseNcdf($probability) * $stdDev) + $mean;
@@ -2726,7 +2726,7 @@ class Statistical
 
         if ((is_numeric($entry)) && (!is_string($entry))) {
             if (($entry < 0) || ($entry > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             $mArgs = array();
             foreach ($aArgs as $arg) {
@@ -2780,7 +2780,7 @@ class Statistical
         sort($valueSet, SORT_NUMERIC);
         $valueCount = count($valueSet);
         if ($valueCount == 0) {
-            return Functions::NaN();
+            return Functions::NAN();
         }
 
         $valueAdjustor = $valueCount - 1;
@@ -2824,7 +2824,7 @@ class Statistical
         if ((is_numeric($numObjs)) && (is_numeric($numInSet))) {
             $numInSet = floor($numInSet);
             if ($numObjs < $numInSet) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return round(MathTrig::FACT($numObjs) / MathTrig::FACT($numObjs - $numInSet));
@@ -2853,7 +2853,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($mean))) {
             if (($value < 0) || ($mean <= 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {
@@ -2897,7 +2897,7 @@ class Statistical
         if ((is_numeric($entry)) && (!is_string($entry))) {
             $entry /= 4;
             if (($entry < 0) || ($entry > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return self::PERCENTILE($aArgs, $entry);
@@ -3073,7 +3073,7 @@ class Statistical
             $count = self::COUNT($mArgs);
             $entry = floor(--$entry);
             if (($entry < 0) || ($entry >= $count) || ($count == 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             sort($mArgs);
 
@@ -3102,7 +3102,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($mean)) && (is_numeric($stdDev))) {
             if ($stdDev <= 0) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
 
             return ($value - $mean) / $stdDev;
@@ -3360,7 +3360,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($degrees)) && (is_numeric($tails))) {
             if (($value < 0) || ($degrees < 1) || ($tails < 1) || ($tails > 2)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             //    tdist, which finds the probability that corresponds to a given value
             //    of t with k degrees of freedom. This algorithm is translated from a
@@ -3522,7 +3522,7 @@ class Statistical
 
         if ((is_numeric($percent)) && (!is_string($percent))) {
             if (($percent < 0) || ($percent > 1)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             $mArgs = array();
             foreach ($aArgs as $arg) {
@@ -3760,7 +3760,7 @@ class Statistical
 
         if ((is_numeric($value)) && (is_numeric($alpha)) && (is_numeric($beta))) {
             if (($value < 0) || ($alpha <= 0) || ($beta <= 0)) {
-                return Functions::NaN();
+                return Functions::NAN();
             }
             if ((is_numeric($cumulative)) || (is_bool($cumulative))) {
                 if ($cumulative) {

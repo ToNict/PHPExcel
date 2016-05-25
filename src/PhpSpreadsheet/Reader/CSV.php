@@ -2,6 +2,8 @@
 
 namespace PhpOffice\PhpExcel\Reader;
 
+use PHPExcel\Spreadsheet;
+
 /**
  * PhpOffice\PhpExcel\Reader\CSV.
  *
@@ -214,14 +216,14 @@ class CSV extends BaseReader implements IReader
      *
      * @param string $pFilename
      *
-     * @return \PhpOffice\PhpExcel\Spreadsheet
+     * @return Spreadsheet
      *
      * @throws Exception
      */
     public function load($pFilename)
     {
         // Create new Spreadsheet
-        $objPHPExcel = new \PhpOffice\PhpExcel\Spreadsheet();
+        $objPHPExcel = new Spreadsheet();
 
         // Load into this instance
         return $this->loadIntoExisting($pFilename, $objPHPExcel);
@@ -237,7 +239,7 @@ class CSV extends BaseReader implements IReader
      *
      * @throws Exception
      */
-    public function loadIntoExisting($pFilename, \PhpOffice\PhpExcel\Spreadsheet $objPHPExcel)
+    public function loadIntoExisting($pFilename, Spreadsheet $objPHPExcel)
     {
         $lineEnding = ini_get('auto_detect_line_endings');
         ini_set('auto_detect_line_endings', true);
@@ -280,7 +282,7 @@ class CSV extends BaseReader implements IReader
 
                     // Convert encoding if necessary
                     if ($this->inputEncoding !== 'UTF-8') {
-                        $rowDatum = \PhpOffice\PhpExcel\Shared\String::ConvertEncoding($rowDatum, 'UTF-8', $this->inputEncoding);
+                        $rowDatum = \PhpOffice\PhpExcel\Shared\StringHelper::convertEncoding($rowDatum, 'UTF-8', $this->inputEncoding);
                     }
 
                     // Set cell value

@@ -779,7 +779,7 @@ class Calculation
         ),
         'ERROR.TYPE' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::ERROR_TYPE',
+            'functionCall' => 'Calculation\Categories::errorType',
             'argumentCount' => '1',
         ),
         'EVEN' => array(
@@ -1101,7 +1101,7 @@ class Calculation
         ),
         'ISBLANK' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_BLANK',
+            'functionCall' => 'Calculation\Categories::isBlank',
             'argumentCount' => '1',
         ),
         'ISERR' => array(
@@ -1116,32 +1116,32 @@ class Calculation
         ),
         'ISEVEN' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_EVEN',
+            'functionCall' => 'Calculation\Categories::isEven',
             'argumentCount' => '1',
         ),
         'ISLOGICAL' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_LOGICAL',
+            'functionCall' => 'Calculation\Categories::isLogical',
             'argumentCount' => '1',
         ),
         'ISNA' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_NA',
+            'functionCall' => 'Calculation\Categories::isNa',
             'argumentCount' => '1',
         ),
         'ISNONTEXT' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_NONTEXT',
+            'functionCall' => 'Calculation\Categories::isNonText',
             'argumentCount' => '1',
         ),
         'ISNUMBER' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_NUMBER',
+            'functionCall' => 'Calculation\Categories::isNumber',
             'argumentCount' => '1',
         ),
         'ISODD' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_ODD',
+            'functionCall' => 'Calculation\Categories::isOdd',
             'argumentCount' => '1',
         ),
         'ISPMT' => array(
@@ -1156,7 +1156,7 @@ class Calculation
         ),
         'ISTEXT' => array(
             'category' => Calculation\Categories::CATEGORY_INFORMATION,
-            'functionCall' => 'Calculation\Categories::IS_TEXT',
+            'functionCall' => 'Calculation\Categories::isText',
             'argumentCount' => '1',
         ),
         'JIS' => array(
@@ -2475,9 +2475,9 @@ class Calculation
             }
             //    Return strings wrapped in quotes
             return '"'.$value.'"';
-        //    Convert numeric errors to NaN error
+        //    Convert numeric errors to NAN error
         } elseif ((is_float($value)) && ((is_nan($value)) || (is_infinite($value)))) {
-            return Calculation\Functions::NaN();
+            return Calculation\Functions::NAN();
         }
 
         return $value;
@@ -2496,9 +2496,9 @@ class Calculation
             if ((isset($value{0})) && ($value{0} == '"') && (substr($value, -1) == '"')) {
                 return substr($value, 1, -1);
             }
-        //    Convert numeric errors to NaN error
+        //    Convert numeric errors to NAN error
         } elseif ((is_float($value)) && ((is_nan($value)) || (is_infinite($value)))) {
-            return Calculation\Functions::NaN();
+            return Calculation\Functions::NAN();
         }
 
         return $value;
@@ -2594,7 +2594,7 @@ class Calculation
         if ($result === null) {
             return 0;
         } elseif ((is_float($result)) && ((is_nan($result)) || (is_infinite($result)))) {
-            return Calculation\Functions::NaN();
+            return Calculation\Functions::NAN();
         }
 
         return $result;
@@ -3886,7 +3886,7 @@ class Calculation
                     $this->_debugLog->writeDebugLog('Evaluation Result is ', $this->showTypeDetails($operand));
 
                     return false;
-                } elseif (!Shared\String::convertToNumberIfFraction($operand)) {
+                } elseif (!Shared\StringHelper::convertToNumberIfFraction($operand)) {
                     //    If not a numeric or a fraction, then it's a text string, and so can't be used in mathematical binary operations
                     $stack->push('Value', '#VALUE!');
                     $this->_debugLog->writeDebugLog('Evaluation Result is a ', $this->showTypeDetails('#VALUE!'));
@@ -4032,8 +4032,8 @@ class Calculation
      */
     private function strcmpLowercaseFirst($str1, $str2)
     {
-        $inversedStr1 = Shared\String::StrCaseReverse($str1);
-        $inversedStr2 = Shared\String::StrCaseReverse($str2);
+        $inversedStr1 = Shared\StringHelper::StrCaseReverse($str1);
+        $inversedStr2 = Shared\StringHelper::StrCaseReverse($str2);
 
         return strcmp($inversedStr1, $inversedStr2);
     }

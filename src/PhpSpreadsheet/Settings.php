@@ -31,22 +31,22 @@ namespace PhpOffice\PhpExcel;
 class Settings
 {
     /**    constants */
+
     /**    Available Zip library classes */
     const PCLZIP = '\\PhpOffice\\PhpExcel\\Shared\\ZipArchive';
     const ZIPARCHIVE = '\\ZipArchive';
 
     /**    Optional Chart Rendering libraries */
-    const CHART_RENDERER_JPGRAPH = 'jpgraph';
+    const CHART_RENDERER_JPGRAPH = 'JpGraph';
 
     /**    Optional PDF Rendering libraries */
-    const PDF_RENDERER_TCPDF = 'tcPDF';
+    const PDF_RENDERER_TCPDF = 'TcPDF';
     const PDF_RENDERER_DOMPDF = 'DomPDF';
-    const PDF_RENDERER_MPDF = 'mPDF';
+    const PDF_RENDERER_MPDF = 'MPDF';
 
     private static $chartRenderers = array(
         self::CHART_RENDERER_JPGRAPH,
     );
-
     private static $pdfRenderers = array(
         self::PDF_RENDERER_TCPDF,
         self::PDF_RENDERER_DOMPDF,

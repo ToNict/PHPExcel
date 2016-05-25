@@ -205,7 +205,7 @@ class TextData
 
         // Validate parameters
         if (!is_numeric($value) || !is_numeric($decimals)) {
-            return Functions::NaN();
+            return Functions::NAN();
         }
         $decimals = floor($decimals);
 
@@ -243,8 +243,8 @@ class TextData
                 $haystack = ($haystack) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
             }
 
-            if (($offset > 0) && (\PhpOffice\PhpExcel\Shared\String::CountCharacters($haystack) > $offset)) {
-                if (\PhpOffice\PhpExcel\Shared\String::CountCharacters($needle) == 0) {
+            if (($offset > 0) && (\PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($haystack) > $offset)) {
+                if (\PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($needle) == 0) {
                     return $offset;
                 }
                 if (function_exists('mb_strpos')) {
@@ -281,8 +281,8 @@ class TextData
                 $haystack = ($haystack) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
             }
 
-            if (($offset > 0) && (\PhpOffice\PhpExcel\Shared\String::CountCharacters($haystack) > $offset)) {
-                if (\PhpOffice\PhpExcel\Shared\String::CountCharacters($needle) == 0) {
+            if (($offset > 0) && (\PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($haystack) > $offset)) {
+                if (\PhpOffice\PhpExcel\Shared\StringHelper::countCharacters($needle) == 0) {
                     return $offset;
                 }
                 if (function_exists('mb_stripos')) {
@@ -316,7 +316,7 @@ class TextData
 
         // Validate parameters
         if (!is_numeric($value) || !is_numeric($decimals)) {
-            return Functions::NaN();
+            return Functions::NAN();
         }
         $decimals = floor($decimals);
 
@@ -456,7 +456,7 @@ class TextData
             $mixedCaseString = ($mixedCaseString) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
         }
 
-        return \PhpOffice\PhpExcel\Shared\String::StrToLower($mixedCaseString);
+        return \PhpOffice\PhpExcel\Shared\StringHelper::strToLower($mixedCaseString);
     }
 
     /**
@@ -476,7 +476,7 @@ class TextData
             $mixedCaseString = ($mixedCaseString) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
         }
 
-        return \PhpOffice\PhpExcel\Shared\String::StrToUpper($mixedCaseString);
+        return \PhpOffice\PhpExcel\Shared\StringHelper::strToUpper($mixedCaseString);
     }
 
     /**
@@ -496,7 +496,7 @@ class TextData
             $mixedCaseString = ($mixedCaseString) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
         }
 
-        return \PhpOffice\PhpExcel\Shared\String::StrToTitle($mixedCaseString);
+        return \PhpOffice\PhpExcel\Shared\StringHelper::strToTitle($mixedCaseString);
     }
 
     /**
@@ -621,7 +621,7 @@ class TextData
 
         if (!is_numeric($value)) {
             $numberValue = str_replace(
-                \PhpOffice\PhpExcel\Shared\String::getThousandsSeparator(), '', trim($value, " \t\n\r\0\x0B".\PhpOffice\PhpExcel\Shared\String::getCurrencyCode())
+                \PhpOffice\PhpExcel\Shared\StringHelper::getThousandsSeparator(), '', trim($value, " \t\n\r\0\x0B".\PhpOffice\PhpExcel\Shared\StringHelper::getCurrencyCode())
             );
             if (is_numeric($numberValue)) {
                 return (float) $numberValue;

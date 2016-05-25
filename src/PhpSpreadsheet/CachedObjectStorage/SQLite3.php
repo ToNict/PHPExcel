@@ -320,7 +320,7 @@ class SQLite3 extends CacheBase implements ICache
             $this->TableName = str_replace('.', '_', $this->getUniqueID());
             $_DBName = ':memory:';
 
-            $this->DBHandle = new self($_DBName);
+            $this->DBHandle = new \SQLite3($_DBName);
             if ($this->DBHandle === false) {
                 throw new \PhpOffice\PhpExcel\Exception($this->DBHandle->lastErrorMsg());
             }

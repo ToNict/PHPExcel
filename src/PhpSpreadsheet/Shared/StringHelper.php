@@ -28,7 +28,7 @@ namespace PhpOffice\PhpExcel\Shared;
  *
  * @version    ##VERSION##, ##DATE##
  */
-class String
+class StringHelper
 {
     /**    Constants                */
 /**    Regular Expressions        */
@@ -351,7 +351,7 @@ class String
      *
      * @return string
      */
-    public static function ControlCharacterOOXML2PHP($value = '')
+    public static function controlCharacterOOXML2PHP($value = '')
     {
         return str_replace(array_keys(self::$controlCharacters), array_values(self::$controlCharacters), $value);
     }
@@ -371,7 +371,7 @@ class String
      *
      * @return string
      */
-    public static function ControlCharacterPHP2OOXML($value = '')
+    public static function controlCharacterPHP2OOXML($value = '')
     {
         return str_replace(array_values(self::$controlCharacters), array_keys(self::$controlCharacters), $value);
     }
@@ -383,7 +383,7 @@ class String
      *
      * @return string
      */
-    public static function SanitizeUTF8($value)
+    public static function sanitizeUTF8($value)
     {
         if (self::getIsIconvEnabled()) {
             $value = @iconv('UTF-8', 'UTF-8', $value);
@@ -408,7 +408,7 @@ class String
      *
      * @return bool
      */
-    public static function IsUTF8($value = '')
+    public static function isUTF8($value = '')
     {
         return $value === '' || preg_match('/^./su', $value) === 1;
     }
@@ -421,7 +421,7 @@ class String
      *
      * @return string
      */
-    public static function FormatNumber($value)
+    public static function formatNumber($value)
     {
         if (is_float($value)) {
             return str_replace(',', '.', $value);
@@ -504,7 +504,7 @@ class String
      *
      * @return string
      */
-    public static function ConvertEncoding($value, $to, $from)
+    public static function convertEncoding($value, $to, $from)
     {
         if (self::getIsIconvEnabled()) {
             return iconv($from, $to, $value);
@@ -515,9 +515,9 @@ class String
         }
 
         if ($from == 'UTF-16LE') {
-            return self::utf16_decode($value, false);
+            return self::utf16Decode($value, false);
         } elseif ($from == 'UTF-16BE') {
-            return self::utf16_decode($value);
+            return self::utf16Decode($value);
         }
         // else, no conversion
         return $value;
@@ -540,7 +540,7 @@ class String
      * @author  Rasmus Andersson {@link http://rasmusandersson.se/}
      * @author vadik56
      */
-    public static function utf16_decode($str, $bom_be = true)
+    public static function utf16Decode($str, $bom_be = true)
     {
         if (strlen($str) < 2) {
             return $str;
@@ -577,7 +577,7 @@ class String
      *
      * @return int Character count
      */
-    public static function CountCharacters($value, $enc = 'UTF-8')
+    public static function countCharacters($value, $enc = 'UTF-8')
     {
         if (self::getIsMbstringEnabled()) {
             return mb_strlen($value, $enc);
@@ -600,7 +600,7 @@ class String
      *
      * @return string
      */
-    public static function Substring($pValue = '', $pStart = 0, $pLength = 0)
+    public static function substring($pValue = '', $pStart = 0, $pLength = 0)
     {
         if (self::getIsMbstringEnabled()) {
             return mb_substr($pValue, $pStart, $pLength, 'UTF-8');
@@ -621,7 +621,7 @@ class String
      *
      * @return string
      */
-    public static function StrToUpper($pValue = '')
+    public static function strToUpper($pValue = '')
     {
         if (function_exists('mb_convert_case')) {
             return mb_convert_case($pValue, MB_CASE_UPPER, 'UTF-8');
@@ -637,7 +637,7 @@ class String
      *
      * @return string
      */
-    public static function StrToLower($pValue = '')
+    public static function strToLower($pValue = '')
     {
         if (function_exists('mb_convert_case')) {
             return mb_convert_case($pValue, MB_CASE_LOWER, 'UTF-8');
@@ -654,7 +654,7 @@ class String
      *
      * @return string
      */
-    public static function StrToTitle($pValue = '')
+    public static function strToTitle($pValue = '')
     {
         if (function_exists('mb_convert_case')) {
             return mb_convert_case($pValue, MB_CASE_TITLE, 'UTF-8');
@@ -663,12 +663,12 @@ class String
         return ucwords($pValue);
     }
 
-    public static function mb_is_upper($char)
+    public static function mbIsUpper($char)
     {
         return mb_strtolower($char, 'UTF-8') != $char;
     }
 
-    public static function mb_str_split($string)
+    public static function mbStrSplit($string)
     {
         # Split at all position not after the start: ^
         # and not before the end: $
@@ -686,9 +686,9 @@ class String
     public static function StrCaseReverse($pValue = '')
     {
         if (self::getIsMbstringEnabled()) {
-            $characters = self::mb_str_split($pValue);
+            $characters = self::mbStrSplit($pValue);
             foreach ($characters as &$character) {
-                if (self::mb_is_upper($character)) {
+                if (self::mbIsUpper($character)) {
                     $character = mb_strtolower($character, 'UTF-8');
                 } else {
                     $character = mb_strtoupper($character, 'UTF-8');

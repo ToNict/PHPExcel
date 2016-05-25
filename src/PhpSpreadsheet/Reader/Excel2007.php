@@ -331,11 +331,11 @@ class Excel2007 extends BaseReader implements IReader
         //    so we need to load case-insensitively from the zip file
         // Apache POI fixes
         $contents = $archive->getFromIndex(
-            $archive->locateName($fileName, \ZIPARCHIVE::FL_NOCASE)
+            $archive->locateName($fileName, \ZipArchive::FL_NOCASE)
         );
         if ($contents === false) {
             $contents = $archive->getFromIndex(
-                $archive->locateName(substr($fileName, 1), \ZIPARCHIVE::FL_NOCASE)
+                $archive->locateName(substr($fileName, 1), \ZipArchive::FL_NOCASE)
             );
         }
 
@@ -498,7 +498,7 @@ class Excel2007 extends BaseReader implements IReader
                     if (isset($xmlStrings) && isset($xmlStrings->si)) {
                         foreach ($xmlStrings->si as $val) {
                             if (isset($val->t)) {
-                                $sharedStrings[] = \PhpOffice\PhpExcel\Shared\String::ControlCharacterOOXML2PHP((string) $val->t);
+                                $sharedStrings[] = \PhpOffice\PhpExcel\Shared\StringHelper::controlCharacterOOXML2PHP((string) $val->t);
                             } elseif (isset($val->r)) {
                                 $sharedStrings[] = $this->parseRichText($val);
                             }
@@ -1998,14 +1998,14 @@ class Excel2007 extends BaseReader implements IReader
         $value = new \PhpOffice\PhpExcel\RichText();
 
         if (isset($is->t)) {
-            $value->createText(\PhpOffice\PhpExcel\Shared\String::ControlCharacterOOXML2PHP((string) $is->t));
+            $value->createText(\PhpOffice\PhpExcel\Shared\StringHelper::controlCharacterOOXML2PHP((string) $is->t));
         } else {
             if (is_object($is->r)) {
                 foreach ($is->r as $run) {
                     if (!isset($run->rPr)) {
-                        $objText = $value->createText(\PhpOffice\PhpExcel\Shared\String::ControlCharacterOOXML2PHP((string) $run->t));
+                        $objText = $value->createText(\PhpOffice\PhpExcel\Shared\StringHelper::controlCharacterOOXML2PHP((string) $run->t));
                     } else {
-                        $objText = $value->createTextRun(\PhpOffice\PhpExcel\Shared\String::ControlCharacterOOXML2PHP((string) $run->t));
+                        $objText = $value->createTextRun(\PhpOffice\PhpExcel\Shared\StringHelper::controlCharacterOOXML2PHP((string) $run->t));
 
                         if (isset($run->rPr->rFont['val'])) {
                             $objText->getFont()->setName((string) $run->rPr->rFont['val']);

@@ -725,8 +725,8 @@ class NumberFormat extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                             $value = number_format(
                                 $value,
                                 strlen($right),
-                                \PhpOffice\PhpExcel\Shared\String::getDecimalSeparator(),
-                                \PhpOffice\PhpExcel\Shared\String::getThousandsSeparator()
+                                \PhpOffice\PhpExcel\Shared\StringHelper::getDecimalSeparator(),
+                                \PhpOffice\PhpExcel\Shared\StringHelper::getThousandsSeparator()
                             );
                             $value = preg_replace($number_regex, $value, $format);
                         } else {
@@ -749,7 +749,7 @@ class NumberFormat extends Supervisor implements \PhpOffice\PhpExcel\IComparable
                     $currencyCode = $m[1];
                     list($currencyCode) = explode('-', $currencyCode);
                     if ($currencyCode == '') {
-                        $currencyCode = \PhpOffice\PhpExcel\Shared\String::getCurrencyCode();
+                        $currencyCode = \PhpOffice\PhpExcel\Shared\StringHelper::getCurrencyCode();
                     }
                     $value = preg_replace('/\[\$([^\]]*)\]/u', $currencyCode, $value);
                 }
