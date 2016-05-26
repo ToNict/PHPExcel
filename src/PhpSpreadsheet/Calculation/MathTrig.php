@@ -30,7 +30,6 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class MathTrig
 {
-
     //
     //    Private method to return an array of the factors of the input value
     //

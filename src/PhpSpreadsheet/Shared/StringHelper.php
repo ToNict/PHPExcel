@@ -32,7 +32,7 @@ class StringHelper
 {
     /**    Constants                */
 
-    /**    Regular Expressions        */
+/**    Regular Expressions        */
     //    Fraction
     const STRING_REGEXP_FRACTION = '(-?)(\d+)\s+(\d+\/\d+)';
 
@@ -803,10 +803,12 @@ class StringHelper
         $localeconv = localeconv();
         if (!empty($localeconv['currency_symbol'])) {
             self::$currencyCode = $localeconv['currency_symbol'];
+
             return self::$currencyCode;
         }
         if (!empty($localeconv['int_curr_symbol'])) {
             self::$currencyCode = $localeconv['int_curr_symbol'];
+
             return self::$currencyCode;
         }
 

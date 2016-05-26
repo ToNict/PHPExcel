@@ -30,7 +30,6 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class DateTime
 {
-
     /**
      * Identify if a year is a leap year or not.
      *

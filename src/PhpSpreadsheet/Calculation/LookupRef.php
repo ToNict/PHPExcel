@@ -30,7 +30,6 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class LookupRef
 {
-
     /**
      * cellAddress.
      *

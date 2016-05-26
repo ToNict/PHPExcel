@@ -33,7 +33,6 @@ define('EULER', 2.71828182845904523536);
  */
 class Engineering
 {
-
     /**
      * Details of the Units of measure that can be used in CONVERTUOM().
      *
@@ -888,7 +887,7 @@ class Engineering
                     $fTerm *= $fSqrX;
                     $fTerm /= ($ordK * ($ordK + $ord));
                     $fResult += $fTerm;
-                } while ((abs($fTerm) > 1e-12) && ( ++$ordK < 100));
+                } while ((abs($fTerm) > 1e-12) && (++$ordK < 100));
             } else {
                 $f_2_PI = 2 * M_PI;
 
@@ -943,7 +942,7 @@ class Engineering
                     $fTerm *= $fSqrX;
                     $fTerm /= ($ordK * ($ordK + $ord));
                     $fResult += $fTerm;
-                } while ((abs($fTerm) > 1e-12) && ( ++$ordK < 100));
+                } while ((abs($fTerm) > 1e-12) && (++$ordK < 100));
             } else {
                 $f_PI_DIV_2 = M_PI / 2;
                 $f_PI_DIV_4 = M_PI / 4;
@@ -1548,11 +1547,13 @@ class Engineering
             $binX .= str_pad(base_convert($char, 16, 2), 3, '0', STR_PAD_LEFT);
         }
         if (strlen($binX) == 40 && $binX[0] == '1') {
-            for ($i = 0; $i < 40; $i++) {
+            for ($i = 0; $i < 40; ++$i) {
                 $binX[$i] = ($binX[$i] == '1' ? '0' : '1');
             }
+
             return (bindec($binX) + 1) * -1;
         }
+
         return bindec($binX);
     }
 
@@ -1695,9 +1696,10 @@ class Engineering
             $binX .= str_pad(decbin((int) $char), 3, '0', STR_PAD_LEFT);
         }
         if (strlen($binX) == 30 && $binX[0] == '1') {
-            for ($i = 0; $i < 30; $i++) {
+            for ($i = 0; $i < 30; ++$i) {
                 $binX[$i] = ($binX[$i] == '1' ? '0' : '1');
             }
+
             return (bindec($binX) + 1) * -1;
         }
 

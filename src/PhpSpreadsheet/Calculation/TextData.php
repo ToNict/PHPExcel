@@ -381,7 +381,7 @@ class TextData
         if (is_bool($value)) {
             $value = ($value) ? \PhpOffice\PhpExcel\Calculation::getTRUE() : \PhpOffice\PhpExcel\Calculation::getFALSE();
         }
-        
+
         if (empty($chars)) {
             return '';
         }
