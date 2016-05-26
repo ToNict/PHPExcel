@@ -5,6 +5,7 @@ namespace PhpOffice\PhpExcel\Shared;
 if (!defined('PCLZIP_TEMPORARY_DIR')) {
     define('PCLZIP_TEMPORARY_DIR', File::sysGetTempDir().DIRECTORY_SEPARATOR);
 }
+use PhpOffice\PhpExcel\Shared\PCLZip\PclZip;
 
 /**
  * PhpOffice\PhpExcel\Shared\ZipArchive.
@@ -62,7 +63,7 @@ class ZipArchive
     public function open($fileName)
     {
         $this->tempDir = File::sysGetTempDir();
-        $this->zip = new \PclZip($fileName);
+        $this->zip = new PclZip($fileName);
 
         return true;
     }

@@ -2,16 +2,16 @@
 
 /** Error reporting */
 error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+ini_set('display_errors', true);
+ini_set('display_startup_errors', true);
 date_default_timezone_set('Europe/London');
 
-define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
+define('EOL', (PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 
 date_default_timezone_set('Europe/London');
 
 /**
- * PHPExcel
+ * PHPExcel.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -30,36 +30,35 @@ date_default_timezone_set('Europe/London');
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PHPExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 
 /** PHPExcel */
-require_once dirname(__FILE__) . '/../src/Bootstrap.php';
-
+require_once dirname(__FILE__).'/../src/Bootstrap.php';
 
 $objPHPExcel = new \PhpOffice\PhpExcel\Spreadsheet();
 $objWorksheet = $objPHPExcel->getActiveSheet();
 $objWorksheet->fromArray(
-	array(
-		array('',		'Rainfall (mm)',	'Temperature (°F)',	'Humidity (%)'),
-		array('Jan',		78,   				52,					61),
-		array('Feb',		64,   				54,					62),
-		array('Mar',		62,   				57,					63),
-		array('Apr',		21,   				62,					59),
-		array('May',		11,   				75,					60),
-		array('Jun',		1,   				75,					57),
-		array('Jul',		1,   				79,					56),
-		array('Aug',		1,   				79,					59),
-		array('Sep',		10,   				75,					60),
-		array('Oct',		40,   				68,					63),
-		array('Nov',		69,   				62,					64),
-		array('Dec',		89,   				57,					66),
-	)
+    array(
+        array('',        'Rainfall (mm)',    'Temperature (°F)',    'Humidity (%)'),
+        array('Jan',        78,                52,                    61),
+        array('Feb',        64,                54,                    62),
+        array('Mar',        62,                57,                    63),
+        array('Apr',        21,                62,                    59),
+        array('May',        11,                75,                    60),
+        array('Jun',        1,                75,                    57),
+        array('Jul',        1,                79,                    56),
+        array('Aug',        1,                79,                    59),
+        array('Sep',        10,                75,                    60),
+        array('Oct',        40,                68,                    63),
+        array('Nov',        69,                62,                    64),
+        array('Dec',        89,                57,                    66),
+    )
 );
-
 
 //	Set the Labels for each data series we want to plot
 //		Datatype
@@ -69,13 +68,13 @@ $objWorksheet->fromArray(
 //		Data values
 //		Data Marker
 $dataSeriesLabels1 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$B$1', NULL, 1),	//	Temperature
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$B$1', null, 1),    //	Temperature
 );
 $dataSeriesLabels2 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$C$1', NULL, 1),	//	Rainfall
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$C$1', null, 1),    //	Rainfall
 );
 $dataSeriesLabels3 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$D$1', NULL, 1),	//	Humidity
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$D$1', null, 1),    //	Humidity
 );
 
 //	Set the X-Axis Labels
@@ -86,9 +85,8 @@ $dataSeriesLabels3 = array(
 //		Data values
 //		Data Marker
 $xAxisTickValues = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$A$2:$A$13', NULL, 12),	//	Jan to Dec
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('String', 'Worksheet!$A$2:$A$13', null, 12),    //	Jan to Dec
 );
-
 
 //	Set the Data values for each data series we want to plot
 //		Datatype
@@ -98,22 +96,21 @@ $xAxisTickValues = array(
 //		Data values
 //		Data Marker
 $dataSeriesValues1 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$B$2:$B$13', NULL, 12),
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$B$2:$B$13', null, 12),
 );
 
 //	Build the dataseries
 $series1 = new \PhpOffice\PhpExcel\Chart\DataSeries(
-	\PhpOffice\PhpExcel\Chart\DataSeries::TYPE_BARCHART,		// plotType
-	\PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_CLUSTERED,	// plotGrouping
-	range(0, count($dataSeriesValues1)-1),			// plotOrder
-	$dataSeriesLabels1,								// plotLabel
-	$xAxisTickValues,								// plotCategory
-	$dataSeriesValues1								// plotValues
+    \PhpOffice\PhpExcel\Chart\DataSeries::TYPE_BARCHART,        // plotType
+    \PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_CLUSTERED,    // plotGrouping
+    range(0, count($dataSeriesValues1) - 1),            // plotOrder
+    $dataSeriesLabels1,                                // plotLabel
+    $xAxisTickValues,                                // plotCategory
+    $dataSeriesValues1                                // plotValues
 );
 //	Set additional dataseries parameters
 //		Make it a vertical column rather than a horizontal bar graph
 $series1->setPlotDirection(\PhpOffice\PhpExcel\Chart\DataSeries::DIRECTION_COL);
-
 
 //	Set the Data values for each data series we want to plot
 //		Datatype
@@ -123,19 +120,18 @@ $series1->setPlotDirection(\PhpOffice\PhpExcel\Chart\DataSeries::DIRECTION_COL);
 //		Data values
 //		Data Marker
 $dataSeriesValues2 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$C$2:$C$13', NULL, 12),
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$C$2:$C$13', null, 12),
 );
 
 //	Build the dataseries
 $series2 = new \PhpOffice\PhpExcel\Chart\DataSeries(
-	\PhpOffice\PhpExcel\Chart\DataSeries::TYPE_LINECHART,		// plotType
-	\PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_STANDARD,	// plotGrouping
-	range(0, count($dataSeriesValues2)-1),			// plotOrder
-	$dataSeriesLabels2,								// plotLabel
-	NULL,											// plotCategory
-	$dataSeriesValues2								// plotValues
+    \PhpOffice\PhpExcel\Chart\DataSeries::TYPE_LINECHART,        // plotType
+    \PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_STANDARD,    // plotGrouping
+    range(0, count($dataSeriesValues2) - 1),            // plotOrder
+    $dataSeriesLabels2,                                // plotLabel
+    null,                                            // plotCategory
+    $dataSeriesValues2                                // plotValues
 );
-
 
 //	Set the Data values for each data series we want to plot
 //		Datatype
@@ -145,38 +141,36 @@ $series2 = new \PhpOffice\PhpExcel\Chart\DataSeries(
 //		Data values
 //		Data Marker
 $dataSeriesValues3 = array(
-	new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$D$2:$D$13', NULL, 12),
+    new \PhpOffice\PhpExcel\Chart\DataSeriesValues('Number', 'Worksheet!$D$2:$D$13', null, 12),
 );
 
 //	Build the dataseries
 $series3 = new \PhpOffice\PhpExcel\Chart\DataSeries(
-	\PhpOffice\PhpExcel\Chart\DataSeries::TYPE_AREACHART,		// plotType
-	\PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_STANDARD,	// plotGrouping
-	range(0, count($dataSeriesValues2)-1),			// plotOrder
-	$dataSeriesLabels3,								// plotLabel
-	NULL,											// plotCategory
-	$dataSeriesValues3								// plotValues
+    \PhpOffice\PhpExcel\Chart\DataSeries::TYPE_AREACHART,        // plotType
+    \PhpOffice\PhpExcel\Chart\DataSeries::GROUPING_STANDARD,    // plotGrouping
+    range(0, count($dataSeriesValues2) - 1),            // plotOrder
+    $dataSeriesLabels3,                                // plotLabel
+    null,                                            // plotCategory
+    $dataSeriesValues3                                // plotValues
 );
 
-
 //	Set the series in the plot area
-$plotArea = new \PhpOffice\PhpExcel\Chart\PlotArea(NULL, array($series1, $series2, $series3));
+$plotArea = new \PhpOffice\PhpExcel\Chart\PlotArea(null, array($series1, $series2, $series3));
 //	Set the chart legend
-$legend = new \PhpOffice\PhpExcel\Chart\Legend(\PhpOffice\PhpExcel\Chart\Legend::POSITION_RIGHT, NULL, false);
+$legend = new \PhpOffice\PhpExcel\Chart\Legend(\PhpOffice\PhpExcel\Chart\Legend::POSITION_RIGHT, null, false);
 
 $title = new \PhpOffice\PhpExcel\Chart\Title('Average Weather Chart for Crete');
 
-
 //	Create the chart
 $chart = new \PhpOffice\PhpExcel\Chart(
-	'chart1',		// name
-	$title,			// title
-	$legend,		// legend
-	$plotArea,		// plotArea
-	true,			// plotVisibleOnly
-	0,				// displayBlanksAs
-	NULL,			// xAxisLabel
-	NULL			// yAxisLabel
+    'chart1',        // name
+    $title,            // title
+    $legend,        // legend
+    $plotArea,        // plotArea
+    true,            // plotVisibleOnly
+    0,                // displayBlanksAs
+    null,            // xAxisLabel
+    null            // yAxisLabel
 );
 
 //	Set the position where the chart should appear in the worksheet
@@ -186,18 +180,16 @@ $chart->setBottomRightPosition('O16');
 //	Add the chart to the worksheet
 $objWorksheet->addChart($chart);
 
-
 // Save Excel 2007 file
-echo date('H:i:s') , " Write to Excel2007 format" , EOL;
+echo date('H:i:s') , ' Write to Excel2007 format' , EOL;
 $objWriter = \PhpOffice\PhpExcel\IOFactory::createWriter($objPHPExcel, 'Excel2007');
-$objWriter->setIncludeCharts(TRUE);
+$objWriter->setIncludeCharts(true);
 $objWriter->save(str_replace('.php', '.xlsx', __FILE__));
-echo date('H:i:s') , " File written to " , str_replace('.php', '.xlsx', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
-
+echo date('H:i:s') , ' File written to ' , str_replace('.php', '.xlsx', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
 
 // Echo memory peak usage
-echo date('H:i:s') , " Peak memory usage: " , (memory_get_peak_usage(true) / 1024 / 1024) , " MB" , EOL;
+echo date('H:i:s') , ' Peak memory usage: ' , (memory_get_peak_usage(true) / 1024 / 1024) , ' MB' , EOL;
 
 // Echo done
-echo date('H:i:s') , " Done writing file" , EOL;
+echo date('H:i:s') , ' Done writing file' , EOL;
 echo 'File has been created in ' , getcwd() , EOL;

@@ -2,7 +2,7 @@
 
 namespace PhpOffice\PhpExcel\Reader;
 
-use PHPExcel\Spreadsheet;
+use PhpOffice\PhpExcel\Spreadsheet;
 
 /**
  * PhpOffice\PhpExcel\Reader\CSV.

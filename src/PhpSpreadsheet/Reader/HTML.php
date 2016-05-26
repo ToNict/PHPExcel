@@ -146,7 +146,7 @@ class HTML extends BaseReader implements IReader
     public function load($pFilename)
     {
         // Create new PHPExcel
-        $objPHPExcel = new PHPExcel();
+        $objPHPExcel = new \PhpOffice\PhpExcel\Spreadsheet();
 
         // Load into this instance
         return $this->loadIntoExisting($pFilename, $objPHPExcel);
@@ -470,7 +470,7 @@ class HTML extends BaseReader implements IReader
      *
      * @throws Exception
      */
-    public function loadIntoExisting($pFilename, PHPExcel $objPHPExcel)
+    public function loadIntoExisting($pFilename, \PhpOffice\PhpExcel\Spreadsheet $objPHPExcel)
     {
         // Open file to validate
         $this->openFile($pFilename);
@@ -488,7 +488,7 @@ class HTML extends BaseReader implements IReader
         $objPHPExcel->setActiveSheetIndex($this->sheetIndex);
 
         //    Create a new DOM object
-        $dom = new domDocument();
+        $dom = new \DOMDocument();
         //    Reload the HTML file into the DOM object
         $loaded = $dom->loadHTML(mb_convert_encoding($this->securityScanFile($pFilename), 'HTML-ENTITIES', 'UTF-8'));
         if ($loaded === false) {

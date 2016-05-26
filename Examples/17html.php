@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPExcel
+ * PHPExcel.
  *
  * Copyright (c) 2006 - 2016 PHPExcel
  *
@@ -19,29 +19,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPExcel
- * @package    PHPExcel
+ *
  * @copyright  Copyright (c) 2006 - 2016 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
+ *
  * @version    ##VERSION##, ##DATE##
  */
 
 /** Error reporting */
 error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+ini_set('display_errors', true);
+ini_set('display_startup_errors', true);
 date_default_timezone_set('Europe/London');
 
-define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
+define('EOL', (PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 
 date_default_timezone_set('Europe/London');
 
-include "05featuredemo.inc.php";
+include '05featuredemo.inc.php';
 
 /** \PhpOffice\PhpExcel\IOFactory */
-require_once dirname(__FILE__) . '/../src/Bootstrap.php';
+require_once dirname(__FILE__).'/../src/Bootstrap.php';
 
-
-echo date('H:i:s') , " Write to HTML format" , EOL;
+echo date('H:i:s') , ' Write to HTML format' , EOL;
 $callStartTime = microtime(true);
 
 $objWriter = \PhpOffice\PhpExcel\IOFactory::createWriter($objPHPExcel, 'HTML');
@@ -50,15 +50,14 @@ $objWriter->setSheetIndex(0);
 $objWriter->save(str_replace('.php', '.htm', __FILE__));
 $callEndTime = microtime(true);
 $callTime = $callEndTime - $callStartTime;
-echo date('H:i:s') , " File written to " , str_replace('.php', '.htm', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
-echo 'Call time to write Workbook was ' , sprintf('%.4f',$callTime) , " seconds" , EOL;
+echo date('H:i:s') , ' File written to ' , str_replace('.php', '.htm', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
+echo 'Call time to write Workbook was ' , sprintf('%.4f', $callTime) , ' seconds' , EOL;
 // Echo memory usage
-echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 / 1024) , " MB" , EOL;
-
+echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 / 1024) , ' MB' , EOL;
 
 // Echo memory peak usage
-echo date('H:i:s') , " Peak memory usage: " , (memory_get_peak_usage(true) / 1024 / 1024) , " MB" , EOL;
+echo date('H:i:s') , ' Peak memory usage: ' , (memory_get_peak_usage(true) / 1024 / 1024) , ' MB' , EOL;
 
 // Echo done
-echo date('H:i:s') , " Done writing file" , EOL;
+echo date('H:i:s') , ' Done writing file' , EOL;
 echo 'File has been created in ' , getcwd() , EOL;

@@ -117,7 +117,7 @@ class CachedObjectStorageFactory
      * Return the current cache storage method.
      *
      * @return string|null
-     **/
+     * */
     public static function getCacheStorageMethod()
     {
         return self::$cacheStorageMethod;
@@ -127,7 +127,7 @@ class CachedObjectStorageFactory
      * Return the current cache storage class.
      *
      * @return \CachedObjectStorage\ICache|null
-     **/
+     * */
     public static function getCacheStorageClass()
     {
         return self::$cacheStorageClass;
@@ -137,7 +137,7 @@ class CachedObjectStorageFactory
      * Return the list of all possible cache storage methods.
      *
      * @return string[]
-     **/
+     * */
     public static function getAllCacheStorageMethods()
     {
         return self::$storageMethods;
@@ -147,7 +147,7 @@ class CachedObjectStorageFactory
      * Return the list of all available cache storage methods.
      *
      * @return string[]
-     **/
+     * */
     public static function getCacheStorageMethods()
     {
         $activeMethods = array();
@@ -169,7 +169,7 @@ class CachedObjectStorageFactory
      *                           when instantiating
      *
      * @return bool
-     **/
+     * */
     public static function initialize($method = self::CACHE_IN_MEMORY, $arguments = [])
     {
         if (!in_array($method, self::$storageMethods)) {
@@ -202,7 +202,7 @@ class CachedObjectStorageFactory
      * @param Worksheet $parent Enable cell caching for this worksheet
      *
      * @return CachedObjectStorage\ICache
-     **/
+     * */
     public static function getInstance(Worksheet $parent)
     {
         $cacheMethodIsAvailable = true;
@@ -212,8 +212,7 @@ class CachedObjectStorageFactory
 
         if ($cacheMethodIsAvailable) {
             $instance = new self::$cacheStorageClass(
-                $parent,
-                self::$storageMethodParameters[self::$cacheStorageMethod]
+                $parent, self::$storageMethodParameters[self::$cacheStorageMethod]
             );
             if ($instance !== null) {
                 return $instance;
@@ -225,7 +224,7 @@ class CachedObjectStorageFactory
 
     /**
      * Clear the cache storage.
-     **/
+     * */
     public static function finalize()
     {
         self::$cacheStorageMethod = null;
