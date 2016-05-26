@@ -30,6 +30,7 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class DateTime
 {
+
     /**
      * Identify if a year is a leap year or not.
      *
@@ -489,6 +490,7 @@ class DateTime
      */
     public static function DATEVALUE($dateValue = 1)
     {
+        $dateValueOrig = $dateValue;
         $dateValue = trim(Functions::flattenSingleValue($dateValue), '"');
         //    Strip any ordinals because they're allowed in Excel (English only)
         $dateValue = preg_replace('/(\d)(st|nd|rd|th)([ -\/])/Ui', '$1$3', $dateValue);
@@ -517,7 +519,12 @@ class DateTime
             if ($yearFound) {
                 array_unshift($t1, 1);
             } else {
-                array_push($t1, date('Y'));
+                if ($t1[1] > 29) {
+                    $t1[1] += 1900;
+                    array_unshift($t1, 1);
+                } else {
+                    array_push($t1, date('Y'));
+                }
             }
         }
         unset($t);
@@ -538,6 +545,9 @@ class DateTime
                 }
             } else {
                 return Functions::VALUE();
+            }
+            if ($testVal1 < 31 && $testVal2 < 12 && $testVal3 < 12 && strlen($testVal3) == 2) {
+                $testVal3 += 2000;
             }
             $PHPDateArray = date_parse($testVal1.'-'.$testVal2.'-'.$testVal3);
             if (($PHPDateArray === false) || ($PHPDateArray['error_count'] > 0)) {
@@ -561,6 +571,9 @@ class DateTime
             }
             if ($PHPDateArray['day'] == '') {
                 $PHPDateArray['day'] = strftime('%d');
+            }
+            if (!checkdate($PHPDateArray['month'], $PHPDateArray['day'], $PHPDateArray['year'])) {
+                return Functions::VALUE();
             }
             $excelDateValue = floor(
                 \PhpOffice\PhpExcel\Shared\Date::formattedPHPToExcel(
@@ -608,6 +621,12 @@ class DateTime
     {
         $timeValue = trim(Functions::flattenSingleValue($timeValue), '"');
         $timeValue = str_replace(array('/', '.'), array('-', '-'), $timeValue);
+
+        $arraySplit = preg_split('/[\/:\-\s]/', $timeValue);
+        if ((count($arraySplit) == 2 || count($arraySplit) == 3) && $arraySplit[0] > 24) {
+            $arraySplit[0] = ($arraySplit[0] % 24);
+            $timeValue = implode(':', $arraySplit);
+        }
 
         $PHPDateArray = date_parse($timeValue);
         if (($PHPDateArray !== false) && ($PHPDateArray['error_count'] == 0)) {
@@ -692,6 +711,9 @@ class DateTime
                 if ($endMonths < $startMonths) {
                     --$retVal;
                 } elseif (($endMonths == $startMonths) && ($endDays < $startDays)) {
+                    // Remove start month
+                    --$retVal;
+                    // Remove end month
                     --$retVal;
                 }
                 break;
@@ -700,9 +722,7 @@ class DateTime
                     $retVal = $endDays;
                     $PHPEndDateObject->modify('-'.$endDays.' days');
                     $adjustDays = $PHPEndDateObject->format('j');
-                    if ($adjustDays > $startDays) {
-                        $retVal += ($adjustDays - $startDays);
-                    }
+                    $retVal += ($adjustDays - $startDays);
                 } else {
                     $retVal = $endDays - $startDays;
                 }
@@ -731,7 +751,7 @@ class DateTime
                 }
                 break;
             default:
-                $retVal = Functions::NAN();
+                $retVal = Functions::VALUE();
         }
 
         return $retVal;
@@ -1251,7 +1271,6 @@ class DateTime
         // Execute function
         $PHPDateObject = \PhpOffice\PhpExcel\Shared\Date::excelToPHPObject($dateValue);
         $dayOfYear = $PHPDateObject->format('z');
-        $dow = $PHPDateObject->format('w');
         $PHPDateObject->modify('-'.$dayOfYear.' days');
         $dow = $PHPDateObject->format('w');
         $daysInFirstWeek = 7 - (($dow + (2 - $method)) % 7);
@@ -1279,7 +1298,7 @@ class DateTime
     {
         $dateValue = Functions::flattenSingleValue($dateValue);
 
-        if ($dateValue === null) {
+        if (empty($dateValue)) {
             $dateValue = 1;
         } elseif (is_string($dateValue = self::getDateValue($dateValue))) {
             return Functions::VALUE();

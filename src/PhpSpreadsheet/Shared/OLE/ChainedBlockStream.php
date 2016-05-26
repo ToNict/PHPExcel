@@ -70,7 +70,7 @@ class ChainedBlockStream
      *
      * @return bool true on success
      */
-    public function stream_open($path, $mode, $options, &$openedPath)
+    public function stream_open($path, $mode, $options, &$openedPath) // @codingStandardsIgnoreLine
     {
         if ($mode != 'r') {
             if ($options & STREAM_REPORT_ERRORS) {
@@ -125,7 +125,7 @@ class ChainedBlockStream
     /**
      * Implements support for fclose().
      */
-    public function stream_close()
+    public function stream_close() // @codingStandardsIgnoreLine
     {
         $this->ole = null;
         unset($GLOBALS['_OLE_INSTANCES']);
@@ -138,7 +138,7 @@ class ChainedBlockStream
      *
      * @return string
      */
-    public function stream_read($count)
+    public function stream_read($count) // @codingStandardsIgnoreLine
     {
         if ($this->stream_eof()) {
             return false;
@@ -154,7 +154,7 @@ class ChainedBlockStream
      *
      * @return bool TRUE if the file pointer is at EOF; otherwise FALSE
      */
-    public function stream_eof()
+    public function stream_eof() // @codingStandardsIgnoreLine
     {
         return $this->pos >= strlen($this->data);
     }
@@ -165,7 +165,7 @@ class ChainedBlockStream
      *
      * @return int
      */
-    public function stream_tell()
+    public function stream_tell() // @codingStandardsIgnoreLine
     {
         return $this->pos;
     }
@@ -178,7 +178,7 @@ class ChainedBlockStream
      *
      * @return bool
      */
-    public function stream_seek($offset, $whence)
+    public function stream_seek($offset, $whence) // @codingStandardsIgnoreLine
     {
         if ($whence == SEEK_SET && $offset >= 0) {
             $this->pos = $offset;
@@ -199,7 +199,7 @@ class ChainedBlockStream
      *
      * @return array
      */
-    public function stream_stat()
+    public function stream_stat() // @codingStandardsIgnoreLine
     {
         return array(
             'size' => strlen($this->data),

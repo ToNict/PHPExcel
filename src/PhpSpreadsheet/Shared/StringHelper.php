@@ -31,7 +31,8 @@ namespace PhpOffice\PhpExcel\Shared;
 class StringHelper
 {
     /**    Constants                */
-/**    Regular Expressions        */
+
+    /**    Regular Expressions        */
     //    Fraction
     const STRING_REGEXP_FRACTION = '(-?)(\d+)\s+(\d+\/\d+)';
 
@@ -557,7 +558,7 @@ class StringHelper
         $newstr = '';
         for ($i = 0; $i < $len; $i += 2) {
             if ($bom_be) {
-                $val = ord($str{$i})   << 4;
+                $val = ord($str{$i}) << 4;
                 $val += ord($str{$i + 1});
             } else {
                 $val = ord($str{$i + 1}) << 4;
@@ -720,7 +721,8 @@ class StringHelper
         }
 
         return false;
-    }    //    function convertToNumberIfFraction()
+    }
+//    function convertToNumberIfFraction()
 
     /**
      * Get the decimal separator. If it has not yet been set explicitly, try to obtain number
@@ -732,8 +734,7 @@ class StringHelper
     {
         if (!isset(self::$decimalSeparator)) {
             $localeconv = localeconv();
-            self::$decimalSeparator = ($localeconv['decimal_point'] != '')
-                ? $localeconv['decimal_point'] : $localeconv['mon_decimal_point'];
+            self::$decimalSeparator = ($localeconv['decimal_point'] != '') ? $localeconv['decimal_point'] : $localeconv['mon_decimal_point'];
 
             if (self::$decimalSeparator == '') {
                 // Default to .
@@ -765,8 +766,7 @@ class StringHelper
     {
         if (!isset(self::$thousandsSeparator)) {
             $localeconv = localeconv();
-            self::$thousandsSeparator = ($localeconv['thousands_sep'] != '')
-                ? $localeconv['thousands_sep'] : $localeconv['mon_thousands_sep'];
+            self::$thousandsSeparator = ($localeconv['thousands_sep'] != '') ? $localeconv['thousands_sep'] : $localeconv['mon_thousands_sep'];
 
             if (self::$thousandsSeparator == '') {
                 // Default to .
@@ -796,15 +796,18 @@ class StringHelper
      */
     public static function getCurrencyCode()
     {
-        if (!isset(self::$currencyCode)) {
-            $localeconv = localeconv();
-            self::$currencyCode = ($localeconv['currency_symbol'] != '')
-                ? $localeconv['currency_symbol'] : $localeconv['int_curr_symbol'];
-
-            if (self::$currencyCode == '') {
-                // Default to $
-                self::$currencyCode = '$';
-            }
+        if (!empty(self::$currencyCode)) {
+            return self::$currencyCode;
+        }
+        self::$currencyCode = '$';
+        $localeconv = localeconv();
+        if (!empty($localeconv['currency_symbol'])) {
+            self::$currencyCode = $localeconv['currency_symbol'];
+            return self::$currencyCode;
+        }
+        if (!empty($localeconv['int_curr_symbol'])) {
+            self::$currencyCode = $localeconv['int_curr_symbol'];
+            return self::$currencyCode;
         }
 
         return self::$currencyCode;

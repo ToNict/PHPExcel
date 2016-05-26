@@ -65,7 +65,7 @@ class Logical
     }
 
     /**
-     * LOGICAL_AND.
+     * logicalAnd.
      *
      * Returns boolean TRUE if all its arguments are TRUE; returns FALSE if one or more argument is FALSE.
      *
@@ -86,7 +86,7 @@ class Logical
      *
      * @return bool The logical AND of the arguments.
      */
-    public static function LOGICAL_AND()
+    public static function logicalAnd()
     {
         // Return value
         $returnValue = true;
@@ -122,7 +122,7 @@ class Logical
     }
 
     /**
-     * LOGICAL_OR.
+     * logicalOr.
      *
      * Returns boolean TRUE if any argument is TRUE; returns FALSE if all arguments are FALSE.
      *
@@ -143,7 +143,7 @@ class Logical
      *
      * @return bool The logical OR of the arguments.
      */
-    public static function LOGICAL_OR()
+    public static function logicalOr()
     {
         // Return value
         $returnValue = false;
@@ -217,7 +217,7 @@ class Logical
     }
 
     /**
-     * STATEMENT_IF.
+     * statementIf.
      *
      * Returns one value if a condition you specify evaluates to TRUE and another value if it evaluates to FALSE.
      *
@@ -249,7 +249,7 @@ class Logical
      *
      * @return mixed The value of returnIfTrue or returnIfFalse determined by condition
      */
-    public static function STATEMENT_IF($condition = true, $returnIfTrue = 0, $returnIfFalse = false)
+    public static function statementIf($condition = true, $returnIfTrue = 0, $returnIfFalse = false)
     {
         $condition = (is_null($condition))     ? true :  (boolean) Functions::flattenSingleValue($condition);
         $returnIfTrue = (is_null($returnIfTrue))  ? 0 :     Functions::flattenSingleValue($returnIfTrue);
@@ -276,6 +276,6 @@ class Logical
         $testValue = (is_null($testValue)) ? '' : Functions::flattenSingleValue($testValue);
         $errorpart = (is_null($errorpart)) ? '' : Functions::flattenSingleValue($errorpart);
 
-        return self::STATEMENT_IF(Functions::IS_ERROR($testValue), $errorpart, $testValue);
+        return self::statementIf(Functions::IS_ERROR($testValue), $errorpart, $testValue);
     }
 }

@@ -263,7 +263,7 @@ class Calculation
         ),
         'ADDRESS' => array(
             'category' => Calculation\Categories::CATEGORY_LOOKUP_AND_REFERENCE,
-            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\LookupRef::CELL_ADDRESS',
+            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\LookupRef::cellAddress',
             'argumentCount' => '2-5',
         ),
         'AMORDEGRC' => array(
@@ -278,7 +278,7 @@ class Calculation
         ),
         'AND' => array(
             'category' => Calculation\Categories::CATEGORY_LOGICAL,
-            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::LOGICAL_AND',
+            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::logicalAnd',
             'argumentCount' => '1+',
         ),
         'AREAS' => array(
@@ -965,7 +965,7 @@ class Calculation
         ),
         'IF' => array(
             'category' => Calculation\Categories::CATEGORY_LOGICAL,
-            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::STATEMENT_IF',
+            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::statementIf',
             'argumentCount' => '1-3',
         ),
         'IFERROR' => array(
@@ -1211,7 +1211,7 @@ class Calculation
         ),
         'LOG' => array(
             'category' => Calculation\Categories::CATEGORY_MATH_AND_TRIG,
-            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\MathTrig::LOG_BASE',
+            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\MathTrig::logBase',
             'argumentCount' => '1,2',
         ),
         'LOG10' => array(
@@ -1468,7 +1468,7 @@ class Calculation
         ),
         'OR' => array(
             'category' => Calculation\Categories::CATEGORY_LOGICAL,
-            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::LOGICAL_OR',
+            'functionCall' => '\\PhpOffice\\PhpExcel\\Calculation\\Logical::logicalOr',
             'argumentCount' => '1+',
         ),
         'PEARSON' => array(

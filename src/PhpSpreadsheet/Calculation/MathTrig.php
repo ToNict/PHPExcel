@@ -30,6 +30,7 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class MathTrig
 {
+
     //
     //    Private method to return an array of the factors of the input value
     //
@@ -93,7 +94,7 @@ class MathTrig
         $yCoordinate = ($yCoordinate !== null) ? $yCoordinate : 0.0;
 
         if (((is_numeric($xCoordinate)) || (is_bool($xCoordinate))) &&
-            ((is_numeric($yCoordinate)))  || (is_bool($yCoordinate))) {
+            ((is_numeric($yCoordinate))) || (is_bool($yCoordinate))) {
             $xCoordinate = (float) $xCoordinate;
             $yCoordinate = (float) $yCoordinate;
 
@@ -499,7 +500,7 @@ class MathTrig
     }
 
     /**
-     * LOG_BASE.
+     * logBase.
      *
      * Returns the logarithm of a number to a specified base. The default base is 10.
      *
@@ -513,7 +514,7 @@ class MathTrig
      *
      * @return float
      */
-    public static function LOG_BASE($number = null, $base = 10)
+    public static function logBase($number = null, $base = 10)
     {
         $number = Functions::flattenSingleValue($number);
         $base = (is_null($base)) ? 10 : (float) Functions::flattenSingleValue($base);
@@ -567,8 +568,10 @@ class MathTrig
             }
             ++$row;
         }
-        if ($row != $maxColumn) {
-            return Functions::VALUE();
+        foreach ($matrixValues as $matrixRow) {
+            if (count($matrixRow) != $maxColumn) {
+                return Functions::VALUE();
+            }
         }
 
         try {
@@ -952,7 +955,7 @@ class MathTrig
     public static function ROMAN($aValue, $style = 0)
     {
         $aValue = Functions::flattenSingleValue($aValue);
-        $style = (is_null($style))    ? 0 :    (integer) Functions::flattenSingleValue($style);
+        $style = (is_null($style)) ? 0 : (integer) Functions::flattenSingleValue($style);
         if ((!is_numeric($aValue)) || ($aValue < 0) || ($aValue >= 4000)) {
             return Functions::VALUE();
         }
@@ -1248,19 +1251,19 @@ class MathTrig
     }
 
     /**
-     *	SUMIFS.
+     * 	SUMIFS.
      *
-     *	Counts the number of cells that contain numbers within the list of arguments
+     * 	Counts the number of cells that contain numbers within the list of arguments
      *
-     *	Excel Function:
-     *		SUMIFS(value1[,value2[, ...]],condition)
+     * 	Excel Function:
+     * 		SUMIFS(value1[,value2[, ...]],condition)
      *
-     *	@category Mathematical and Trigonometric Functions
+     * 	@category Mathematical and Trigonometric Functions
      *
-     *	@param	mixed		$arg,...		Data values
-     *	@param	string		$condition		The criteria that defines which cells will be summed.
+     * 	@param	mixed		$arg,...		Data values
+     * 	@param	string		$condition		The criteria that defines which cells will be summed.
      *
-     *	@return	float
+     * 	@return	float
      */
     public static function SUMIFS()
     {

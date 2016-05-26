@@ -33,75 +33,76 @@ define('EULER', 2.71828182845904523536);
  */
 class Engineering
 {
+
     /**
      * Details of the Units of measure that can be used in CONVERTUOM().
      *
      * @var mixed[]
      */
     private static $conversionUnits = array(
-        'g' => array('Group' => 'Mass',        'Unit Name' => 'Gram',                     'AllowPrefix' => true),
-        'sg' => array('Group' => 'Mass',        'Unit Name' => 'Slug',                     'AllowPrefix' => false),
-        'lbm' => array('Group' => 'Mass',        'Unit Name' => 'Pound mass (avoirdupois)', 'AllowPrefix' => false),
-        'u' => array('Group' => 'Mass',        'Unit Name' => 'U (atomic mass unit)',     'AllowPrefix' => true),
-        'ozm' => array('Group' => 'Mass',        'Unit Name' => 'Ounce mass (avoirdupois)', 'AllowPrefix' => false),
-        'm' => array('Group' => 'Distance',    'Unit Name' => 'Meter',                    'AllowPrefix' => true),
-        'mi' => array('Group' => 'Distance',    'Unit Name' => 'Statute mile',             'AllowPrefix' => false),
-        'Nmi' => array('Group' => 'Distance',    'Unit Name' => 'Nautical mile',            'AllowPrefix' => false),
-        'in' => array('Group' => 'Distance',    'Unit Name' => 'Inch',                     'AllowPrefix' => false),
-        'ft' => array('Group' => 'Distance',    'Unit Name' => 'Foot',                     'AllowPrefix' => false),
-        'yd' => array('Group' => 'Distance',    'Unit Name' => 'Yard',                     'AllowPrefix' => false),
-        'ang' => array('Group' => 'Distance',    'Unit Name' => 'Angstrom',                 'AllowPrefix' => true),
-        'Pica' => array('Group' => 'Distance',    'Unit Name' => 'Pica (1/72 in)',           'AllowPrefix' => false),
-        'yr' => array('Group' => 'Time',        'Unit Name' => 'Year',                     'AllowPrefix' => false),
-        'day' => array('Group' => 'Time',        'Unit Name' => 'Day',                      'AllowPrefix' => false),
-        'hr' => array('Group' => 'Time',        'Unit Name' => 'Hour',                     'AllowPrefix' => false),
-        'mn' => array('Group' => 'Time',        'Unit Name' => 'Minute',                   'AllowPrefix' => false),
-        'sec' => array('Group' => 'Time',        'Unit Name' => 'Second',                   'AllowPrefix' => true),
-        'Pa' => array('Group' => 'Pressure',    'Unit Name' => 'Pascal',                   'AllowPrefix' => true),
-        'p' => array('Group' => 'Pressure',    'Unit Name' => 'Pascal',                   'AllowPrefix' => true),
-        'atm' => array('Group' => 'Pressure',    'Unit Name' => 'Atmosphere',               'AllowPrefix' => true),
-        'at' => array('Group' => 'Pressure',    'Unit Name' => 'Atmosphere',               'AllowPrefix' => true),
-        'mmHg' => array('Group' => 'Pressure',    'Unit Name' => 'mm of Mercury',            'AllowPrefix' => true),
-        'N' => array('Group' => 'Force',       'Unit Name' => 'Newton',                   'AllowPrefix' => true),
-        'dyn' => array('Group' => 'Force',       'Unit Name' => 'Dyne',                     'AllowPrefix' => true),
-        'dy' => array('Group' => 'Force',       'Unit Name' => 'Dyne',                     'AllowPrefix' => true),
-        'lbf' => array('Group' => 'Force',       'Unit Name' => 'Pound force',              'AllowPrefix' => false),
-        'J' => array('Group' => 'Energy',      'Unit Name' => 'Joule',                    'AllowPrefix' => true),
-        'e' => array('Group' => 'Energy',      'Unit Name' => 'Erg',                      'AllowPrefix' => true),
-        'c' => array('Group' => 'Energy',      'Unit Name' => 'Thermodynamic calorie',    'AllowPrefix' => true),
-        'cal' => array('Group' => 'Energy',      'Unit Name' => 'IT calorie',               'AllowPrefix' => true),
-        'eV' => array('Group' => 'Energy',      'Unit Name' => 'Electron volt',            'AllowPrefix' => true),
-        'ev' => array('Group' => 'Energy',      'Unit Name' => 'Electron volt',            'AllowPrefix' => true),
-        'HPh' => array('Group' => 'Energy',      'Unit Name' => 'Horsepower-hour',          'AllowPrefix' => false),
-        'hh' => array('Group' => 'Energy',      'Unit Name' => 'Horsepower-hour',          'AllowPrefix' => false),
-        'Wh' => array('Group' => 'Energy',      'Unit Name' => 'Watt-hour',                'AllowPrefix' => true),
-        'wh' => array('Group' => 'Energy',      'Unit Name' => 'Watt-hour',                'AllowPrefix' => true),
-        'flb' => array('Group' => 'Energy',      'Unit Name' => 'Foot-pound',               'AllowPrefix' => false),
-        'BTU' => array('Group' => 'Energy',      'Unit Name' => 'BTU',                      'AllowPrefix' => false),
-        'btu' => array('Group' => 'Energy',      'Unit Name' => 'BTU',                      'AllowPrefix' => false),
-        'HP' => array('Group' => 'Power',       'Unit Name' => 'Horsepower',               'AllowPrefix' => false),
-        'h' => array('Group' => 'Power',       'Unit Name' => 'Horsepower',               'AllowPrefix' => false),
-        'W' => array('Group' => 'Power',       'Unit Name' => 'Watt',                     'AllowPrefix' => true),
-        'w' => array('Group' => 'Power',       'Unit Name' => 'Watt',                     'AllowPrefix' => true),
-        'T' => array('Group' => 'Magnetism',   'Unit Name' => 'Tesla',                    'AllowPrefix' => true),
-        'ga' => array('Group' => 'Magnetism',   'Unit Name' => 'Gauss',                    'AllowPrefix' => true),
-        'C' => array('Group' => 'Temperature', 'Unit Name' => 'Celsius',                  'AllowPrefix' => false),
-        'cel' => array('Group' => 'Temperature', 'Unit Name' => 'Celsius',                  'AllowPrefix' => false),
-        'F' => array('Group' => 'Temperature', 'Unit Name' => 'Fahrenheit',               'AllowPrefix' => false),
-        'fah' => array('Group' => 'Temperature', 'Unit Name' => 'Fahrenheit',               'AllowPrefix' => false),
-        'K' => array('Group' => 'Temperature', 'Unit Name' => 'Kelvin',                   'AllowPrefix' => false),
-        'kel' => array('Group' => 'Temperature', 'Unit Name' => 'Kelvin',                   'AllowPrefix' => false),
-        'tsp' => array('Group' => 'Liquid',      'Unit Name' => 'Teaspoon',                 'AllowPrefix' => false),
-        'tbs' => array('Group' => 'Liquid',      'Unit Name' => 'Tablespoon',               'AllowPrefix' => false),
-        'oz' => array('Group' => 'Liquid',      'Unit Name' => 'Fluid Ounce',              'AllowPrefix' => false),
-        'cup' => array('Group' => 'Liquid',      'Unit Name' => 'Cup',                      'AllowPrefix' => false),
-        'pt' => array('Group' => 'Liquid',      'Unit Name' => 'U.S. Pint',                'AllowPrefix' => false),
-        'us_pt' => array('Group' => 'Liquid',      'Unit Name' => 'U.S. Pint',                'AllowPrefix' => false),
-        'uk_pt' => array('Group' => 'Liquid',      'Unit Name' => 'U.K. Pint',                'AllowPrefix' => false),
-        'qt' => array('Group' => 'Liquid',      'Unit Name' => 'Quart',                    'AllowPrefix' => false),
-        'gal' => array('Group' => 'Liquid',      'Unit Name' => 'Gallon',                   'AllowPrefix' => false),
-        'l' => array('Group' => 'Liquid',      'Unit Name' => 'Litre',                    'AllowPrefix' => true),
-        'lt' => array('Group' => 'Liquid',      'Unit Name' => 'Litre',                    'AllowPrefix' => true),
+        'g' => array('Group' => 'Mass', 'Unit Name' => 'Gram', 'AllowPrefix' => true),
+        'sg' => array('Group' => 'Mass', 'Unit Name' => 'Slug', 'AllowPrefix' => false),
+        'lbm' => array('Group' => 'Mass', 'Unit Name' => 'Pound mass (avoirdupois)', 'AllowPrefix' => false),
+        'u' => array('Group' => 'Mass', 'Unit Name' => 'U (atomic mass unit)', 'AllowPrefix' => true),
+        'ozm' => array('Group' => 'Mass', 'Unit Name' => 'Ounce mass (avoirdupois)', 'AllowPrefix' => false),
+        'm' => array('Group' => 'Distance', 'Unit Name' => 'Meter', 'AllowPrefix' => true),
+        'mi' => array('Group' => 'Distance', 'Unit Name' => 'Statute mile', 'AllowPrefix' => false),
+        'Nmi' => array('Group' => 'Distance', 'Unit Name' => 'Nautical mile', 'AllowPrefix' => false),
+        'in' => array('Group' => 'Distance', 'Unit Name' => 'Inch', 'AllowPrefix' => false),
+        'ft' => array('Group' => 'Distance', 'Unit Name' => 'Foot', 'AllowPrefix' => false),
+        'yd' => array('Group' => 'Distance', 'Unit Name' => 'Yard', 'AllowPrefix' => false),
+        'ang' => array('Group' => 'Distance', 'Unit Name' => 'Angstrom', 'AllowPrefix' => true),
+        'Pica' => array('Group' => 'Distance', 'Unit Name' => 'Pica (1/72 in)', 'AllowPrefix' => false),
+        'yr' => array('Group' => 'Time', 'Unit Name' => 'Year', 'AllowPrefix' => false),
+        'day' => array('Group' => 'Time', 'Unit Name' => 'Day', 'AllowPrefix' => false),
+        'hr' => array('Group' => 'Time', 'Unit Name' => 'Hour', 'AllowPrefix' => false),
+        'mn' => array('Group' => 'Time', 'Unit Name' => 'Minute', 'AllowPrefix' => false),
+        'sec' => array('Group' => 'Time', 'Unit Name' => 'Second', 'AllowPrefix' => true),
+        'Pa' => array('Group' => 'Pressure', 'Unit Name' => 'Pascal', 'AllowPrefix' => true),
+        'p' => array('Group' => 'Pressure', 'Unit Name' => 'Pascal', 'AllowPrefix' => true),
+        'atm' => array('Group' => 'Pressure', 'Unit Name' => 'Atmosphere', 'AllowPrefix' => true),
+        'at' => array('Group' => 'Pressure', 'Unit Name' => 'Atmosphere', 'AllowPrefix' => true),
+        'mmHg' => array('Group' => 'Pressure', 'Unit Name' => 'mm of Mercury', 'AllowPrefix' => true),
+        'N' => array('Group' => 'Force', 'Unit Name' => 'Newton', 'AllowPrefix' => true),
+        'dyn' => array('Group' => 'Force', 'Unit Name' => 'Dyne', 'AllowPrefix' => true),
+        'dy' => array('Group' => 'Force', 'Unit Name' => 'Dyne', 'AllowPrefix' => true),
+        'lbf' => array('Group' => 'Force', 'Unit Name' => 'Pound force', 'AllowPrefix' => false),
+        'J' => array('Group' => 'Energy', 'Unit Name' => 'Joule', 'AllowPrefix' => true),
+        'e' => array('Group' => 'Energy', 'Unit Name' => 'Erg', 'AllowPrefix' => true),
+        'c' => array('Group' => 'Energy', 'Unit Name' => 'Thermodynamic calorie', 'AllowPrefix' => true),
+        'cal' => array('Group' => 'Energy', 'Unit Name' => 'IT calorie', 'AllowPrefix' => true),
+        'eV' => array('Group' => 'Energy', 'Unit Name' => 'Electron volt', 'AllowPrefix' => true),
+        'ev' => array('Group' => 'Energy', 'Unit Name' => 'Electron volt', 'AllowPrefix' => true),
+        'HPh' => array('Group' => 'Energy', 'Unit Name' => 'Horsepower-hour', 'AllowPrefix' => false),
+        'hh' => array('Group' => 'Energy', 'Unit Name' => 'Horsepower-hour', 'AllowPrefix' => false),
+        'Wh' => array('Group' => 'Energy', 'Unit Name' => 'Watt-hour', 'AllowPrefix' => true),
+        'wh' => array('Group' => 'Energy', 'Unit Name' => 'Watt-hour', 'AllowPrefix' => true),
+        'flb' => array('Group' => 'Energy', 'Unit Name' => 'Foot-pound', 'AllowPrefix' => false),
+        'BTU' => array('Group' => 'Energy', 'Unit Name' => 'BTU', 'AllowPrefix' => false),
+        'btu' => array('Group' => 'Energy', 'Unit Name' => 'BTU', 'AllowPrefix' => false),
+        'HP' => array('Group' => 'Power', 'Unit Name' => 'Horsepower', 'AllowPrefix' => false),
+        'h' => array('Group' => 'Power', 'Unit Name' => 'Horsepower', 'AllowPrefix' => false),
+        'W' => array('Group' => 'Power', 'Unit Name' => 'Watt', 'AllowPrefix' => true),
+        'w' => array('Group' => 'Power', 'Unit Name' => 'Watt', 'AllowPrefix' => true),
+        'T' => array('Group' => 'Magnetism', 'Unit Name' => 'Tesla', 'AllowPrefix' => true),
+        'ga' => array('Group' => 'Magnetism', 'Unit Name' => 'Gauss', 'AllowPrefix' => true),
+        'C' => array('Group' => 'Temperature', 'Unit Name' => 'Celsius', 'AllowPrefix' => false),
+        'cel' => array('Group' => 'Temperature', 'Unit Name' => 'Celsius', 'AllowPrefix' => false),
+        'F' => array('Group' => 'Temperature', 'Unit Name' => 'Fahrenheit', 'AllowPrefix' => false),
+        'fah' => array('Group' => 'Temperature', 'Unit Name' => 'Fahrenheit', 'AllowPrefix' => false),
+        'K' => array('Group' => 'Temperature', 'Unit Name' => 'Kelvin', 'AllowPrefix' => false),
+        'kel' => array('Group' => 'Temperature', 'Unit Name' => 'Kelvin', 'AllowPrefix' => false),
+        'tsp' => array('Group' => 'Liquid', 'Unit Name' => 'Teaspoon', 'AllowPrefix' => false),
+        'tbs' => array('Group' => 'Liquid', 'Unit Name' => 'Tablespoon', 'AllowPrefix' => false),
+        'oz' => array('Group' => 'Liquid', 'Unit Name' => 'Fluid Ounce', 'AllowPrefix' => false),
+        'cup' => array('Group' => 'Liquid', 'Unit Name' => 'Cup', 'AllowPrefix' => false),
+        'pt' => array('Group' => 'Liquid', 'Unit Name' => 'U.S. Pint', 'AllowPrefix' => false),
+        'us_pt' => array('Group' => 'Liquid', 'Unit Name' => 'U.S. Pint', 'AllowPrefix' => false),
+        'uk_pt' => array('Group' => 'Liquid', 'Unit Name' => 'U.K. Pint', 'AllowPrefix' => false),
+        'qt' => array('Group' => 'Liquid', 'Unit Name' => 'Quart', 'AllowPrefix' => false),
+        'gal' => array('Group' => 'Liquid', 'Unit Name' => 'Gallon', 'AllowPrefix' => false),
+        'l' => array('Group' => 'Liquid', 'Unit Name' => 'Litre', 'AllowPrefix' => true),
+        'lt' => array('Group' => 'Liquid', 'Unit Name' => 'Litre', 'AllowPrefix' => true),
     );
 
     /**
@@ -110,21 +111,21 @@ class Engineering
      * @var mixed[]
      */
     private static $conversionMultipliers = array(
-        'Y' => array('multiplier' => 1E24,  'name' => 'yotta'),
-        'Z' => array('multiplier' => 1E21,  'name' => 'zetta'),
-        'E' => array('multiplier' => 1E18,  'name' => 'exa'),
-        'P' => array('multiplier' => 1E15,  'name' => 'peta'),
-        'T' => array('multiplier' => 1E12,  'name' => 'tera'),
-        'G' => array('multiplier' => 1E9,   'name' => 'giga'),
-        'M' => array('multiplier' => 1E6,   'name' => 'mega'),
-        'k' => array('multiplier' => 1E3,   'name' => 'kilo'),
-        'h' => array('multiplier' => 1E2,   'name' => 'hecto'),
-        'e' => array('multiplier' => 1E1,   'name' => 'deka'),
-        'd' => array('multiplier' => 1E-1,  'name' => 'deci'),
-        'c' => array('multiplier' => 1E-2,  'name' => 'centi'),
-        'm' => array('multiplier' => 1E-3,  'name' => 'milli'),
-        'u' => array('multiplier' => 1E-6,  'name' => 'micro'),
-        'n' => array('multiplier' => 1E-9,  'name' => 'nano'),
+        'Y' => array('multiplier' => 1E24, 'name' => 'yotta'),
+        'Z' => array('multiplier' => 1E21, 'name' => 'zetta'),
+        'E' => array('multiplier' => 1E18, 'name' => 'exa'),
+        'P' => array('multiplier' => 1E15, 'name' => 'peta'),
+        'T' => array('multiplier' => 1E12, 'name' => 'tera'),
+        'G' => array('multiplier' => 1E9, 'name' => 'giga'),
+        'M' => array('multiplier' => 1E6, 'name' => 'mega'),
+        'k' => array('multiplier' => 1E3, 'name' => 'kilo'),
+        'h' => array('multiplier' => 1E2, 'name' => 'hecto'),
+        'e' => array('multiplier' => 1E1, 'name' => 'deka'),
+        'd' => array('multiplier' => 1E-1, 'name' => 'deci'),
+        'c' => array('multiplier' => 1E-2, 'name' => 'centi'),
+        'm' => array('multiplier' => 1E-3, 'name' => 'milli'),
+        'u' => array('multiplier' => 1E-6, 'name' => 'micro'),
+        'n' => array('multiplier' => 1E-9, 'name' => 'nano'),
         'p' => array('multiplier' => 1E-12, 'name' => 'pico'),
         'f' => array('multiplier' => 1E-15, 'name' => 'femto'),
         'a' => array('multiplier' => 1E-18, 'name' => 'atto'),
@@ -830,6 +831,14 @@ class Engineering
     private static function nbrConversionFormat($xVal, $places)
     {
         if (!is_null($places)) {
+            if (is_numeric($places)) {
+                $places = (int) $places;
+            } else {
+                return Functions::VALUE();
+            }
+            if ($places < 0) {
+                return Functions::NAN();
+            }
             if (strlen($xVal) <= $places) {
                 return substr(str_pad($xVal, $places, '0', STR_PAD_LEFT), -10);
             } else {
@@ -862,8 +871,8 @@ class Engineering
      */
     public static function BESSELI($x, $ord)
     {
-        $x = (is_null($x))    ? 0.0 :    Functions::flattenSingleValue($x);
-        $ord = (is_null($ord))    ? 0.0 :    Functions::flattenSingleValue($ord);
+        $x = (is_null($x)) ? 0.0 : Functions::flattenSingleValue($x);
+        $ord = (is_null($ord)) ? 0.0 : Functions::flattenSingleValue($ord);
 
         if ((is_numeric($x)) && (is_numeric($ord))) {
             $ord = floor($ord);
@@ -879,7 +888,7 @@ class Engineering
                     $fTerm *= $fSqrX;
                     $fTerm /= ($ordK * ($ordK + $ord));
                     $fResult += $fTerm;
-                } while ((abs($fTerm) > 1e-12) && (++$ordK < 100));
+                } while ((abs($fTerm) > 1e-12) && ( ++$ordK < 100));
             } else {
                 $f_2_PI = 2 * M_PI;
 
@@ -916,8 +925,8 @@ class Engineering
      */
     public static function BESSELJ($x, $ord)
     {
-        $x = (is_null($x))    ? 0.0 :    Functions::flattenSingleValue($x);
-        $ord = (is_null($ord))    ? 0.0 :    Functions::flattenSingleValue($ord);
+        $x = (is_null($x)) ? 0.0 : Functions::flattenSingleValue($x);
+        $ord = (is_null($ord)) ? 0.0 : Functions::flattenSingleValue($ord);
 
         if ((is_numeric($x)) && (is_numeric($ord))) {
             $ord = floor($ord);
@@ -934,7 +943,7 @@ class Engineering
                     $fTerm *= $fSqrX;
                     $fTerm /= ($ordK * ($ordK + $ord));
                     $fResult += $fTerm;
-                } while ((abs($fTerm) > 1e-12) && (++$ordK < 100));
+                } while ((abs($fTerm) > 1e-12) && ( ++$ordK < 100));
             } else {
                 $f_PI_DIV_2 = M_PI / 2;
                 $f_PI_DIV_4 = M_PI / 4;
@@ -1009,8 +1018,8 @@ class Engineering
      */
     public static function BESSELK($x, $ord)
     {
-        $x = (is_null($x))        ? 0.0 :    Functions::flattenSingleValue($x);
-        $ord = (is_null($ord))    ? 0.0 :    Functions::flattenSingleValue($ord);
+        $x = (is_null($x)) ? 0.0 : Functions::flattenSingleValue($x);
+        $ord = (is_null($ord)) ? 0.0 : Functions::flattenSingleValue($ord);
 
         if ((is_numeric($x)) && (is_numeric($ord))) {
             if (($ord < 0) || ($x == 0.0)) {
@@ -1094,8 +1103,8 @@ class Engineering
      */
     public static function BESSELY($x, $ord)
     {
-        $x = (is_null($x))        ? 0.0 :    Functions::flattenSingleValue($x);
-        $ord = (is_null($ord))    ? 0.0 :    Functions::flattenSingleValue($ord);
+        $x = (is_null($x)) ? 0.0 : Functions::flattenSingleValue($x);
+        $ord = (is_null($ord)) ? 0.0 : Functions::flattenSingleValue($ord);
 
         if ((is_numeric($x)) && (is_numeric($ord))) {
             if (($ord < 0) || ($x == 0.0)) {
@@ -1494,6 +1503,9 @@ class Engineering
         if (strlen($x) > preg_match_all('/[0123456789ABCDEF]/', strtoupper($x), $out)) {
             return Functions::NAN();
         }
+        if (hexdec($x) > 0x1FF) {
+            return Functions::NAN();
+        }
         $binVal = decbin(hexdec($x));
 
         return substr(self::nbrConversionFormat($binVal, $places), -10);
@@ -1531,7 +1543,17 @@ class Engineering
             return Functions::NAN();
         }
 
-        return hexdec($x);
+        $binX = '';
+        foreach (str_split($x) as $char) {
+            $binX .= str_pad(base_convert($char, 16, 2), 3, '0', STR_PAD_LEFT);
+        }
+        if (strlen($binX) == 40 && $binX[0] == '1') {
+            for ($i = 0; $i < 40; $i++) {
+                $binX[$i] = ($binX[$i] == '1' ? '0' : '1');
+            }
+            return (bindec($binX) + 1) * -1;
+        }
+        return bindec($binX);
     }
 
     /**
@@ -1582,7 +1604,7 @@ class Engineering
         $octVal = decoct(hexdec($x));
 
         return self::nbrConversionFormat($octVal, $places);
-    }    //    function HEXTOOCT()
+    }
 
     /**
      * OCTTOBIN.
@@ -1668,7 +1690,18 @@ class Engineering
             return Functions::NAN();
         }
 
-        return octdec($x);
+        $binX = '';
+        foreach (str_split($x) as $char) {
+            $binX .= str_pad(decbin((int) $char), 3, '0', STR_PAD_LEFT);
+        }
+        if (strlen($binX) == 30 && $binX[0] == '1') {
+            for ($i = 0; $i < 30; $i++) {
+                $binX[$i] = ($binX[$i] == '1' ? '0' : '1');
+            }
+            return (bindec($binX) + 1) * -1;
+        }
+
+        return bindec($binX);
     }
 
     /**
@@ -1713,7 +1746,7 @@ class Engineering
         if (preg_match_all('/[01234567]/', $x, $out) != strlen($x)) {
             return Functions::NAN();
         }
-        $hexVal = strtoupper(dechex(octdec($x)));
+        $hexVal = strtoupper(dechex(self::OCTTODEC($x)));
 
         return self::nbrConversionFormat($hexVal, $places);
     }
@@ -1738,8 +1771,8 @@ class Engineering
     public static function COMPLEX($realNumber = 0.0, $imaginary = 0.0, $suffix = 'i')
     {
         $realNumber = (is_null($realNumber)) ? 0.0 : Functions::flattenSingleValue($realNumber);
-        $imaginary = (is_null($imaginary))  ? 0.0 : Functions::flattenSingleValue($imaginary);
-        $suffix = (is_null($suffix))     ? 'i' : Functions::flattenSingleValue($suffix);
+        $imaginary = (is_null($imaginary)) ? 0.0 : Functions::flattenSingleValue($imaginary);
+        $suffix = (is_null($suffix)) ? 'i' : Functions::flattenSingleValue($suffix);
 
         if (((is_numeric($realNumber)) && (is_numeric($imaginary))) &&
             (($suffix == 'i') || ($suffix == 'j') || ($suffix == ''))) {
@@ -1868,7 +1901,7 @@ class Engineering
 
         if ($parsedComplex['real'] == 0.0) {
             if ($parsedComplex['imaginary'] == 0.0) {
-                return 0.0;
+                return Functions::DIV0();
             } elseif ($parsedComplex['imaginary'] < 0.0) {
                 return M_PI / -2;
             } else {
@@ -1905,11 +1938,9 @@ class Engineering
             return $parsedComplex['real'];
         } else {
             return self::cleanComplex(
-                self::COMPLEX(
-                    $parsedComplex['real'],
-                    0 - $parsedComplex['imaginary'],
-                    $parsedComplex['suffix']
-                )
+                    self::COMPLEX(
+                        $parsedComplex['real'], 0 - $parsedComplex['imaginary'], $parsedComplex['suffix']
+                    )
             );
         }
     }
@@ -1936,11 +1967,9 @@ class Engineering
             return cos($parsedComplex['real']);
         } else {
             return self::IMCONJUGATE(
-                self::COMPLEX(
-                    cos($parsedComplex['real']) * cosh($parsedComplex['imaginary']),
-                    sin($parsedComplex['real']) * sinh($parsedComplex['imaginary']),
-                    $parsedComplex['suffix']
-                )
+                    self::COMPLEX(
+                        cos($parsedComplex['real']) * cosh($parsedComplex['imaginary']), sin($parsedComplex['real']) * sinh($parsedComplex['imaginary']), $parsedComplex['suffix']
+                    )
             );
         }
     }
@@ -1967,9 +1996,7 @@ class Engineering
             return sin($parsedComplex['real']);
         } else {
             return self::COMPLEX(
-                sin($parsedComplex['real']) * cosh($parsedComplex['imaginary']),
-                cos($parsedComplex['real']) * sinh($parsedComplex['imaginary']),
-                $parsedComplex['suffix']
+                    sin($parsedComplex['real']) * cosh($parsedComplex['imaginary']), cos($parsedComplex['real']) * sinh($parsedComplex['imaginary']), $parsedComplex['suffix']
             );
         }
     }
@@ -2181,7 +2208,8 @@ class Engineering
         $parsedComplexDivisor = self::parseComplex($complexDivisor);
 
         if (($parsedComplexDividend['suffix'] != '') && ($parsedComplexDivisor['suffix'] != '') &&
-            ($parsedComplexDividend['suffix'] != $parsedComplexDivisor['suffix'])) {
+            ($parsedComplexDividend['suffix'] != $parsedComplexDivisor['suffix'])
+        ) {
             return Functions::NAN();
         }
         if (($parsedComplexDividend['suffix'] != '') && ($parsedComplexDivisor['suffix'] == '')) {
@@ -2229,6 +2257,9 @@ class Engineering
             ($parsedComplex1['suffix'] != $parsedComplex2['suffix'])) {
             return Functions::NAN();
         } elseif (($parsedComplex1['suffix'] == '') && ($parsedComplex2['suffix'] != '')) {
+            return Functions::NAN();
+        }
+        if (($parsedComplex1['suffix'] == '') && ($parsedComplex2['suffix'] != '')) {
             $parsedComplex1['suffix'] = $parsedComplex2['suffix'];
         }
 
@@ -2264,7 +2295,7 @@ class Engineering
             if ($activeSuffix == '') {
                 $activeSuffix = $parsedComplex['suffix'];
             } elseif (($parsedComplex['suffix'] != '') && ($activeSuffix != $parsedComplex['suffix'])) {
-                return Functions::VALUE();
+                return Functions::NAN();
             }
 
             $returnValue['real'] += $parsedComplex['real'];
@@ -2642,10 +2673,10 @@ class Engineering
                     return $value;
                 }
             } elseif ((($fromUOM == 'K') || ($fromUOM == 'kel')) &&
-                      (($toUOM == 'K') || ($toUOM == 'kel'))) {
+                (($toUOM == 'K') || ($toUOM == 'kel'))) {
                 return $value;
             } elseif ((($fromUOM == 'C') || ($fromUOM == 'cel')) &&
-                      (($toUOM == 'C') || ($toUOM == 'cel'))) {
+                (($toUOM == 'C') || ($toUOM == 'cel'))) {
                 return $value;
             }
             if (($toUOM == 'F') || ($toUOM == 'fah')) {

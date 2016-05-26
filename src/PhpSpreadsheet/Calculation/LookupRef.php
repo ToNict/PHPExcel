@@ -30,8 +30,9 @@ namespace PhpOffice\PhpExcel\Calculation;
  */
 class LookupRef
 {
+
     /**
-     * CELL_ADDRESS.
+     * cellAddress.
      *
      * Creates a cell address as text, given specified row and column numbers.
      *
@@ -46,13 +47,13 @@ class LookupRef
      *                                3                Relative row; absolute column
      *                                4                Relative
      * @param    referenceStyle    A logical value that specifies the A1 or R1C1 reference style.
-     *                                TRUE or omitted        CELL_ADDRESS returns an A1-style reference
-     *                                FALSE                CELL_ADDRESS returns an R1C1-style reference
+     *                                TRUE or omitted        cellAddress returns an A1-style reference
+     *                                FALSE                cellAddress returns an R1C1-style reference
      * @param    sheetText        Optional Name of worksheet to use
      *
      * @return string
      */
-    public static function CELL_ADDRESS($row, $column, $relativity = 1, $referenceStyle = true, $sheetText = '')
+    public static function cellAddress($row, $column, $relativity = 1, $referenceStyle = true, $sheetText = '')
     {
         $row = Functions::flattenSingleValue($row);
         $column = Functions::flattenSingleValue($column);
@@ -271,7 +272,7 @@ class LookupRef
         $args = func_get_args();
         $pCell = array_pop($args);
 
-        $linkURL = (is_null($linkURL))     ? '' : Functions::flattenSingleValue($linkURL);
+        $linkURL = (is_null($linkURL)) ? '' : Functions::flattenSingleValue($linkURL);
         $displayName = (is_null($displayName)) ? '' : Functions::flattenSingleValue($displayName);
 
         if ((!is_object($pCell)) || (trim($linkURL) == '')) {
@@ -731,8 +732,12 @@ class LookupRef
                 (!is_numeric($lookup_value) && !is_numeric($rowData[$firstColumn]) && (strtolower($rowData[$firstColumn]) > strtolower($lookup_value)))) {
                 break;
             }
-            $rowNumber = $rowKey;
-            $rowValue = $rowData[$firstColumn];
+            // remember the last key, but only if datatypes match
+            if ((is_numeric($lookup_value) && is_numeric($rowData[$firstColumn])) ||
+                (!is_numeric($lookup_value) && !is_numeric($rowData[$firstColumn]))) {
+                $rowNumber = $rowKey;
+                $rowValue = $rowData[$firstColumn];
+            }
         }
 
         if ($rowNumber !== false) {
@@ -776,7 +781,7 @@ class LookupRef
         } else {
             $f = array_keys($lookup_array);
             $firstRow = array_pop($f);
-            if ((!is_array($lookup_array[$firstRow])) || ($index_number > count($lookup_array[$firstRow]))) {
+            if ((!is_array($lookup_array[$firstRow])) || ($index_number - 1 > count($lookup_array[$firstRow]))) {
                 return Functions::REF();
             } else {
                 $columnKeys = array_keys($lookup_array[$firstRow]);

@@ -525,7 +525,7 @@ class Functions
      *                An error value        The error value
      *                Anything else        0
      */
-    public static function N($value = null)
+    public static function n($value = null)
     {
         while (is_array($value)) {
             $value = array_shift($value);
